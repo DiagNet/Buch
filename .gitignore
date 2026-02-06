@@ -1,3 +1,6 @@
+# custom editor config
+.helix/
+
 # nix
 /.direnv/
 /result
