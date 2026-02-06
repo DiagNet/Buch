@@ -47,6 +47,22 @@
   ),
 )
 
-// #include "chapter/example.typ"
-#include "chapter/test_framework.typ"
-#include "chapter/pyats.typ"
+#include "chapters/01_architecture_design.typ"   // Danijel
+#include "chapters/02_routing_infra.typ"         // Luka
+#include "chapters/03_switching_infra.typ"       // Danijel
+#include "chapters/04_firewalls_security.typ"    // Benedikt
+#include "chapters/05_dev_environment.typ"       // Karun
+#include "chapters/06_django_framework.typ"      // Karun
+#include "chapters/07_interfaces_automation.typ" // Benedikt
+#include "chapters/08_data_security.typ"         // Karun
+#include "chapters/09_test_engine_arch.typ"      // Luka
+#include "chapters/10_dynamic_forms.typ"         // Luka
+#include "chapters/11_routing_tests.typ"         // Luka
+#include "chapters/12_switching_tests.typ"       // Danijel
+#include "chapters/13_frontend_ux.typ"           // Karun
+#include "chapters/14_data_visualization.typ"    // Danijel
+#include "chapters/15_containerization.typ"      // Karun
+#include "chapters/16_cicd_automation.typ"       // Karun
+
+#include "chapters/test_framework.typ"
+#include "chapters/pyats.typ"
