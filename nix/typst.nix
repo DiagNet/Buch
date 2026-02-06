@@ -10,7 +10,7 @@
     let
       typixLib = inputs.typix.lib.${system};
 
-      src = ../buch;
+      src = ../.;
       commonArgs = {
         typstSource = "DiagNet_DA_Buch.typ";
 
