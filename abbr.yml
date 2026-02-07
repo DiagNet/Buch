@@ -1,10 +1,80 @@
-# Beispiel - kann entfernt werden
-da:
+# keep-sorted start newline_separated=yes
+cd:
   short:
-    singular: DA
-    plural: DA
+    singular: CD
   long:
-    singular: Diplomarbeit
-    plural: Diplomarbeiten
-  description: Abschlussarbeit an einer HTL
-# Beispiel - kann entfernt werden
+    singular: Continuous Deployment
+  description: Die automatisierte Bereitstellung von Software in Produktionsumgebungen nach erfolgreicher Integration.
+
+ci:
+  short:
+    singular: CI
+  long:
+    singular: Continuous Integration
+  description: Die Praxis der regelmäßigen Integration von Code-Änderungen in ein gemeinsames Repository mit automatisierten Tests.
+
+direnv:
+  long:
+    singular: direnv
+  description: Eine Shell-Erweiterung, die Umgebungsvariablen automatisch lädt, sobald ein Verzeichnis betreten wird.
+
+djlint:
+  long:
+    singular: djLint
+  description: Ein Linter und Formatter speziell für HTML-Templates, der häufig in Django- oder Jinja2-Projekten Anwendung findet.
+
+hermetic:
+  long:
+    singular: Hermetisch
+  description: Beschreibt in Build-Systemen eine Umgebung, die vollständig isoliert ist und keinen Zugriff auf das Dateisystem oder Netzwerk des Host-Computers hat, außer explizit deklarierte Eingaben.
+
+just:
+  long:
+    singular: Just
+  description: Ein Task-Runner, der Projektaufgaben in einem Justfile definiert und als moderne Alternative zu Make dient.
+
+nix-flakes:
+  long:
+    singular: Nix Flakes
+  description: Eine Erweiterung des Nix-Ökosystems zur hermetischen Abriegelung von Projekt-Abhängigkeiten mittels flake.nix.
+
+nix-shell:
+  long:
+    singular: Nix Shell
+  description: Eine temporäre, isolierte Entwicklungsumgebung, in der alle definierten Abhängigkeiten verfügbar sind, ohne das Host-System zu verändern.
+
+nix:
+  long:
+    singular: Nix
+  description: Ein rein funktionaler Paketmanager und Build-System, das Software in isolierten, unveränderlichen Zuständen verwaltet.
+
+nixfmt:
+  long:
+    singular: nixfmt
+  description: Ein Formatter für Nix-Code, der sicherstellt, dass alle .nix-Konfigurationsdateien einem Standardstil folgen.
+
+prettier:
+  long:
+    singular: Prettier
+  description: Ein "opinionated" Code-Formatter, der vorrangig für Web-Technologien (JavaScript, CSS, HTML, JSON) eingesetzt wird, um einen einheitlichen Stil zu erzwingen.
+
+ruff:
+  long:
+    singular: Ruff
+  description: Ein extrem schneller Python-Linter und Code-Formatter, geschrieben in Rust, der mehrere klassische Tools (Flake8, Black, isort) ersetzt.
+
+treefmt:
+  long:
+    singular: Treefmt
+  description: Ein Werkzeug zur Orchestrierung verschiedener Code-Formatierer (z. B. Ruff, Prettier) für eine einheitliche Codebasis.
+
+twelvefactor:
+  long:
+    singular: The Twelve-Factor App
+  description: Eine Methodik zur Erstellung skalierbarer und wartbarer Software-as-a-Service-Anwendungen.
+
+uv:
+  long:
+    singular: uv
+  description: Ein extrem performanter Python-Paketmanager und Resolver, geschrieben in Rust, der pip und venv ersetzt.
+# keep-sorted end
