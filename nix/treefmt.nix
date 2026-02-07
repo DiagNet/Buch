@@ -12,6 +12,8 @@
         prettier.enable = true;
 
         typstyle.enable = true;
+
+        keep-sorted.enable = true;
       };
     };
   };
