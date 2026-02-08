@@ -65,4 +65,3 @@
 #include "chapters/16_cicd_automation.typ"       // Karun
 
 #include "chapters/test_framework.typ"
-#include "chapters/pyats.typ"
