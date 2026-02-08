@@ -1,3 +1,5 @@
-Hier steht eine kurze Zusammenfassung der Diplomarbeit.
+Im Zeitalter von zunehmend wachsenden digitalen Infrastrukturen sind die Zuverlässigkeit und Stabilität von Netzwerken von größter Bedeutung. Manuelle Diagnosen von Netzwerken und die Fehlerbehebung erfordern häufig viel Zeit, sind anfällig für Fehler und leiden oft unter mangelnder Standardisierung der Dokumentation.
 
-#lorem(100)
+Diese Diplomarbeit behandelt die Implementierung von "DiagNet", einer modularen und webbasierten Applikation zur automatisierten Netzwerkdiagnose. Das Projekt, welches durch die Bereitstellung von Hardware seitens der CANCOM Austria AG unterstützt wurde, zielt darauf ab, die Verifizierung von Netzwerkzuständen und das Erkennen von Anomalien in Netzwerkumgebungen zu vereinfachen. Das Ergebnis ist eine funktionierende Open-Source-Applikation unter der GPLv3+-Lizenz.
+
+Der technologische Kern der Anwendung basiert auf dem Python-Webframework Django und nutzt das Cisco pyATS-Ökosystem, um programmatisch mit Netzwerkgeräten zu interagieren. Dieser Ansatz ermöglicht die Abstraktion herstellerspezifischer Befehlszeilen in strukturierte Testfälle. Zu den zentralen Funktionen gehören eine Engine zur dynamischen Erstellung von Tests, eine Statusüberwachung sowie ein benutzerfreundliches Dashboard zur Visualisierung der Diagnoseergebnisse.
