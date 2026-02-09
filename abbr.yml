@@ -1,4 +1,3 @@
-# keep-sorted start newline_separated=yes
 cd:
   short:
     singular: CD
@@ -77,4 +76,110 @@ uv:
   long:
     singular: uv
   description: Ein extrem performanter Python-Paketmanager und Resolver, geschrieben in Rust, der pip und venv ersetzt.
-# keep-sorted end
+pyats:
+  long:
+    singular: pyATS
+  description: Ein von Cisco entwickeltes Python-basiertes Framework zur Automatisierung und zum Testen von Netzwerkgeräten.
+
+genie:
+  long:
+    singular: Genie
+  description: Eine Bibliothek innerhalb von pyATS, die Parser und Funktionen zur strukturierten Auswertung von Geräteinformationen bereitstellt.
+
+parser:
+  long:
+    singular: Parser
+  description: Eine Softwarekomponente, die unstrukturierten Text, wie Geräteausgaben, in strukturierte Datenformate umwandelt.
+
+testbed:
+  long:
+    singular: Testbed
+  description: Eine Konfigurationsdatei in pyATS, welche Geräte, Zugangsdaten und Verbindungsparameter für automatisierte Tests definiert.
+
+aetest:
+  long:
+    singular: AEtest
+  description: Eine pyATS-Komponente zur Strukturierung und Automatisierung von Testfällen und Testabläufen.
+
+unicon:
+  long:
+    singular: Unicon
+  description: Eine Bibliothek innerhalb von pyATS, die Geräteverbindungen über Protokolle wie SSH oder Telnet verwaltet.
+
+ospf:
+  short:
+    singular: OSPF
+  long:
+    singular: Open Shortest Path First
+  description: Ein dynamisches Routing-Protokoll zur Berechnung des kürzesten Pfades innerhalb eines IP-Netzwerks.
+
+routingprotokoll:
+  long:
+    singular: Routing-Protokoll
+  description: Ein Protokoll, das den Austausch von Routing-Informationen zwischen Netzwerkgeräten ermöglicht.
+
+interface:
+  long:
+    singular: Netzwerkinterface
+  description: Eine physische oder logische Schnittstelle eines Netzwerkgeräts zur Datenübertragung.
+
+ssh:
+  short:
+    singular: SSH
+  long:
+    singular: Secure Shell
+  description: Ein verschlüsseltes Netzwerkprotokoll für den sicheren Fernzugriff auf Geräte.
+
+telnet:
+  long:
+    singular: Telnet
+  description: Ein unverschlüsseltes Netzwerkprotokoll für den Fernzugriff auf Geräte.
+
+framework:
+  long:
+    singular: Framework
+  description: Eine Sammlung von Bibliotheken und Werkzeugen, die eine Grundlage für die Entwicklung von Softwareanwendungen bereitstellt.
+
+python_dictionary:
+  long:
+    singular: Python-Dictionary
+  description: Eine Datenstruktur in Python zur Speicherung von Schlüssel-Wert-Paaren.
+
+yaml:
+  short:
+    singular: YAML
+  long:
+    singular: YAML Ain't Markup Language
+  description: Ein menschenlesbares Datenformat zur Speicherung strukturierter Konfigurationsdaten.
+
+exception:
+  long:
+    singular: Exception
+  description: Ein Fehler oder Ausnahmezustand, der während der Programmausführung auftritt.
+
+api:
+  short:
+    singular: API
+  long:
+    singular: Application Programming Interface
+  description: Eine Programmierschnittstelle, über die Softwarekomponenten miteinander kommunizieren.
+
+backend:
+  long:
+    singular: Backend
+  description: Der Teil einer Anwendung, der im Hintergrund läuft und Datenverarbeitung sowie Logik bereitstellt.
+
+router_id:
+  long:
+    singular: Router ID
+  description: Eine eindeutige Kennung eines Routers innerhalb eines Routing-Protokolls.
+
+ospf_area:
+  long:
+    singular: OSPF Area
+  description: Ein logischer Bereich innerhalb eines OSPF-Netzwerks zur Strukturierung und Skalierung.
+
+neighbor:
+  long:
+    singular: Neighbor
+  description: Ein benachbartes Netzwerkgerät, mit dem Routing-Informationen ausgetauscht werden.
