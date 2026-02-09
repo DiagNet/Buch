@@ -17,7 +17,7 @@ Zentral sind dabei zwei Dateien im Repository:
 Nachfolgend ein stark vereinfachter Auszug aus unserer Konfiguration, der dennoch zeigt, wie Python und externe Tools einer #htl3r.long[nix-shell] hinzugefügt werden:
 
 #htl3r.code(
-  caption: [Eine vereinfache `flake.nix`-Datei],
+  caption: [Eine vereinfachte `flake.nix`-Datei],
   description: `flake.nix`,
 )[
   ```nix
