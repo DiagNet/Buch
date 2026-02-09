@@ -1,7 +1,7 @@
 #import "@preview/htl3r-da:2.0.0" as htl3r
 
 #htl3r.author("Benedikt Theuretzbachner")
-== Schnittstellen & Parsing mit #htl3r.long[pyats]
+== Schnittstellen & Parsing mit pyATS
 #htl3r.long[pyats] ist ein Test- und Automatisierungs-#htl3r.long[framework], welches Python-basiert ist und von Cisco entwickelt wird. Es spezialisiert sich vor allem auf das Testen von Netzwerkgeräten aus dem Cisco Ökosystem, jedoch unterstützt es auch andere Plattformen.
 
 === Automatisiertes Testen von Netzwerken
