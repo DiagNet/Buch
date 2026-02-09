@@ -1,31 +1,27 @@
 #import "@preview/htl3r-da:2.0.0" as htl3r
 
 #htl3r.author("Benedikt Theuretzbachner")
-== Schnittstellen & Parsing
-
-
-=== PyATS
+== Schnittstellen & Parsing mit pyATS
 PyATS ist ein Test- und Automatisierungs-Framework, welches Python-basiert ist und von Cisco entwickelt wird. Es spezialisiert sich vor allem auf das Testen von Netzwerkgeräten aus dem Cisco Ökosystem, jedoch unterstützt es auch andere Plattformen.
 
-==== Automatisiertes Testen von Netzwerken
+=== Automatisiertes Testen von Netzwerken
 Automatisierung im Netzwerkbereich ist ein Thema, welches zunehmend an Relevanz gewinnt. Die Effizienz von Netzwerkperationen wird durch eien automatische Ausführung erheblich gesteigert. Außerdem kann bei diesem Konzept das menschliche Versagen nur noch bei dem Aufsetzen der Automatisierung selbst auftreten.
 
 Das Testen von Infrastrukturen stellt einen besonders geeigneten Anwendungsbereich dar. Wird dieses manuell ausgeführt, müssen bei jeder Änderung an Systemen bestimmte Befehle händisch ausgeführt werden. Mit einem automatisierten Ansatz kann dieser Aufwand minimiert werden, da es möglich ist, die gesamte Infrastruktur mit einem Befehl oder Knopfdruck zu testen.
 
-==== Eignung für das Projekt
+=== Eignung für das Projekt
 Das Ziel von DiagNet ist es, ein Programm zu erschaffen, welches das Testen von Netzwerken angenehmer und effizienter gestaltet. PyATS eignet sich für diesen Zweck, da es praktische Funktioen für das Handhaben von Verbindungen zu Geräten bietet.
 
 Zusätzlich ermöglicht es, Daten auf Netzwerkgeräten zu sammeln und sie in ein für die weitere Verarbeitung in Python geeignetes Format umzuwandeln. Diese Funktionalität bietet eine Grundlage für die automatisierte Analyse und Auswertung innerhalb von DiagNet.
 
-==== Grundlagen von PyATS
-===== Architektur
+=== Grundlagen
 PyATS besteht aus einer modularen Architektur. Eine seiner wichtigsten Komponenten ist Genie. Dabei handelt es sich um eine Library innerhalb von PyATS, welche zahlreiche Parser zur Verfügung stellt. Ein Parser ist dafür verantwortlich, den Geräteoutput in ein verwendbares Format umzuwandeln.
 
 Bei Genie kann es sich dabei konkret um show-Befehle handeln. Diese werden auf Geräten wie Cisco Routern eingesetzt, um Informationen über den aktuellen Zustand des Systems anzuzeigen. Da die Befehle lediglich Text zurückgeben, wandeln Genie Parser diesen in Python dictionary-Strukturen um. Darauf kann im Programmcode ohne Weiteren Aufwand direkt zugegriffen werden.
 
 Weitere Komponenten von PyATS sind AEtest, welches die Basis für die Strukturierung der Testfälle und Automatisierung der Testabläufe darstellt, sowie Unicon. Letzteres kümmert sich um die Geräteverbindungen und bietet eine einheitliche Schnittstelle um auf Protokolle sie SSH oder Telnet zuzugreifen.
 
-==== Testbeds <testbeds>
+=== Testbeds <testbeds>
 Ein Testbed in PyATS ist eine Datei, in der zur Verbindung benötigte Daten von Geräten deklariert werden.
 Zu diesen Daten gehören:
 - Gerätename
@@ -57,7 +53,7 @@ devices:
 ```
 Dieses Beispiel enthält lediglich einen Router, es können aber auch mehrere Geräteverbindungen in einem Testbed definiert werden.
 
-==== PyATS Testskript
+=== PyATS Testskript
 Wie bereits erwähnt ist PyATS in der Programmiersprache Python geschrieben. Es beitet eine umfangreiche Programmierschnittstelle, auf die man in eigenem Programmcode zugreifen kann. Dazu muss das richtige Paket installiert werden, was in Python auf mehrere Arten erledigt werden kann. Da das Projekt DiagNet auf die Paketverwaltungssoftware *uv* setzt, wurde folgender Befehl verwendet:
 ```bash
 uv add pyats[full]
@@ -65,6 +61,7 @@ uv add pyats[full]
 *Full* gibt an, dass alle Komponenten des Frameworks installiert werden sollen.
 
 Mit diesem Paket und dem Testbed von @testbeds kann ein Python-Skript geschrieben werden, welches die Funktionalität von PyATS demonstriert:
+#pagebreak()
 ```python
 from genie.testbed import load
 from genie.libs.ops.interface.ios.interface import Interface
@@ -104,4 +101,32 @@ Der Ablauf des Skripts kann in folgende Teile gegliedert werden:
                'version_short': '15.9'}}
   ```
   Hier ist klar ersichtlich, dass die Ausgabe in die Form eines Python-Dictionaries gebracht wurde. Falls kein passender Parser vorhanden ist, wirft das Programm eine *genie.libs.parser.utils.common.ParserNotFound* Exception.
-+ Anschließend wird von dem "device" Objekt ein Interface Objekt erstellt. Mit diesem können durch die "learn" Methode sämtliche Informationen über Interfaces auf dem Router gesammelt und als Python-Dictionary zurückgeben werden. Die Umfangreiche Ausgabe wird durch `interfaces.info["GigabitEthernet0/0"]["enabled"]` auf den Status eines bestimmten Interfaces, hier GigabitEthernet0/0, reduziert.
++ Anschließend wird von dem "device" Objekt ein Interface Objekt erstellt. Mit diesem können durch die "learn" Methode sämtliche Informationen über Interfaces auf dem Router gesammelt und als Python-Dictionary zurückgeben werden. Die Umfangreiche Ausgabe wird durch `interfaces.info["GigabitEthernet0/0"]["enabled"]` auf den Status eines bestimmten Interfaces, hier GigabitEthernet0/0, reduziert. Die Ausgabe beschränkt sich daher auf `True`, bei einem aktiven Interface, und `False`, bei einem inaktiven Interface.
++ Zuletzt wird im obigen Script die "learn" Methode mit dem Parameter "ospf" ausgeführt. Diese gibt folglich alle Informationen über das dynamische routing Protokoll OSPF zurück, welche PyATS von einem Router extrahieren kann. \
+  Einige davon, welche häufig benötigt werden, sind:
+  - Router ID
+  - Areas
+  - Jegliche Timer
+  - OSPF-Prozess-ID
+  - OSPF-Version (v2/v3)
+  - Nachbarn (Neighbors)
+  - Routen in der OSPF-Routing-Tabelle
+  Folgendes stellt den Teil der Ausgabe des Befehls dar, welcher Informationen über die OSPF-Areas liefert:
+  ```
+  'areas': {'0.0.0.0': {'area_id': '0.0.0.0',
+                        'area_type': 'normal',
+                        'mpls': {'te': {'enable': False}},
+                        'statistics': {'area_scope_lsa_cksum_sum': '0x000000',
+                                      'area_scope_lsa_count': 0,
+                                      'spf_runs_count': 0}}},
+  ```
+
+=== Integration in die DiagNet-Applikation
+PyATS wird im Backend von DiagNet eingesetzt, da dieser Teil des Programmcodes unter anderem dafür verantwortlich ist, mit den zu testenden Netzwerkgeräte zu interagieren und von ihnen diverse Informationen zu extrahieren.
+==== Technische Anbindung
+Um die Funktionalität von PyATS in der DiagNet Applikation nutzen zu können, werden mehrere Datenstrukturen benötigt. Eine von ihnen ist eine Liste, die mit  Geräteobjekten bzw. Geräteverbindungen befüllt wird. Dieses Speichern von Verbindungen hat den Vorteil, dass bei dem Ausführen von Testfällen nicht immer neue Objekte erstellt werden müssen. Folglich wird die Anzahl der offenen Verbindungen kleiner, was sowohl den Prozess der DiagNet Anwendung, als auch die Netzwerkgeräte entlastet. \
+Von dieser Liste bekommt das Backend ein Genie-Device-Objekt. In den einzelnen Testfällen wird dann spezifiziert, welche PyATS-Methoden mit dem Objekt ausgeführt werden müssen, um die für die Auswertung erforderlichen Informationen zu erhalten.
+
+=== Zusammenfassung
+PyATS stellt ein Framework zur Automatisierung von Netzwerktests dar. Durch die Kombination aus strukturierten Testabläufen und der Aufbereitung von Geräteinformationen eignet sich PyATS besonders für den Einsatz in automatisierten Testumgebungen. \
+Trotz der umfangreichen Funktionalität ist die Nutzung von PyATS an gewisse Einschränkungen gebunden, wie etwa die Verfügbarkeit geeigneter Parser oder den Fokus auf bestimmte Plattformen. Diese Grenzen können jedoch durch eine gezielte Auswahl unterstützter Tests sowie durch Erweiterungen in zukünftigen Versionen teilweise kompensiert werden.
