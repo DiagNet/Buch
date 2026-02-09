@@ -8,8 +8,8 @@ on:
   pull_request:
 
 jobs:
-  check-flake:
-    name: Check Flake
+  flake:
+    name: Flake
     runs-on: ubuntu-latest
 
     steps:

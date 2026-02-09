@@ -1,4 +1,4 @@
-name: Build Book
+name: Build
 
 on:
   push:
@@ -9,8 +9,8 @@ on:
   pull_request:
 
 jobs:
-  build:
-    name: Build Book
+  book:
+    name: Book
     runs-on: ubuntu-latest
 
     steps:
@@ -49,8 +49,8 @@ jobs:
           path: DiagNet_DA_Buch.pdf
 
   release:
-    name: Create Release
-    needs: build
+    name: Release
+    needs: book
     runs-on: ubuntu-latest
     permissions:
       contents: write
