@@ -183,3 +183,66 @@ neighbor:
   long:
     singular: Neighbor
   description: Ein benachbartes Netzwerkgerät, mit dem Routing-Informationen ausgetauscht werden.
+
+# Danijel
+diagnet:
+  short:
+    singular: DiagNet
+  long:
+    singular: DiagNet
+  description: Der Name des in dieser Arbeit entwickelten Systems. Eine Webapplikation zur automatisierten Durchführung, Verwaltung und Analyse von Netzwerktests.
+
+vlan:
+  short:
+    singular: vlan
+  long:
+    singular: Virtual Local Area Network
+  full: Virtual Local Area Network (VLAN)
+  description: Ein logisches Teilnetz innerhalb eines physischen Netzwerks, das Geräte unabhängig von ihrem Standort isoliert.
+
+gns3:
+  short:
+    singular: gns3
+  long:
+    singular: Graphical Network Simulator-3
+  full: Graphical Network Simulator-3 (GNS3)
+  description: Eine Software zur Simulation komplexer Netzwerke, die es ermöglicht, virtuelle und reale Geräte miteinander zu verknüpfen.
+
+wan:
+  short:
+    singular: WAN
+  long:
+    singular: Wide Area Network
+  full: Wide Area Network (WAN)
+  description: Ein Rechnernetz, das sich über einen sehr großen geografischen Bereich erstreckt und verschiedene lokale Netze (LANs) miteinander verbindet.
+
+ise:
+  short:
+    singular: ISE
+  long:
+    singular: Identity Services Engine
+  full: Identity Services Engine (ISE)
+  description: Eine Sicherheitsplattform von Cisco zur Identitätsverwaltung und Zugriffskontrolle, die Richtlinien für den Netzwerkzugriff zentral steuert.
+
+nat:
+  short:
+    singular: NAT
+  long:
+    singular: Network Address Translation
+  full: Network Address Translation (NAT)
+  description: Ein Verfahren, bei dem IP-Adressen in Datenpaketen durch andere Adressen ersetzt werden, um die Kommunikation zwischen privaten und öffentlichen Netzwerken zu ermöglichen.
+
+trunk:
+  short:
+    singular: Trunk
+  long:
+    singular: Trunk
+  description: Eine Punkt-zu-Punkt-Verbindung zwischen zwei Netzwerkgeräten (z. B. Switchen), die den Datenverkehr für mehrere VLANs gleichzeitig über ein einziges physisches Kabel überträgt.
+
+802.1Q:
+  short:
+    singular: 802.1Q
+  long:
+    singular: IEEE 802.1Q
+  full: IEEE 802.1Q (802.1Q)
+  description: Der gängigste Standard für das VLAN-Tagging in Ethernet-Netzwerken, der es ermöglicht, mehrere VLANs über eine einzige physische Verbindung zu übertragen.
