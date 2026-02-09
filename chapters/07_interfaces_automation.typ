@@ -37,20 +37,27 @@ Zu den relevantesten unterstützten Betriebssystemen/Plattformen gehören:
 - Cisco ASA - Betriebssystem für Firewalls
 
 Testbeds werden in dem Format YAML gespeichert und können folgendermaßen aussehen:
-```yaml
-devices:
-  Router-1:             # Hostname des Gerätes
-    type: router
-    os: iosxe           # Betriebssystem
-    credentials:        # Zugangsdaten
-        default:
-            username: dnadmin
-            password: Cisco123!
-    connections:        # Daten für den Verbindungsaufbau
-      cli:
-        protocol: ssh
-        ip: 172.25.192.90
-```
+
+#htl3r.code(
+  caption: [Ein Beispiel einer Testbed-Datei],
+  description: `testbed.yaml`,
+)[
+  ```yaml
+  devices:
+    Router-1:             # Hostname des Gerätes
+      type: router
+      os: iosxe           # Betriebssystem
+      credentials:        # Zugangsdaten
+          default:
+              username: dnadmin
+              password: Cisco123!
+      connections:        # Daten für den Verbindungsaufbau
+        cli:
+          protocol: ssh
+          ip: 172.25.192.90
+  ```
+]
+
 Dieses Beispiel enthält lediglich einen Router, es können aber auch mehrere Geräteverbindungen in einem Testbed definiert werden.
 
 === PyATS Testskript
@@ -62,34 +69,40 @@ uv add pyats[full]
 
 Mit diesem Paket und dem Testbed von @testbeds kann ein Python-Skript geschrieben werden, welches die Funktionalität von PyATS demonstriert:
 #pagebreak()
-```python
-from genie.testbed import load
-from genie.libs.ops.interface.ios.interface import Interface
 
-from pprint import pprint
+#htl3r.code(
+  caption: [Ein Beispiel einer Testbed-Datei],
+  description: `testbed.yaml`,
+)[
+  ```python
+  from genie.testbed import load
+  from genie.libs.ops.interface.ios.interface import Interface
 
-
-# Datei mit den Verbindungsinformationen von Routern laden:
-tb = load("testbed1.yml")
-
-# Mit einem bestimmten Router verbinden:
-device = tb.devices["R1"]
-device.connect(log_stdout=False)
-
-# Informationen über die Plattform und Version des Betriebssystems ausgeben:
-version = device.parse("show version")
-pprint(version)
+  from pprint import pprint
 
 
-# Den Status von Gig0/0 ausgeben:
-interfaces = Interface(device)
-interfaces.learn()
-pprint(interfaces.info["GigabitEthernet0/0"]["enabled"])
+  # Datei mit den Verbindungsinformationen von Routern laden:
+  tb = load("testbed1.yml")
 
-# Informationen über den ospf Prozess ausgeben:
-ospf = device.learn("ospf")
-pprint(ospf.info)
-```
+  # Mit einem bestimmten Router verbinden:
+  device = tb.devices["R1"]
+  device.connect(log_stdout=False)
+
+  # Informationen über die Plattform und Version des Betriebssystems ausgeben:
+  version = device.parse("show version")
+  pprint(version)
+
+
+  # Den Status von Gig0/0 ausgeben:
+  interfaces = Interface(device)
+  interfaces.learn()
+  pprint(interfaces.info["GigabitEthernet0/0"]["enabled"])
+
+  # Informationen über den ospf Prozess ausgeben:
+  ospf = device.learn("ospf")
+  pprint(ospf.info)
+  ```
+]
 Der Ablauf des Skripts kann in folgende Teile gegliedert werden:
 + Am Anfang werden die benötigten Genie Komponenten und pprint importiert. Pprint ist dafür zuständig, die Ausgaben der Funktionen in einem übersichtlichen Format darzustellen.
 + Danach wird das Testbed geladen und in eine Variable gespeichert. Von dieser wird dann ein bestimmtes Gerät, in diesem Fall der Router R1, ausgewählt und in einer eigenen Variable "device" gespeichert.
