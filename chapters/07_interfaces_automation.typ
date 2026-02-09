@@ -36,7 +36,7 @@ Zu den relevantesten unterstützten Betriebssystemen/Plattformen gehören:
 - Cisco NXOS - Betriebssystem für Datacenter-Switches
 - Cisco ASA - Betriebssystem für Firewalls
 
-Testbeds werden in dem Format #htl3r.long[yaml] gespeichert und können folgendermaßen aussehen:
+Testbeds werden in dem Format #htl3r.short[yaml] gespeichert und können folgendermaßen aussehen:
 
 #htl3r.code(
   caption: [Ein Beispiel einer Testbed-Datei],
