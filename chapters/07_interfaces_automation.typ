@@ -128,5 +128,5 @@ Um die Funktionalität von PyATS in der DiagNet Applikation nutzen zu können, w
 Von dieser Liste bekommt das Backend ein Genie-Device-Objekt. In den einzelnen Testfällen wird dann spezifiziert, welche PyATS-Methoden mit dem Objekt ausgeführt werden müssen, um die für die Auswertung erforderlichen Informationen zu erhalten.
 
 === Zusammenfassung
-PyATS stellt ein Framework zur Automatisierung von Netzwerktests dar. Durch die Kombination aus strukturierten Testabläufen und der Aufbereitung von Geräteinformationen eignet sich PyATS besonders für den Einsatz in automatisierten Testumgebungen. \
+Bei PyATS handelt es sich um ein Framework zur Automatisierung von Netzwerktests. Durch die Kombination aus strukturierten Testabläufen und der Aufbereitung von Geräteinformationen eignet sich PyATS besonders für den Einsatz in automatisierten Testumgebungen. \
 Trotz der umfangreichen Funktionalität ist die Nutzung von PyATS an gewisse Einschränkungen gebunden, wie etwa die Verfügbarkeit geeigneter Parser oder den Fokus auf bestimmte Plattformen. Diese Grenzen können jedoch durch eine gezielte Auswahl unterstützter Tests sowie durch Erweiterungen in zukünftigen Versionen teilweise kompensiert werden.
