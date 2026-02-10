@@ -2,19 +2,29 @@
 
 #htl3r.author("Luka Pacar")
 
-== Dynamische Formulare
-Ein grundlegendes Designprinzip von _DiagNet_ ist die saubere Trennung von Testlogik und Benutzeroberfläche. Während die Implementierung der Netzwerktests und deren Parameterdefinitionen ausschließlich in Python-Dateien vorliegt, muss die Benutzeroberfläche diese Strukturen abbilden können. Da sich die erforderlichen Eingaben je nach Testszenario stark unterscheiden, ist ein statisches HTML-Formular keine Lösung. Stattdessen generiert das System die Eingabefelder dynamisch, indem es die Struktur aus den empfangenen Testattributen ableitet.
+= Dynamische Formulare
+Bei der Architektur von _DiagNet_ wurde großer Wert auf eine klare Trennung zwischen der Testlogik und der grafischen Oberfläche gelegt.
+Während die Implementierung der Netzwerktests und deren Parameterdefinitionen ausschließlich in Python-Dateien vorliegt, muss die Benutzeroberfläche diese Strukturen abbilden können.
+Da sich die erforderlichen Eingaben für jedes Testszenario stark unterscheiden, ist ein statisches #htl3r.full[html]-Formular keine Lösung.
+Stattdessen generiert das System die Eingabefelder dynamisch, indem es die Struktur aus den empfangenen Testattributen ableitet.
 
-=== Aufbau der Benutzeroberfläche
-Der Aufbau des Formulars beginnt, sobald der Anwender eine Testklasse auswählt. Das System sendet eine Anfrage an die API des Servers, um die Konfiguration des gewählten Tests zu laden. Das Backend liest dabei die Attribute der Python-Klasse aus und wandelt sie in ein standardisiertes JSON-Format um. Dieses Datenobjekt dient als Bauplan für den Client und enthält neben den Parameternamen und Datentypen auch Informationen über Pflichtfelder sowie Abhängigkeiten zwischen den Eingabewerten.
+== Aufbau der Benutzeroberfläche
+Der Aufbau des Formulars beginnt, sobald der Anwender eine Testklasse auswählt.
+Das System sendet eine Anfrage an die #htl3r.full[api] des Servers, um die Konfiguration des gewählten Tests zu laden.
+Das Backend liest dabei die Attribute der Python-Klasse aus und wandelt sie in ein standardisiertes #htl3r.full[json]-Format um.
+Dieses Datenobjekt dient als Bauplan für den Client und enthält neben den Parameternamen und Datentypen auch Informationen über Pflichtfelder sowie Abhängigkeiten zwischen den Eingabewerten.
 
-Nach dem Empfang der Daten wird der Container für die Parameter vorbereitet und nötige Abhängigkeiten definiert. Anschließend iteriert der Algorithmus über die Liste der Definitionen, transformiert jeden Eintrag direkt in das korrespondierende Eingabeelement und fügt es in die Benutzeroberfläche ein. Dieser Ansatz entkoppelt das Frontend von der konkreten Programmierung der Tests. Fügt ein Entwickler im Backend einen neuen Parameter hinzu, erscheint dieser automatisch in der Benutzeroberfläche, ohne dass der Code des Frontends angepasst werden muss.
-=== Abstraktion der Eingabefelder
+Nach dem Empfang der Daten wird der Container für die Parameter vorbereitet und nötige Abhängigkeiten definiert.
+In einer Schleife werden daraufhin alle Definitionen nacheinander abgearbeitet, in das entsprechende Eingabeelement übersetzt und in die Oberfläche integriert.
+Dieser Ansatz entkoppelt das Frontend von der Programmierung der Tests.
+Fügt ein Entwickler im Backend einen neuen Parameter hinzu, erscheint dieser automatisch in der Benutzeroberfläche, ohne dass der Code des Frontends angepasst werden muss.
+
+== Abstraktion der Eingabefelder
 Damit der Code wartbar bleibt, verzichtet das System auf komplexe Funktionen zur Erstellung der Felder. Stattdessen definiert eine abstrakte Basisklasse das Verhalten aller Eingabeelemente. Sie garantiert eine einheitliche Schnittstelle, unabhängig von der eigentlichen visuellen Darstellung.
 
-Jedes Eingabefeld, ob Textfeld, Dropdown-Liste oder eine spezielle Auswahl für Netzwerkgeräte, muss von dieser Basisklasse erben. Das garantiert, dass der übergeordnete Algorithmus jedes Feld gleich behandeln kann, ohne dessen interne Details zu kennen. Eine Fabrikmethode prüft den geforderten Datentyp und erstellt die passende Unterklasse.
+Jedes Eingabefeld, ob Textfeld, Dropdown-Liste oder eine spezielle Auswahl für Netzwerkgeräte, muss von dieser Basisklasse erben. Das garantiert, dass der Code für das Parametermanagement jedes Feld gleich behandeln kann, ohne dessen interne Details zu kennen. Eine #htl3r.full[fabrikmethode] prüft den geforderten Datentyp und erstellt die passende Unterklasse.
 
-Der folgende Code zeigt die Struktur dieser Abstraktion. Sie schreibt vor, dass jede Unterklasse Funktionen zur Erstellung des HTML-Elements, zur Rückgabe des Werts und zur Überprüfung des Datentyps bereitstellen muss.
+Der folgende Code zeigt die Struktur dieser Abstraktion. Sie schreibt vor, dass jede Unterklasse Funktionen zur Erstellung des #htl3r.short[html]-Elements, zur Rückgabe des Werts und zur Überprüfung des Datentyps bereitstellen muss.
 
 #htl3r.code(
   caption: [Struktur der Parameterklasse],
@@ -31,8 +41,8 @@ Der folgende Code zeigt die Struktur dieser Abstraktion. Sie schreibt vor, dass 
 
 Durch diese Struktur kann das System entscheiden, welche Implementierung für einen Parameter notwendig ist. Listen-Parameter werden beispielsweise rekursiv behandelt, indem die Listen-Komponente wiederum Instanzen der Basisklasse für ihre Einträge verwaltet.
 
-=== Datentyp Validierung
-Neben der Darstellung muss auch die inhaltliche Korrektheit der eingegebenen Daten sichergestellt werden. Dafür nutzt das System ein eigenes Validierungsverfahren, dessen Logik in einer separaten Klassenstruktur organisiert wird. Während die `ParameterField` Klasse für das HTML-Element zuständig ist, übergibt sie die inhaltliche Prüfung an Datentyp-Klassen.
+== Datentyp Validierung
+Neben der Darstellung muss auch die inhaltliche Korrektheit der eingegebenen Daten sichergestellt werden. Dafür nutzt das System ein eigenes Validierungsverfahren, dessen Logik in einer separaten Klassenstruktur organisiert wird. Während die `ParameterField` Klasse für das #htl3r.short[html]-Element zuständig ist, übergibt sie die inhaltliche Prüfung an Datentyp-Klassen.
 
 Auch hier wird ein modularer Ansatz verfolgt. Die abstrakte Basisklasse `Datatype` definiert die Methode `check(value)`, welche die Gültigkeit eines Wertes bestätigt. Klassen wie `IPv4` oder `CiscoInterface` implementieren diese Methode mit der jeweiligen Logik.
 
@@ -56,9 +66,9 @@ Der folgende Ausschnitt zeigt die Implementierung einer solchen Prüfung am Beis
   ```
 ]
 
-Diese Struktur ermöglicht eine einfache Überprüfung der Eingabe. Ein `EventHandler` verbindet das Eingabefeld mit dem passenden Datentyp. Bei jeder Änderung des Werts wird die `check()` Methode ausgeführt und das Ergebnis gespeichert. Dies stellt sicher, dass der Benutzer nur dann einen Test erstellen kann, wenn alle Parameter den Vorgaben entsprechen.
+Diese Struktur ermöglicht eine einfache Überprüfung der Eingabe. Ein `EventHandler` verbindet das Eingabefeld mit dem passenden Datentyp. Bei jeder Änderung des Werts wird die `check()` Methode ausgeführt und das Ergebnis verarbeitet. Dies stellt sicher, dass der Benutzer nur dann einen Test erstellen kann, wenn alle Parameter den Vorgaben entsprechen.
 
-=== Abhängigkeitsmanagement
+== Abhängigkeitsmanagement
 In komplexen Netzwerkszenarien sind Parameter meistens voneinander abhängig.
 Oft bestimmt die Auswahl einer Option, ob weitere Eingaben nötig oder verboten sind. _DiagNet_ bildet diese Abhängigkeiten durch ein System ab, das auf Änderungen reagiert.
 
@@ -92,8 +102,8 @@ Das System unterscheidet dabei zwei Arten von Abhängigkeiten:
   ```
 ]
 
-=== Zusammenführung und Erstellung
-Den Abschluss bildet das Einsammeln der Benutzereingaben. Da das System die Gültigkeit der Daten bereits während der Eingabe überwacht, ist beim finalen Absenden keine erneute Prüfung notwendig. Sobald der Anwender die Erstellung bestätigt, geht der Algorithmus die Liste aller Parameter durch. Dabei greift er auf die `getValue()` Methode der Felder zurück, um die eingetragenen Werte auszulesen. Die aggregierten Daten werden in einem JSON-Objekt gesammelt und über eine API-Schnittstelle an das Backend übermittelt. Dieses nutzt die Informationen, um den Testfall zu erstellen und dauerhaft in der Datenbank zu speichern.
+== Zusammenführung und Erstellung
+Den Abschluss bildet das Einsammeln der Benutzereingaben. Da das System die Gültigkeit der Daten bereits während der Eingabe überwacht, ist beim finalen Absenden keine erneute Prüfung notwendig. Sobald der Anwender die Erstellung bestätigt, geht der Algorithmus die Liste aller Parameter durch. Dabei greift er auf die `getValue()` Methode der Felder zurück, um die eingetragenen Werte auszulesen. Die Daten werden in einem #htl3r.short[json]-Objekt gesammelt und über eine #htl3r.short[api]-Schnittstelle an das Backend übermittelt. Dieses nutzt die Informationen, um den Testfall zu erstellen und in der Datenbank zu speichern.
 
 #htl3r.code(
   caption: [Erstellung des Testfalls im Backend],

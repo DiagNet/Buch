@@ -86,7 +86,7 @@ Neben den zwingend erforderlichen Definitionen unterstützt das Parameterschema 
 ==== Präsentation und Frontend
 Diese Attribute steuern ausschließlich die visuelle Darstellung der Parameter in der Benutzeroberfläche und haben keinen direkten Einfluss auf die interne Testlogik.
 
-*`display_name`*: Definiert die Beschriftung des Eingabefeldes in der GUI. Fehlt dieser Schlüssel, greift das System automatisch auf den technischen Variablennamen zurück. Dies ermöglicht eine benutzerfreundliche Darstellung wie "BGP AS Number" bei gleichzeitiger Beibehaltung des technisch notwendigen Variablennamens bgp_as_number.
+*`display_name`*: Definiert die Beschriftung des Eingabefeldes in der #htl3r.full[gui]. Fehlt dieser Schlüssel, greift das System automatisch auf den technischen Variablennamen zurück. Dies ermöglicht eine benutzerfreundliche Darstellung wie "BGP AS Number" bei gleichzeitiger Beibehaltung des technisch notwendigen Variablennamens bgp_as_number.
 
 *`description`*: Ermöglicht die Hinterlegung eines ausführlichen Hilfetextes. Dieser wird dem Anwender im Frontend angezeigt und dient dazu, die Bedeutung des Parameters zu erläutern.
 
@@ -214,7 +214,7 @@ Um das Verhalten einzelner Testmethoden zu modifizieren, ohne den eigentlichen T
 ]
 
 === Definition von Abhängigkeiten
-Innerhalb komplexer Testabläufe bestehen oft logische Kausalitäten zwischen verschiedenen Prüfungen. Eine detaillierte Protokoll-Analyse ist beispielsweise obsolet, sofern bereits die grundlegende ICMP-Erreichbarkeit des Gerätes gescheitert ist. Um kaskadierende Fehlermeldungen zu vermeiden und die Ausführungszeit zu optimieren, stellt das Framework den Dekorator *\@depends_on* bereit.
+Innerhalb komplexer Testabläufe bestehen oft logische Kausalitäten zwischen verschiedenen Prüfungen. Eine detaillierte Protokoll-Analyse ist beispielsweise obsolet, sofern bereits die grundlegende Erreichbarkeit des Gerätes gescheitert ist. Um kaskadierende Fehlermeldungen zu vermeiden und die Ausführungszeit zu optimieren, stellt das Framework den Dekorator *\@depends_on* bereit.
 
 Dieser markiert eine Testmethode als abhängig von einem spezifischen Vorgänger. Die Referenzierung erfolgt hierbei über den Methodennamen als Text. Das Framework stellt sicher, dass der abhängige Test erst nach dem erfolgreichen Abschluss der referenzierten Methode ausgeführt wird. Sollte die Vorbedingung scheitern oder selbst übersprungen werden, entfällt die Ausführung des abhängigen Tests und dieser erhält im Protokoll automatisch den Status SKIPPED.
 
@@ -240,7 +240,7 @@ Die Methode `run()` ist der zentrale Einstiegspunkt für die Testausführung.
 Sie steuert den gesamten Testablauf zentral und stellt sicher, dass alle Voraussetzungen validiert sind, bevor die eigentliche Ausführung beginnt. Der Ablauf gliedert sich dabei in folgende Phasen:
 
 === Parameter-Validierung
-Überprüft, ob alle _erforderlichen_ Parameter vorhanden sind, und ob keine _mutually exclusive_ Parameter gleichzeitig gesetzt wurden. Gültige Parameter werden dynamisch als Instanzattribute zugewiesen, sodass in den Testmethoden über *`self.parameter_name`* direkt auf sie zugegriffen werden kann.
+Überprüft, ob alle _erforderlichen_ Parameter vorhanden sind, und ob keine _mutually exclusive_ Parameter gleichzeitig gesetzt wurden. Gültige Parameter werden dynamisch als #htl3r.short[instanzattribute] zugewiesen, sodass in den Testmethoden über *`self.parameter_name`* direkt auf sie zugegriffen werden kann.
 
 #htl3r.code(
   caption: [Zugriff auf einen Parameter],
@@ -293,7 +293,7 @@ Um die definierten Abhängigkeiten in eine linear ausführbare Sequenz zu überf
 Der Algorithmus gliedert sich in vier Phasen:
 
 *Graphen-Konstruktion*:
-Zunächst iteriert das System über alle aktiven Testmethoden und baut eine Adjazenzliste auf. Parallel dazu wird jedem Test ein Zählerwert zugewiesen, der exakt beziffert, von wie vielen anderen Tests er direkt abhängig ist.
+Zunächst iteriert das System über alle aktiven Testmethoden und baut eine #htl3r.short[adjazenzliste] auf. Parallel dazu wird jedem Test ein Zählerwert zugewiesen, der exakt beziffert, von wie vielen anderen Tests er direkt abhängig ist.
 
 #htl3r.code(
   caption: [Aufbau des Graphen und Berechnung der Eingangsgrade],
