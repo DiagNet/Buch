@@ -71,7 +71,7 @@ Mit diesem Paket und dem Testbed von @testbeds kann ein Python-Skript geschriebe
 #pagebreak()
 
 #htl3r.code(
-  caption: [Ein #htl3r.long[pyats] Beispielskript],
+  caption: [Ein pyATS Beispielskript],
   description: `script.py`,
 )[
   ```python

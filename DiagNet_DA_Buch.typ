@@ -63,5 +63,3 @@
 #include "chapters/14_data_visualization.typ"    // Danijel
 #include "chapters/15_containerization.typ"      // Karun
 #include "chapters/16_cicd_automation.typ"       // Karun
-
-#include "chapters/test_framework.typ"
