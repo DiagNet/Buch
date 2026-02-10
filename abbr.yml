@@ -246,3 +246,65 @@ trunk:
     singular: IEEE 802.1Q
   full: IEEE 802.1Q (802.1Q)
   description: Der gängigste Standard für das VLAN-Tagging in Ethernet-Netzwerken, der es ermöglicht, mehrere VLANs über eine einzige physische Verbindung zu übertragen.
+
+gui:
+  short:
+    singular: GUI
+  long:
+    singular: Graphical User Interface
+  full: Graphical User Interface
+  description: Bezeichnet eine Benutzeroberfläche, die dem Anwender die Interaktion mit der Software durch visuelle Elemente wie Fenster, Menüs und Symbole ermöglicht, anstatt textbasierte Befehle zu erfordern.
+
+instanzattribute:
+  short:
+    singular: Instanzattribute
+  long:
+    singular: Instanzattribute
+  full: Instanzattribute
+  description: >-
+    Variablen, die an eine spezifische Instanz einer Klasse gebunden sind und deren individuellen Zustand speichern.
+
+html:
+  short:
+    singular: HTML
+  long:
+    singular: Hypertext Markup Language
+  full: Hypertext Markup Language
+  description: >-
+    Eine strukturierte Auszeichnungssprache, die zur Erstellung und Gestaltung digitaler Dokumente im World Wide Web dient.
+
+adjazenzliste:
+  short:
+    singular: Adjazenzliste
+  long:
+    singular: Adjazenzliste
+  full: Adjazenzliste
+  description: >-
+    Eine Darstellungsform für Graphen in der Informatik, bei der für jeden Knoten eine Liste aller seiner direkten Nachbarknoten gespeichert wird.
+
+icmp:
+  short:
+    singular: ICMP
+  long:
+    singular: Internet Control Message Protocol
+  full: Internet Control Message Protocol
+  description: >-
+    Ein Netzwerkprotokoll, das zum Austausch von Informations- und Fehlermeldungen in IP-Netzwerken dient. Es wird primär für Diagnosezwecke verwendet, etwa um die Erreichbarkeit von Hosts zu prüfen.
+
+json:
+  short:
+    singular: JSON
+  long:
+    singular: JavaScript Object Notation
+  full: JavaScript Object Notation
+  description: >-
+    Ein textbasiertes Format zum effizienten Datenaustausch zwischen Anwendungen, das in Web-APIs als Standard für die Client-Server-Kommunikation dient.
+
+fabrikmethode:
+  short:
+    singular: Fabrikmethode
+  long:
+    singular: Fabrikmethode
+  full: Fabrikmethode
+  description: >-
+    Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert, wobei die konkrete Instanziierung den Unterklassen überlassen wird.
