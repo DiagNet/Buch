@@ -26,10 +26,30 @@ api:
     singular: Application Programming Interface
   description: Eine Programmierschnittstelle, über die Softwarekomponenten miteinander kommunizieren.
 
+as:
+  short:
+    singular: AS
+    plural: AS
+  long:
+    singular: Autonomes System
+    plural: Autonome Systeme
+  full:
+    singular: Autonomes System (AS)
+    plural: Autonome Systeme (AS)
+  description: Eine Sammlung von IP-Netzwerken unter der Kontrolle einer einzigen administrativen Einheit, die eine gemeinsame Routing-Politik verfolgt.
+
 backend:
   long:
     singular: Backend
   description: Der Teil einer Anwendung, der im Hintergrund läuft und Datenverarbeitung sowie Logik bereitstellt.
+
+bgp:
+  short:
+    singular: BGP
+  long:
+    singular: Border Gateway Protocol
+  full: Border Gateway Protocol (BGP)
+  description: Das Standard-Routing-Protokoll des Internets, das den Datenaustausch zwischen verschiedenen Autonomen Systemen (AS) steuert.
 
 cd:
   short:
@@ -62,6 +82,30 @@ djlint:
     singular: djLint
   description: Ein Linter und Formatter speziell für HTML-Templates, der häufig in Django- oder Jinja2-Projekten Anwendung findet.
 
+dmvpn:
+  short:
+    singular: DMVPN
+  long:
+    singular: Dynamic Multipoint Virtual Private Network
+  full: Dynamic Multipoint Virtual Private Network (DMVPN)
+  description: Eine VPN-Technologie, die den dynamischen Aufbau von IPsec-Tunneln zwischen mehreren Standorten ohne permanente Konfiguration ermöglicht.
+
+ebgp:
+  short:
+    singular: eBGP
+  long:
+    singular: External Border Gateway Protocol
+  full: External Border Gateway Protocol (eBGP)
+  description: Eine Variante des Border Gateway Protocols, die für den Austausch von Routing-Informationen zwischen unterschiedlichen Autonomen Systemen (AS) verwendet wird.
+
+eigrp:
+  short:
+    singular: EIGRP
+  long:
+    singular: Enhanced Interior Gateway Routing Protocol
+  full: Enhanced Interior Gateway Routing Protocol (EIGRP)
+  description: Ein fortschrittliches Distanzvektor-Routing-Protokoll von Cisco, das Bandbreite und Verzögerung zur Pfadberechnung kombiniert.
+
 exception:
   long:
     singular: Exception
@@ -72,8 +116,21 @@ fabrikmethode:
     singular: Fabrikmethode
   long:
     singular: Fabrikmethode
+  full: Fabrikmethode
   description: >-
     Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert, wobei die konkrete Instanziierung den Unterklassen überlassen wird.
+
+fhrp:
+  short:
+    singular: FHRP
+    plural: FHRPs
+  long:
+    singular: First Hop Redundancy Protocol
+    plural: First Hop Redundancy Protocols
+  full:
+    singular: First Hop Redundancy Protocol (FHRP)
+    plural: First Hop Redundancy Protocols (FHRPs)
+  description: Ein Oberbegriff für Protokolle (wie HSRP, VRRP, GLBP), die Gateway-Redundanz in lokalen Netzwerken bereitstellen.
 
 framework:
   long:
@@ -85,12 +142,28 @@ genie:
     singular: Genie
   description: Eine Bibliothek innerhalb von pyATS, die Parser und Funktionen zur strukturierten Auswertung von Geräteinformationen bereitstellt.
 
+glbp:
+  short:
+    singular: GLBP
+  long:
+    singular: Gateway Load Balancing Protocol
+  full: Gateway Load Balancing Protocol (GLBP)
+  description: Ein Cisco-Protokoll zur Gateway-Redundanz, das zusätzlich zur Ausfallsicherheit eine Lastverteilung über mehrere Router hinweg bietet.
+
 gns3:
   short:
     singular: GNS3
   long:
     singular: Graphical Network Simulator 3
   description: Eine Software zur Simulation komplexer Netzwerke, die es ermöglicht, virtuelle und reale Geräte miteinander zu verknüpfen.
+
+gre:
+  short:
+    singular: GRE
+  long:
+    singular: Generic Routing Encapsulation
+  full: Generic Routing Encapsulation (GRE)
+  description: Ein Tunneling-Protokoll, das beliebige Netzwerkprotokolle in IP-Pakete verpackt, um sie über ein öffentliches Netzwerk zu transportieren.
 
 gui:
   short:
@@ -105,6 +178,14 @@ hermetic:
     plural: hermetische
   description: Beschreibt in Build-Systemen eine Umgebung, die vollständig isoliert ist und keinen Zugriff auf das Dateisystem oder Netzwerk des Host-Computers hat, außer explizit deklarierte Eingaben.
 
+hsrp:
+  short:
+    singular: HSRP
+  long:
+    singular: Hot Standby Router Protocol
+  full: Hot Standby Router Protocol (HSRP)
+  description: Ein proprietäres Redundanzprotokoll von Cisco, das durch ein Active/Standby-Modell die Ausfallsicherheit des Standard-Gateways gewährleistet.
+
 html:
   short:
     singular: HTML
@@ -118,8 +199,21 @@ icmp:
     singular: ICMP
   long:
     singular: Internet Control Message Protocol
+  full: Internet Control Message Protocol
   description: >-
     Ein Netzwerkprotokoll, das zum Austausch von Informations- und Fehlermeldungen in IP-Netzwerken dient. Es wird primär für Diagnosezwecke verwendet, etwa um die Erreichbarkeit von Hosts zu prüfen.
+
+igp:
+  short:
+    singular: IGP
+    plural: IGPs
+  long:
+    singular: Interior Gateway Protocol
+    plural: Interior Gateway Protocols
+  full:
+    singular: Interior Gateway Protocol (IGP)
+    plural: Interior Gateway Protocols (IGPs)
+  description: Ein Routing-Protokoll, das zum Austausch von Routing-Informationen zwischen Gateways (Routern) innerhalb eines einzelnen Autonomen Systems (AS) verwendet wird.
 
 instanzattribute:
   short:
@@ -134,6 +228,14 @@ interface:
     singular: Netzwerkinterface
   description: Eine physische oder logische Schnittstelle eines Netzwerkgeräts zur Datenübertragung.
 
+ipsec:
+  short:
+    singular: IPsec
+  long:
+    singular: Internet Protocol Security
+  full: Internet Protocol Security (IPsec)
+  description: Eine Protokoll-Suite zur Sicherung der Internetkommunikation durch Authentifizierung und Verschlüsselung jedes IP-Pakets.
+
 ise:
   short:
     singular: ISE
@@ -146,6 +248,7 @@ json:
     singular: JSON
   long:
     singular: JavaScript Object Notation
+  full: JavaScript Object Notation
   description: >-
     Ein textbasiertes Format zum effizienten Datenaustausch zwischen Anwendungen, das in Web-APIs als Standard für die Client-Server-Kommunikation dient.
 
@@ -153,6 +256,22 @@ just:
   long:
     singular: "`just`"
   description: Ein Task-Runner, der Projektaufgaben in einem Justfile definiert und als moderne Alternative zu `make` dient.
+
+med:
+  short:
+    singular: MED
+  long:
+    singular: Multi-Exit Discriminator
+  full: Multi-Exit Discriminator (MED)
+  description: Ein optionales BGP-Pfadattribut, das verwendet wird, um den eingehenden Datenverkehr von einem benachbarten Autonomen System zu steuern.
+
+mpls:
+  short:
+    singular: MPLS
+  long:
+    singular: Multiprotocol Label Switching
+  full: Multiprotocol Label Switching (MPLS)
+  description: Ein Verfahren zur Weiterleitung von Datenpaketen entlang vordefinierter Pfade basierend auf kurzen Labels statt langer Netzwerkadressen.
 
 nat:
   short:
@@ -166,6 +285,23 @@ neighbor:
     singular: Neighbor
   description: Ein benachbartes Netzwerkgerät, mit dem Routing-Informationen ausgetauscht werden.
 
+nhrp:
+  short:
+    singular: NHRP
+    plural: NHRPs
+  long:
+    singular: Next Hop Resolution Protocol
+    plural: Next Hop Resolution Protocols
+  full:
+    singular: Next Hop Resolution Protocol (NHRP)
+    plural: Next Hop Resolution Protocols (NHRPs)
+  description: Ein Protokoll, das in NBMA-Netzwerken (wie DMVPN) verwendet wird, um die logische IP-Adresse eines Ziels auf die physische Tunnel-Endpunkt-Adresse aufzulösen.
+
+nix:
+  long:
+    singular: Nix
+  description: Ein rein funktionaler Paketmanager und Build-System, das Software in isolierten, unveränderlichen Zuständen verwaltet.
+
 nix-flakes:
   long:
     singular: Nix Flakes
@@ -175,11 +311,6 @@ nix-shell:
   long:
     singular: Nix Shell
   description: Eine temporäre, isolierte Entwicklungsumgebung, in der alle definierten Abhängigkeiten verfügbar sind, ohne das Host-System zu verändern.
-
-nix:
-  long:
-    singular: Nix
-  description: Ein rein funktionaler Paketmanager und Build-System, das Software in isolierten, unveränderlichen Zuständen verwaltet.
 
 nixfmt:
   long:
@@ -203,6 +334,18 @@ parser:
     singular: Parser
   description: Eine Softwarekomponente, die unstrukturierten Text, wie Geräteausgaben, in strukturierte Datenformate umwandelt.
 
+pat:
+  short:
+    singular: PAT
+    plural: PATs
+  long:
+    singular: Port Address Translation
+    plural: Port Address Translations
+  full:
+    singular: Port Address Translation (PAT)
+    plural: Port Address Translations (PATs)
+  description: Eine Erweiterung von NAT, die es ermöglicht, mehrere Geräte im lokalen Netzwerk über eine einzige öffentliche IP-Adresse abzubilden, indem unterschiedliche Source-Ports verwendet werden.
+
 prettier:
   long:
     singular: Prettier
@@ -217,6 +360,14 @@ python_dictionary:
   long:
     singular: Python-Dictionary
   description: Eine Datenstruktur in Python zur Speicherung von Schlüssel-Wert-Paaren.
+
+rip:
+  short:
+    singular: RIP
+  long:
+    singular: Routing Information Protocol
+  full: Routing Information Protocol (RIP)
+  description: Ein klassisches Distanzvektor-Routing-Protokoll, das den Hop-Count zur Bestimmung des besten Pfades verwendet.
 
 router_id:
   long:
@@ -243,7 +394,7 @@ ssh:
 telnet:
   long:
     singular: Telnet
-  description: Ein unverschlüsseltes Netzwerkprotokoll für den Fernzugriff auf Geräte.
+  description: Ein unverschlüsseltes Netzwerkprotokoll für den fernzugriff auf Geräte.
 
 testbed:
   long:
