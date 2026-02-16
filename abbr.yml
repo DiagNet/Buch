@@ -308,3 +308,71 @@ fabrikmethode:
   full: Fabrikmethode
   description: >-
     Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert, wobei die konkrete Instanziierung den Unterklassen überlassen wird.
+
+rip:
+  short:
+    singular: RIP
+  long:
+    singular: Routing Information Protocol
+  full: Routing Information Protocol (RIP)
+  description: Ein klassisches Distanzvektor-Routing-Protokoll, das den Hop-Count zur Bestimmung des besten Pfades verwendet.
+
+eigrp:
+  short:
+    singular: EIGRP
+  long:
+    singular: Enhanced Interior Gateway Routing Protocol
+  full: Enhanced Interior Gateway Routing Protocol (EIGRP)
+  description: Ein fortschrittliches Distanzvektor-Routing-Protokoll, das verschiedene Metriken wie Bandbreite und Verzögerung zur Pfadberechnung kombiniert.
+
+bgp:
+  short:
+    singular: BGP
+  long:
+    singular: Border Gateway Protocol
+  full: Border Gateway Protocol (BGP)
+  description: Das Routing-Protokoll des Internets, welches den Datenaustausch zwischen verschiedenen autonomen Systemen steuert.
+
+hsrp:
+  short:
+    singular: HSRP
+  long:
+    singular: Hot Standby Router Protocol
+  full: Hot Standby Router Protocol (HSRP)
+  description: Ein redundantes Protokoll für Standard-Gateways, das bei Ausfall eines Routers die unterbrechungsfreie Weiterleitung des Datenverkehrs ermöglicht.
+
+glbp:
+  short:
+    singular: GLBP
+  long:
+    singular: Gateway Load Balancing Protocol
+  full: Gateway Load Balancing Protocol (GLBP)
+  description: Ein Protokoll zur Gateway-Redundanz, das zusätzlich zur Ausfallsicherheit eine Lastverteilung über mehrere Router hinweg bietet.
+
+dmvpn:
+  short:
+    singular: DMVPN
+  long:
+    singular: Dynamic Multipoint Virtual Private Network
+  full: Dynamic Multipoint Virtual Private Network (DMVPN)
+  description: Eine VPN-Technologie, die den dynamischen Aufbau von Tunneln zwischen mehreren Standorten ermöglicht.
+
+ipsec:
+  short:
+    singular: IPsec
+  long:
+    singular: Internet Protocol Security
+  full: Internet Protocol Security (IPsec)
+  description: Eine Protokoll-Suite zur Sicherung der Kommunikation in IP-Netzwerken durch Verschlüsselung und Authentifizierung der Datenpakete.
+
+regex:
+  short:
+    singular: Regex
+    plural: Regex
+  long:
+    singular: regulärer Ausdruck
+    plural: reguläre Ausdrücke
+  full:
+    singular: regulärer Ausdruck (regex)
+    plural: reguläre Ausdrücke (regex)
+  description: Eine Zeichenfolge, die ein Suchmuster beschreibt, um mithilfe von Matching gezielt Informationen aus unformatiertem Text zu extrahieren.

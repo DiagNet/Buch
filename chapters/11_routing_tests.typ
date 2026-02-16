@@ -4,8 +4,8 @@
 
 = Routing Tests
 Die Routing-Tests validieren die Funktion der WAN-Seite der Netzwerktopologie.
-Der Fokus liegt auf der Überprüfung der dynamischen Routing-Protokolle RIP, EIGRP, OSPF und BGP.
-Zusätzlich deckt das Framework Technologien für Redundanz und Sicherheit ab, darunter HSRP, GLBP, DMVPN und IPSec.
+Der Fokus liegt auf der Überprüfung der dynamischen Routing-Protokolle *#htl3r.full[rip]*, *#htl3r.full[eigrp]*, *#htl3r.full[ospf]* und *#htl3r.full[bgp]*.
+Zusätzlich deckt das Framework Technologien für Redundanz und Sicherheit ab, darunter *#htl3r.full[hsrp]*, *#htl3r.full[glbp]*, *#htl3r.full[dmvpn]* und *#htl3r.full[ipsec]*.
 Im Gegensatz zu einfachen Verbindungstests analysieren diese Module den operativen Zustand der Protokolle direkt auf den Geräten.
 Das System vergleicht die Routing-Tabellen, Nachbarschaften und Interfaces mit den konfigurierten Soll-Werten.
 
@@ -16,17 +16,17 @@ Hierfür kommen zwei unterschiedliche Verfahren zum Einsatz.
 Die Wahl der Methode hängt davon ab, ob für den spezifischen Befehl eine Bibliothek zur Verarbeitung existiert.
 
 === Strukturierte Daten
-Die bevorzugte Methode nutzt die Parser der Bibliothek pyATS, welche die Text-Ausgabe der Konsole direkt in strukturierte Datenobjekte umwandelt.
+Die bevorzugte Methode nutzt die Parser der Bibliothek #htl3r.long[pyats], welche die Text-Ausgabe der Konsole direkt in strukturierte Datenobjekte umwandelt.
 Dadurch muss der Testcode den Text nicht manuell durchsuchen, sondern greift über definierte Namen auf die gewünschten Werte zu.
 Dieses Verfahren macht die Testfälle unempfindlich gegenüber kleinen Formatänderungen in der Geräteantwort.
 
 === Rohdaten
 Besitzen Befehle keinen Parser oder liefern keine strukturierten Daten, nutzt das System die Rohdatenausgabe der Konsole.
-Hierfür kommen meistens reguläre Ausdrücke zum Einsatz, um die gesuchten Informationen aus dem unveränderten Text zu extrahieren.
+Hierfür kommen #htl3r.fullpl[regex] zum Einsatz, um die gesuchten Informationen aus dem unveränderten Text zu extrahieren.
 Dieses Verfahren bietet zwar maximale Flexibilität für exotische Befehle, ist in der Implementierung jedoch deutlich aufwendiger, da der Entwickler das Antwortformat des Gerätes manuell interpretieren muss.
 
 === Parallele Ausführung
-Da Tests für Protokolle wie OSPF oft viele Geräte gleichzeitig betreffen, würde eine nacheinander folgende Abfrage zu langen Wartezeiten führen.
+Da Tests für Protokolle wie #htl3r.short[ospf] oft viele Geräte gleichzeitig betreffen, würde eine nacheinander folgende Abfrage zu langen Wartezeiten führen.
 Das Modul OSPF_Areas nutzt deshalb eine Funktion für asynchrone Aufrufe, wodurch die Abfrage auf allen Geräten zum gleichen Zeitpunkt startet.
 Die Gesamtdauer des Tests hängt somit nur noch vom langsamsten Gerät ab und ist nicht mehr von der Anzahl der Router abhängig.
 
@@ -69,7 +69,7 @@ Durch den Einsatz des Datentyps `list` lassen sich beliebig viele Erwartungswert
 ]
 
 == Implementierungsbeispiele
-Die praktische Anwendung der Methoden zur Datenbeschaffung zeigt sich in zwei unterschiedlichen Modulen, welche die theoretischen Konzepte in funktionalen Testcode umsetzen.
+Die praktische Anwendung der Methoden zur Datenbeschaffung zeigt sich in drei unterschiedlichen Modulen, welche die theoretischen Konzepte in funktionalen Testcode umsetzen.
 
 === Routing Tabelle
 Das Modul `RoutingTable` verifiziert die Einträge in der Routing-Tabelle des Gerätes, wobei es die strukturierte Datenverarbeitung über Parser nutzt.
@@ -85,7 +85,7 @@ Durch diesen systematischen Abgleich stellt das Framework sicher, dass wichtige 
   raw_output = self.device.get_genie_device_object().parse("show ip route")
   routes = raw_output["vrf"][vrf]["address_family"]["ipv4"]["routes"]
 
-  # Abgleich der Soll-Werte gegen die Telemetriedaten
+  # Abgleich der Soll-Werte gegen die Gerätedaten
   for requirement in self.routes:
       target_net = requirement["network"]
 
@@ -98,13 +98,13 @@ Durch diesen systematischen Abgleich stellt das Framework sicher, dass wichtige 
 ]
 
 === GLBP
-Im Gegensatz dazu überprüft das Modul GLBP die Redundanz von Gateways mithilfe der Rohdaten-Analyse.
-Da für diesen spezifischen Befehl oft kein Parser zur Verfügung steht, greift der Test auf reguläre Ausdrücke zum Filtern der Informationen zurück.
+Im Gegensatz dazu überprüft das Modul #htl3r.short[glbp] die Redundanz von Gateways mithilfe der Rohdaten.
+Da für diesen spezifischen Befehl kein Parser zur Verfügung steht, greift der Test auf #htl3r.longpl[regex] zum Filtern der Informationen zurück.
 Ein Suchmuster extrahiert dabei den aktuellen Status der Redundanzgruppe aus dem Text der Konsole, damit der konfigurierte Wert gegen den erwarteten Zustand geprüft werden kann.
 
 
 #htl3r.code(
-  caption: [Extraktion des GLBP-Status mit Regex],
+  caption: [Extraktion des GLBP-Status mit regex],
   description: `GLBP.py`,
 )[
   ```python
@@ -124,8 +124,8 @@ Ein Suchmuster extrahiert dabei den aktuellen Status der Redundanzgruppe aus dem
 ]
 
 === BGP Nachbarschaften
-Das Modul `BGP_Neighbors` stellt sicher, dass die Verbindungen zu den konfigurierten Peering-Partnern aktiv sind.
-Da BGP oft eine Vielzahl von Nachbarn umfasst, nutzt dieser Test ebenfalls die Listen-Verarbeitung.
+Das Modul `BGP_Neighbors` stellt sicher, dass die Verbindungen zu den konfigurierten Nachbarn aktiv sind.
+Da #htl3r.short[bgp] oft eine Vielzahl von Verbindungen umfasst, nutzt dieser Test ebenfalls die Listen-Verarbeitung.
 Die Logik prüft für jeden definierten Nachbarn, ob der Status den Wert Established erreicht hat.
 
 #htl3r.code(
@@ -138,7 +138,7 @@ Die Logik prüft für jeden definierten Nachbarn, ob der Status den Wert Establi
   bgp_data = self.device.get_genie_device_object().parse("show ip bgp summary")
   neighbors = bgp_data["vrf"][vrf]["neighbor"]
 
-  # Prüfung der einzelnen Peers aus der Parameter-Liste
+  # Prüfung der einzelnen Nachbarn aus der Parameter-Liste
   for peer in self.expected_peers:
       ip = peer["neighbor_ip"]
 
