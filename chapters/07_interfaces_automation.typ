@@ -5,21 +5,21 @@
 #htl3r.long[pyats] ist ein Test- und Automatisierungs-#htl3r.long[framework], welches Python-basiert ist und von Cisco entwickelt wird. Es spezialisiert sich vor allem auf das Testen von Netzwerkgeräten aus dem Cisco Ökosystem, jedoch unterstützt es auch andere Plattformen.
 
 === Automatisiertes Testen von Netzwerken
-Automatisierung im Netzwerkbereich ist ein Thema, welches zunehmend an Relevanz gewinnt. Die Effizienz von Netzwerkoperationen wird durch eine automatische Ausführung erheblich gesteigert. Außerdem kann bei diesem Konzept das menschliche Versagen nur noch bei dem Aufsetzen der Automatisierung selbst auftreten.
+Automatisierung im Netzwerkbereich ist ein Thema, welches zunehmend an Relevanz gewinnt. Die Effizienz von Netzwerkoperationen wird durch eine automatische Ausführung erheblich gesteigert. Außerdem könnte bei diesem Konzept menschliche Fehler nur noch bei dem Aufsetzen der Automatisierung selbst auftreten.
 
-Das Testen von Infrastrukturen stellt einen besonders geeigneten Anwendungsbereich dar. Wird dieses manuell ausgeführt, müssen bei jeder Änderung an Systemen bestimmte Befehle händisch ausgeführt werden. Mit einem automatisierten Ansatz kann dieser Aufwand minimiert werden, da es möglich ist, die gesamte Infrastruktur mit einem Befehl oder Knopfdruck zu testen.
+Das Testen von Infrastrukturen stellt einen besonders geeigneten Anwendungsbereich dar. Wird dieses manuell ausgeführt, müssen bei jeder Änderung an Systemen bestimmte Befehle händisch eingegeben werden. Mit einem automatisierten Ansatz kann dieser Aufwand minimiert werden, da es möglich ist, die gesamte Infrastruktur mit einem Befehl oder per Knopfdruck zu testen.
 
 === Eignung für das Projekt
-Das Ziel von DiagNet ist es, ein Programm zu erschaffen, welches das Testen von Netzwerken angenehmer und effizienter gestaltet. #htl3r.long[pyats] eignet sich für diesen Zweck, da es praktische Funktionen für das Handhaben von Verbindungen zu Geräten bietet.
+Das Ziel von DiagNet ist es, ein Programm zu entwickeln, welches das Testen von Netzwerken angenehmer und effizienter gestaltet. #htl3r.long[pyats] eignet sich für diesen Zweck, da es praktische Funktionen für die Handhabung von Verbindungen zu Geräten bietet.
 
 Zusätzlich ermöglicht es, Daten auf Netzwerkgeräten zu sammeln und sie in ein für die weitere Verarbeitung in Python geeignetes Format umzuwandeln. Diese Funktionalität bietet eine Grundlage für die automatisierte Analyse und Auswertung innerhalb von DiagNet.
 
 === Grundlagen
-#htl3r.long[pyats] besteht aus einer modularen Architektur. Eine seiner wichtigsten Komponenten ist #htl3r.long[genie]. Dabei handelt es sich um eine Library innerhalb von #htl3r.long[pyats], welche zahlreiche #htl3r.long[parser] zur Verfügung stellt. Ein #htl3r.long[parser] ist dafür verantwortlich, den Geräteoutput in ein verwendbares Format umzuwandeln.
+#htl3r.long[pyats] basiert auf einer modularen Architektur. Eine seiner wichtigsten Komponenten ist #htl3r.long[genie]. Dabei handelt es sich um eine Library innerhalb von #htl3r.long[pyats], welche zahlreiche #htl3r.long[parser] zur Verfügung stellt. Ein #htl3r.long[parser] ist dafür verantwortlich, den Geräteoutput in ein verwendbares Format umzuwandeln.
 
-Bei #htl3r.long[genie] kann es sich dabei konkret um show-Befehle handeln. Diese werden auf Geräten wie Cisco Routern eingesetzt, um Informationen über den aktuellen Zustand des Systems anzuzeigen. Da die Befehle lediglich Text zurückgeben, wandeln #htl3r.long[genie] #htl3r.long[parser] diesen in Python dictionary-Strukturen um. Darauf kann im Programmcode ohne weiteren Aufwand direkt zugegriffen werden.
+Bei #htl3r.long[genie] kann es sich dabei konkret um show-Befehle handeln. Diese werden auf Geräten wie Cisco Routern eingesetzt, um Informationen über den aktuellen Zustand des Systems anzuzeigen. Da die Befehle lediglich Text zurückgeben, wandeln #htl3r.long[genie]-#htl3r.long[parser] diesen in Python Dictionary-Strukturen um. Darauf kann im Programmcode ohne weiteren Aufwand direkt zugegriffen werden.
 
-Weitere Komponenten von #htl3r.long[pyats] sind #htl3r.long[aetest], welches die Basis für die Strukturierung der Testfälle und Automatisierung der Testabläufe darstellt, sowie #htl3r.long[unicon]. Letzteres kümmert sich um die Geräteverbindungen und bietet eine einheitliche Schnittstelle um auf Protokolle sie #htl3r.long[ssh] oder #htl3r.long[telnet] zuzugreifen.
+Weitere Komponenten von #htl3r.long[pyats] sind #htl3r.long[aetest], welches die Basis für die Strukturierung der Testfälle und Automatisierung der Testabläufe darstellt, sowie #htl3r.long[unicon]. Letzteres kümmert sich um die Geräteverbindungen und bietet eine einheitliche Schnittstelle um auf Protokolle wie #htl3r.long[ssh] oder #htl3r.long[telnet] zuzugreifen.
 
 === Testbeds <testbeds>
 Ein #htl3r.long[testbed] in #htl3r.long[pyats] ist eine Datei, in der zur Verbindung benötigte Daten von Geräten deklariert werden.
@@ -33,7 +33,6 @@ Zu den relevantesten unterstützten Betriebssystemen/Plattformen gehören:
 - Cisco IOS - Klassisches Betriebssystem für Router und Switches
 - Cisco IOXE - Modularer, Linux-basierter nachfolger von IOS
 - Cisco IOSXR - Optimiert für Einsatz bei Service Providern
-- Cisco NXOS - Betriebssystem für Datacenter-Switches
 - Cisco ASA - Betriebssystem für Firewalls
 
 Testbeds werden in dem Format #htl3r.short[yaml] gespeichert und können folgendermaßen aussehen:
@@ -65,7 +64,7 @@ Wie bereits erwähnt ist #htl3r.long[pyats] in der Programmiersprache Python ges
 ```bash
 uv add pyats[full]
 ```
-*Full* gibt an, dass alle Komponenten des Frameworks installiert werden sollen.
+Die Option *Full* gibt an, dass alle Komponenten des Frameworks installiert werden sollen.
 
 Mit diesem Paket und dem Testbed von @testbeds kann ein Python-Skript geschrieben werden, welches die Funktionalität von #htl3r.long[pyats] demonstriert:
 #pagebreak()
@@ -106,21 +105,21 @@ Mit diesem Paket und dem Testbed von @testbeds kann ein Python-Skript geschriebe
 Der Ablauf des Skripts kann in folgende Teile gegliedert werden:
 + Am Anfang werden die benötigten #htl3r.long[genie] Komponenten und pprint importiert. Pprint ist dafür zuständig, die Ausgaben der Funktionen in einem übersichtlichen Format darzustellen.
 
-+ Danach wird das Testbed geladen und in eine Variable gespeichert. Von dieser wird dann ein bestimmtes Gerät, in diesem Fall der Router R1, ausgewählt und in einer eigenen Variable "device" gespeichert.
++ Danach wird das Testbed geladen und in eine Variable gespeichert. Von dieser wird dann ein bestimmtes Gerät, in diesem Fall der Router R1, ausgewählt und in einer eigenen Variable `device` gespeichert.
 
-+ Auf 'device' kann jetzt mit diversen #htl3r.long[genie] Methoden zugegriffen werden. Eine davon ist parse. Sie erwartet als Parameter einen show-Befehl, von dem die Ausgabe geparsed, also in ein verwendbares Format umgewandelt wird. Bei dem obigen Beispiel des Befehls "show version" sieht die gekürzte Ausgabe folgendermaßen aus:
++ Auf `device` kann jetzt mit diversen #htl3r.long[genie] Methoden zugegriffen werden. Eine davon ist `parse`. Sie erwartet als Parameter einen show-Befehl, von dem die Ausgabe geparsed, also in ein verwendbares Format umgewandelt wird. Bei dem obigen Beispiel des Befehls "show version" sieht die gekürzte Ausgabe folgendermaßen aus:
   ```
   {'version': {'chassis': 'IOSv',
                ...
                'version': '15.9(3)M6',
                'version_short': '15.9'}}
   ```
-+ Hier ist klar ersichtlich, dass die Ausgabe in die Form eines Python-Dictionaries gebracht wurde. Falls kein passender Parser vorhanden ist, wirft das Programm eine genie.libs.parser.utils.common.ParserNotFound #htl3r.long[exception].
++ Hier ist klar ersichtlich, dass die Ausgabe in die Form eines Python-Dictionaries gebracht wurde. Falls kein passender Parser vorhanden ist, wirft das Programm eine `genie.libs.parser.utils.common.ParserNotFound` #htl3r.long[exception].
 
-+ Anschließend wird von dem "device" Objekt ein #htl3r.long[interface] Objekt erstellt. Mit diesem können durch die "learn" Methode sämtliche Informationen über Interfaces auf dem Router gesammelt und als Python-Dictionary zurückgegeben werden. Die Umfangreiche Ausgabe wird durch interfaces.info["GigabitEthernet0/0"]["enabled"] auf den Status eines bestimmten Interfaces, hier GigabitEthernet0/0, reduziert. Die Ausgabe beschränkt sich daher auf True, bei einem aktiven Interface, und False, bei einem inaktiven Interface.
++ Anschließend wird von dem `device`-Objekt ein #htl3r.long[interface] Objekt erstellt. Mit diesem können durch die `learn` Methode sämtliche Informationen über Interfaces auf dem Router gesammelt und als Python-Dictionary zurückgegeben werden. Die Umfangreiche Ausgabe wird durch `interfaces.info["GigabitEthernet0/0"]["enabled"]` auf den Status eines bestimmten Interfaces, hier GigabitEthernet0/0, reduziert. Die Ausgabe beschränkt sich daher auf `True` bei einem aktiven Interface, und `False` bei einem inaktiven Interface.
 
-+ Zuletzt wird im obigen Script die "learn" Methode mit dem Parameter "#htl3r.long[ospf]" ausgeführt. Diese gibt folglich alle Informationen über das dynamische #htl3r.long[routingprotokoll] #htl3r.long[ospf] zurück, welche #htl3r.long[pyats] von einem Router extrahieren kann.
-Einige davon, welche häufig benötigt werden, sind:
++ Zuletzt wird im obigen Script die `learn` Methode mit dem Parameter `ospf` ausgeführt. Diese gibt folglich alle Informationen über das dynamische #htl3r.long[routingprotokoll] #htl3r.long[ospf] zurück, welche #htl3r.long[pyats] von einem Router extrahieren kann.
+Einige häufig benötigte Funktionen sind:
 - #htl3r.long[router_id]
 - #htl3r.long[ospf_area]s
 - Jegliche Timer
