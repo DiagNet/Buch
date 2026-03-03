@@ -1,3 +1,36 @@
+# keep-sorted start newline_separated=yes case=no
+802.1Q:
+  short:
+    singular: 802.1Q
+  long:
+    singular: IEEE 802.1Q
+  description: Der gängigste Standard für das VLAN-Tagging in Ethernet-Netzwerken, der es ermöglicht, mehrere VLANs über eine einzige physische Verbindung zu übertragen.
+
+adjazenzliste:
+  short:
+    singular: Adjazenzliste
+  long:
+    singular: Adjazenzliste
+  description: >-
+    Eine Darstellungsform für Graphen in der Informatik, bei der für jeden Knoten eine Liste aller seiner direkten Nachbarknoten gespeichert wird.
+
+aetest:
+  long:
+    singular: AEtest
+  description: Eine pyATS-Komponente zur Strukturierung und Automatisierung von Testfällen und Testabläufen.
+
+api:
+  short:
+    singular: API
+  long:
+    singular: Application Programming Interface
+  description: Eine Programmierschnittstelle, über die Softwarekomponenten miteinander kommunizieren.
+
+backend:
+  long:
+    singular: Backend
+  description: Der Teil einer Anwendung, der im Hintergrund läuft und Datenverarbeitung sowie Logik bereitstellt.
+
 cd:
   short:
     singular: CD
@@ -12,9 +45,17 @@ ci:
     singular: Continuous Integration
   description: Die Praxis der regelmäßigen Integration von Code-Änderungen in ein gemeinsames Repository mit automatisierten Tests.
 
+# Danijel
+diagnet:
+  short:
+    singular: DiagNet
+  long:
+    singular: DiagNet
+  description: Der Name des in dieser Arbeit entwickelten Systems. Eine Webapplikation zur automatisierten Durchführung, Verwaltung und Analyse von Netzwerktests.
+
 direnv:
   long:
-    singular: direnv
+    singular: "`direnv`"
   description: Eine Shell-Erweiterung, die Umgebungsvariablen automatisch lädt, sobald ein Verzeichnis betreten wird.
 
 djlint:
@@ -22,20 +63,114 @@ djlint:
     singular: djLint
   description: Ein Linter und Formatter speziell für HTML-Templates, der häufig in Django- oder Jinja2-Projekten Anwendung findet.
 
+exception:
+  long:
+    singular: Exception
+  description: Ein Fehler oder Ausnahmezustand, der während der Programmausführung auftritt.
+
+fabrikmethode:
+  short:
+    singular: Fabrikmethode
+  long:
+    singular: Fabrikmethode
+  description: >-
+    Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert, wobei die konkrete Instanziierung den Unterklassen überlassen wird.
+
+framework:
+  long:
+    singular: Framework
+  description: Eine Sammlung von Bibliotheken und Werkzeugen, die eine Grundlage für die Entwicklung von Softwareanwendungen bereitstellt.
+
+genie:
+  long:
+    singular: Genie
+  description: Eine Bibliothek innerhalb von pyATS, die Parser und Funktionen zur strukturierten Auswertung von Geräteinformationen bereitstellt.
+
+gns3:
+  short:
+    singular: GNS3
+  long:
+    singular: Graphical Network Simulator 3
+  description: Eine Software zur Simulation komplexer Netzwerke, die es ermöglicht, virtuelle und reale Geräte miteinander zu verknüpfen.
+
+gui:
+  short:
+    singular: GUI
+  long:
+    singular: Graphical User Interface
+  description: Bezeichnet eine Benutzeroberfläche, die dem Anwender die Interaktion mit der Software durch visuelle Elemente wie Fenster, Menüs und Symbole ermöglicht, anstatt textbasierte Befehle zu erfordern.
+
 hermetic:
   long:
-    singular: Hermetisch
+    singular: hermetisch
+    plural: hermetische
   description: Beschreibt in Build-Systemen eine Umgebung, die vollständig isoliert ist und keinen Zugriff auf das Dateisystem oder Netzwerk des Host-Computers hat, außer explizit deklarierte Eingaben.
+
+html:
+  short:
+    singular: HTML
+  long:
+    singular: Hypertext Markup Language
+  description: >-
+    Eine strukturierte Auszeichnungssprache, die zur Erstellung und Gestaltung digitaler Dokumente im World Wide Web dient.
+
+icmp:
+  short:
+    singular: ICMP
+  long:
+    singular: Internet Control Message Protocol
+  description: >-
+    Ein Netzwerkprotokoll, das zum Austausch von Informations- und Fehlermeldungen in IP-Netzwerken dient. Es wird primär für Diagnosezwecke verwendet, etwa um die Erreichbarkeit von Hosts zu prüfen.
+
+instanzattribute:
+  short:
+    singular: Instanzattribute
+  long:
+    singular: Instanzattribute
+  description: >-
+    Variablen, die an eine spezifische Instanz einer Klasse gebunden sind und deren individuellen Zustand speichern.
+
+interface:
+  long:
+    singular: Netzwerkinterface
+  description: Eine physische oder logische Schnittstelle eines Netzwerkgeräts zur Datenübertragung.
+
+ise:
+  short:
+    singular: ISE
+  long:
+    singular: Identity Services Engine
+  description: Eine Sicherheitsplattform von Cisco zur Identitätsverwaltung und Zugriffskontrolle, die Richtlinien für den Netzwerkzugriff zentral steuert.
+
+json:
+  short:
+    singular: JSON
+  long:
+    singular: JavaScript Object Notation
+  description: >-
+    Ein textbasiertes Format zum effizienten Datenaustausch zwischen Anwendungen, das in Web-APIs als Standard für die Client-Server-Kommunikation dient.
 
 just:
   long:
-    singular: Just
-  description: Ein Task-Runner, der Projektaufgaben in einem Justfile definiert und als moderne Alternative zu Make dient.
+    singular: "`just`"
+  description: Ein Task-Runner, der Projektaufgaben in einem Justfile definiert und als moderne Alternative zu `make` dient.
+
+nat:
+  short:
+    singular: NAT
+  long:
+    singular: Network Address Translation
+  description: Ein Verfahren, bei dem IP-Adressen in Datenpaketen durch andere Adressen ersetzt werden, um die Kommunikation zwischen privaten und öffentlichen Netzwerken zu ermöglichen.
+
+neighbor:
+  long:
+    singular: Neighbor
+  description: Ein benachbartes Netzwerkgerät, mit dem Routing-Informationen ausgetauscht werden.
 
 nix-flakes:
   long:
     singular: Nix Flakes
-  description: Eine Erweiterung des Nix-Ökosystems zur hermetischen Abriegelung von Projekt-Abhängigkeiten mittels flake.nix.
+  description: Eine Erweiterung des Nix-Ökosystems zur hermetischen Abriegelung von Projekt-Abhängigkeiten mittels `flake.nix`.
 
 nix-shell:
   long:
@@ -50,61 +185,7 @@ nix:
 nixfmt:
   long:
     singular: nixfmt
-  description: Ein Formatter für Nix-Code, der sicherstellt, dass alle .nix-Konfigurationsdateien einem Standardstil folgen.
-
-prettier:
-  long:
-    singular: Prettier
-  description: Ein "opinionated" Code-Formatter, der vorrangig für Web-Technologien (JavaScript, CSS, HTML, JSON) eingesetzt wird, um einen einheitlichen Stil zu erzwingen.
-
-ruff:
-  long:
-    singular: Ruff
-  description: Ein extrem schneller Python-Linter und Code-Formatter, geschrieben in Rust, der mehrere klassische Tools (Flake8, Black, isort) ersetzt.
-
-treefmt:
-  long:
-    singular: Treefmt
-  description: Ein Werkzeug zur Orchestrierung verschiedener Code-Formatierer (z. B. Ruff, Prettier) für eine einheitliche Codebasis.
-
-twelvefactor:
-  long:
-    singular: The Twelve-Factor App
-  description: Eine Methodik zur Erstellung skalierbarer und wartbarer Software-as-a-Service-Anwendungen.
-
-uv:
-  long:
-    singular: uv
-  description: Ein extrem performanter Python-Paketmanager und Resolver, geschrieben in Rust, der pip und venv ersetzt.
-pyats:
-  long:
-    singular: pyATS
-  description: Ein von Cisco entwickeltes Python-basiertes Framework zur Automatisierung und zum Testen von Netzwerkgeräten.
-
-genie:
-  long:
-    singular: Genie
-  description: Eine Bibliothek innerhalb von pyATS, die Parser und Funktionen zur strukturierten Auswertung von Geräteinformationen bereitstellt.
-
-parser:
-  long:
-    singular: Parser
-  description: Eine Softwarekomponente, die unstrukturierten Text, wie Geräteausgaben, in strukturierte Datenformate umwandelt.
-
-testbed:
-  long:
-    singular: Testbed
-  description: Eine Konfigurationsdatei in pyATS, welche Geräte, Zugangsdaten und Verbindungsparameter für automatisierte Tests definiert.
-
-aetest:
-  long:
-    singular: AEtest
-  description: Eine pyATS-Komponente zur Strukturierung und Automatisierung von Testfällen und Testabläufen.
-
-unicon:
-  long:
-    singular: Unicon
-  description: Eine Bibliothek innerhalb von pyATS, die Geräteverbindungen über Protokolle wie SSH oder Telnet verwaltet.
+  description: Ein Formatter für Nix-Code, der sicherstellt, dass alle `.nix`-Konfigurationsdateien einem Standardstil folgen.
 
 ospf:
   short:
@@ -113,15 +194,45 @@ ospf:
     singular: Open Shortest Path First
   description: Ein dynamisches Routing-Protokoll zur Berechnung des kürzesten Pfades innerhalb eines IP-Netzwerks.
 
+ospf_area:
+  long:
+    singular: OSPF Area
+  description: Ein logischer Bereich innerhalb eines OSPF-Netzwerks zur Strukturierung und Skalierung.
+
+parser:
+  long:
+    singular: Parser
+  description: Eine Softwarekomponente, die unstrukturierten Text, wie Geräteausgaben, in strukturierte Datenformate umwandelt.
+
+prettier:
+  long:
+    singular: Prettier
+  description: Ein "opinionated" Code-Formatter, der vorrangig für Web-Technologien (JavaScript, CSS, HTML, JSON) eingesetzt wird, um einen einheitlichen Stil zu erzwingen.
+
+pyats:
+  long:
+    singular: pyATS
+  description: Ein von Cisco entwickeltes Python-basiertes Framework zur Automatisierung und zum Testen von Netzwerkgeräten.
+
+python_dictionary:
+  long:
+    singular: Python-Dictionary
+  description: Eine Datenstruktur in Python zur Speicherung von Schlüssel-Wert-Paaren.
+
+router_id:
+  long:
+    singular: Router ID
+  description: Eine eindeutige Kennung eines Routers innerhalb eines Routing-Protokolls.
+
 routingprotokoll:
   long:
     singular: Routing-Protokoll
   description: Ein Protokoll, das den Austausch von Routing-Informationen zwischen Netzwerkgeräten ermöglicht.
 
-interface:
+ruff:
   long:
-    singular: Netzwerkinterface
-  description: Eine physische oder logische Schnittstelle eines Netzwerkgeräts zur Datenübertragung.
+    singular: Ruff
+  description: Ein extrem schneller Python-Linter und Code-Formatter, geschrieben in Rust, der mehrere klassische Tools (Flake8, Black, isort) ersetzt.
 
 ssh:
   short:
@@ -135,102 +246,15 @@ telnet:
     singular: Telnet
   description: Ein unverschlüsseltes Netzwerkprotokoll für den Fernzugriff auf Geräte.
 
-framework:
+testbed:
   long:
-    singular: Framework
-  description: Eine Sammlung von Bibliotheken und Werkzeugen, die eine Grundlage für die Entwicklung von Softwareanwendungen bereitstellt.
+    singular: Testbed
+  description: Eine Konfigurationsdatei in pyATS, welche Geräte, Zugangsdaten und Verbindungsparameter für automatisierte Tests definiert.
 
-python_dictionary:
+treefmt:
   long:
-    singular: Python-Dictionary
-  description: Eine Datenstruktur in Python zur Speicherung von Schlüssel-Wert-Paaren.
-
-yaml:
-  short:
-    singular: YAML
-  long:
-    singular: YAML Ain't Markup Language
-  description: Ein menschenlesbares Datenformat zur Speicherung strukturierter Konfigurationsdaten.
-
-exception:
-  long:
-    singular: Exception
-  description: Ein Fehler oder Ausnahmezustand, der während der Programmausführung auftritt.
-
-api:
-  short:
-    singular: API
-  long:
-    singular: Application Programming Interface
-  description: Eine Programmierschnittstelle, über die Softwarekomponenten miteinander kommunizieren.
-
-backend:
-  long:
-    singular: Backend
-  description: Der Teil einer Anwendung, der im Hintergrund läuft und Datenverarbeitung sowie Logik bereitstellt.
-
-router_id:
-  long:
-    singular: Router ID
-  description: Eine eindeutige Kennung eines Routers innerhalb eines Routing-Protokolls.
-
-ospf_area:
-  long:
-    singular: OSPF Area
-  description: Ein logischer Bereich innerhalb eines OSPF-Netzwerks zur Strukturierung und Skalierung.
-
-neighbor:
-  long:
-    singular: Neighbor
-  description: Ein benachbartes Netzwerkgerät, mit dem Routing-Informationen ausgetauscht werden.
-
-# Danijel
-diagnet:
-  short:
-    singular: DiagNet
-  long:
-    singular: DiagNet
-  description: Der Name des in dieser Arbeit entwickelten Systems. Eine Webapplikation zur automatisierten Durchführung, Verwaltung und Analyse von Netzwerktests.
-
-vlan:
-  short:
-    singular: vlan
-  long:
-    singular: Virtual Local Area Network
-  full: Virtual Local Area Network (VLAN)
-  description: Ein logisches Teilnetz innerhalb eines physischen Netzwerks, das Geräte unabhängig von ihrem Standort isoliert.
-
-gns3:
-  short:
-    singular: gns3
-  long:
-    singular: Graphical Network Simulator-3
-  full: Graphical Network Simulator-3 (GNS3)
-  description: Eine Software zur Simulation komplexer Netzwerke, die es ermöglicht, virtuelle und reale Geräte miteinander zu verknüpfen.
-
-wan:
-  short:
-    singular: WAN
-  long:
-    singular: Wide Area Network
-  full: Wide Area Network (WAN)
-  description: Ein Rechnernetz, das sich über einen sehr großen geografischen Bereich erstreckt und verschiedene lokale Netze (LANs) miteinander verbindet.
-
-ise:
-  short:
-    singular: ISE
-  long:
-    singular: Identity Services Engine
-  full: Identity Services Engine (ISE)
-  description: Eine Sicherheitsplattform von Cisco zur Identitätsverwaltung und Zugriffskontrolle, die Richtlinien für den Netzwerkzugriff zentral steuert.
-
-nat:
-  short:
-    singular: NAT
-  long:
-    singular: Network Address Translation
-  full: Network Address Translation (NAT)
-  description: Ein Verfahren, bei dem IP-Adressen in Datenpaketen durch andere Adressen ersetzt werden, um die Kommunikation zwischen privaten und öffentlichen Netzwerken zu ermöglichen.
+    singular: Treefmt
+  description: Ein Werkzeug zur Orchestrierung verschiedener Code-Formatierer (z. B. Ruff, Prettier) für eine einheitliche Codebasis.
 
 trunk:
   short:
@@ -239,72 +263,39 @@ trunk:
     singular: Trunk
   description: Eine Punkt-zu-Punkt-Verbindung zwischen zwei Netzwerkgeräten (z. B. Switchen), die den Datenverkehr für mehrere VLANs gleichzeitig über ein einziges physisches Kabel überträgt.
 
-802.1Q:
-  short:
-    singular: 802.1Q
+twelvefactor:
   long:
-    singular: IEEE 802.1Q
-  full: IEEE 802.1Q (802.1Q)
-  description: Der gängigste Standard für das VLAN-Tagging in Ethernet-Netzwerken, der es ermöglicht, mehrere VLANs über eine einzige physische Verbindung zu übertragen.
+    singular: The Twelve-Factor App
+  description: Eine Methodik zur Erstellung skalierbarer und wartbarer Software-as-a-Service-Anwendungen.
 
-gui:
-  short:
-    singular: GUI
+unicon:
   long:
-    singular: Graphical User Interface
-  full: Graphical User Interface
-  description: Bezeichnet eine Benutzeroberfläche, die dem Anwender die Interaktion mit der Software durch visuelle Elemente wie Fenster, Menüs und Symbole ermöglicht, anstatt textbasierte Befehle zu erfordern.
+    singular: Unicon
+  description: Eine Bibliothek innerhalb von pyATS, die Geräteverbindungen über Protokolle wie SSH oder Telnet verwaltet.
 
-instanzattribute:
-  short:
-    singular: Instanzattribute
+uv:
   long:
-    singular: Instanzattribute
-  full: Instanzattribute
-  description: >-
-    Variablen, die an eine spezifische Instanz einer Klasse gebunden sind und deren individuellen Zustand speichern.
+    singular: "`uv`"
+  description: Ein extrem performanter Python-Paketmanager und Resolver, geschrieben in Rust, der `pip` und `venv` ersetzt.
 
-html:
+vlan:
   short:
-    singular: HTML
+    singular: vlan
   long:
-    singular: Hypertext Markup Language
-  full: Hypertext Markup Language
-  description: >-
-    Eine strukturierte Auszeichnungssprache, die zur Erstellung und Gestaltung digitaler Dokumente im World Wide Web dient.
+    singular: Virtual Local Area Network
+  description: Ein logisches Teilnetz innerhalb eines physischen Netzwerks, das Geräte unabhängig von ihrem Standort isoliert.
 
-adjazenzliste:
+wan:
   short:
-    singular: Adjazenzliste
+    singular: WAN
   long:
-    singular: Adjazenzliste
-  full: Adjazenzliste
-  description: >-
-    Eine Darstellungsform für Graphen in der Informatik, bei der für jeden Knoten eine Liste aller seiner direkten Nachbarknoten gespeichert wird.
+    singular: Wide Area Network
+  description: Ein Rechnernetz, das sich über einen sehr großen geografischen Bereich erstreckt und verschiedene lokale Netze (LANs) miteinander verbindet.
 
-icmp:
+yaml:
   short:
-    singular: ICMP
+    singular: YAML
   long:
-    singular: Internet Control Message Protocol
-  full: Internet Control Message Protocol
-  description: >-
-    Ein Netzwerkprotokoll, das zum Austausch von Informations- und Fehlermeldungen in IP-Netzwerken dient. Es wird primär für Diagnosezwecke verwendet, etwa um die Erreichbarkeit von Hosts zu prüfen.
-
-json:
-  short:
-    singular: JSON
-  long:
-    singular: JavaScript Object Notation
-  full: JavaScript Object Notation
-  description: >-
-    Ein textbasiertes Format zum effizienten Datenaustausch zwischen Anwendungen, das in Web-APIs als Standard für die Client-Server-Kommunikation dient.
-
-fabrikmethode:
-  short:
-    singular: Fabrikmethode
-  long:
-    singular: Fabrikmethode
-  full: Fabrikmethode
-  description: >-
-    Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert, wobei die konkrete Instanziierung den Unterklassen überlassen wird.
+    singular: YAML Ain't Markup Language
+  description: Ein menschenlesbares Datenformat zur Speicherung strukturierter Konfigurationsdaten.
+# keep-sorted end
