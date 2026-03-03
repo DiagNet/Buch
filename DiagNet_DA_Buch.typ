@@ -28,8 +28,8 @@
     ),
   ),
   supervisor-incl-ac-degree: (
-    "Prof. Dipl.-Ing. Harald Zainzinger",
-    "Prof. Dipl.-Ing. Christian Schöndorfer",
+    "Prof. Dipl.-Ing. Dr. Harald Zainzinger",
+    "AV Prof. Dipl.-Ing. Christian Schöndorfer",
   ),
   sponsors: (
     "Cancom SE",
@@ -39,7 +39,37 @@
   date: datetime.today(),
   print-ref: false,
   generative-ai-clause: none,
-  abbreviation: yaml("abbr.yml"),
+  abbreviation: {
+    let data = yaml("abbr.yml")
+    for (key, value) in data {
+      if type(value) != dictionary { continue }
+
+      // Handle description
+      if "description" in value {
+        data.at(key).description = eval(value.description, mode: "markup")
+      }
+
+      // Handle full form
+      if "full" in value {
+        data.at(key).full = eval(value.full, mode: "markup")
+      }
+
+      // Handle short and long forms (singular/plural)
+      for field in ("short", "long") {
+        if field in value and type(value.at(field)) == dictionary {
+          for form in ("singular", "plural") {
+            if form in value.at(field) {
+              data.at(key).at(field).at(form) = eval(
+                value.at(field).at(form),
+                mode: "markup",
+              )
+            }
+          }
+        }
+      }
+    }
+    data
+  },
   bibliography-content: bibliography(
     "refs.yml",
     full: false,
