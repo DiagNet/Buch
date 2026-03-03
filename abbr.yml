@@ -43,7 +43,7 @@ ci:
     singular: CI
   long:
     singular: Continuous Integration
-  description: Die Praxis der regelmäßigen Integration von Code-Änderungen in ein gemeinsames Repository mit automatisierten Tests.
+  description: Die Praxis der regelmäßigen Integration von Code-Änderungen in ein gemeinsames Repository mit automatisierten Regressionstests.
 
 # Danijel
 diagnet:
