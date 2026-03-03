@@ -16,6 +16,24 @@ Das Zentrum der Topologie bildet ein simuliertes #htl3r.full[wan], das in vier u
 Jedes dieser Systeme agiert als eigenständiger #htl3r.full[isp].
 Der Austausch von Routing-Informationen zwischen den Providern erfolgt über das #htl3r.full[ebgp].
 
+
+=== Protokoll-Diversität im Backbone
+Die Backbones der einzelnen #htl3r.shortpl[isp] sind technisch unterschiedlich aufgebaut, um verschiedene Transport-Mechanismen und #htl3r.fullpl[igp] bereitzustellen:
+
+*ISP 1 (OSPF & MPLS):*
+Nutzung von #htl3r.full[ospf] sowie #htl3r.full[mpls].
+Das Label Switching erfolgt direkt im Global Routing Table.
+
+*ISP 2 (RIP & GRE):*
+Implementierung von #htl3r.short[rip]v2 als Legacy-Protokoll.
+
+*ISP 3 (EIGRP & GRE):*
+Verwendung von #htl3r.full[eigrp] zur Routen-Berechnung.
+Teilbereiche sind, wie bei #htl3r.short[isp] 2, über #htl3r.full[gre]-Tunnel verbunden, wodurch die #htl3r.short[bgp]-Nachbarn miteinander kommunizieren können.
+
+*ISP 4:*
+Fungiert als reines Transit-#htl3r.short[as] zur Kopplung der Provider ohne eigene Backbone-Logik.
+
 === Pfadmanipulation und Traffic Engineering
 Ein zentrales Element des WAN-Designs ist das gezielte Traffic Engineering, um Datenströme jenseits der Standard-Metriken zu steuern.
 Während das #htl3r.full[bgp] standardmäßig den Pfad mit der geringsten AS-Pfad-Länge bevorzugt, werden in dieser Topologie Attribute manipuliert, um spezifische Routing-Entscheidungen zu erzwingen.
@@ -45,23 +63,6 @@ Dies signalisiert dem benachbarten #htl3r.short[as] eine schlechtere Verbindungs
    neighbor 60.60.60.2 route-map MED out
   ```
 ]
-
-=== Protokoll-Diversität im Backbone
-Die Backbones der einzelnen #htl3r.shortpl[isp] sind technisch unterschiedlich aufgebaut, um verschiedene Transport-Mechanismen und #htl3r.fullpl[igp] bereitzustellen:
-
-*ISP 1 (OSPF & MPLS):*
-Nutzung von #htl3r.full[ospf] sowie #htl3r.full[mpls].
-Das Label Switching erfolgt direkt im Global Routing Table.
-
-*ISP 2 (RIP & GRE):*
-Implementierung von #htl3r.short[rip]v2 als Legacy-Protokoll.
-
-*ISP 3 (EIGRP & GRE):*
-Verwendung von #htl3r.full[eigrp] zur Routen-Berechnung.
-Teilbereiche sind, wie bei #htl3r.short[isp] 2, über #htl3r.full[gre]-Tunnel verbunden, wodurch die #htl3r.short[bgp]-Nachbarn miteinander kommunizieren können.
-
-*ISP 4:*
-Fungiert als reines Transit-#htl3r.short[as] zur Kopplung der Provider ohne eigene Backbone-Logik.
 
 == Standort-Vernetzung und Redundanz
 Die angebundenen Netze demonstrieren verschiedene Konzepte zur Hochverfügbarkeit und Standortvernetzung.
@@ -108,8 +109,8 @@ Zur Demonstration hierarchischer Routing-Strukturen wurde ein Standort in mehrer
 Ein zentraler Backbone (Area 0) verbindet dabei untergeordnete Bereiche (Area 1, Area 2) über #htl3r.full[abr].
 Dieses Design reduziert die Größe der #htl3r.full[lsdb] auf den einzelnen Routern.
 
-=== Site-to-Site htl3r.short[VPN]
-Die Standorte IPSEC1 und IPSEC2 sind über eine klassische Site-to-Site #htl3r.short[vpn]-Verbindung gekoppelt.
+=== Site-to-Site #htl3r.short[vpn]
+Die zwei Standorte `IPSEC` sind über eine klassische Site-to-Site #htl3r.short[vpn]-Verbindung gekoppelt.
 Der verschlüsselte Tunnel überspannt das gesamte #htl3r.short[wan].
 Die Endpunkte handeln dabei eigenständig die #htl3r.full[ike]-Phase-1 zur Authentifizierung und die #htl3r.short[ike]-Phase-2 zur Verschlüsselung des Nutzdatenverkehrs aus.
 
