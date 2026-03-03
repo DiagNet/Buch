@@ -8,7 +8,7 @@ Das Design zielt darauf ab, eine komplexe und heterogene Topologie bereitzustell
 Die gesamte virtuelle Infrastruktur basiert dabei auf Cisco-Komponenten, wobei bewusst verschiedene Konfigurationen und Architekturen implementiert wurden, um ein möglichst breites Spektrum an Netzwerk-Verhalten abzubilden.
 
 #figure(
-  image("../assets/WAN.png", width: 95%),
+  image("../assets/WAN10.jpg", width: 95%),
   caption: [WAN Topologie],
 ) <fig-kahn>
 == Architektur des #htl3r.fullpl[wan]
