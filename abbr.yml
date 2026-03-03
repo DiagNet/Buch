@@ -4,13 +4,27 @@
     singular: 802.1Q
   long:
     singular: IEEE 802.1Q
+  full: IEEE 802.1Q (802.1Q)
   description: Der gängigste Standard für das VLAN-Tagging in Ethernet-Netzwerken, der es ermöglicht, mehrere VLANs über eine einzige physische Verbindung zu übertragen.
+
+abr:
+  short:
+    singular: ABR
+    plural: ABRs
+  long:
+    singular: Area Border Router
+    plural: Area Border Router
+  full:
+    singular: Area Border Router (ABR)
+    plural: Area Border Router (ABRs)
+  description: Ein Router in einem OSPF-Netzwerk, der mehrere Areas miteinander verbindet und Routing-Informationen zwischen ihnen austauscht.
 
 adjazenzliste:
   short:
     singular: Adjazenzliste
   long:
     singular: Adjazenzliste
+  full: Adjazenzliste
   description: >-
     Eine Darstellungsform für Graphen in der Informatik, bei der für jeden Knoten eine Liste aller seiner direkten Nachbarknoten gespeichert wird.
 
@@ -25,6 +39,18 @@ api:
   long:
     singular: Application Programming Interface
   description: Eine Programmierschnittstelle, über die Softwarekomponenten miteinander kommunizieren.
+
+arp:
+  short:
+    singular: ARP
+    plural: ARPs
+  long:
+    singular: Address Resolution Protocol
+    plural: Address Resolution Protocols
+  full:
+    singular: Address Resolution Protocol (ARP)
+    plural: Address Resolution Protocols (ARPs)
+  description: Ein Netzwerkprotokoll, das dazu dient, die Hardware-Adresse (MAC-Adresse) eines Geräts anhand seiner IP-Adresse zu ermitteln.
 
 as:
   short:
@@ -46,9 +72,13 @@ backend:
 bgp:
   short:
     singular: BGP
+    plural: BGPs
   long:
     singular: Border Gateway Protocol
-  full: Border Gateway Protocol (BGP)
+    plural: Border Gateway Protocols
+  full:
+    singular: Border Gateway Protocol (BGP)
+    plural: Border Gateway Protocols (BGPs)
   description: Das Standard-Routing-Protokoll des Internets, das den Datenaustausch zwischen verschiedenen Autonomen Systemen (AS) steuert.
 
 cd:
@@ -65,6 +95,7 @@ ci:
     singular: Continuous Integration
   description: Die Praxis der regelmäßigen Integration von Code-Änderungen in ein gemeinsames Repository mit automatisierten Regressionstests.
 
+# Danijel
 diagnet:
   short:
     singular: DiagNet
@@ -85,25 +116,37 @@ djlint:
 dmvpn:
   short:
     singular: DMVPN
+    plural: DMVPNs
   long:
     singular: Dynamic Multipoint Virtual Private Network
-  full: Dynamic Multipoint Virtual Private Network (DMVPN)
+    plural: Dynamic Multipoint Virtual Private Networks
+  full:
+    singular: Dynamic Multipoint Virtual Private Network (DMVPN)
+    plural: Dynamic Multipoint Virtual Private Networks (DMVPNs)
   description: Eine VPN-Technologie, die den dynamischen Aufbau von IPsec-Tunneln zwischen mehreren Standorten ohne permanente Konfiguration ermöglicht.
 
 ebgp:
   short:
     singular: eBGP
+    plural: eBGPs
   long:
     singular: External Border Gateway Protocol
-  full: External Border Gateway Protocol (eBGP)
+    plural: External Border Gateway Protocols
+  full:
+    singular: External Border Gateway Protocol (eBGP)
+    plural: External Border Gateway Protocols (eBGPs)
   description: Eine Variante des Border Gateway Protocols, die für den Austausch von Routing-Informationen zwischen unterschiedlichen Autonomen Systemen (AS) verwendet wird.
 
 eigrp:
   short:
     singular: EIGRP
+    plural: EIGRPs
   long:
     singular: Enhanced Interior Gateway Routing Protocol
-  full: Enhanced Interior Gateway Routing Protocol (EIGRP)
+    plural: Enhanced Interior Gateway Routing Protocols
+  full:
+    singular: Enhanced Interior Gateway Routing Protocol (EIGRP)
+    plural: Enhanced Interior Gateway Routing Protocols (EIGRPs)
   description: Ein fortschrittliches Distanzvektor-Routing-Protokoll von Cisco, das Bandbreite und Verzögerung zur Pfadberechnung kombiniert.
 
 exception:
@@ -145,9 +188,13 @@ genie:
 glbp:
   short:
     singular: GLBP
+    plural: GLBPs
   long:
     singular: Gateway Load Balancing Protocol
-  full: Gateway Load Balancing Protocol (GLBP)
+    plural: Gateway Load Balancing Protocols
+  full:
+    singular: Gateway Load Balancing Protocol (GLBP)
+    plural: Gateway Load Balancing Protocols (GLBPs)
   description: Ein Cisco-Protokoll zur Gateway-Redundanz, das zusätzlich zur Ausfallsicherheit eine Lastverteilung über mehrere Router hinweg bietet.
 
 gns3:
@@ -155,14 +202,19 @@ gns3:
     singular: GNS3
   long:
     singular: Graphical Network Simulator 3
+  full: Graphical Network Simulator-3 (GNS3)
   description: Eine Software zur Simulation komplexer Netzwerke, die es ermöglicht, virtuelle und reale Geräte miteinander zu verknüpfen.
 
 gre:
   short:
     singular: GRE
+    plural: GREs
   long:
     singular: Generic Routing Encapsulation
-  full: Generic Routing Encapsulation (GRE)
+    plural: Generic Routing Encapsulations
+  full:
+    singular: Generic Routing Encapsulation (GRE)
+    plural: Generic Routing Encapsulations (GREs)
   description: Ein Tunneling-Protokoll, das beliebige Netzwerkprotokolle in IP-Pakete verpackt, um sie über ein öffentliches Netzwerk zu transportieren.
 
 gui:
@@ -170,6 +222,7 @@ gui:
     singular: GUI
   long:
     singular: Graphical User Interface
+  full: Graphical User Interface
   description: Bezeichnet eine Benutzeroberfläche, die dem Anwender die Interaktion mit der Software durch visuelle Elemente wie Fenster, Menüs und Symbole ermöglicht, anstatt textbasierte Befehle zu erfordern.
 
 hermetic:
@@ -181,9 +234,13 @@ hermetic:
 hsrp:
   short:
     singular: HSRP
+    plural: HSRPs
   long:
     singular: Hot Standby Router Protocol
-  full: Hot Standby Router Protocol (HSRP)
+    plural: Hot Standby Router Protocols
+  full:
+    singular: Hot Standby Router Protocol (HSRP)
+    plural: Hot Standby Router Protocols (HSRPs)
   description: Ein proprietäres Redundanzprotokoll von Cisco, das durch ein Active/Standby-Modell die Ausfallsicherheit des Standard-Gateways gewährleistet.
 
 html:
@@ -191,6 +248,7 @@ html:
     singular: HTML
   long:
     singular: Hypertext Markup Language
+  full: Hypertext Markup Language
   description: >-
     Eine strukturierte Auszeichnungssprache, die zur Erstellung und Gestaltung digitaler Dokumente im World Wide Web dient.
 
@@ -215,11 +273,24 @@ igp:
     plural: Interior Gateway Protocols (IGPs)
   description: Ein Routing-Protokoll, das zum Austausch von Routing-Informationen zwischen Gateways (Routern) innerhalb eines einzelnen Autonomen Systems (AS) verwendet wird.
 
+ike:
+  short:
+    singular: IKE
+    plural: IKEs
+  long:
+    singular: Internet Key Exchange
+    plural: Internet Key Exchanges
+  full:
+    singular: Internet Key Exchange (IKE)
+    plural: Internet Key Exchanges (IKEs)
+  description: Ein Netzwerkprotokoll, das im Rahmen von IPsec verwendet wird, um Sicherheitsassoziationen aufzubauen und kryptografische Schlüssel sicher auszutauschen.
+
 instanzattribute:
   short:
     singular: Instanzattribute
   long:
     singular: Instanzattribute
+  full: Instanzattribute
   description: >-
     Variablen, die an eine spezifische Instanz einer Klasse gebunden sind und deren individuellen Zustand speichern.
 
@@ -241,7 +312,20 @@ ise:
     singular: ISE
   long:
     singular: Identity Services Engine
+  full: Identity Services Engine (ISE)
   description: Eine Sicherheitsplattform von Cisco zur Identitätsverwaltung und Zugriffskontrolle, die Richtlinien für den Netzwerkzugriff zentral steuert.
+
+isp:
+  short:
+    singular: ISP
+    plural: ISPs
+  long:
+    singular: Internet Service Provider
+    plural: Internet Service Provider
+  full:
+    singular: Internet Service Provider (ISP)
+    plural: Internet Service Provider (ISPs)
+  description: Ein Dienstleister, der Kunden die Anbindung an das Internet sowie weitere technische Dienstleistungen bereitstellt.
 
 json:
   short:
@@ -257,27 +341,64 @@ just:
     singular: "`just`"
   description: Ein Task-Runner, der Projektaufgaben in einem Justfile definiert und als moderne Alternative zu `make` dient.
 
+lsdb:
+  short:
+    singular: LSDB
+    plural: LSDBs
+  long:
+    singular: Link-State Database
+    plural: Link-State Databases
+  full:
+    singular: Link-State Database (LSDB)
+    plural: Link-State Databases (LSDBs)
+  description: Eine Datenbank in Link-State-Routing-Protokollen (wie OSPF), die ein vollständiges Abbild der Netzwerktopologie speichert.
+
+mac:
+  short:
+    singular: MAC
+    plural: MACs
+  long:
+    singular: Media Access Control
+    plural: Media Access Controls
+  full:
+    singular: Media Access Control (MAC)
+    plural: Media Access Controls (MACs)
+  description: Die eindeutige Hardware-Adresse eines Netzwerkadapters, die zur Identifikation von Geräten in lokalen Netzwerken dient.
+
 med:
   short:
     singular: MED
+    plural: MEDs
   long:
     singular: Multi-Exit Discriminator
-  full: Multi-Exit Discriminator (MED)
+    plural: Multi-Exit Discriminators
+  full:
+    singular: Multi-Exit Discriminator (MED)
+    plural: Multi-Exit Discriminators (MEDs)
   description: Ein optionales BGP-Pfadattribut, das verwendet wird, um den eingehenden Datenverkehr von einem benachbarten Autonomen System zu steuern.
 
 mpls:
   short:
     singular: MPLS
+    plural: MPLS
   long:
     singular: Multiprotocol Label Switching
-  full: Multiprotocol Label Switching (MPLS)
+    plural: Multiprotocol Label Switching
+  full:
+    singular: Multiprotocol Label Switching (MPLS)
+    plural: Multiprotocol Label Switching (MPLS)
   description: Ein Verfahren zur Weiterleitung von Datenpaketen entlang vordefinierter Pfade basierend auf kurzen Labels statt langer Netzwerkadressen.
 
 nat:
   short:
     singular: NAT
+    plural: NATs
   long:
     singular: Network Address Translation
+    plural: Network Address Translations
+  full:
+    singular: Network Address Translation (NAT)
+    plural: Network Address Translations (NATs)
   description: Ein Verfahren, bei dem IP-Adressen in Datenpaketen durch andere Adressen ersetzt werden, um die Kommunikation zwischen privaten und öffentlichen Netzwerken zu ermöglichen.
 
 neighbor:
@@ -320,8 +441,13 @@ nixfmt:
 ospf:
   short:
     singular: OSPF
+    plural: OSPFs
   long:
     singular: Open Shortest Path First
+    plural: Open Shortest Path First
+  full:
+    singular: Open Shortest Path First (OSPF)
+    plural: Open Shortest Path First (OSPFs)
   description: Ein dynamisches Routing-Protokoll zur Berechnung des kürzesten Pfades innerhalb eines IP-Netzwerks.
 
 ospf_area:
@@ -364,9 +490,13 @@ python_dictionary:
 rip:
   short:
     singular: RIP
+    plural: RIPs
   long:
     singular: Routing Information Protocol
-  full: Routing Information Protocol (RIP)
+    plural: Routing Information Protocols
+  full:
+    singular: Routing Information Protocol (RIP)
+    plural: Routing Information Protocols (RIPs)
   description: Ein klassisches Distanzvektor-Routing-Protokoll, das den Hop-Count zur Bestimmung des besten Pfades verwendet.
 
 router_id:
@@ -394,7 +524,7 @@ ssh:
 telnet:
   long:
     singular: Telnet
-  description: Ein unverschlüsseltes Netzwerkprotokoll für den fernzugriff auf Geräte.
+  description: Ein unverschlüsseltes Netzwerkprotokoll für den Fernzugriff auf Geräte.
 
 testbed:
   long:
@@ -433,13 +563,31 @@ vlan:
     singular: vlan
   long:
     singular: Virtual Local Area Network
+  full: Virtual Local Area Network (VLAN)
   description: Ein logisches Teilnetz innerhalb eines physischen Netzwerks, das Geräte unabhängig von ihrem Standort isoliert.
+
+vpn:
+  short:
+    singular: VPN
+    plural: VPNs
+  long:
+    singular: Virtual Private Network
+    plural: Virtual Private Networks
+  full:
+    singular: Virtual Private Network (VPN)
+    plural: Virtual Private Networks (VPNs)
+  description: Ein virtuelles privates Kommunikationsnetz, das eine sichere und verschlüsselte Verbindung über öffentliche Netzwerke ermöglicht.
 
 wan:
   short:
     singular: WAN
+    plural: WANs
   long:
     singular: Wide Area Network
+    plural: Wide Area Networks
+  full:
+    singular: Wide Area Network (WAN)
+    plural: Wide Area Networks (WANs)
   description: Ein Rechnernetz, das sich über einen sehr großen geografischen Bereich erstreckt und verschiedene lokale Netze (LANs) miteinander verbindet.
 
 yaml:
