@@ -5,7 +5,7 @@
 
 Die Routing-Infrastruktur ist die Grundlage der gesamten Simulationsumgebung von #htl3r.short[diagnet].
 Das Design zielt darauf ab, eine komplexe und heterogene Topologie bereitzustellen, die unterschiedliche Protokoll-Standards und Routing-Protokolle vereint.
-Die gesamte virtuelle Infrastruktur basiert dabei auf Cisco-Komponenten, wobei bewusst verschiedene Konfigurationen und Architekturen implementiert wurden, um ein möglichst breites Spektrum an Netzwerk-Verhalten abzubilden.
+Die gesamte #htl3r.short[wan]-Infrastruktur basiert dabei auf Cisco-Komponenten, wobei bewusst verschiedene Konfigurationen implementiert wurden, um ein möglichst breites Spektrum an Netzwerk-Verhalten abzubilden.
 
 #figure(
   image("../assets/WAN10.jpg", width: 95%),
@@ -21,15 +21,14 @@ Der Austausch von Routing-Informationen zwischen den Providern erfolgt über das
 Die Backbones der einzelnen #htl3r.shortpl[isp] sind technisch unterschiedlich aufgebaut, um verschiedene Transport-Mechanismen und #htl3r.fullpl[igp] bereitzustellen:
 
 *ISP 1 (OSPF & MPLS):*
-Nutzung von #htl3r.full[ospf] sowie #htl3r.full[mpls].
-Das Label Switching erfolgt direkt im Global Routing Table.
+In diesem Backbone wird #htl3r.full[ospf] als Basis-Protokoll eingesetzt, um die interne Erreichbarkeit sicherzustellen. Darauf aufbauend kommt #htl3r.full[mpls] zum Einsatz, um den Datentransport über Label-Switching zu optimieren.
 
-*ISP 2 (RIP & GRE):*
-Implementierung von #htl3r.short[rip]v2 als Legacy-Protokoll.
+*ISP 2 (RIP & GRE)*:
+Hier wird #htl3r.short[rip] als internes Protokoll genutzt. Zusätzlich werden #htl3r.full[gre] Tunnel eingesetzt, um eine direkte virtuelle Leitung zwischen den #htl3r.short[bgp]-Routern zu schaffen. So können diese ihre Daten austauschen, ohne dass die Router dazwischen den Inhalt verarbeiten müssen.
 
-*ISP 3 (EIGRP & GRE):*
-Verwendung von #htl3r.full[eigrp] zur Routen-Berechnung.
-Teilbereiche sind, wie bei #htl3r.short[isp] 2, über #htl3r.full[gre]-Tunnel verbunden, wodurch die #htl3r.short[bgp]-Nachbarn miteinander kommunizieren können.
+*ISP 3 (EIGRP & GRE)*:
+Dieser Provider nutzt #htl3r.full[eigrp] zur Routen-Berechnung.
+Wie schon bei #htl3r.short[isp] 2 dienen auch hier #htl3r.short[gre]-Tunnel dazu, die #htl3r.short[bgp]-Nachbarn logisch direkt miteinander zu verbinden und den Datenverkehr durch das Backbone-Netz zu leiten.
 
 *ISP 4:*
 Fungiert als reines Transit-#htl3r.short[as] zur Kopplung der Provider ohne eigene Backbone-Logik.
@@ -86,14 +85,14 @@ Technologisch ermöglicht dies den Aufbau einer Hub-and-Spoke-Topologie über di
 
 Ein wesentliches Merkmal der Phase 3 ist die Optimierung des Datenpfads durch #htl3r.full[nhrp]-Redirects.
 Initiale Pakete zwischen zwei Außenstellen laufen über den Hub.
-Gleichzeitig signalisiert der Hub den beteiligten Routern jedoch, dass eine direktere Verbindung möglich ist.
-Daraufhin bauen die Spokes dynamisch einen direkten Tunnel zueinander auf ("Spoke-to-Spoke"), wodurch der Traffic nicht mehr über den zentralen Hub fließt.
+Gleichzeitig signalisiert der Hub den beteiligten Routern jedoch, dass eine direkte Verbindung möglich ist.
+Daraufhin bauen die Spokes dynamisch einen direkten Tunnel zueinander auf, wodurch der Traffic nicht mehr über den zentralen Hub fließt.
 
 Ein Blick auf die Konfiguration des zentralen Hub-Routers zeigt, wie dieses Konzept in der Praxis umgesetzt wird.
 Die Basis bildet ein Multipoint-GRE-Tunnel, der alle Außenstellen als eine Art dynamische Sammelstelle anbindet.
 Damit die Router über dieses Overlay-Netzwerk auch Routing-Updates austauschen können, erlaubt der Befehl `ip nhrp map multicast dynamic` die gezielte Verteilung von Multicast-Paketen an alle bekannten Spokes.
 Die Kernfunktion der Phase 3 wird schließlich mit `ip nhrp redirect` eingeschaltet.
-Genau dieser Befehl versetzt den Hub in die Lage, den Außenstellen einen direkteren Pfad mitzuteilen und so den direkten Verbindungsaufbau einzuleiten.
+Genau dieser Befehl versetzt den Hub in die Lage, den Außenstellen einen Pfad mitzuteilen und so einen direkten Verbindungsaufbau einzuleiten.
 
 #htl3r.code(
   caption: [Konfiguration des #htl3r.short[dmvpn]-Hubs],
@@ -107,14 +106,14 @@ Genau dieser Befehl versetzt den Hub in die Lage, den Außenstellen einen direkt
    ! Erlaubt Multicast-Traffic (z. B. für OSPF) zu den dynamischen Spokes
    ip nhrp map multicast dynamic
 
-   ! Aktiviert DMVPN Phase 3: Hub informiert Spokes über direktere Pfade
+   ! Aktiviert DMVPN Phase 3: Hub informiert Spokes über den Pfad
    ip nhrp redirect
   ```
 ]
 === Site-to-Site #htl3r.short[vpn]
 Die zwei Standorte `IPSEC` sind über eine klassische Site-to-Site #htl3r.short[vpn]-Verbindung gekoppelt.
 Der verschlüsselte Tunnel überspannt das gesamte #htl3r.short[wan].
-Die Endpunkte handeln dabei eigenständig die #htl3r.full[ike]-Phase-1 zur Authentifizierung und die #htl3r.short[ike]-Phase-2 zur Verschlüsselung des Nutzdatenverkehrs aus.
+Die Endpunkte handeln dabei eigenständig die #htl3r.full[ike] Phase 1 zur Authentifizierung und die #htl3r.short[ike] Phase 2 zur Verschlüsselung des Nutzdatenverkehrs aus.
 
 == Spezielle Funktionsbereiche
 Ergänzend zur reinen Transportfunktion der #htl3r.short[wan]-Infrastruktur integriert die vorliegende Topologie dedizierte Segmente, die gezielt fortgeschrittene Netzwerkdienste wie Adressübersetzung und hierarchisches Routing demonstrieren.
