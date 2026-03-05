@@ -240,7 +240,7 @@ Die Methode `run()` ist der zentrale Einstiegspunkt für die Testausführung.
 Sie steuert den gesamten Testablauf zentral und stellt sicher, dass alle Voraussetzungen validiert sind, bevor die eigentliche Ausführung beginnt. Der Ablauf gliedert sich dabei in folgende Phasen:
 
 === Parameter-Validierung
-Überprüft, ob alle _erforderlichen_ Parameter vorhanden sind, und ob keine _mutually exclusive_ Parameter gleichzeitig gesetzt wurden. Gültige Parameter werden dynamisch als #htl3r.short[instanzattribute] zugewiesen, sodass in den Testmethoden über *`self.parameter_name`* direkt auf sie zugegriffen werden kann.
+Überprüft, ob alle _erforderlichen_ Parameter vorhanden sind, und ob keine _mutually exclusive_ Parameter gleichzeitig gesetzt wurden. Gültige Parameter werden dynamisch als #htl3r.long[instanzattribute] zugewiesen, sodass in den Testmethoden über *`self.parameter_name`* direkt auf sie zugegriffen werden kann.
 
 #htl3r.code(
   caption: [Zugriff auf einen Parameter],
@@ -293,7 +293,7 @@ Um die definierten Abhängigkeiten in eine linear ausführbare Sequenz zu überf
 Der Algorithmus gliedert sich in vier Phasen:
 
 *Graphen-Konstruktion*:
-Zunächst iteriert das System über alle aktiven Testmethoden und baut eine #htl3r.short[adjazenzliste] auf. Parallel dazu wird jedem Test ein Zählerwert zugewiesen, der exakt beziffert, von wie vielen anderen Tests er direkt abhängig ist.
+Zunächst iteriert das System über alle aktiven Testmethoden und baut eine #htl3r.long[adjazenzliste] auf. Parallel dazu wird jedem Test ein Zählerwert zugewiesen, der exakt beziffert, von wie vielen anderen Tests er direkt abhängig ist.
 
 #htl3r.code(
   caption: [Aufbau des Graphen und Berechnung der Eingangsgrade],

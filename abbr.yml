@@ -7,8 +7,6 @@
   description: Der gängigste Standard für das VLAN-Tagging in Ethernet-Netzwerken, der es ermöglicht, mehrere VLANs über eine einzige physische Verbindung zu übertragen.
 
 adjazenzliste:
-  short:
-    singular: Adjazenzliste
   long:
     singular: Adjazenzliste
   description: >-
@@ -46,8 +44,6 @@ ci:
   description: Die Praxis der regelmäßigen Integration von Code-Änderungen in ein gemeinsames Repository mit automatisierten Regressionstests.
 
 diagnet:
-  short:
-    singular: DiagNet
   long:
     singular: DiagNet
   description: Der Name des in dieser Arbeit entwickelten Systems. Eine Webapplikation zur automatisierten Durchführung, Verwaltung und Analyse von Netzwerktests.
@@ -68,8 +64,6 @@ exception:
   description: Ein Fehler oder Ausnahmezustand, der während der Programmausführung auftritt.
 
 fabrikmethode:
-  short:
-    singular: Fabrikmethode
   long:
     singular: Fabrikmethode
   description: >-
@@ -122,8 +116,6 @@ icmp:
     Ein Netzwerkprotokoll, das zum Austausch von Informations- und Fehlermeldungen in IP-Netzwerken dient. Es wird primär für Diagnosezwecke verwendet, etwa um die Erreichbarkeit von Hosts zu prüfen.
 
 instanzattribute:
-  short:
-    singular: Instanzattribute
   long:
     singular: Instanzattribute
   description: >-
@@ -256,8 +248,6 @@ treefmt:
   description: Ein Werkzeug zur Orchestrierung verschiedener Code-Formatierer (z. B. Ruff, Prettier) für eine einheitliche Codebasis.
 
 trunk:
-  short:
-    singular: Trunk
   long:
     singular: Trunk
   description: Eine Punkt-zu-Punkt-Verbindung zwischen zwei Netzwerkgeräten (z. B. Switchen), die den Datenverkehr für mehrere VLANs gleichzeitig über ein einziges physisches Kabel überträgt.
@@ -279,7 +269,7 @@ uv:
 
 vlan:
   short:
-    singular: vlan
+    singular: VLAN
   long:
     singular: Virtual Local Area Network
   description: Ein logisches Teilnetz innerhalb eines physischen Netzwerks, das Geräte unabhängig von ihrem Standort isoliert.
