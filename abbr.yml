@@ -45,7 +45,6 @@ ci:
     singular: Continuous Integration
   description: Die Praxis der regelmäßigen Integration von Code-Änderungen in ein gemeinsames Repository mit automatisierten Regressionstests.
 
-# Danijel
 diagnet:
   short:
     singular: DiagNet
