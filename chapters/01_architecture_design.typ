@@ -3,13 +3,13 @@
 #htl3r.author("Danijel Stamenkovic")
 = Design und Aufbau der Infrastruktur
 
-Für die Umsetzung von #htl3r.short[diagnet] war eine Testumgebung notwendig, in der sowohl reale Netzwerkeigenschaften als auch komplexe Topologien abgebildet werden können.
+Für die Umsetzung von #htl3r.long[diagnet] war eine Testumgebung notwendig, in der sowohl reale Netzwerkeigenschaften als auch komplexe Topologien abgebildet werden können.
 Eine rein virtuelle Umgebung hätte zwar viel Flexibilität geboten, jedoch lassen sich bestimmte Funktionen wie Port-Security, #htl3r.full[vlan]-Zuweisungen oder das Verhalten physischer Switch-Ports nur eingeschränkt realistisch testen.
 Aus diesem Grund wurde ein hybrider Ansatz gewählt, der aus einer Kombination von echter Hardware und einer virtuellen Umgebung auf Basis von #htl3r.full[gns3] besteht.
 Ziel war es, eine möglichst praxisnahe Infrastruktur aufzubauen, die gleichzeitig flexibel erweiterbar bleibt.
 #figure(
   image("../assets/Topologie - DiagNet.jpg", width: 95%),
-  caption: [Detaillierte Topologie: Links die virtuelle #htl3r.short[gns3]-Instanz, rechts die physische Hardware, verbunden über den #htl3r.full[802.1Q] #htl3r.short[trunk].],
+  caption: [Detaillierte Topologie: Links die virtuelle #htl3r.short[gns3]-Instanz, rechts die physische Hardware, verbunden über den #htl3r.full[802.1Q] #htl3r.long[trunk].],
 ) <fig-hybrid-arch>
 
 
@@ -43,7 +43,7 @@ Diese Struktur ermöglicht es, Routing-Protokolle, Redundanzmechanismen und Ausf
 
 == Verbindung zwischen physischer und virtueller Umgebung
 
-Die Verbindung zwischen Hardware und #htl3r.short[gns3] erfolgt über einen #htl3r.short[trunk]-Port des Multilayer-Switches, der mit einer zweiten Netzwerkkarte des #htl3r.short[gns3]-Servers verbunden ist.
+Die Verbindung zwischen Hardware und #htl3r.short[gns3] erfolgt über einen #htl3r.long[trunk]-Port des Multilayer-Switches, der mit einer zweiten Netzwerkkarte des #htl3r.short[gns3]-Servers verbunden ist.
 Damit #htl3r.short[vlan]-Tags korrekt in #htl3r.short[gns3] ankommen, wurde auf dem Server das #htl3r.short[vlan]-Offloading deaktiviert.
 Zusätzlich läuft die Netzwerkkarte im Promiscuous Mode, sodass getaggte Ethernet-Frames unverändert an die virtuellen Geräte weitergegeben werden.
 
@@ -127,7 +127,7 @@ Durch dieses Namenskonzept ist bereits anhand des Gerätenamens erkennbar, welch
 
 == Trennung zwischen Testumgebung und Infrastruktur
 
-Ein wesentliches Designprinzip von #htl3r.short[diagnet] ist die klare Trennung zwischen der zugrunde liegenden Infrastruktur und den darauf ausgeführten Testfällen.
+Ein wesentliches Designprinzip von #htl3r.long[diagnet] ist die klare Trennung zwischen der zugrunde liegenden Infrastruktur und den darauf ausgeführten Testfällen.
 Die Infrastruktur stellt ausschließlich die Netzwerkumgebung bereit (Router, Switches, Verbindungen, IP-Strukturen und Routing).
 Die eigentlichen Testcases sind davon logisch getrennt und greifen nur über definierte Schnittstellen auf die Geräte zu.
 Dadurch sind die Testfälle unabhängig vom konkreten Aufbau der Topologie.
