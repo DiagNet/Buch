@@ -22,7 +22,7 @@ Fügt ein Entwickler im Backend einen neuen Parameter hinzu, erscheint dieser au
 == Abstraktion der Eingabefelder
 Damit der Code wartbar bleibt, verzichtet das System auf komplexe Funktionen zur Erstellung der Felder. Stattdessen definiert eine abstrakte Basisklasse das Verhalten aller Eingabeelemente. Sie garantiert eine einheitliche Schnittstelle, unabhängig von der eigentlichen visuellen Darstellung.
 
-Jedes Eingabefeld, ob Textfeld, Dropdown-Liste oder eine spezielle Auswahl für Netzwerkgeräte, muss von dieser Basisklasse erben. Das garantiert, dass der Code für das Parametermanagement jedes Feld gleich behandeln kann, ohne dessen interne Details zu kennen. Eine #htl3r.full[fabrikmethode] prüft den geforderten Datentyp und erstellt die passende Unterklasse.
+Jedes Eingabefeld, ob Textfeld, Dropdown-Liste oder eine spezielle Auswahl für Netzwerkgeräte, muss von dieser Basisklasse erben. Das garantiert, dass der Code für das Parametermanagement jedes Feld gleich behandeln kann, ohne dessen interne Details zu kennen. Eine #htl3r.long[fabrikmethode] prüft den geforderten Datentyp und erstellt die passende Unterklasse.
 
 Der folgende Code zeigt die Struktur dieser Abstraktion. Sie schreibt vor, dass jede Unterklasse Funktionen zur Erstellung des #htl3r.short[html]-Elements, zur Rückgabe des Werts und zur Überprüfung des Datentyps bereitstellen muss.
 
