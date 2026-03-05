@@ -5,18 +5,20 @@
   author:
     - name: Wiggins
       given-name: Adam
-  url: https://12factor.net/
+  url:
+    value: https://12factor.net/
+    date: 2026-02-07
   date: 2017-01-01
-  accessed: 2026-02-07
 
 astral-uv:
   type: web
   title: "uv: An extremely fast Python package installer and resolver"
   author:
     - name: Astral Software Inc.
-  url: https://docs.astral.sh/uv/
+  url:
+    value: https://docs.astral.sh/uv/
+    date: 2026-02-07
   date: 2024-02-15
-  accessed: 2026-02-07
 
 direnv-docs:
   type: web
@@ -24,9 +26,10 @@ direnv-docs:
   author:
     - name: zimbatm
       given-name: zimbatm
-  url: https://direnv.net/
+  url:
+    value: https://direnv.net/
+    date: 2026-02-07
   date: 2024-01-01
-  accessed: 2026-02-07
 
 dolstra-nix:
   type: thesis
@@ -34,8 +37,8 @@ dolstra-nix:
   author:
     - name: Dolstra
       given-name: Eelco
-  date: 2006-01-01
   url: https://edolstra.github.io/pubs/phd-thesis.pdf
+  date: 2006-01-01
   institution: Utrecht University
 
 jetbrains-config-drift:
@@ -43,9 +46,10 @@ jetbrains-config-drift:
   title: "Configuration Drift: The Pitfall of Local Machines"
   author:
     - name: JetBrains
+  url:
+    value: https://blog.jetbrains.com/codecanvas/2025/08/configuration-drift-the-pitfall-of-local-machines/
+    date: 2026-02-07
   date: 2025-10-15
-  url: https://blog.jetbrains.com/codecanvas/2025/08/configuration-drift-the-pitfall-of-local-machines/
-  accessed: 2026-02-07
 
 just-command-runner:
   type: web
@@ -53,25 +57,28 @@ just-command-runner:
   author:
     - name: Rodarmor
       given-name: Casey
-  url: https://github.com/casey/just
+  url:
+    value: https://github.com/casey/just
+    date: 2026-02-07
   date: 2025-01-15
-  accessed: 2026-02-07
 
 nixos-homepage:
   type: web
   title: "NixOS: Reproducible builds and deployments"
   author:
     - name: NixOS Foundation
-  url: https://nixos.org/
+  url:
+    value: https://nixos.org/
+    date: 2026-02-07
   date: 2026-02-07
-  accessed: 2026-02-07
 
 treefmt-docs:
   type: web
   title: "treefmt: one CLI to format the whole repo"
   author:
     - name: numtide
-  url: https://github.com/numtide/treefmt
+  url:
+    value: https://github.com/numtide/treefmt
+    date: 2026-02-07
   date: 2024-11-20
-  accessed: 2026-02-07
 # keep-sorted end
