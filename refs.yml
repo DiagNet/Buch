@@ -31,6 +31,26 @@ direnv-docs:
     date: 2026-02-07
   date: 2024-01-01
 
+django-docs:
+  type: web
+  title: "Django Documentation: Models, Views, and Templates"
+  author:
+    - name: Django Software Foundation
+  url:
+    value: https://docs.djangoproject.com/en/6.0/
+    date: 2026-03-05
+  date: 2026-03-05
+
+django-security:
+  type: web
+  title: "Security in Django"
+  author:
+    - name: Django Software Foundation
+  url:
+    value: https://docs.djangoproject.com/en/6.0/topics/security/
+    date: 2026-03-05
+  date: 2026-03-05
+
 dolstra-nix:
   type: thesis
   title: "The Purely Functional Software Deployment Model"
@@ -71,6 +91,16 @@ nixos-homepage:
     value: https://nixos.org/
     date: 2026-02-07
   date: 2026-02-07
+
+pyats-docs:
+  type: web
+  title: "pyATS Documentation"
+  author:
+    - name: Cisco Systems
+  url:
+    value: https://pubhub.devnetcloud.com/media/pyats/docs/getting_started/index.html
+    date: 2026-03-05
+  date: 2026-03-05
 
 treefmt-docs:
   type: web
