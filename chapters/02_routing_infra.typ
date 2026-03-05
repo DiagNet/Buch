@@ -18,20 +18,20 @@ Der Austausch von Routing-Informationen zwischen den Providern erfolgt über das
 
 
 === Protokoll-Diversität im Backbone
-Die Backbones der einzelnen #htl3r.shortpl[isp] sind technisch unterschiedlich aufgebaut, um verschiedene Transport-Mechanismen und #htl3r.fullpl[igp] bereitzustellen:
+Die #htl3r.longpl[backbone] der einzelnen #htl3r.shortpl[isp] sind technisch unterschiedlich aufgebaut, um verschiedene Transport-Mechanismen und #htl3r.fullpl[igp] bereitzustellen:
 
-*ISP 1 (OSPF & MPLS):*
-In diesem Backbone wird #htl3r.full[ospf] als Basis-Protokoll eingesetzt, um die interne Erreichbarkeit sicherzustellen. Darauf aufbauend kommt #htl3r.full[mpls] zum Einsatz, um den Datentransport über Label-Switching zu optimieren.
+*ISP 1 (#htl3r.short[ospf] & #htl3r.short[mpls]):*
+In diesem #htl3r.long[backbone] wird #htl3r.full[ospf] als Basis-Protokoll eingesetzt, um die interne Erreichbarkeit sicherzustellen. Darauf aufbauend kommt #htl3r.full[mpls] zum Einsatz, um den Datentransport über Label-Switching zu optimieren.
 
-*ISP 2 (RIP & GRE)*:
+*ISP 2 (#htl3r.short[rip] & #htl3r.short[gre])*:
 Hier wird #htl3r.short[rip] als internes Protokoll genutzt. Zusätzlich werden #htl3r.full[gre] Tunnel eingesetzt, um eine direkte virtuelle Leitung zwischen den #htl3r.short[bgp]-Routern zu schaffen. So können diese ihre Daten austauschen, ohne dass die Router dazwischen den Inhalt verarbeiten müssen.
 
-*ISP 3 (EIGRP & GRE)*:
+*ISP 3 (#htl3r.short[eigrp] & #htl3r.short[gre])*:
 Dieser Provider nutzt #htl3r.full[eigrp] zur Routen-Berechnung.
 Wie schon bei #htl3r.short[isp] 2 dienen auch hier #htl3r.short[gre]-Tunnel dazu, die #htl3r.short[bgp]-Nachbarn logisch direkt miteinander zu verbinden und den Datenverkehr durch das Backbone-Netz zu leiten.
 
 *ISP 4:*
-Fungiert als reines Transit-#htl3r.short[as] zur Kopplung der Provider ohne eigene Backbone-Logik.
+Fungiert als reines Transit-#htl3r.short[as] zur Kopplung der Provider ohne eigene #htl3r.long[backbone]-Logik.
 
 === Pfadmanipulation und Traffic Engineering
 Ein zentrales Element des WAN-Designs ist das Traffic Engineering, um Datenströme gezielt zu steuern.
@@ -110,17 +110,17 @@ Genau dieser Befehl versetzt den Hub in die Lage, den Außenstellen einen Pfad m
    ip nhrp redirect
   ```
 ]
-=== Site-to-Site #htl3r.short[vpn]
+=== Site-to-Site VPN
 Die zwei Standorte `IPSEC` sind über eine klassische Site-to-Site #htl3r.short[vpn]-Verbindung gekoppelt.
 Der verschlüsselte Tunnel überspannt das gesamte #htl3r.short[wan].
-Die Endpunkte handeln dabei eigenständig die #htl3r.full[ike] Phase 1 zur Authentifizierung und die #htl3r.short[ike] Phase 2 zur Verschlüsselung des Nutzdatenverkehrs aus.
+Die Endpunkte handeln dabei eigenständig die #htl3r.full[ike]-Phase 1 zur Authentifizierung und die #htl3r.short[ike]-Phase 2 zur Verschlüsselung des Nutzdatenverkehrs aus.
 
 == Spezielle Funktionsbereiche
 Ergänzend zur reinen Transportfunktion der #htl3r.short[wan]-Infrastruktur integriert die vorliegende Topologie dedizierte Segmente, die gezielt fortgeschrittene Netzwerkdienste wie Adressübersetzung und hierarchisches Routing demonstrieren.
 
-=== #htl3r.full[nat]
+=== Network Address Translation (NAT)
 Ein spezialisierter Standort bildet die Schnittstelle zwischen privaten Adressen und dem öffentlichen Adressraum ab.
-Dabei kommen drei Verfahren des #htl3r.short[nat] zum Einsatz, um unterschiedliche Übersetzungsszenarien zu simulieren:
+Dabei kommen drei Verfahren des #htl3r.full[nat] zum Einsatz, um unterschiedliche Übersetzungsszenarien zu simulieren:
 
 - *Static #htl3r.short[nat]:*
   Eine feste 1-zu-1-Zuordnung einer öffentlichen IP-Adresse zu einem internen Host.
@@ -131,9 +131,9 @@ Dabei kommen drei Verfahren des #htl3r.short[nat] zum Einsatz, um unterschiedlic
 - *Port Address Translation (PAT):*
   Das Multiplexing mehrerer interner Clients über eine einzige öffentliche IP-Adresse unter Verwendung unterschiedlicher Source-Ports.
 
-=== #htl3r.short[ospf] Multi-Area Design
+=== OSPF Multi-Area Design
 Zur Demonstration hierarchischer Routing-Strukturen wurde ein Standort in mehrere #htl3r.short[ospf]-Areas unterteilt.
-Ein zentraler Backbone (Area 0) verbindet dabei untergeordnete Bereiche (Area 1, Area 2) über #htl3r.full[abr].
+Ein zentraler #htl3r.long[backbone] (Area 0) verbindet dabei untergeordnete Bereiche (Area 1, Area 2) über #htl3r.full[abr].
 Dieses Design reduziert die Größe der #htl3r.full[lsdb] auf den einzelnen Routern.
 
 == Fazit zur Routing-Infrastruktur

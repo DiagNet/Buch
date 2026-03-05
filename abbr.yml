@@ -81,6 +81,12 @@ backend:
     singular: Backend
   description: Der Teil einer Anwendung, der im Hintergrund läuft und Datenverarbeitung sowie Logik bereitstellt.
 
+backbone:
+  long:
+    singular: Backbone
+    plural: Backbones
+  description: Der zentrale Hauptteil eines Netzwerks, der verschiedene Teilnetze miteinander verbindet und für den Datentransport über große Distanzen oder hohe Bandbreiten optimiert ist.
+
 bgp:
   short:
     singular: BGP
@@ -433,7 +439,7 @@ nhrp:
 nix:
   long:
     singular: Nix
-  description: Ein rein funktionaler Paketmanager und Build-System, das Software in isolierten, unveränderlichen Zuständen verwaltet.
+  description: Ein rein funktionaler Paketmanager and Build-System, das Software in isolierten, unveränderlichen Zuständen verwaltet.
 
 nix-flakes:
   long:
