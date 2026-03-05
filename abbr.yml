@@ -19,6 +19,18 @@ abr:
     plural: Area Border Router (ABRs)
   description: Ein Router in einem OSPF-Netzwerk, der mehrere Areas miteinander verbindet und Routing-Informationen zwischen ihnen austauscht.
 
+acl:
+  short:
+    singular: ACL
+    plural: ACLs
+  long:
+    singular: Access Control List
+    plural: Access Control Lists
+  full:
+    singular: Access Control List (ACL)
+    plural: Access Control Lists (ACLs)
+  description: Eine sequenzielle Liste von Regeln, die Berechtigungen definiert und steuert, welcher Netzwerkverkehr oder welche Benutzer auf bestimmte Systeme, Schnittstellen oder Ressourcen zugreifen dürfen.
+
 adjazenzliste:
   short:
     singular: Adjazenzliste
@@ -305,7 +317,7 @@ ipsec:
   long:
     singular: Internet Protocol Security
   full: Internet Protocol Security (IPsec)
-  description: Eine Protokoll-Suite zur Sicherung der Internetkommunikation durch Authentifizierung und Verschlüsselung jedes IP-Pakets.
+  description: Eine Protokoll-Suite zur Sicherung der Internetkommunikation durch Authentifizierung and Verschlüsselung jedes IP-Pakets.
 
 ise:
   short:
@@ -475,7 +487,7 @@ pat:
 prettier:
   long:
     singular: Prettier
-  description: Ein "opinionated" Code-Formatter, der vorrangig für Web-Technologien (JavaScript, CSS, HTML, JSON) eingesetzt wird, um einen einheitlichen Stil zu erzwingen.
+  description: Ein "opinionated" Code-Formatter, der vorrangig für Web-Technologies (JavaScript, CSS, HTML, JSON) eingesetzt wird, um einen einheitlichen Stil zu erzwenken.
 
 pyats:
   long:
