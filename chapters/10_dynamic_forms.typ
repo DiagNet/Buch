@@ -41,8 +41,8 @@ Der folgende Code zeigt die Struktur dieser Abstraktion. Sie schreibt vor, dass 
 
 Durch diese Struktur kann das System entscheiden, welche Implementierung für einen Parameter notwendig ist. Listen-Parameter werden beispielsweise rekursiv behandelt, indem die Listen-Komponente wiederum Instanzen der Basisklasse für ihre Einträge verwaltet.
 
-== Datentyp Validierung
-Neben der Darstellung muss auch die inhaltliche Korrektheit der eingegebenen Daten sichergestellt werden. Dafür nutzt das System ein eigenes Validierungsverfahren, dessen Logik in einer separaten Klassenstruktur organisiert wird. Während die `ParameterField` Klasse für das #htl3r.short[html]-Element zuständig ist, übergibt sie die inhaltliche Prüfung an Datentyp-Klassen.
+== Datentyp-Validierung
+Neben der Darstellung muss auch die inhaltliche Korrektheit der eingegebenen Daten sichergestellt werden. Dafür nutzt das System ein eigenes Validierungsverfahren, dessen Logik in einer separaten Klassenstruktur organisiert wird. Während die `ParameterField`-Klasse für das #htl3r.short[html]-Element zuständig ist, übergibt sie die inhaltliche Prüfung an Datentyp-Klassen.
 
 Auch hier wird ein modularer Ansatz verfolgt. Die abstrakte Basisklasse `Datatype` definiert die Methode `check(value)`, welche die Gültigkeit eines Wertes bestätigt. Klassen wie `IPv4` oder `CiscoInterface` implementieren diese Methode mit der jeweiligen Logik.
 
@@ -54,9 +54,9 @@ Der folgende Ausschnitt zeigt die Implementierung einer solchen Prüfung am Beis
 )[
   ```javascript
   class IPv4 extends Datatype {
-    // Überprüft ob der übergebene Wert einer IPv4-Addresse ist
+    // Überprüft, ob der übergebene Wert eine IPv4-Adresse ist
     check(value) {
-      const p = v.split('.');
+      const p = value.split('.');
       return p.length === 4 && p.every(n => n >= 0 && n <= 255);
     }
     getDescription() { return "An IPv4 address"; }
@@ -66,7 +66,7 @@ Der folgende Ausschnitt zeigt die Implementierung einer solchen Prüfung am Beis
   ```
 ]
 
-Diese Struktur ermöglicht eine einfache Überprüfung der Eingabe. Ein `EventHandler` verbindet das Eingabefeld mit dem passenden Datentyp. Bei jeder Änderung des Werts wird die `check()` Methode ausgeführt und das Ergebnis verarbeitet. Dies stellt sicher, dass der Benutzer nur dann einen Test erstellen kann, wenn alle Parameter den Vorgaben entsprechen.
+Diese Struktur ermöglicht eine einfache Überprüfung der Eingabe. Ein #htl3r.long[eventhandler] verbindet das Eingabefeld mit dem passenden Datentyp. Bei jeder Änderung des Werts wird die `check()`-Methode ausgeführt und das Ergebnis verarbeitet. Dies stellt sicher, dass der Benutzer nur dann einen Test erstellen kann, wenn alle Parameter den Vorgaben entsprechen.
 
 == Abhängigkeitsmanagement
 In komplexen Netzwerkszenarien sind Parameter meistens voneinander abhängig.
@@ -77,6 +77,12 @@ Das System unterscheidet dabei zwei Arten von Abhängigkeiten:
 *Gegenseitiger Ausschluss*: Bestimmte Parameter dürfen nicht gleichzeitig gesetzt werden. Das System merkt sich Gruppen von solchen exklusiven Feldern. Sobald der Benutzer einen Wert in eines dieser Felder einträgt, werden alle anderen Felder der Gruppe automatisch deaktiviert und gesperrt. Erst wenn das Feld wieder geleert wird, gibt das System die anderen Optionen wieder frei.
 
 *Bedingte Sichtbarkeit*: Manche Parameter sind nur relevant, wenn ein anderer Parameter einen bestimmten Wert hat. Hier fungieren Felder als Auslöser. Ändert sich der Wert eines solchen Auslösers, prüft das System die hinterlegten Bedingungen. Je nach Ergebnis werden die betroffenen Felder dynamisch eingeblendet oder versteckt. Da diese Logik direkt in der Klasse der Eingabefelder verankert ist, reagiert das Formular auf jede Benutzerinteraktion.
+
+Um diese dynamischen Abläufe im Formular technisch umzusetzen, geht die nachfolgende Funktion alle verfügbaren Parameter Schritt für Schritt durch.
+Für jedes Feld schaut das System in einem zentralen Verzeichnis nach, ob andere Eingaben von genau diesem Parameter abhängen.
+Gibt es solche Verknüpfungen, erhält das auslösende Feld eine interne Benachrichtigungsfunktion.
+Jedes Mal, wenn der Benutzer nun den Wert dieses Feldes anpasst, gibt diese Funktion die Änderung sofort an alle verknüpften Felder weiter.
+Diese können dann in Echtzeit reagieren und sich passend einblenden oder sperren.
 
 #htl3r.code(
   caption: [Implementierung der Update-Logik für abhängige Parameter],
@@ -93,7 +99,7 @@ Das System unterscheidet dabei zwei Arten von Abhängigkeiten:
         parameter["activation_handler"] = async () => {
           dependents.forEach((item) => {
             // Neuberechnung der Sichtbarkeit für das abhängige Feld
-            item.handleActivationTrigger(parameterName, field.getValue());
+            item.handleActivationTrigger(parameterName, parameter.getValue());
           });
         };
       }
@@ -103,7 +109,7 @@ Das System unterscheidet dabei zwei Arten von Abhängigkeiten:
 ]
 
 == Zusammenführung und Erstellung
-Den Abschluss bildet das Einsammeln der Benutzereingaben. Da das System die Gültigkeit der Daten bereits während der Eingabe überwacht, ist beim finalen Absenden keine erneute Prüfung notwendig. Sobald der Anwender die Erstellung bestätigt, geht der Algorithmus die Liste aller Parameter durch. Dabei greift er auf die `getValue()` Methode der Felder zurück, um die eingetragenen Werte auszulesen. Die Daten werden in einem #htl3r.short[json]-Objekt gesammelt und über eine #htl3r.short[api]-Schnittstelle an das Backend übermittelt. Dieses nutzt die Informationen, um den Testfall zu erstellen und in der Datenbank zu speichern.
+Den Abschluss bildet das Einsammeln der Benutzereingaben. Da das System die Gültigkeit der Daten bereits während der Eingabe überwacht, ist beim finalen Absenden keine erneute Prüfung notwendig. Sobald der Anwender die Erstellung bestätigt, geht der Algorithmus die Liste aller Parameter durch. Dabei greift er auf die `getValue()`-Methode der Felder zurück, um die eingetragenen Werte auszulesen. Die Daten werden in einem #htl3r.short[json]-Objekt gesammelt und über eine #htl3r.short[api]-Schnittstelle an das Backend übermittelt. Dieses nutzt die Informationen, um den Testfall zu erstellen und in der Datenbank zu speichern.
 
 #htl3r.code(
   caption: [Erstellung des Testfalls im Backend],
