@@ -27,7 +27,7 @@ Das Backend von #htl3r.long[diagnet] sorgt für die Ausführung, Auswertung und 
 Der Aufbau von `DiagNetTest` gliedert sich in drei wesentliche Komponenten: die Definition der Parameter, die Implementierung der Testmethoden sowie die Ausführung durch die `run()`-Methode.
 
 == Definition der Parameter
-Die Schnittstelle für Eingabedaten wird deklarativ über das Klassenattribut `_params` definiert. Dies ist eine Liste von Dictionaries, wobei jeder Eintrag einen spezifischen Eingabeparameter beschreibt. Die Definition unterscheidet hierbei zwischen Schlüsseln, die für die technische Verarbeitung zwingend notwendig sind, und solchen, die der Steuerung oder der Benutzerfreundlichkeit dienen.
+Die Schnittstelle für Eingabedaten wird deklarativ über das Klassenattribut `_params` definiert. Dies ist eine Liste von #htl3r.longpl[dictionary], wobei jeder Eintrag einen spezifischen Eingabeparameter beschreibt. Die Definition unterscheidet hierbei zwischen Schlüsseln, die für die technische Verarbeitung zwingend notwendig sind, und solchen, die der Steuerung oder der Benutzerfreundlichkeit dienen.
 
 === Erforderliche Schlüsselwörter
 Damit das Framework einen Parameter verarbeiten kann, muss die Definition mindestens zwei Attribute enthalten:
@@ -50,7 +50,7 @@ Das Backend implementiert jedoch drei zentrale Ausnahmen, bei denen eine automat
 
   Die Verwendung dieses Typs erfordert zwingend die Angabe des zusätzlichen Schlüssels *`parameters`*. Er definiert das Schema und somit die verschachtelten Parameter, denen alle Einträge der Liste entsprechen müssen.
 
-Dieser Code zeigt, dass die speziellen Parametertypen zur Laufzeit direkt als Attribute der Testinstanz abgebildet werden und wie der typspezifische Zugriff programmatisch erfolgt:
+Das folgende Beispiel demonstriert, wie die speziellen Parametertypen zur Laufzeit direkt als Attribute der Testinstanz abgebildet werden und wie der typspezifische Zugriff programmatisch erfolgt:
 
 #htl3r.code(
   caption: [Parameterstruktur mit deklarierten Datentypen],
@@ -63,7 +63,7 @@ Dieser Code zeigt, dass die speziellen Parametertypen zur Laufzeit direkt als At
           },
           {
               "name": "routes",
-              "type": "list"
+              "type": "list",
               "parameters":
               [
                   {
@@ -311,12 +311,11 @@ Zunächst iteriert das System über alle aktiven Testmethoden und baut eine #htl
   description: `base.py`,
 )[
   ```python
-      for name, func in test_methods:
-          dep = getattr(func, "_depends_on", None)
-          if dep: # Gibt es eine Beziehung für diesen Testcase?
-              graph[dep].append(name) # Adjazenz in den Graphen eintragen
-              in_degree[name] += 1 # Erhöht die Anzahl an Abhängigkeiten
-
+  for name, func in test_methods:
+      dep = getattr(func, "_depends_on", None)
+      if dep: # Gibt es eine Beziehung für diesen Testcase?
+          graph[dep].append(name) # Adjazenz in den Graphen eintragen
+          in_degree[name] += 1 # Erhöht die Anzahl an Abhängigkeiten
   ```
 ]
 *Initialisierung der Warteschlange:*
@@ -377,7 +376,7 @@ Die run()-Methode verwendet diese Liste anschließend als Ausführungsplan. Sie 
 === Ausführung und Resultate der Testfälle
 Vor dem eigentlichen Aufruf der Testfunktionen evaluiert das Framework die hinterlegten Dekoratoren und modifiziert den Ablauf entsprechend. Dies stellt sicher, dass Abfolgen wie Wiederholungen oder Ausschlüsse technisch abgearbeitet werden, noch bevor der erste Testfall ausgeführt wird.
 
-Nach Abschluss aller Testfälle aggregiert das Framework die Einzelresultate in einem universellen Ergebnisobjekt. Dieses Dictionary dient als standardisierte Schnittstelle für das Frontend und beinhaltet neben dem Gesamtstatus eine statistische Zusammenfassung sowie die detaillierten Laufzeitdaten jedes Tests.
+Nach Abschluss aller Testfälle aggregiert das Framework die Einzelresultate in einem universellen Ergebnisobjekt. Dieses #htl3r.long[dictionary] dient als standardisierte Schnittstelle für das Frontend und beinhaltet neben dem Gesamtstatus eine statistische Zusammenfassung sowie die detaillierten Laufzeitdaten jedes Tests.
 
 #htl3r.code(
   caption: [Struktur des aggregierten Ergebnisobjekts],
