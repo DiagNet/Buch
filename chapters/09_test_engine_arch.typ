@@ -298,7 +298,7 @@ Um die definierten Abhängigkeiten in eine linear ausführbare Sequenz zu überf
 Die nachfolgende Abbildung visualisiert beispielhaft die Abhängigkeiten zwischen den einzelnen Testmethoden in Form eines gerichteten Graphen.
 #figure(
   image("../assets/gerichteter_graph.png", width: 60%),
-  caption: [Beispielhafte Darstellung eines gerichteten Graphen (Quelle: Wikipedia)],
+  caption: [Darstellung von Abhängigkeiten in einem gerichteten Graphen],
 ) <fig-kahn>
 
 Der Algorithmus gliedert sich in vier Phasen:
@@ -369,7 +369,7 @@ Die nachfolgende Abbildung veranschaulicht dieses Resultat anhand des ursprüngl
 
 #figure(
   image("../assets/solved_topological_sort.png", width: 60%),
-  caption: [Resultat einer topologischen Sortierung nach Kahn (Quelle: Wikipedia)],
+  caption: [Resultat einer topologischen Sortierung nach Kahn],
 ) <fig-kahn-result>
 
 Die run()-Methode verwendet diese Liste anschließend als Ausführungsplan. Sie iteriert über die Einträge und führt die Tests nacheinander aus, mit der Gewissheit, dass zum Zeitpunkt der Ausführung eines Tests alle seine notwendigen Vorbedingungen bereits bearbeitet wurden.
