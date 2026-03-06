@@ -534,6 +534,15 @@ python_dictionary:
     singular: Python-Dictionary
   description: Eine Datenstruktur in Python zur Speicherung von Schlüssel-Wert-Paaren.
 
+regex:
+  short:
+    singular: Regex
+    plural: Regex
+  long:
+    singular: regulärer Ausdruck
+    plural: reguläre Ausdrücke
+  description: Eine Zeichenfolge, die ein Suchmuster beschreibt, um mithilfe von Matching gezielt Informationen aus unformatiertem Text zu extrahieren.
+
 rip:
   short:
     singular: RIP
