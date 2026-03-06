@@ -83,13 +83,14 @@ Flask und FastAPI sind hervorragende Micro-#htl3r.long[framework]s, erfordern f�
 
 Um die Komplexität des Gesamtsystems zu kapseln und die Wartbarkeit zu erhöhen, wurde das #htl3r.long[backend] von #htl3r.long[diagnet] in mehrere entkoppelte Module in sogenannte Django-Apps unterteilt. Diese strikte Trennung fördert die Wiederverwendbarkeit des Codes und spiegelt die in der Planungsphase definierten Projektziele wider.
 
-Wie in der zentralen Konfigurationsdatei der Applikation definiert, besteht das System neben den Django-Standardkomponenten aus drei essenziellen Kern-Apps, die jeweils einen abgegrenzten Verantwortungsbereich besitzen:
+Wie in der zentralen Konfigurationsdatei der Applikation definiert, besteht das System neben den Django-Standardkomponenten aus vier essenziellen Kern-Apps, die jeweils einen abgegrenzten Verantwortungsbereich besitzen:
 
+- *`accounts`*: Verwaltet die Benutzerverwaltung und Zugriffskontrolle der Plattform. Dies umfasst die Definition von Benutzerrollen, die Vergabe von Berechtigungen sowie die Authentifizierung der Administratoren.
 - *`dashboard`*: Zuständig für die grafische Übersicht und die zentrale Einstiegsseite der Webanwendung. Hier laufen Metriken und Statusinformationen zusammen.
 - *`devices`*: Beinhaltet die gesamte Geschäftslogik zur Verwaltung der Netzwerkgeräte. Dies umfasst die Validierung der Verbindungsparameter, die Speicherung der Zugangsdaten und die Bereitstellung von Schnittstellen für die Netzwerk-Engines.
 - *`networktests`*: Das Herzstück der Testausführung. Diese App verwaltet die Struktur der Testfälle, deren dynamische Parameter und protokolliert die Historie der Testergebnisse. Zudem beinhaltet sie die logische Gruppierung von Testfällen, sodass Netzwerkadministratoren ganze Test-Batches zusammenfassen und gesammelt ausführen können.
 
-Durch die vollständige Abstraktion mittels #htl3r.short[orm] kann diese relationale Datenbank im produktiven Einsatz bei Bedarf durch leistungsstärkere Systeme wie PostgreSQL ausgetauscht werden. Dies erfordert lediglich eine Anpassung der Umgebungsvariablen, während die gesamte Programmlogik und die Datenmodelle unberührt bleiben.
+Durch die vollständige Abstraktion mittels #htl3r.short[orm] kann diese relationale Datenbank im produktiven Einsatz bei Bedarf durch leistungsstärkere Systeme wie PostgreSQL ausgetauscht werden. Dies erfordert eine Anpassung der Datenbankeinstellungen sowie die Installation des entsprechenden Datenbanktreibers, jedoch können die Datenmodelle und die Programmlogik vollkommen unberührt bleiben.
 
 === Model-View-Template (MVT) Architektur
 
