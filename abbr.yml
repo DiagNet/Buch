@@ -1,4 +1,14 @@
 # keep-sorted start newline_separated=yes case=no
+3nf:
+  short:
+    singular: 3NF
+  long:
+    singular: Dritte Normalform
+  description: >-
+    Die dritte Normalform ist eine Stufe der Datenbankormalisierung,
+    bei der alle Nicht-Schlüsselattribute ausschließlich vom Primärschlüssel
+    abhängen und keine transitiven Abhängigkeiten bestehen.
+
 802.1Q:
   short:
     singular: 802.1Q
@@ -198,6 +208,7 @@ firewall_policy:
 framework:
   long:
     singular: Framework
+    plural: Frameworks
   description: Eine Sammlung von Bibliotheken und Werkzeugen, die eine Grundlage für die Entwicklung von Softwareanwendungen bereitstellt.
 
 genie:
@@ -593,6 +604,13 @@ ssh:
     singular: Secure Shell
   description: Ein verschlüsseltes Netzwerkprotokoll für den sicheren Fernzugriff auf Geräte.
 
+tcp:
+  short:
+    singular: TCP
+  long:
+    singular: Transmission Control Protocol
+  description: Ein verbindungsorientiertes Transportprotokoll der Transportschicht, das eine zuverlässige, geordnete und fehlergesicherte Übertragung von Daten zwischen zwei Endpunkten gewährleistet.
+
 telnet:
   long:
     singular: Telnet
@@ -601,6 +619,7 @@ telnet:
 testbed:
   long:
     singular: Testbed
+    plural: Testbeds
   description: Eine Konfigurationsdatei in pyATS, welche Geräte, Zugangsdaten und Verbindungsparameter für automatisierte Tests definiert.
 
 treefmt:

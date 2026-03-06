@@ -1,0 +1,31 @@
+erDiagram
+    direction LR
+    Device {
+        int id PK
+        string name
+        string protocol
+        string device_type
+    }
+    TestCase {
+        int id PK
+        string test_module
+        string label
+    }
+    TestDevice {
+        int id PK
+        int test_case_id FK
+        int device_id FK
+    }
+    TestParameter {
+        int id PK
+        string name
+        string value
+        int test_case_id FK
+        int parent_test_parameter_id FK
+    }
+
+    TestCase ||--o{ TestDevice : "devices"
+    TestCase ||--o{ TestParameter : "parameters"
+    Device ||--o{ TestDevice : "device"
+    TestParameter ||--o{ TestParameter : "parent"
+    TestParameter ||--o{ TestDevice : "device_parent_parameter"
