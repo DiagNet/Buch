@@ -2,7 +2,7 @@
 
 #htl3r.author("Luka Pacar")
 = Die Test-Engine
-Das Backend von DiagNet sorgt für die Ausführung, Auswertung und Steuerung der Netzwerktests. Um eine einheitliche und wartbare Testinfrastruktur zu gewährleisten, haben wir eine modulare Architektur entwickelt, die auf einer abstrakten Basisklasse basiert.
+Das Backend von #htl3r.long[diagnet] sorgt für die Ausführung, Auswertung und Steuerung der Netzwerktests. Um eine einheitliche und wartbare Testinfrastruktur zu gewährleisten, haben wir eine modulare Architektur entwickelt, die auf einer abstrakten Basisklasse basiert.
 `DiagNetTest` bildet das Fundament für alle implementierten Tests und kapselt die gesamte Logik zur Testausführung, einschließlich Parameter-Validierung, Abhängigkeitsmanagement und Ergebnisverarbeitung.
 
 #htl3r.code(
@@ -189,7 +189,7 @@ Ein Test gilt als erfolgreich, wenn die Methode entweder `True`, `None` oder ein
 ]
 
 === Steuerung mittels Dekoratoren
-Um das Verhalten einzelner Testmethoden zu modifizieren, ohne den eigentlichen Testcode mit Verwaltungslogik zu vermischen, setzt DiagNet auf Python-Dekoratoren. Diese ermöglichen eine praktische Steuerung, bei der Eigenschaften wie Wiederholungen oder Ausführungsbedingungen direkt an der Methodendefinition annotiert werden. Diese Metadaten werden vom Framework vor der Ausführung evaluiert.
+Um das Verhalten einzelner Testmethoden zu modifizieren, ohne den eigentlichen Testcode mit Verwaltungslogik zu vermischen, setzt #htl3r.long[diagnet] auf Python-Dekoratoren. Diese ermöglichen eine praktische Steuerung, bei der Eigenschaften wie Wiederholungen oder Ausführungsbedingungen direkt an der Methodendefinition annotiert werden. Diese Metadaten werden vom Framework vor der Ausführung evaluiert.
 
 #htl3r.code(
   caption: [Anwendungsbeispiele für die verfügbaren Dekoratoren],
@@ -280,7 +280,7 @@ Mittels Introspektion durchsucht das Framework die Klasse zur Laufzeit nach Meth
 ]
 
 === Abhängigkeitsmanagement
-Innerhalb einer Testklasse bauen Prüfungen oft logisch aufeinander auf. DiagNet erlaubt die Definition solcher Kausalitäten mittels des *`@depends_on`* Dekorators.
+Innerhalb einer Testklasse bauen Prüfungen oft logisch aufeinander auf. #htl3r.long[diagnet] erlaubt die Definition solcher Kausalitäten mittels des *`@depends_on`* Dekorators.
 Die `run()`-Methode analysiert diese Beziehungen und erstellt mittels topologischer Sortierung einen validen Ausführungsplan.
 
 ==== Kahn's Algorithmus
