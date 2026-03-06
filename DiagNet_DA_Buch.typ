@@ -82,6 +82,7 @@
 #include "chapters/02_routing_infra.typ"         // Luka
 #include "chapters/03_switching_infra.typ"       // Danijel
 #include "chapters/04_firewalls_security.typ"    // Benedikt
+#include "chapters/04-2_secure_access.typ"       // Benedikt
 #include "chapters/05_dev_environment.typ"       // Karun
 #include "chapters/06_django_framework.typ"      // Karun
 #include "chapters/07_interfaces_automation.typ" // Benedikt
