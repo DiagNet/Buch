@@ -3,7 +3,7 @@
 #htl3r.author("Luka Pacar")
 
 = Routing Tests
-Die Routing-Tests validieren die Funktion der WAN-Seite der Netzwerktopologie.
+Die Routing-Tests validieren die korrekte Weiterleitung von Netzwerkverkehr über alle Schichten der Netzwerktopologie hinweg.
 Der Fokus liegt auf der Überprüfung der dynamischen Routing-Protokolle *#htl3r.full[rip]*, *#htl3r.full[eigrp]*, *#htl3r.full[ospf]* und *#htl3r.full[bgp]*.
 Zusätzlich deckt das Framework Technologien für Redundanz und Sicherheit ab, darunter *#htl3r.full[hsrp]*, *#htl3r.full[glbp]*, *#htl3r.full[dmvpn]* und *#htl3r.full[ipsec]*.
 Im Gegensatz zu einfachen Verbindungstests analysieren diese Module den operativen Zustand der Protokolle direkt auf den Geräten.
@@ -27,7 +27,7 @@ Dieses Verfahren bietet zwar maximale Flexibilität für exotische Befehle, ist 
 
 === Parallele Ausführung
 Da Tests für Protokolle wie #htl3r.short[ospf] oft viele Geräte gleichzeitig betreffen, würde eine nacheinander folgende Abfrage zu langen Wartezeiten führen.
-Das Modul OSPF_Areas nutzt deshalb eine Funktion für asynchrone Aufrufe, wodurch die Abfrage auf allen Geräten zum gleichen Zeitpunkt startet.
+Das Modul `OSPF_Areas` nutzt deshalb die in das #htl3r.long[pyats]-Framework integrierte Funktion `pcall` für asynchrone Aufrufe, wodurch die Abfrage auf allen Geräten zum gleichen Zeitpunkt startet.
 Die Gesamtdauer des Tests hängt somit nur noch vom langsamsten Gerät ab und ist nicht mehr von der Anzahl der Router abhängig.
 
 #htl3r.code(
@@ -48,7 +48,7 @@ Da Routing-Informationen wie Nachbarschaftslisten oder Routing-Tabellen eine var
 Eine einfache Definition von Einzelparametern würde die Flexibilität des Systems einschränken, da die Anzahl der prüfbaren Werte begrenzt wäre.
 Durch den Einsatz des Datentyps `list` lassen sich beliebig viele Erwartungswerte in einem einzigen Testfall bündeln, was den administrativen Aufwand im Vergleich zu statischen Parametern erheblich reduziert.
 
-
+Der folgende Codeausschnitt demonstriert die Definition einer solchen tabellarischen Struktur am Beispiel einer Routing-Tabelle:
 #htl3r.code(
   caption: [Definition einer tabellarischen Parameterstruktur],
   description: `RoutingTable.py`,
@@ -82,8 +82,8 @@ Durch diesen systematischen Abgleich stellt das Framework sicher, dass wichtige 
 )[
   ```python
   # Abruf der strukturierten Daten
-  raw_output = self.device.get_genie_device_object().parse("show ip route")
-  routes = raw_output["vrf"][vrf]["address_family"]["ipv4"]["routes"]
+  config_output = self.device.get_genie_device_object().parse("show ip route")
+  routes = config_output["vrf"]["default"]["address_family"]["ipv4"]["routes"]
 
   # Abgleich der Soll-Werte gegen die Gerätedaten
   for requirement in self.routes:
@@ -104,11 +104,10 @@ Ein Suchmuster extrahiert dabei den aktuellen Status der Redundanzgruppe aus dem
 
 
 #htl3r.code(
-  caption: [Extraktion des GLBP-Status mit regex],
+  caption: [Extraktion des GLBP-Status mit #htl3r.short[regex]],
   description: `GLBP.py`,
 )[
   ```python
-
   # Ausführen des Befehls und Erhalt der Textausgabe
   cmd = f"show glbp {group_id}"
   output = self.device.get_genie_device_object().execute(cmd)
@@ -119,24 +118,23 @@ Ein Suchmuster extrahiert dabei den aktuellen Status der Redundanzgruppe aus dem
   if match:
       actual_state = match.group("state")
       if actual_state != self.expected_state:
-           raise ValueError("State Mismatch")
+           failures.append(f"GLBP state mismatch")
   ```
 ]
 
 === BGP Nachbarschaften
 Das Modul `BGP_Neighbors` stellt sicher, dass die Verbindungen zu den konfigurierten Nachbarn aktiv sind.
 Da #htl3r.short[bgp] oft eine Vielzahl von Verbindungen umfasst, nutzt dieser Test ebenfalls die Listen-Verarbeitung.
-Die Logik prüft für jeden definierten Nachbarn, ob der Status den Wert Established erreicht hat.
+Die Logik prüft für jeden definierten Nachbarn, ob der Status den Wert `Established` erreicht hat.
 
 #htl3r.code(
   caption: [Validierung der BGP-Nachbarschaftsbeziehungen],
   description: `BGP_Neighbors.py`,
 )[
   ```python
-
-  # Abruf der BGP-Zustände für eine spezifische VRF
+  # Abruf der BGP-Zustände
   bgp_data = self.device.get_genie_device_object().parse("show ip bgp summary")
-  neighbors = bgp_data["vrf"][vrf]["neighbor"]
+  neighbors = bgp_data["vrf"]["default"]["neighbor"]
 
   # Prüfung der einzelnen Nachbarn aus der Parameter-Liste
   for peer in self.expected_peers:
