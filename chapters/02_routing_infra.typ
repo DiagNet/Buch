@@ -3,7 +3,7 @@
 #htl3r.author("Luka Pacar")
 = Routing-Infrastruktur
 
-Die Routing-Infrastruktur ist die Grundlage der gesamten Simulationsumgebung von #htl3r.short[diagnet].
+Die Routing-Infrastruktur ist die Grundlage der gesamten Simulationsumgebung von #htl3r.long[diagnet].
 Das Design zielt darauf ab, eine komplexe und heterogene Topologie bereitzustellen, die unterschiedliche Protokoll-Standards und Routing-Protokolle vereint.
 Die gesamte #htl3r.short[wan]-Infrastruktur basiert dabei auf Cisco-Komponenten, wobei bewusst verschiedene Konfigurationen implementiert wurden, um ein möglichst breites Spektrum an Netzwerk-Verhalten abzubilden.
 
@@ -140,4 +140,4 @@ Dieses Design reduziert die Größe der #htl3r.full[lsdb] auf den einzelnen Rout
 Zusammenfassend bietet die vorgestellte Topologie weit mehr als nur eine Ansammlung von Routern und Protokollen.
 Sie formt ein realitätsnahes Abbild eines komplexen Unternehmensnetzwerks.
 Das bewusste Zusammenspiel aus Provider-Netzen, redundanten Standorten und spezialisierten Diensten macht diese Infrastruktur zu einer äußerst vielseitigen Testumgebung.
-Genau darin liegt ihr wesentlicher Mehrwert: Sie bietet das perfekte Fundament, um die in #htl3r.short[diagnet] implementierten Testcases praxisnah auszuführen und umfassend zu validieren.
+Genau darin liegt ihr wesentlicher Mehrwert: Sie bietet das perfekte Fundament, um die in #htl3r.long[diagnet] implementierten Testcases praxisnah auszuführen und umfassend zu validieren.
