@@ -1,7 +1,7 @@
 #import "@preview/htl3r-da:2.0.0" as htl3r
 
 #htl3r.author("Luka Pacar")
-= Routing-Infrastruktur
+== Routing-Infrastruktur
 
 Die Routing-Infrastruktur ist die Grundlage der gesamten Simulationsumgebung von #htl3r.long[diagnet].
 Das Design zielt darauf ab, eine komplexe und heterogene Topologie bereitzustellen, die unterschiedliche Protokoll-Standards und Routing-Protokolle vereint.
@@ -11,13 +11,13 @@ Die gesamte #htl3r.short[wan]-Infrastruktur basiert dabei auf Cisco-Komponenten,
   image("../assets/WAN10.jpg", width: 95%),
   caption: [WAN Topologie],
 ) <fig-kahn>
-== Architektur des WAN
+=== Architektur des WAN
 Das Zentrum der Topologie bildet ein simuliertes #htl3r.full[wan], das in vier unabhängige #htl3r.fullpl[as] unterteilt ist.
 Jedes dieser Systeme agiert als eigenständiger #htl3r.full[isp].
 Der Austausch von Routing-Informationen zwischen den Providern erfolgt über das #htl3r.full[ebgp].
 
 
-=== Protokoll-Diversität im Backbone
+==== Protokoll-Diversität im Backbone
 Die #htl3r.longpl[backbone] der einzelnen #htl3r.shortpl[isp] sind technisch unterschiedlich aufgebaut, um verschiedene Transport-Mechanismen und #htl3r.fullpl[igp] bereitzustellen:
 
 *ISP 1 (#htl3r.short[ospf] & #htl3r.short[mpls]):*
@@ -33,7 +33,7 @@ Wie schon bei #htl3r.short[isp] 2 dienen auch hier #htl3r.short[gre]-Tunnel dazu
 *ISP 4:*
 Fungiert als reines Transit-#htl3r.short[as] zur Kopplung der Provider ohne eigene #htl3r.long[backbone]-Logik.
 
-=== Pfadmanipulation und Traffic Engineering
+==== Pfadmanipulation und Traffic Engineering
 Ein zentrales Element des WAN-Designs ist das Traffic Engineering, um Datenströme gezielt zu steuern.
 Während das #htl3r.full[bgp] standardmäßig den Pfad mit der geringsten AS-Pfad-Länge bevorzugt, werden in dieser Topologie Attribute manipuliert, um spezifische Routing-Entscheidungen zu erzwingen.
 
@@ -64,10 +64,10 @@ Die nachfolgende Konfiguration veranschaulicht diesen Vorgang konkret: Zunächst
   ```
 ]
 
-== Standort-Vernetzung und Redundanz
+=== Standort-Vernetzung und Redundanz
 Die angebundenen Netze demonstrieren verschiedene fortgeschrittene Konzepte zur Hochverfügbarkeit und Standortvernetzung, deren primäres Ziel es ist, eine unterbrechungsfreie Kommunikation sicherzustellen und Endgeräte zuverlässig an das WAN anzubinden.
 
-=== Gateway-Redundanz
+==== Gateway-Redundanz
 Zur Absicherung des Default-Gateways für Endgeräte werden zwei unterschiedliche #htl3r.fullpl[fhrp] eingesetzt:
 
 #htl3r.short[hsrp]-Standort:
@@ -79,7 +79,7 @@ Im Gegensatz dazu nutzt dieser Standort das #htl3r.full[glbp].
 Dieses ermöglicht eine aktive Lastverteilung auf Gateway-Ebene.
 Mehrere Router leiten gleichzeitig Traffic weiter, indem sie auf #htl3r.full[arp]-Anfragen mit unterschiedlichen virtuellen #htl3r.full[mac]-Adressen antworten.
 
-=== Skalierbare Vernetzung mittels #htl3r.short[dmvpn]
+==== Skalierbare Vernetzung mittels #htl3r.short[dmvpn]
 Die Verbindung zwischen den #htl3r.short[hsrp]- und #htl3r.short[glbp]-Standorten wird über #htl3r.full[dmvpn] Phase 3 realisiert.
 Technologisch ermöglicht dies den Aufbau einer Hub-and-Spoke-Topologie über die Infrastruktur der #htl3r.shortpl[isp] hinweg.
 
@@ -110,15 +110,15 @@ Genau dieser Befehl versetzt den Hub in die Lage, den Außenstellen einen Pfad m
    ip nhrp redirect
   ```
 ]
-=== Site-to-Site VPN
+==== Site-to-Site VPN
 Die zwei Standorte `IPSEC` sind über eine klassische Site-to-Site #htl3r.short[vpn]-Verbindung gekoppelt.
 Der verschlüsselte Tunnel überspannt das gesamte #htl3r.short[wan].
 Die Endpunkte handeln dabei eigenständig die #htl3r.full[ike]-Phase 1 zur Authentifizierung und die #htl3r.short[ike]-Phase 2 zur Verschlüsselung des Nutzdatenverkehrs aus.
 
-== Spezielle Funktionsbereiche
+=== Spezielle Funktionsbereiche
 Ergänzend zur reinen Transportfunktion der #htl3r.short[wan]-Infrastruktur integriert die vorliegende Topologie dedizierte Segmente, die gezielt fortgeschrittene Netzwerkdienste wie Adressübersetzung und hierarchisches Routing demonstrieren.
 
-=== Network Address Translation (NAT)
+==== Network Address Translation (NAT)
 Ein spezialisierter Standort bildet die Schnittstelle zwischen privaten Adressen und dem öffentlichen Adressraum ab.
 Dabei kommen drei Verfahren des #htl3r.full[nat] zum Einsatz, um unterschiedliche Übersetzungsszenarien zu simulieren:
 
@@ -131,12 +131,12 @@ Dabei kommen drei Verfahren des #htl3r.full[nat] zum Einsatz, um unterschiedlich
 - *Port Address Translation (PAT):*
   Das Multiplexing mehrerer interner Clients über eine einzige öffentliche IP-Adresse unter Verwendung unterschiedlicher Source-Ports.
 
-=== OSPF Multi-Area Design
+==== OSPF Multi-Area Design
 Zur Demonstration hierarchischer Routing-Strukturen wurde ein Standort in mehrere #htl3r.short[ospf]-Areas unterteilt.
 Ein zentraler #htl3r.long[backbone] (Area 0) verbindet dabei untergeordnete Bereiche (Area 1, Area 2) über #htl3r.full[abr].
 Dieses Design reduziert die Größe der #htl3r.full[lsdb] auf den einzelnen Routern.
 
-== Fazit zur Routing-Infrastruktur
+=== Fazit zur Routing-Infrastruktur
 Zusammenfassend bietet die vorgestellte Topologie weit mehr als nur eine Ansammlung von Routern und Protokollen.
 Sie formt ein realitätsnahes Abbild eines komplexen Unternehmensnetzwerks.
 Das bewusste Zusammenspiel aus Provider-Netzen, redundanten Standorten und spezialisierten Diensten macht diese Infrastruktur zu einer äußerst vielseitigen Testumgebung.
