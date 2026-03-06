@@ -69,6 +69,7 @@ backbone:
 backend:
   long:
     singular: Backend
+    plural: Backends
   description: Der Teil einer Anwendung, der im Hintergrund läuft und Datenverarbeitung sowie Logik bereitstellt.
 
 bgp:
