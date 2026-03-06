@@ -3,7 +3,7 @@
 #htl3r.author("Karun Sandhu")
 = Backend & Applikationsarchitektur <backend_architektur>
 
-Die serverseitige Logik und die Datenhaltung bilden das Fundament von #htl3r.long[diagnet]. In diesem Kapitel wird die Architektur des #htl3r.long[backend]s detailliert beleuchtet. Der Fokus liegt dabei auf der Strukturierung der Applikation, der Abbildung der Netzwerktopologie in einer relationalen Datenbank sowie der sicheren Verarbeitung sensibler Gerätedaten und Testparameter.
+Die serverseitige Logik und die Datenhaltung bilden das Fundament von #htl3r.long[diagnet]. In diesem Kapitel wird die Architektur des #htl3r.longpl[backend] detailliert beleuchtet. Der Fokus liegt dabei auf der Strukturierung der Applikation, der Abbildung der Netzwerktopologie in einer relationalen Datenbank sowie der sicheren Verarbeitung sensibler Gerätedaten und Testparameter.
 
 == Das Django Framework
 
@@ -197,7 +197,7 @@ Nach jedem Testlauf speichert #htl3r.long[diagnet] die vollständigen Logs und S
 
 #htl3r.long[diagnet] folgt dem "Fat Models"-Prinzip: Die Geschäftslogik wird nicht in den Views implementiert, sondern direkt in den Datenmodellen gekapselt. Das `Device`-Modell dient dabei als direkte Schnittstelle zur externen Netzwerk-Engine #htl3r.long[pyats]. Die netzwerktechnischen Grundlagen, Parsing-Mechanismen und statischen #htl3r.long[testbed]s von #htl3r.long[pyats] werden in @pyats_chapter erläutert.
 
-Anstatt Verbindungslogiken extern zu verwalten, erzeugt das `Device`-Modell aus seinen eigenen Tabellenspalten (IP, Username, Password) dynamisch die benötigten #htl3r.long[pyats]-#htl3r.long[testbed]s und instanziiert die Verbindungen direkt im Speicher des #htl3r.long[backend]s. Um Ressourcen zu schonen, wurde zudem ein globales Caching implementiert (`device_connections`), das bereits offene Verbindungen für nachfolgende Tests wiederverwendet:
+Anstatt Verbindungslogiken extern zu verwalten, erzeugt das `Device`-Modell aus seinen eigenen Tabellenspalten (IP, Username, Password) dynamisch die benötigten #htl3r.long[pyats]-#htl3r.long[testbed]s und instanziiert die Verbindungen direkt im Speicher des #htl3r.longpl[backend]. Um Ressourcen zu schonen, wurde zudem ein globales Caching implementiert (`device_connections`), das bereits offene Verbindungen für nachfolgende Tests wiederverwendet:
 
 #htl3r.code(
   caption: [Dynamische Instanziierung von #htl3r.long[pyats]-Geräteobjekten aus der Datenbank],
