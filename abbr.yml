@@ -101,6 +101,13 @@ csrf:
     singular: Cross-Site Request Forgery
   description: Ein Angriff auf Webanwendungen, bei dem ein Angreifer ungewollte Aktionen im Namen eines authentifizierten Benutzers ausführt.
 
+class_map:
+  long:
+    singular: Class Map
+    plural: Class Maps
+  description: Eine Struktur innerhalb der Cisco Zone-Based Firewall, mit der Datenverkehr anhand definierter Kriterien klassifiziert wird.
+
+# Danijel
 diagnet:
   long:
     singular: DiagNet
@@ -154,6 +161,13 @@ eventhandler:
     singular: Event-Handler
   description: Eine Softwarekomponente oder Funktion, die auf spezifische Ereignisseinnerhalb eines Systems reagiert, wie beispielsweise Benutzereingaben oder Statusänderungen.
 
+esp:
+  short:
+    singular: ESP
+  long:
+    singular: Encapsulating Security Payload
+  description: Ein Bestandteil von IPsec, der für die Vertraulichkeit, Integrität und Authentizität von IP-Paketen sorgt.
+
 exception:
   long:
     singular: Exception
@@ -173,6 +187,12 @@ fhrp:
     singular: First Hop Redundancy Protocol
     plural: First Hop Redundancy Protocols
   description: Ein Oberbegriff für Protokolle (wie HSRP, VRRP, GLBP), die Gateway-Redundanz in lokalen Netzwerken bereitstellen.
+
+firewall_policy:
+  long:
+    singular: Firewall-Policy
+    plural: Firewall-Policies
+  description: Eine Regel oder Richtlinie einer Firewall, die festlegt, welcher Datenverkehr zwischen Netzwerkbereichen erlaubt, geprüft oder blockiert wird.
 
 framework:
   long:
@@ -272,6 +292,13 @@ ike:
     plural: Internet Key Exchanges
   description: Ein Netzwerkprotokoll, das im Rahmen von IPsec verwendet wird, um Sicherheitsassoziationen aufzubauen und kryptografische Schlüssel sicher auszutauschen.
 
+ikev2:
+  short:
+    singular: IKEv2
+  long:
+    singular: Internet Key Exchange Version 2
+  description: Eine Weiterentwicklung von IKE zum Aufbau und zur Verwaltung von IPsec-Sicherheitsassoziationen.
+
 instanzattribute:
   long:
     singular: Instanzattribute
@@ -303,6 +330,13 @@ ipv6:
   long:
     singular: Internet Protocol Version 6
   description: Der Nachfolger von IPv4, der 128-Bit-Adressen nutzt, um einen deutlich größeren Adressraum im Netzwerk zur Verfügung zu stellen.
+
+isakmp:
+  short:
+    singular: ISAKMP
+  long:
+    singular: Internet Security Association and Key Management Protocol
+  description: Ein Protokollrahmen für den Aufbau, die Aushandlung und die Verwaltung von Sicherheitsassoziationen, der von IKE verwendet wird.
 
 ise:
   short:
@@ -392,10 +426,22 @@ nat:
     plural: Network Address Translations
   description: Ein Verfahren, bei dem IP-Adressen in Datenpaketen durch andere Adressen ersetzt werden, um die Kommunikation zwischen privaten und öffentlichen Netzwerken zu ermöglichen.
 
+nat_traversal:
+  short:
+    singular: NAT-T
+  long:
+    singular: NAT Traversal
+  description: Ein Verfahren, bei dem IPsec-Datenverkehr in UDP gekapselt wird, damit VPN-Verbindungen auch über NAT-Geräte hinweg zuverlässig funktionieren.
+
 neighbor:
   long:
     singular: Neighbor
   description: Ein benachbartes Netzwerkgerät, mit dem Routing-Informationen ausgetauscht werden.
+
+nextcloud:
+  long:
+    singular: Nextcloud
+  description: Eine Open-Source-Plattform für Dateiablage, Synchronisation und Zusammenarbeit, die auf eigenen Servern betrieben werden kann.
 
 nhrp:
   short:
@@ -461,6 +507,17 @@ pat:
     plural: Port Address Translations
   description: Eine Erweiterung von NAT, die es ermöglicht, mehrere Geräte im lokalen Netzwerk über eine einzige öffentliche IP-Adresse abzubilden, indem unterschiedliche Source-Ports verwendet werden.
 
+port_forwarding:
+  long:
+    singular: Port Forwarding
+  description: Ein Verfahren, bei dem eingehender Datenverkehr auf einen bestimmten Port eines internen Zielsystems weitergeleitet wird.
+
+port_group:
+  long:
+    singular: Port Group
+    plural: Port Groups
+  description: Eine logische Gruppierung von virtuellen Switch-Ports in VMware vSphere, über die virtuelle Maschinen mit einem bestimmten Netzwerk verbunden werden.
+
 prettier:
   long:
     singular: Prettier
@@ -507,6 +564,18 @@ sql:
     singular: Structured Query Language
   description: Eine standardisierte Datenbanksprache zur Erstellung, Abfrage und Manipulation relationaler Datenbanken.
 
+sicherheitszone:
+  long:
+    singular: Sicherheitszone
+    plural: Sicherheitszonen
+  description: Ein logisch abgegrenzter Bereich innerhalb einer Firewall-Architektur, dem Netzwerkinterfaces zugeordnet werden, um den Datenverkehr zwischen diesen Bereichen gezielt zu kontrollieren.
+
+site_to_site_vpn:
+  long:
+    singular: Site-to-Site-VPN
+    plural: Site-to-Site-VPNs
+  description: Eine VPN-Verbindung, die zwei räumlich getrennte Standorte über ein öffentliches Netzwerk sicher miteinander verbindet.
+
 ssh:
   short:
     singular: SSH
@@ -539,6 +608,13 @@ twelvefactor:
     singular: The Twelve-Factor App
   description: Eine Methodik zur Erstellung skalierbarer und wartbarer Software-as-a-Service-Anwendungen.
 
+udp:
+  short:
+    singular: UDP
+  long:
+    singular: User Datagram Protocol
+  description: Ein verbindungsloses Transportprotokoll der Transportschicht, das Daten ohne Sitzungsaufbau und ohne Zustellgarantie überträgt.
+
 unicon:
   long:
     singular: Unicon
@@ -548,6 +624,15 @@ uv:
   long:
     singular: "`uv`"
   description: Ein extrem performanter Python-Paketmanager und Resolver, geschrieben in Rust, der `pip` und `venv` ersetzt.
+
+vip:
+  short:
+    singular: VIP
+    plural: VIPs
+  long:
+    singular: Virtual IP
+    plural: Virtual IPs
+  description: Eine virtuelle IP-Adresse, die auf einer Firewall oder einem Load Balancer konfiguriert wird, um eingehende Verbindungen an interne Systeme weiterzuleiten.
 
 vlan:
   short:
@@ -564,6 +649,17 @@ vpn:
     singular: Virtual Private Network
     plural: Virtual Private Networks
   description: Ein virtuelles privates Kommunikationsnetz, das eine sichere und verschlüsselte Verbindung über öffentliche Netzwerke ermöglicht.
+
+vpn_tunnel:
+  long:
+    singular: VPN-Tunnel
+    plural: VPN-Tunnel
+  description: Ein logisch aufgebauter, verschlüsselter Kommunikationskanal innerhalb eines Virtual Private Networks.
+
+vsphere:
+  long:
+    singular: vSphere
+  description: Eine Virtualisierungsplattform von VMware zur Verwaltung virtueller Maschinen, Hosts und Netzwerke.
 
 wan:
   short:
@@ -587,4 +683,11 @@ yaml:
   long:
     singular: YAML Ain't Markup Language
   description: Ein menschenlesbares Datenformat zur Speicherung strukturierter Konfigurationsdaten.
+
+zbf:
+  short:
+    singular: ZBF
+  long:
+    singular: Zone-Based Firewall
+  description: Eine zustandsorientierte Firewall-Technologie von Cisco, bei der der Datenverkehr zwischen definierten Sicherheitszonen kontrolliert wird.
 # keep-sorted end
