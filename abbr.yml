@@ -94,18 +94,18 @@ ci:
     singular: Continuous Integration
   description: Die Praxis der regelmäßigen Integration von Code-Änderungen in ein gemeinsames Repository mit automatisierten Regressionstests.
 
+class_map:
+  long:
+    singular: Class Map
+    plural: Class Maps
+  description: Eine Struktur innerhalb der Cisco Zone-Based Firewall, mit der Datenverkehr anhand definierter Kriterien klassifiziert wird.
+
 csrf:
   short:
     singular: CSRF
   long:
     singular: Cross-Site Request Forgery
   description: Ein Angriff auf Webanwendungen, bei dem ein Angreifer ungewollte Aktionen im Namen eines authentifizierten Benutzers ausführt.
-
-class_map:
-  long:
-    singular: Class Map
-    plural: Class Maps
-  description: Eine Struktur innerhalb der Cisco Zone-Based Firewall, mit der Datenverkehr anhand definierter Kriterien klassifiziert wird.
 
 # Danijel
 diagnet:
@@ -156,17 +156,17 @@ eigrp:
     plural: Enhanced Interior Gateway Routing Protocols
   description: Ein fortschrittliches Distanzvektor-Routing-Protokoll von Cisco, das Bandbreite und Verzögerung zur Pfadberechnung kombiniert.
 
-eventhandler:
-  long:
-    singular: Event-Handler
-  description: Eine Softwarekomponente oder Funktion, die auf spezifische Ereignisseinnerhalb eines Systems reagiert, wie beispielsweise Benutzereingaben oder Statusänderungen.
-
 esp:
   short:
     singular: ESP
   long:
     singular: Encapsulating Security Payload
   description: Ein Bestandteil von IPsec, der für die Vertraulichkeit, Integrität und Authentizität von IP-Paketen sorgt.
+
+eventhandler:
+  long:
+    singular: Event-Handler
+  description: Eine Softwarekomponente oder Funktion, die auf spezifische Ereignisseinnerhalb eines Systems reagiert, wie beispielsweise Benutzereingaben oder Statusänderungen.
 
 exception:
   long:
@@ -557,13 +557,6 @@ ruff:
     singular: Ruff
   description: Ein extrem schneller Python-Linter und Code-Formatter, geschrieben in Rust, der mehrere klassische Tools (Flake8, Black, isort) ersetzt.
 
-sql:
-  short:
-    singular: SQL
-  long:
-    singular: Structured Query Language
-  description: Eine standardisierte Datenbanksprache zur Erstellung, Abfrage und Manipulation relationaler Datenbanken.
-
 sicherheitszone:
   long:
     singular: Sicherheitszone
@@ -575,6 +568,13 @@ site_to_site_vpn:
     singular: Site-to-Site-VPN
     plural: Site-to-Site-VPNs
   description: Eine VPN-Verbindung, die zwei räumlich getrennte Standorte über ein öffentliches Netzwerk sicher miteinander verbindet.
+
+sql:
+  short:
+    singular: SQL
+  long:
+    singular: Structured Query Language
+  description: Eine standardisierte Datenbanksprache zur Erstellung, Abfrage und Manipulation relationaler Datenbanken.
 
 ssh:
   short:
