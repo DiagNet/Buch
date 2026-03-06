@@ -2,7 +2,7 @@
 
 #htl3r.author("Luka Pacar")
 = Die Test-Engine
-Das Backend von DiagNet sorgt für die Ausführung, Auswertung und Steuerung der Netzwerktests. Um eine einheitliche und wartbare Testinfrastruktur zu gewährleisten, haben wir eine modulare Architektur entwickelt, die auf einer abstrakten Basisklasse basiert.
+Das Backend von #htl3r.long[diagnet] sorgt für die Ausführung, Auswertung und Steuerung der Netzwerktests. Um eine einheitliche und wartbare Testinfrastruktur zu gewährleisten, haben wir eine modulare Architektur entwickelt, die auf einer abstrakten Basisklasse basiert.
 `DiagNetTest` bildet das Fundament für alle implementierten Tests und kapselt die gesamte Logik zur Testausführung, einschließlich Parameter-Validierung, Abhängigkeitsmanagement und Ergebnisverarbeitung.
 
 #htl3r.code(
@@ -27,7 +27,7 @@ Das Backend von DiagNet sorgt für die Ausführung, Auswertung und Steuerung der
 Der Aufbau von `DiagNetTest` gliedert sich in drei wesentliche Komponenten: die Definition der Parameter, die Implementierung der Testmethoden sowie die Ausführung durch die `run()`-Methode.
 
 == Definition der Parameter
-Die Schnittstelle für Eingabedaten wird deklarativ über das Klassenattribut `_params` definiert. Dies ist eine Liste von Dictionaries, wobei jeder Eintrag einen spezifischen Eingabeparameter beschreibt. Die Definition unterscheidet hierbei zwischen Schlüsseln, die für die technische Verarbeitung zwingend notwendig sind, und solchen, die der Steuerung oder der Benutzerfreundlichkeit dienen.
+Die Schnittstelle für Eingabedaten wird deklarativ über das Klassenattribut `_params` definiert. Dies ist eine Liste von #htl3r.longpl[dictionary], wobei jeder Eintrag einen spezifischen Eingabeparameter beschreibt. Die Definition unterscheidet hierbei zwischen Schlüsseln, die für die technische Verarbeitung zwingend notwendig sind, und solchen, die der Steuerung oder der Benutzerfreundlichkeit dienen.
 
 === Erforderliche Schlüsselwörter
 Damit das Framework einen Parameter verarbeiten kann, muss die Definition mindestens zwei Attribute enthalten:
@@ -35,12 +35,12 @@ Damit das Framework einen Parameter verarbeiten kann, muss die Definition mindes
 *`name`*:
 Die technische Bezeichnung des Parameters.
 Dieser String dient als interne Referenz und wird zur Laufzeit als Attributname der Testinstanz verwendet (z. B. `self.destination`).
-Daher muss er zwingend die syntaktischen Merkmale einer validen Python-Variable aufweisen (keine Leerzeichen, keine Sonderzeichen, Start mit Buchstaben oder Underscore).
+Daher muss er zwingend die syntaktischen Merkmale einer validen Python-Variable aufweisen (keine Leerzeichen, keine Sonderzeichen, Beginn mit Buchstaben oder Underscore).
 
 *`type`*:
-Das Attribut type bestimmt das erwartete Datenformat und die Validierung im Frontend. Für die Implementierung der Testlogik ist jedoch die Art der Datenübergabe an Python entscheidend. Grundsätzlich reicht das Framework alle Parameter inklusive numerischer Werte und IP-Adressen als einfache Zeichenkette an den Test weiter. Eine manuelle Konvertierung ist daher bei Bedarf notwendig.
+Das Attribut `type` bestimmt das erwartete Datenformat und die Validierung im Frontend. Für die Implementierung der Testlogik ist jedoch die Art der Datenübergabe an Python entscheidend. Grundsätzlich reicht das Framework alle Parameter inklusive numerischer Werte und IP-Adressen als einfache Zeichenkette an den Test weiter. Eine manuelle Konvertierung ist daher bei Bedarf notwendig.
 
-Das Backend implementiert jedoch drei zentrale Ausnahmen bei denen eine Validierung stattfindet:
+Das Backend implementiert jedoch drei zentrale Ausnahmen, bei denen eine automatische Validierung stattfindet:
 
 - *`device`*: Parameter dieses Typs werden automatisch gegen die Bestandsdatenbank aufgelöst. Die Testmethode erhält statt eines Namens direkt die Objekt-Instanz des Gerätes als Django Model. Dies ermöglicht den direkten Zugriff auf verknüpfte Daten oder Methoden.
 
@@ -49,6 +49,8 @@ Das Backend implementiert jedoch drei zentrale Ausnahmen bei denen eine Validier
 - *`list`*: Dieser Typ dient als Container für wiederholbare Datenstrukturen und wird als native Python-Liste übergeben. Da jeder Listeneintrag wiederum aus mehreren eigenen Parametern bestehen kann, lassen sich damit auch komplexe Datensätze wie Tabellen abbilden
 
   Die Verwendung dieses Typs erfordert zwingend die Angabe des zusätzlichen Schlüssels *`parameters`*. Er definiert das Schema und somit die verschachtelten Parameter, denen alle Einträge der Liste entsprechen müssen.
+
+Das folgende Beispiel demonstriert, wie die speziellen Parametertypen zur Laufzeit direkt als Attribute der Testinstanz abgebildet werden und wie der typspezifische Zugriff programmatisch erfolgt:
 
 #htl3r.code(
   caption: [Parameterstruktur mit deklarierten Datentypen],
@@ -61,7 +63,7 @@ Das Backend implementiert jedoch drei zentrale Ausnahmen bei denen eine Validier
           },
           {
               "name": "routes",
-              "type": "list"
+              "type": "list",
               "parameters":
               [
                   {
@@ -88,8 +90,9 @@ Diese Attribute steuern ausschließlich die visuelle Darstellung der Parameter i
 
 *`display_name`*: Definiert die Beschriftung des Eingabefeldes in der #htl3r.full[gui]. Fehlt dieser Schlüssel, greift das System automatisch auf den technischen Variablennamen zurück. Dies ermöglicht eine benutzerfreundliche Darstellung wie "BGP AS Number" bei gleichzeitiger Beibehaltung des technisch notwendigen Variablennamens bgp_as_number.
 
-*`description`*: Ermöglicht die Hinterlegung eines ausführlichen Hilfetextes. Dieser wird dem Anwender im Frontend angezeigt und dient dazu, die Bedeutung des Parameters zu erläutern.
+*`description`*: Ermöglicht die Definition eines ausführlichen Hilfetextes. Dieser wird dem Anwender im Frontend angezeigt und dient dazu, die Bedeutung des Parameters zu erläutern.
 
+Anhand des folgenden Beispiels wird deutlich, wie diese Frontend-Attribute integriert werden, um eine saubere Trennung zwischen technischer Referenz und Benutzeroberfläche zu erreichen:
 #htl3r.code(
   caption: [Definition der Frontend-Attribute],
 )[
@@ -110,6 +113,8 @@ Diese Attribute beeinflussen, ob und unter welchen Bedingungen ein Parameter vom
 *`requirement`*: Steuert den generellen Pflichtstatus des Parameters. Standardmäßig gelten alle definierten Parameter als zwingend. Durch das Setzen dieses Wertes auf optional wird die Eingabe für den Anwender freiwillig. Leere optionale Felder werden dem Framework nicht übergeben.
 
 *`required_if / forbidden_if`*: Erlaubt die Definition bedingter Abhängigkeiten zwischen Parametern. Diese Logik greift, wenn die Relevanz eines Feldes von der Eingabe eines anderen abhängt. Diese Attribute erwarten eine Referenz auf einen anderen Parameter und werten dessen Zustand zur Laufzeit aus, um den Validierungsstatus des aktuellen Feldes dynamisch anzupassen.
+
+Das folgende Codebeispiel veranschaulicht die Anwendung dieser Steuerungslogik, bei der die Pflichteingabe eines Parameters dynamisch an den ausgewählten Wert eines anderen Feldes geknüpft wird:
 #htl3r.code(
   caption: [Anwendungsbeispiel für bedingte Abhängigkeiten],
 )[
@@ -152,7 +157,7 @@ Die Validierungslogik unterscheidet dabei automatisch zwischen optionalen und ve
           {"name": "target", "type": "str"}
       ]
 
-  # Definition der Gruppe
+  # Definition der mutually-exclusive Gruppe
   _mutually_exclusive_parameters = [
       ["count", "duration"]
   ]
@@ -162,7 +167,7 @@ In diesem Szenario unterbindet das Framework die gleichzeitige Übergabe von *`c
 
 
 == Implementierung der Testmethoden
-Die eigentliche Testlogik wird innerhalb der Testklasse in dedizierten Methoden implementiert. Das Framework folgt hierbei einem strikten Namensschema , um Testfälle automatisch zu identifizieren und von internen Hilfsfunktionen zu unterscheiden.
+Die eigentliche Testlogik wird innerhalb der Testklasse in dedizierten Methoden implementiert. Das Framework folgt hierbei einem strikten Namensschema, um Testfälle automatisch zu identifizieren und von internen Hilfsfunktionen zu unterscheiden.
 
 Jede Methode, die als eigenständiger Testfall ausgeführt werden soll, muss zwingend mit dem Präfix *`test_`* beginnen. Methoden ohne dieses Präfix werden vom Discovery-Prozess ignoriert und können als Helper-Methoden genutzt werden.
 
@@ -189,7 +194,7 @@ Ein Test gilt als erfolgreich, wenn die Methode entweder `True`, `None` oder ein
 ]
 
 === Steuerung mittels Dekoratoren
-Um das Verhalten einzelner Testmethoden zu modifizieren, ohne den eigentlichen Testcode mit Verwaltungslogik zu vermischen, setzt DiagNet auf Python-Dekoratoren. Diese ermöglichen eine praktische Steuerung, bei der Eigenschaften wie Wiederholungen oder Ausführungsbedingungen direkt an der Methodendefinition annotiert werden. Diese Metadaten werden vom Framework vor der Ausführung evaluiert.
+Um das Verhalten einzelner Testmethoden zu modifizieren, ohne den eigentlichen Testcode mit Verwaltungslogik zu vermischen, setzt #htl3r.long[diagnet] auf Python-Dekoratoren. Diese ermöglichen eine praktische Steuerung, bei der Eigenschaften wie Wiederholungen oder Ausführungsbedingungen direkt vor der Methodendefinition annotiert werden. Diese Metadaten werden vom Framework vor der Ausführung evaluiert.
 
 #htl3r.code(
   caption: [Anwendungsbeispiele für die verfügbaren Dekoratoren],
@@ -214,9 +219,9 @@ Um das Verhalten einzelner Testmethoden zu modifizieren, ohne den eigentlichen T
 ]
 
 === Definition von Abhängigkeiten
-Innerhalb komplexer Testabläufe bestehen oft logische Kausalitäten zwischen verschiedenen Prüfungen. Eine detaillierte Protokoll-Analyse ist beispielsweise obsolet, sofern bereits die grundlegende Erreichbarkeit des Gerätes gescheitert ist. Um kaskadierende Fehlermeldungen zu vermeiden und die Ausführungszeit zu optimieren, stellt das Framework den Dekorator *\@depends_on* bereit.
+Innerhalb komplexer Testabläufe bestehen oft logische Kausalitäten zwischen verschiedenen Prüfungen. Eine detaillierte Protokoll-Analyse ist beispielsweise obsolet, sofern bereits die grundlegende Erreichbarkeit des Gerätes gescheitert ist. Um kaskadierende Fehlermeldungen zu vermeiden und die Ausführungszeit zu optimieren, stellt das Framework den Dekorator *`@depends_on`* bereit.
 
-Dieser markiert eine Testmethode als abhängig von einem spezifischen Vorgänger. Die Referenzierung erfolgt hierbei über den Methodennamen als Text. Das Framework stellt sicher, dass der abhängige Test erst nach dem erfolgreichen Abschluss der referenzierten Methode ausgeführt wird. Sollte die Vorbedingung scheitern oder selbst übersprungen werden, entfällt die Ausführung des abhängigen Tests und dieser erhält im Protokoll automatisch den Status SKIPPED.
+Dieser markiert eine Testmethode als abhängig von einem spezifischen Vorgänger. Die Referenzierung erfolgt hierbei über den Methodennamen als Text. Das Framework stellt sicher, dass der abhängige Test erst nach dem erfolgreichen Abschluss der referenzierten Methode ausgeführt wird. Sollte die Vorbedingung scheitern oder selbst übersprungen werden, entfällt die Ausführung des abhängigen Tests und dieser erhält im Protokoll automatisch den Status `SKIPPED`.
 
 #htl3r.code(
   caption: [Anwendungsbeispiele für die verfügbaren Dekoratoren],
@@ -235,12 +240,16 @@ Dieser markiert eine Testmethode als abhängig von einem spezifischen Vorgänger
   ```
 ]
 
+In diesem Fall wird die Konfiguration erst abgefragt, nachdem die Erreichbarkeitsprüfung erfolgreich abgeschlossen wurde.
+Schlägt bereits der erste Test fehl, wird die Abfrage automatisch übersprungen.
+
+
 == Komponenten der `run()`-Methode
 Die Methode `run()` ist der zentrale Einstiegspunkt für die Testausführung.
 Sie steuert den gesamten Testablauf zentral und stellt sicher, dass alle Voraussetzungen validiert sind, bevor die eigentliche Ausführung beginnt. Der Ablauf gliedert sich dabei in folgende Phasen:
 
 === Parameter-Validierung
-Überprüft, ob alle _erforderlichen_ Parameter vorhanden sind, und ob keine _mutually exclusive_ Parameter gleichzeitig gesetzt wurden. Gültige Parameter werden dynamisch als #htl3r.short[instanzattribute] zugewiesen, sodass in den Testmethoden über *`self.parameter_name`* direkt auf sie zugegriffen werden kann.
+Überprüft, ob alle _erforderlichen_ Parameter vorhanden sind, und ob keine _mutually exclusive_ Parameter gleichzeitig gesetzt wurden. Gültige Parameter werden dynamisch als #htl3r.long[instanzattribute] zugewiesen, sodass in den Testmethoden über *`self.parameter_name`* direkt auf sie zugegriffen werden kann.
 
 #htl3r.code(
   caption: [Zugriff auf einen Parameter],
@@ -280,32 +289,33 @@ Mittels Introspektion durchsucht das Framework die Klasse zur Laufzeit nach Meth
 ]
 
 === Abhängigkeitsmanagement
-Innerhalb einer Testklasse bauen Prüfungen oft logisch aufeinander auf. DiagNet erlaubt die Definition solcher Kausalitäten mittels des *`@depends_on`* Dekorators.
+Innerhalb einer Testklasse bauen Prüfungen oft logisch aufeinander auf. #htl3r.long[diagnet] erlaubt die Definition solcher Kausalitäten mittels des *`@depends_on`* Dekorators.
 Die `run()`-Methode analysiert diese Beziehungen und erstellt mittels topologischer Sortierung einen validen Ausführungsplan.
 
 ==== Kahn's Algorithmus
-Um die definierten Abhängigkeiten in eine linear ausführbare Sequenz zu überführen, nutzt die `run()`-Methode eine Implementierung des Algorithmus von Kahn. Dieser Ansatz interpretiert die Testmethoden und ihre Beziehungen als gerichteten Graphen und ermöglicht eine Topologische Sortierung.
+Um die definierten Abhängigkeiten in eine linear ausführbare Sequenz zu überführen, nutzt die `run()`-Methode eine Implementierung des Algorithmus von Kahn. Dieser Ansatz interpretiert die Testmethoden und ihre Beziehungen als gerichteten Graphen und ermöglicht eine topologische Sortierung.
+
+Die nachfolgende Abbildung visualisiert beispielhaft die Abhängigkeiten zwischen den einzelnen Testmethoden in Form eines gerichteten Graphen.
 #figure(
   image("../assets/gerichteter_graph.png", width: 60%),
-  caption: [Beispielhafte Darstellung eines gerichteten Graphen (Quelle: Wikipedia)],
+  caption: [Darstellung von Abhängigkeiten in einem gerichteten Graphen],
 ) <fig-kahn>
 
 Der Algorithmus gliedert sich in vier Phasen:
 
 *Graphen-Konstruktion*:
-Zunächst iteriert das System über alle aktiven Testmethoden und baut eine #htl3r.short[adjazenzliste] auf. Parallel dazu wird jedem Test ein Zählerwert zugewiesen, der exakt beziffert, von wie vielen anderen Tests er direkt abhängig ist.
+Zunächst iteriert das System über alle aktiven Testmethoden und baut eine #htl3r.long[adjazenzliste] auf. Parallel dazu wird jedem Test ein Zählerwert zugewiesen, der exakt beziffert, von wie vielen anderen Tests er direkt abhängig ist.
 
 #htl3r.code(
   caption: [Aufbau des Graphen und Berechnung der Eingangsgrade],
   description: `base.py`,
 )[
   ```python
-      for name, func in test_methods:
-          dep = getattr(func, "_depends_on", None)
-          if dep: # Gibt es eine Beziehung für diesen Testcase?
-              graph[dep].append(name) # Adjazenz in den Graphen eintragen
-              in_degree[name] += 1 # Erhöht die Anzahl an Abhängigkeiten
-
+  for name, func in test_methods:
+      dep = getattr(func, "_depends_on", None)
+      if dep: # Gibt es eine Beziehung für diesen Testcase?
+          graph[dep].append(name) # Adjazenz in den Graphen eintragen
+          in_degree[name] += 1 # Erhöht die Anzahl an Abhängigkeiten
   ```
 ]
 *Initialisierung der Warteschlange:*
@@ -348,14 +358,17 @@ Nachdem die Warteschlange abgearbeitet ist, prüft das System, ob noch Verbindun
   ```python
   if len(result) != len(all_methods):
       raise DependencyException("Cycle detected in test dependencies")
+  return result
   ```
 ]
 
 Das Ergebnis des Algorithmus ist eine Liste, die alle Testmethoden in ihrer topologisch korrekten Reihenfolge enthält
 
+Die nachfolgende Abbildung veranschaulicht dieses Resultat anhand des ursprünglichen Graphen. Durch die topologische Sortierung wurden die Knoten in eine lineare Abfolge gebracht, sodass sämtliche Kanten nun in dieselbe Richtung zeigen. Diese Struktur garantiert eine konfliktfreie, sequentielle Abarbeitung der Tests.
+
 #figure(
   image("../assets/solved_topological_sort.png", width: 60%),
-  caption: [Resultat einer topologischen Sortierung nach Kahn (Quelle: Wikipedia)],
+  caption: [Resultat einer topologischen Sortierung nach Kahn],
 ) <fig-kahn-result>
 
 Die run()-Methode verwendet diese Liste anschließend als Ausführungsplan. Sie iteriert über die Einträge und führt die Tests nacheinander aus, mit der Gewissheit, dass zum Zeitpunkt der Ausführung eines Tests alle seine notwendigen Vorbedingungen bereits bearbeitet wurden.
@@ -363,7 +376,7 @@ Die run()-Methode verwendet diese Liste anschließend als Ausführungsplan. Sie 
 === Ausführung und Resultate der Testfälle
 Vor dem eigentlichen Aufruf der Testfunktionen evaluiert das Framework die hinterlegten Dekoratoren und modifiziert den Ablauf entsprechend. Dies stellt sicher, dass Abfolgen wie Wiederholungen oder Ausschlüsse technisch abgearbeitet werden, noch bevor der erste Testfall ausgeführt wird.
 
-Nach Abschluss aller Testfälle aggregiert das Framework die Einzelresultate in einem universellen Ergebnisobjekt. Dieses Dictionary dient als standardisierte Schnittstelle für das Frontend und beinhaltet neben dem Gesamtstatus eine statistische Zusammenfassung sowie die detaillierten Laufzeitdaten jedes Tests.
+Nach Abschluss aller Testfälle aggregiert das Framework die Einzelresultate in einem universellen Ergebnisobjekt. Dieses #htl3r.long[dictionary] dient als standardisierte Schnittstelle für das Frontend und beinhaltet neben dem Gesamtstatus eine statistische Zusammenfassung sowie die detaillierten Laufzeitdaten jedes Tests.
 
 #htl3r.code(
   caption: [Struktur des aggregierten Ergebnisobjekts],

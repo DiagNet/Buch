@@ -1,3 +1,85 @@
+# keep-sorted start newline_separated=yes case=no
+802.1Q:
+  short:
+    singular: 802.1Q
+  long:
+    singular: IEEE 802.1Q
+  description: Der gängigste Standard für das VLAN-Tagging in Ethernet-Netzwerken, der es ermöglicht, mehrere VLANs über eine einzige physische Verbindung zu übertragen.
+
+abr:
+  short:
+    singular: ABR
+    plural: ABRs
+  long:
+    singular: Area Border Router
+    plural: Area Border Router
+  description: Ein Router in einem OSPF-Netzwerk, der mehrere Areas miteinander verbindet und Routing-Informationen zwischen ihnen austauscht.
+
+acl:
+  short:
+    singular: ACL
+    plural: ACLs
+  long:
+    singular: Access Control List
+    plural: Access Control Lists
+  description: Eine sequenzielle Liste von Regeln, die Berechtigungen definiert und steuert, welcher Netzwerkverkehr oder welche Benutzer auf bestimmte Systeme, Schnittstellen oder Ressourcen zugreifen dürfen.
+
+adjazenzliste:
+  long:
+    singular: Adjazenzliste
+  description: >-
+    Eine Darstellungsform für Graphen in der Informatik, bei der für jeden Knoten eine Liste aller seiner direkten Nachbarknoten gespeichert wird.
+
+aetest:
+  long:
+    singular: AEtest
+  description: Eine pyATS-Komponente zur Strukturierung und Automatisierung von Testfällen und Testabläufen.
+
+api:
+  short:
+    singular: API
+  long:
+    singular: Application Programming Interface
+  description: Eine Programmierschnittstelle, über die Softwarekomponenten miteinander kommunizieren.
+
+arp:
+  short:
+    singular: ARP
+    plural: ARPs
+  long:
+    singular: Address Resolution Protocol
+    plural: Address Resolution Protocols
+  description: Ein Netzwerkprotokoll, das dazu dient, die Hardware-Adresse (MAC-Adresse) eines Geräts anhand seiner IP-Adresse zu ermitteln.
+
+as:
+  short:
+    singular: AS
+    plural: AS
+  long:
+    singular: Autonomes System
+    plural: Autonome Systeme
+  description: Eine Sammlung von IP-Netzwerken unter der Kontrolle einer einzigen administrativen Einheit, die eine gemeinsame Routing-Politik verfolgt.
+
+backbone:
+  long:
+    singular: Backbone
+    plural: Backbones
+  description: Der zentrale Hauptteil eines Netzwerks, der verschiedene Teilnetze miteinander verbindet und für den Datentransport über große Distanzen oder hohe Bandbreiten optimiert ist.
+
+backend:
+  long:
+    singular: Backend
+  description: Der Teil einer Anwendung, der im Hintergrund läuft und Datenverarbeitung sowie Logik bereitstellt.
+
+bgp:
+  short:
+    singular: BGP
+    plural: BGPs
+  long:
+    singular: Border Gateway Protocol
+    plural: Border Gateway Protocols
+  description: Das Standard-Routing-Protokoll des Internets, das den Datenaustausch zwischen verschiedenen Autonomen Systemen (AS) steuert.
+
 cd:
   short:
     singular: CD
@@ -10,11 +92,36 @@ ci:
     singular: CI
   long:
     singular: Continuous Integration
-  description: Die Praxis der regelmäßigen Integration von Code-Änderungen in ein gemeinsames Repository mit automatisierten Tests.
+  description: Die Praxis der regelmäßigen Integration von Code-Änderungen in ein gemeinsames Repository mit automatisierten Regressionstests.
+
+class_map:
+  long:
+    singular: Class Map
+    plural: Class Maps
+  description: Eine Struktur innerhalb der Cisco Zone-Based Firewall, mit der Datenverkehr anhand definierter Kriterien klassifiziert wird.
+
+csrf:
+  short:
+    singular: CSRF
+  long:
+    singular: Cross-Site Request Forgery
+  description: Ein Angriff auf Webanwendungen, bei dem ein Angreifer ungewollte Aktionen im Namen eines authentifizierten Benutzers ausführt.
+
+# Danijel
+diagnet:
+  long:
+    singular: DiagNet
+  description: Der Name des in dieser Arbeit entwickelten Systems. Eine Webapplikation zur automatisierten Durchführung, Verwaltung und Analyse von Netzwerktests.
+
+dictionary:
+  long:
+    singular: Dictionary
+    plural: Dictionaries
+  description: Eine Datenstruktur, die Elemente als Schlüssel-Wert-Paare speichert und einen schnellen Zugriff über den Schlüssel ermöglicht.
 
 direnv:
   long:
-    singular: direnv
+    singular: "`direnv`"
   description: Eine Shell-Erweiterung, die Umgebungsvariablen automatisch lädt, sobald ein Verzeichnis betreten wird.
 
 djlint:
@@ -22,20 +129,333 @@ djlint:
     singular: djLint
   description: Ein Linter und Formatter speziell für HTML-Templates, der häufig in Django- oder Jinja2-Projekten Anwendung findet.
 
+dmvpn:
+  short:
+    singular: DMVPN
+    plural: DMVPNs
+  long:
+    singular: Dynamic Multipoint Virtual Private Network
+    plural: Dynamic Multipoint Virtual Private Networks
+  description: Eine VPN-Technologie, die den dynamischen Aufbau von IPsec-Tunneln zwischen mehreren Standorten ohne permanente Konfiguration ermöglicht.
+
+ebgp:
+  short:
+    singular: eBGP
+    plural: eBGPs
+  long:
+    singular: External Border Gateway Protocol
+    plural: External Border Gateway Protocols
+  description: Eine Variante des Border Gateway Protocols, die für den Austausch von Routing-Informationen zwischen unterschiedlichen Autonomen Systemen (AS) verwendet wird.
+
+eigrp:
+  short:
+    singular: EIGRP
+    plural: EIGRPs
+  long:
+    singular: Enhanced Interior Gateway Routing Protocol
+    plural: Enhanced Interior Gateway Routing Protocols
+  description: Ein fortschrittliches Distanzvektor-Routing-Protokoll von Cisco, das Bandbreite und Verzögerung zur Pfadberechnung kombiniert.
+
+esp:
+  short:
+    singular: ESP
+  long:
+    singular: Encapsulating Security Payload
+  description: Ein Bestandteil von IPsec, der für die Vertraulichkeit, Integrität und Authentizität von IP-Paketen sorgt.
+
+eventhandler:
+  long:
+    singular: Event-Handler
+  description: Eine Softwarekomponente oder Funktion, die auf spezifische Ereignisseinnerhalb eines Systems reagiert, wie beispielsweise Benutzereingaben oder Statusänderungen.
+
+exception:
+  long:
+    singular: Exception
+  description: Ein Fehler oder Ausnahmezustand, der während der Programmausführung auftritt.
+
+fabrikmethode:
+  long:
+    singular: Fabrikmethode
+  description: >-
+    Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert, wobei die konkrete Instanziierung den Unterklassen überlassen wird.
+
+fhrp:
+  short:
+    singular: FHRP
+    plural: FHRPs
+  long:
+    singular: First Hop Redundancy Protocol
+    plural: First Hop Redundancy Protocols
+  description: Ein Oberbegriff für Protokolle (wie HSRP, VRRP, GLBP), die Gateway-Redundanz in lokalen Netzwerken bereitstellen.
+
+firewall_policy:
+  long:
+    singular: Firewall-Policy
+    plural: Firewall-Policies
+  description: Eine Regel oder Richtlinie einer Firewall, die festlegt, welcher Datenverkehr zwischen Netzwerkbereichen erlaubt, geprüft oder blockiert wird.
+
+framework:
+  long:
+    singular: Framework
+  description: Eine Sammlung von Bibliotheken und Werkzeugen, die eine Grundlage für die Entwicklung von Softwareanwendungen bereitstellt.
+
+genie:
+  long:
+    singular: Genie
+  description: Eine Bibliothek innerhalb von pyATS, die Parser und Funktionen zur strukturierten Auswertung von Geräteinformationen bereitstellt.
+
+glbp:
+  short:
+    singular: GLBP
+    plural: GLBPs
+  long:
+    singular: Gateway Load Balancing Protocol
+    plural: Gateway Load Balancing Protocols
+  description: Ein Cisco-Protokoll zur Gateway-Redundanz, das zusätzlich zur Ausfallsicherheit eine Lastverteilung über mehrere Router hinweg bietet.
+
+gns3:
+  short:
+    singular: GNS3
+  long:
+    singular: Graphical Network Simulator 3
+  description: Eine Software zur Simulation komplexer Netzwerke, die es ermöglicht, virtuelle und reale Geräte miteinander zu verknüpfen.
+
+gre:
+  short:
+    singular: GRE
+    plural: GREs
+  long:
+    singular: Generic Routing Encapsulation
+    plural: Generic Routing Encapsulations
+  description: Ein Tunneling-Protokoll, das beliebige Netzwerkprotokolle in IP-Pakete verpackt, um sie über ein öffentliches Netzwerk zu transportieren.
+
+gui:
+  short:
+    singular: GUI
+  long:
+    singular: Graphical User Interface
+  description: Bezeichnet eine Benutzeroberfläche, die dem Anwender die Interaktion mit der Software durch visuelle Elemente wie Fenster, Menüs und Symbole ermöglicht, anstatt textbasierte Befehle zu erfordern.
+
 hermetic:
   long:
-    singular: Hermetisch
+    singular: hermetisch
+    plural: hermetische
   description: Beschreibt in Build-Systemen eine Umgebung, die vollständig isoliert ist und keinen Zugriff auf das Dateisystem oder Netzwerk des Host-Computers hat, außer explizit deklarierte Eingaben.
+
+hsrp:
+  short:
+    singular: HSRP
+    plural: HSRPs
+  long:
+    singular: Hot Standby Router Protocol
+    plural: Hot Standby Router Protocols
+  description: Ein proprietäres Redundanzprotokoll von Cisco, das durch ein Active/Standby-Modell die Ausfallsicherheit des Standard-Gateways gewährleistet.
+
+html:
+  short:
+    singular: HTML
+  long:
+    singular: Hypertext Markup Language
+  description: >-
+    Eine strukturierte Auszeichnungssprache, die zur Erstellung und Gestaltung digitaler Dokumente im World Wide Web dient.
+
+http:
+  short:
+    singular: HTTP
+  long:
+    singular: Hypertext Transfer Protocol
+  description: Ein zustandsloses Protokoll zur Übertragung von Daten auf der Anwendungsschicht über ein Rechnernetz, das hauptsächlich zum Laden von Webseiten verwendet wird.
+
+icmp:
+  short:
+    singular: ICMP
+  long:
+    singular: Internet Control Message Protocol
+  description: >-
+    Ein Netzwerkprotokoll, das zum Austausch von Informations- und Fehlermeldungen in IP-Netzwerken dient. Es wird primär für Diagnosezwecke verwendet, etwa um die Erreichbarkeit von Hosts zu prüfen.
+
+igp:
+  short:
+    singular: IGP
+    plural: IGPs
+  long:
+    singular: Interior Gateway Protocol
+    plural: Interior Gateway Protocols
+  description: Ein Routing-Protokoll, das zum Austausch von Routing-Informationen zwischen Gateways (Routern) innerhalb eines einzelnen Autonomen Systems (AS) verwendet wird.
+
+ike:
+  short:
+    singular: IKE
+    plural: IKEs
+  long:
+    singular: Internet Key Exchange
+    plural: Internet Key Exchanges
+  description: Ein Netzwerkprotokoll, das im Rahmen von IPsec verwendet wird, um Sicherheitsassoziationen aufzubauen und kryptografische Schlüssel sicher auszutauschen.
+
+ikev2:
+  short:
+    singular: IKEv2
+  long:
+    singular: Internet Key Exchange Version 2
+  description: Eine Weiterentwicklung von IKE zum Aufbau und zur Verwaltung von IPsec-Sicherheitsassoziationen.
+
+instanzattribute:
+  long:
+    singular: Instanzattribute
+  description: >-
+    Variablen, die an eine spezifische Instanz einer Klasse gebunden sind und deren individuellen Zustand speichern.
+
+interface:
+  long:
+    singular: Netzwerkinterface
+  description: Eine physische oder logische Schnittstelle eines Netzwerkgeräts zur Datenübertragung.
+
+ipsec:
+  short:
+    singular: IPsec
+  long:
+    singular: Internet Protocol Security
+  description: Eine Protokoll-Suite zur Sicherung der Internetkommunikation durch Authentifizierung and Verschlüsselung jedes IP-Pakets.
+
+ipv4:
+  short:
+    singular: IPv4
+  long:
+    singular: Internet Protocol Version 4
+  description: Die vierte Version des Internet Protocols, die 32-Bit-Adressen verwendet und die historische Basis des Internets darstellt.
+
+ipv6:
+  short:
+    singular: IPv6
+  long:
+    singular: Internet Protocol Version 6
+  description: Der Nachfolger von IPv4, der 128-Bit-Adressen nutzt, um einen deutlich größeren Adressraum im Netzwerk zur Verfügung zu stellen.
+
+isakmp:
+  short:
+    singular: ISAKMP
+  long:
+    singular: Internet Security Association and Key Management Protocol
+  description: Ein Protokollrahmen für den Aufbau, die Aushandlung und die Verwaltung von Sicherheitsassoziationen, der von IKE verwendet wird.
+
+ise:
+  short:
+    singular: ISE
+  long:
+    singular: Identity Services Engine
+  description: Eine Sicherheitsplattform von Cisco zur Identitätsverwaltung und Zugriffskontrolle, die Richtlinien für den Netzwerkzugriff zentral steuert.
+
+isp:
+  short:
+    singular: ISP
+    plural: ISPs
+  long:
+    singular: Internet Service Provider
+    plural: Internet Service Provider
+  description: Ein Dienstleister, der Kunden die Anbindung an das Internet sowie weitere technische Dienstleistungen bereitstellt.
+
+json:
+  short:
+    singular: JSON
+  long:
+    singular: JavaScript Object Notation
+  description: >-
+    Ein textbasiertes Format zum effizienten Datenaustausch zwischen Anwendungen, das in Web-APIs als Standard für die Client-Server-Kommunikation dient.
 
 just:
   long:
-    singular: Just
-  description: Ein Task-Runner, der Projektaufgaben in einem Justfile definiert und als moderne Alternative zu Make dient.
+    singular: "`just`"
+  description: Ein Task-Runner, der Projektaufgaben in einem Justfile definiert und als moderne Alternative zu `make` dient.
+
+lsdb:
+  short:
+    singular: LSDB
+    plural: LSDBs
+  long:
+    singular: Link-State Database
+    plural: Link-State Databases
+  description: Eine Datenbank in Link-State-Routing-Protokollen (wie OSPF), die ein vollständiges Abbild der Netzwerktopologie speichert.
+
+mac:
+  short:
+    singular: MAC
+    plural: MACs
+  long:
+    singular: Media Access Control
+    plural: Media Access Controls
+  description: Die eindeutige Hardware-Adresse eines Netzwerkadapters, die zur Identifikation von Geräten in lokalen Netzwerken dient.
+
+med:
+  short:
+    singular: MED
+    plural: MEDs
+  long:
+    singular: Multi-Exit Discriminator
+    plural: Multi-Exit Discriminators
+  description: Ein optionales BGP-Pfadattribut, das verwendet wird, um den eingehenden Datenverkehr von einem benachbarten Autonomen System zu steuern.
+
+mpls:
+  short:
+    singular: MPLS
+    plural: MPLS
+  long:
+    singular: Multiprotocol Label Switching
+    plural: Multiprotocol Label Switching
+  description: Ein Verfahren zur Weiterleitung von Datenpaketen entlang vordefinierter Pfade basierend auf kurzen Labels statt langer Netzwerkadressen.
+
+mvc:
+  short:
+    singular: MVC
+  long:
+    singular: Model-View-Controller
+  description: Ein Architekturmuster zur Strukturierung von Softwareentwicklung in die drei logischen Einheiten Datenmodell, Präsentation und Programmsteuerung.
+
+mvt:
+  short:
+    singular: MVT
+  long:
+    singular: Model-View-Template
+  description: Ein leicht abgewandeltes MVC-Architekturmuster, das im Django-Framework verwendet wird. Hierbei übernimmt das Framework die Controller-Rolle und das Template die Präsentation.
+
+nat:
+  short:
+    singular: NAT
+    plural: NATs
+  long:
+    singular: Network Address Translation
+    plural: Network Address Translations
+  description: Ein Verfahren, bei dem IP-Adressen in Datenpaketen durch andere Adressen ersetzt werden, um die Kommunikation zwischen privaten und öffentlichen Netzwerken zu ermöglichen.
+
+nat_traversal:
+  short:
+    singular: NAT-T
+  long:
+    singular: NAT Traversal
+  description: Ein Verfahren, bei dem IPsec-Datenverkehr in UDP gekapselt wird, damit VPN-Verbindungen auch über NAT-Geräte hinweg zuverlässig funktionieren.
+
+neighbor:
+  long:
+    singular: Neighbor
+  description: Ein benachbartes Netzwerkgerät, mit dem Routing-Informationen ausgetauscht werden.
+
+nextcloud:
+  long:
+    singular: Nextcloud
+  description: Eine Open-Source-Plattform für Dateiablage, Synchronisation und Zusammenarbeit, die auf eigenen Servern betrieben werden kann.
+
+nhrp:
+  short:
+    singular: NHRP
+    plural: NHRPs
+  long:
+    singular: Next Hop Resolution Protocol
+    plural: Next Hop Resolution Protocols
+  description: Ein Protokoll, das in NBMA-Netzwerken (wie DMVPN) verwendet wird, um die logische IP-Adresse eines Ziels auf die physische Tunnel-Endpunkt-Adresse aufzulösen.
 
 nix-flakes:
   long:
     singular: Nix Flakes
-  description: Eine Erweiterung des Nix-Ökosystems zur hermetischen Abriegelung von Projekt-Abhängigkeiten mittels flake.nix.
+  description: Eine Erweiterung des Nix-Ökosystems zur hermetischen Abriegelung von Projekt-Abhängigkeiten mittels `flake.nix`.
 
 nix-shell:
   long:
@@ -45,83 +465,116 @@ nix-shell:
 nix:
   long:
     singular: Nix
-  description: Ein rein funktionaler Paketmanager und Build-System, das Software in isolierten, unveränderlichen Zuständen verwaltet.
+  description: Ein rein funktionaler Paketmanager and Build-System, das Software in isolierten, unveränderlichen Zuständen verwaltet.
 
 nixfmt:
   long:
     singular: nixfmt
-  description: Ein Formatter für Nix-Code, der sicherstellt, dass alle .nix-Konfigurationsdateien einem Standardstil folgen.
+  description: Ein Formatter für Nix-Code, der sicherstellt, dass alle `.nix`-Konfigurationsdateien einem Standardstil folgen.
 
-prettier:
+orm:
+  short:
+    singular: ORM
   long:
-    singular: Prettier
-  description: Ein "opinionated" Code-Formatter, der vorrangig für Web-Technologien (JavaScript, CSS, HTML, JSON) eingesetzt wird, um einen einheitlichen Stil zu erzwingen.
+    singular: Object-Relational Mapping
+  description: Eine Programmiertechnik, mit der in einer objektorientierten Programmiersprache geschriebene Objekte automatisiert in einer relationalen Datenbank (SQL) gespeichert werden können.
 
-ruff:
+ospf:
+  short:
+    singular: OSPF
+    plural: OSPFs
   long:
-    singular: Ruff
-  description: Ein extrem schneller Python-Linter und Code-Formatter, geschrieben in Rust, der mehrere klassische Tools (Flake8, Black, isort) ersetzt.
+    singular: Open Shortest Path First
+    plural: Open Shortest Path First
+  description: Ein dynamisches Routing-Protokoll zur Berechnung des kürzesten Pfades innerhalb eines IP-Netzwerks.
 
-treefmt:
+ospf_area:
   long:
-    singular: Treefmt
-  description: Ein Werkzeug zur Orchestrierung verschiedener Code-Formatierer (z. B. Ruff, Prettier) für eine einheitliche Codebasis.
-
-twelvefactor:
-  long:
-    singular: The Twelve-Factor App
-  description: Eine Methodik zur Erstellung skalierbarer und wartbarer Software-as-a-Service-Anwendungen.
-
-uv:
-  long:
-    singular: uv
-  description: Ein extrem performanter Python-Paketmanager und Resolver, geschrieben in Rust, der pip und venv ersetzt.
-pyats:
-  long:
-    singular: pyATS
-  description: Ein von Cisco entwickeltes Python-basiertes Framework zur Automatisierung und zum Testen von Netzwerkgeräten.
-
-genie:
-  long:
-    singular: Genie
-  description: Eine Bibliothek innerhalb von pyATS, die Parser und Funktionen zur strukturierten Auswertung von Geräteinformationen bereitstellt.
+    singular: OSPF Area
+  description: Ein logischer Bereich innerhalb eines OSPF-Netzwerks zur Strukturierung und Skalierung.
 
 parser:
   long:
     singular: Parser
   description: Eine Softwarekomponente, die unstrukturierten Text, wie Geräteausgaben, in strukturierte Datenformate umwandelt.
 
-testbed:
-  long:
-    singular: Testbed
-  description: Eine Konfigurationsdatei in pyATS, welche Geräte, Zugangsdaten und Verbindungsparameter für automatisierte Tests definiert.
-
-aetest:
-  long:
-    singular: AEtest
-  description: Eine pyATS-Komponente zur Strukturierung und Automatisierung von Testfällen und Testabläufen.
-
-unicon:
-  long:
-    singular: Unicon
-  description: Eine Bibliothek innerhalb von pyATS, die Geräteverbindungen über Protokolle wie SSH oder Telnet verwaltet.
-
-ospf:
+pat:
   short:
-    singular: OSPF
+    singular: PAT
+    plural: PATs
   long:
-    singular: Open Shortest Path First
-  description: Ein dynamisches Routing-Protokoll zur Berechnung des kürzesten Pfades innerhalb eines IP-Netzwerks.
+    singular: Port Address Translation
+    plural: Port Address Translations
+  description: Eine Erweiterung von NAT, die es ermöglicht, mehrere Geräte im lokalen Netzwerk über eine einzige öffentliche IP-Adresse abzubilden, indem unterschiedliche Source-Ports verwendet werden.
+
+port_forwarding:
+  long:
+    singular: Port Forwarding
+  description: Ein Verfahren, bei dem eingehender Datenverkehr auf einen bestimmten Port eines internen Zielsystems weitergeleitet wird.
+
+port_group:
+  long:
+    singular: Port Group
+    plural: Port Groups
+  description: Eine logische Gruppierung von virtuellen Switch-Ports in VMware vSphere, über die virtuelle Maschinen mit einem bestimmten Netzwerk verbunden werden.
+
+prettier:
+  long:
+    singular: Prettier
+  description: Ein "opinionated" Code-Formatter, der vorrangig für Web-Technologies (JavaScript, CSS, HTML, JSON) eingesetzt wird, um einen einheitlichen Stil zu erzwenken.
+
+pyats:
+  long:
+    singular: pyATS
+  description: Ein von Cisco entwickeltes Python-basiertes Framework zur Automatisierung und zum Testen von Netzwerkgeräten.
+
+python_dictionary:
+  long:
+    singular: Python-Dictionary
+  description: Eine Datenstruktur in Python zur Speicherung von Schlüssel-Wert-Paaren.
+
+rip:
+  short:
+    singular: RIP
+    plural: RIPs
+  long:
+    singular: Routing Information Protocol
+    plural: Routing Information Protocols
+  description: Ein klassisches Distanzvektor-Routing-Protokoll, das den Hop-Count zur Bestimmung des besten Pfades verwendet.
+
+router_id:
+  long:
+    singular: Router ID
+  description: Eine eindeutige Kennung eines Routers innerhalb eines Routing-Protokolls.
 
 routingprotokoll:
   long:
     singular: Routing-Protokoll
   description: Ein Protokoll, das den Austausch von Routing-Informationen zwischen Netzwerkgeräten ermöglicht.
 
-interface:
+ruff:
   long:
-    singular: Netzwerkinterface
-  description: Eine physische oder logische Schnittstelle eines Netzwerkgeräts zur Datenübertragung.
+    singular: Ruff
+  description: Ein extrem schneller Python-Linter und Code-Formatter, geschrieben in Rust, der mehrere klassische Tools (Flake8, Black, isort) ersetzt.
+
+sicherheitszone:
+  long:
+    singular: Sicherheitszone
+    plural: Sicherheitszonen
+  description: Ein logisch abgegrenzter Bereich innerhalb einer Firewall-Architektur, dem Netzwerkinterfaces zugeordnet werden, um den Datenverkehr zwischen diesen Bereichen gezielt zu kontrollieren.
+
+site_to_site_vpn:
+  long:
+    singular: Site-to-Site-VPN
+    plural: Site-to-Site-VPNs
+  description: Eine VPN-Verbindung, die zwei räumlich getrennte Standorte über ein öffentliches Netzwerk sicher miteinander verbindet.
+
+sql:
+  short:
+    singular: SQL
+  long:
+    singular: Structured Query Language
+  description: Eine standardisierte Datenbanksprache zur Erstellung, Abfrage und Manipulation relationaler Datenbanken.
 
 ssh:
   short:
@@ -135,15 +588,94 @@ telnet:
     singular: Telnet
   description: Ein unverschlüsseltes Netzwerkprotokoll für den Fernzugriff auf Geräte.
 
-framework:
+testbed:
   long:
-    singular: Framework
-  description: Eine Sammlung von Bibliotheken und Werkzeugen, die eine Grundlage für die Entwicklung von Softwareanwendungen bereitstellt.
+    singular: Testbed
+  description: Eine Konfigurationsdatei in pyATS, welche Geräte, Zugangsdaten und Verbindungsparameter für automatisierte Tests definiert.
 
-python_dictionary:
+treefmt:
   long:
-    singular: Python-Dictionary
-  description: Eine Datenstruktur in Python zur Speicherung von Schlüssel-Wert-Paaren.
+    singular: Treefmt
+  description: Ein Werkzeug zur Orchestrierung verschiedener Code-Formatierer (z. B. Ruff, Prettier) für eine einheitliche Codebasis.
+
+trunk:
+  long:
+    singular: Trunk
+  description: Eine Punkt-zu-Punkt-Verbindung zwischen zwei Netzwerkgeräten (z. B. Switchen), die den Datenverkehr für mehrere VLANs gleichzeitig über ein einziges physisches Kabel überträgt.
+
+twelvefactor:
+  long:
+    singular: The Twelve-Factor App
+  description: Eine Methodik zur Erstellung skalierbarer und wartbarer Software-as-a-Service-Anwendungen.
+
+udp:
+  short:
+    singular: UDP
+  long:
+    singular: User Datagram Protocol
+  description: Ein verbindungsloses Transportprotokoll der Transportschicht, das Daten ohne Sitzungsaufbau und ohne Zustellgarantie überträgt.
+
+unicon:
+  long:
+    singular: Unicon
+  description: Eine Bibliothek innerhalb von pyATS, die Geräteverbindungen über Protokolle wie SSH oder Telnet verwaltet.
+
+uv:
+  long:
+    singular: "`uv`"
+  description: Ein extrem performanter Python-Paketmanager und Resolver, geschrieben in Rust, der `pip` und `venv` ersetzt.
+
+vip:
+  short:
+    singular: VIP
+    plural: VIPs
+  long:
+    singular: Virtual IP
+    plural: Virtual IPs
+  description: Eine virtuelle IP-Adresse, die auf einer Firewall oder einem Load Balancer konfiguriert wird, um eingehende Verbindungen an interne Systeme weiterzuleiten.
+
+vlan:
+  short:
+    singular: VLAN
+  long:
+    singular: Virtual Local Area Network
+  description: Ein logisches Teilnetz innerhalb eines physischen Netzwerks, das Geräte unabhängig von ihrem Standort isoliert.
+
+vpn:
+  short:
+    singular: VPN
+    plural: VPNs
+  long:
+    singular: Virtual Private Network
+    plural: Virtual Private Networks
+  description: Ein virtuelles privates Kommunikationsnetz, das eine sichere und verschlüsselte Verbindung über öffentliche Netzwerke ermöglicht.
+
+vpn_tunnel:
+  long:
+    singular: VPN-Tunnel
+    plural: VPN-Tunnel
+  description: Ein logisch aufgebauter, verschlüsselter Kommunikationskanal innerhalb eines Virtual Private Networks.
+
+vsphere:
+  long:
+    singular: vSphere
+  description: Eine Virtualisierungsplattform von VMware zur Verwaltung virtueller Maschinen, Hosts und Netzwerke.
+
+wan:
+  short:
+    singular: WAN
+    plural: WANs
+  long:
+    singular: Wide Area Network
+    plural: Wide Area Networks
+  description: Ein Rechnernetz, das sich über einen sehr großen geografischen Bereich erstreckt und verschiedene lokale Netze (LANs) miteinander verbindet.
+
+xss:
+  short:
+    singular: XSS
+  long:
+    singular: Cross-Site Scripting
+  description: Eine Sicherheitslücke in Webanwendungen, bei der Angreifer bösartige Client-Skripte in eigentlich vertrauenswürdige Webseiten einschleusen.
 
 yaml:
   short:
@@ -152,162 +684,17 @@ yaml:
     singular: YAML Ain't Markup Language
   description: Ein menschenlesbares Datenformat zur Speicherung strukturierter Konfigurationsdaten.
 
-exception:
-  long:
-    singular: Exception
-  description: Ein Fehler oder Ausnahmezustand, der während der Programmausführung auftritt.
-
-api:
+zbf:
   short:
-    singular: API
+    singular: ZBF
   long:
-    singular: Application Programming Interface
-  description: Eine Programmierschnittstelle, über die Softwarekomponenten miteinander kommunizieren.
-
-backend:
-  long:
-    singular: Backend
-  description: Der Teil einer Anwendung, der im Hintergrund läuft und Datenverarbeitung sowie Logik bereitstellt.
-
-router_id:
-  long:
-    singular: Router ID
-  description: Eine eindeutige Kennung eines Routers innerhalb eines Routing-Protokolls.
-
-ospf_area:
-  long:
-    singular: OSPF Area
-  description: Ein logischer Bereich innerhalb eines OSPF-Netzwerks zur Strukturierung und Skalierung.
-
-neighbor:
-  long:
-    singular: Neighbor
-  description: Ein benachbartes Netzwerkgerät, mit dem Routing-Informationen ausgetauscht werden.
-
-# Danijel
-diagnet:
-  short:
-    singular: DiagNet
-  long:
-    singular: DiagNet
-  description: Der Name des in dieser Arbeit entwickelten Systems. Eine Webapplikation zur automatisierten Durchführung, Verwaltung und Analyse von Netzwerktests.
-
-vlan:
-  short:
-    singular: vlan
-  long:
-    singular: Virtual Local Area Network
-  full: Virtual Local Area Network (VLAN)
-  description: Ein logisches Teilnetz innerhalb eines physischen Netzwerks, das Geräte unabhängig von ihrem Standort isoliert.
-
-gns3:
-  short:
-    singular: gns3
-  long:
-    singular: Graphical Network Simulator-3
-  full: Graphical Network Simulator-3 (GNS3)
-  description: Eine Software zur Simulation komplexer Netzwerke, die es ermöglicht, virtuelle und reale Geräte miteinander zu verknüpfen.
-
-wan:
-  short:
-    singular: WAN
-  long:
-    singular: Wide Area Network
-  full: Wide Area Network (WAN)
-  description: Ein Rechnernetz, das sich über einen sehr großen geografischen Bereich erstreckt und verschiedene lokale Netze (LANs) miteinander verbindet.
-
-ise:
-  short:
-    singular: ISE
-  long:
-    singular: Identity Services Engine
-  full: Identity Services Engine (ISE)
-  description: Eine Sicherheitsplattform von Cisco zur Identitätsverwaltung und Zugriffskontrolle, die Richtlinien für den Netzwerkzugriff zentral steuert.
-
-nat:
-  short:
-    singular: NAT
-  long:
-    singular: Network Address Translation
-  full: Network Address Translation (NAT)
-  description: Ein Verfahren, bei dem IP-Adressen in Datenpaketen durch andere Adressen ersetzt werden, um die Kommunikation zwischen privaten und öffentlichen Netzwerken zu ermöglichen.
-
-trunk:
-  short:
-    singular: Trunk
-  long:
-    singular: Trunk
-  description: Eine Punkt-zu-Punkt-Verbindung zwischen zwei Netzwerkgeräten (z. B. Switchen), die den Datenverkehr für mehrere VLANs gleichzeitig über ein einziges physisches Kabel überträgt.
-
-802.1Q:
-  short:
-    singular: 802.1Q
-  long:
-    singular: IEEE 802.1Q
-  full: IEEE 802.1Q (802.1Q)
-  description: Der gängigste Standard für das VLAN-Tagging in Ethernet-Netzwerken, der es ermöglicht, mehrere VLANs über eine einzige physische Verbindung zu übertragen.
-
-gui:
-  short:
-    singular: GUI
-  long:
-    singular: Graphical User Interface
-  full: Graphical User Interface
-  description: Bezeichnet eine Benutzeroberfläche, die dem Anwender die Interaktion mit der Software durch visuelle Elemente wie Fenster, Menüs und Symbole ermöglicht, anstatt textbasierte Befehle zu erfordern.
-
-instanzattribute:
-  short:
-    singular: Instanzattribute
-  long:
-    singular: Instanzattribute
-  full: Instanzattribute
-  description: >-
-    Variablen, die an eine spezifische Instanz einer Klasse gebunden sind und deren individuellen Zustand speichern.
-
-html:
-  short:
-    singular: HTML
-  long:
-    singular: Hypertext Markup Language
-  full: Hypertext Markup Language
-  description: >-
-    Eine strukturierte Auszeichnungssprache, die zur Erstellung und Gestaltung digitaler Dokumente im World Wide Web dient.
-
-adjazenzliste:
-  short:
-    singular: Adjazenzliste
-  long:
-    singular: Adjazenzliste
-  full: Adjazenzliste
-  description: >-
-    Eine Darstellungsform für Graphen in der Informatik, bei der für jeden Knoten eine Liste aller seiner direkten Nachbarknoten gespeichert wird.
-
-icmp:
-  short:
-    singular: ICMP
-  long:
-    singular: Internet Control Message Protocol
-  full: Internet Control Message Protocol
-  description: >-
-    Ein Netzwerkprotokoll, das zum Austausch von Informations- und Fehlermeldungen in IP-Netzwerken dient. Es wird primär für Diagnosezwecke verwendet, etwa um die Erreichbarkeit von Hosts zu prüfen.
-
-json:
-  short:
-    singular: JSON
-  long:
-    singular: JavaScript Object Notation
-  full: JavaScript Object Notation
-  description: >-
-    Ein textbasiertes Format zum effizienten Datenaustausch zwischen Anwendungen, das in Web-APIs als Standard für die Client-Server-Kommunikation dient.
+    singular: Zone-Based Firewall
+  description: Eine zustandsorientierte Firewall-Technologie von Cisco, bei der der Datenverkehr zwischen definierten Sicherheitszonen kontrolliert wird.
 
 fabrikmethode:
   short:
     singular: Fabrikmethode
-  long:
-    singular: Fabrikmethode
-  full: Fabrikmethode
-  description: >-
-    Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert, wobei die konkrete Instanziierung den Unterklassen überlassen wird.
+  description: Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert, wobei die konkrete Instanziierung den Unterklassen überlassen wird.
 
 rip:
   short:
@@ -376,3 +763,4 @@ regex:
     singular: regulärer Ausdruck (regex)
     plural: reguläre Ausdrücke (regex)
   description: Eine Zeichenfolge, die ein Suchmuster beschreibt, um mithilfe von Matching gezielt Informationen aus unformatiertem Text zu extrahieren.
+# keep-sorted end
