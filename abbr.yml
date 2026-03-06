@@ -106,6 +106,12 @@ diagnet:
     singular: DiagNet
   description: Der Name des in dieser Arbeit entwickelten Systems. Eine Webapplikation zur automatisierten Durchführung, Verwaltung und Analyse von Netzwerktests.
 
+dictionary:
+  long:
+    singular: Dictionary
+    plural: Dictionaries
+  description: Eine Datenstruktur, die Elemente als Schlüssel-Wert-Paare speichert und einen schnellen Zugriff über den Schlüssel ermöglicht.
+
 direnv:
   long:
     singular: "`direnv`"
