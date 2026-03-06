@@ -94,7 +94,13 @@ ci:
     singular: Continuous Integration
   description: Die Praxis der regelmäßigen Integration von Code-Änderungen in ein gemeinsames Repository mit automatisierten Regressionstests.
 
-# Danijel
+csrf:
+  short:
+    singular: CSRF
+  long:
+    singular: Cross-Site Request Forgery
+  description: Ein Angriff auf Webanwendungen, bei dem ein Angreifer ungewollte Aktionen im Namen eines authentifizierten Benutzers ausführt.
+
 diagnet:
   long:
     singular: DiagNet
@@ -228,6 +234,13 @@ html:
   description: >-
     Eine strukturierte Auszeichnungssprache, die zur Erstellung und Gestaltung digitaler Dokumente im World Wide Web dient.
 
+http:
+  short:
+    singular: HTTP
+  long:
+    singular: Hypertext Transfer Protocol
+  description: Ein zustandsloses Protokoll zur Übertragung von Daten auf der Anwendungsschicht über ein Rechnernetz, das hauptsächlich zum Laden von Webseiten verwendet wird.
+
 icmp:
   short:
     singular: ICMP
@@ -271,6 +284,20 @@ ipsec:
   long:
     singular: Internet Protocol Security
   description: Eine Protokoll-Suite zur Sicherung der Internetkommunikation durch Authentifizierung and Verschlüsselung jedes IP-Pakets.
+
+ipv4:
+  short:
+    singular: IPv4
+  long:
+    singular: Internet Protocol Version 4
+  description: Die vierte Version des Internet Protocols, die 32-Bit-Adressen verwendet und die historische Basis des Internets darstellt.
+
+ipv6:
+  short:
+    singular: IPv6
+  long:
+    singular: Internet Protocol Version 6
+  description: Der Nachfolger von IPv4, der 128-Bit-Adressen nutzt, um einen deutlich größeren Adressraum im Netzwerk zur Verfügung zu stellen.
 
 ise:
   short:
@@ -337,6 +364,20 @@ mpls:
     plural: Multiprotocol Label Switching
   description: Ein Verfahren zur Weiterleitung von Datenpaketen entlang vordefinierter Pfade basierend auf kurzen Labels statt langer Netzwerkadressen.
 
+mvc:
+  short:
+    singular: MVC
+  long:
+    singular: Model-View-Controller
+  description: Ein Architekturmuster zur Strukturierung von Softwareentwicklung in die drei logischen Einheiten Datenmodell, Präsentation und Programmsteuerung.
+
+mvt:
+  short:
+    singular: MVT
+  long:
+    singular: Model-View-Template
+  description: Ein leicht abgewandeltes MVC-Architekturmuster, das im Django-Framework verwendet wird. Hierbei übernimmt das Framework die Controller-Rolle und das Template die Präsentation.
+
 nat:
   short:
     singular: NAT
@@ -379,6 +420,13 @@ nixfmt:
   long:
     singular: nixfmt
   description: Ein Formatter für Nix-Code, der sicherstellt, dass alle `.nix`-Konfigurationsdateien einem Standardstil folgen.
+
+orm:
+  short:
+    singular: ORM
+  long:
+    singular: Object-Relational Mapping
+  description: Eine Programmiertechnik, mit der in einer objektorientierten Programmiersprache geschriebene Objekte automatisiert in einer relationalen Datenbank (SQL) gespeichert werden können.
 
 ospf:
   short:
@@ -447,6 +495,13 @@ ruff:
     singular: Ruff
   description: Ein extrem schneller Python-Linter und Code-Formatter, geschrieben in Rust, der mehrere klassische Tools (Flake8, Black, isort) ersetzt.
 
+sql:
+  short:
+    singular: SQL
+  long:
+    singular: Structured Query Language
+  description: Eine standardisierte Datenbanksprache zur Erstellung, Abfrage und Manipulation relationaler Datenbanken.
+
 ssh:
   short:
     singular: SSH
@@ -513,6 +568,13 @@ wan:
     singular: Wide Area Network
     plural: Wide Area Networks
   description: Ein Rechnernetz, das sich über einen sehr großen geografischen Bereich erstreckt und verschiedene lokale Netze (LANs) miteinander verbindet.
+
+xss:
+  short:
+    singular: XSS
+  long:
+    singular: Cross-Site Scripting
+  description: Eine Sicherheitslücke in Webanwendungen, bei der Angreifer bösartige Client-Skripte in eigentlich vertrauenswürdige Webseiten einschleusen.
 
 yaml:
   short:
