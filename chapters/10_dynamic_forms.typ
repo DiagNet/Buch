@@ -3,7 +3,7 @@
 #htl3r.author("Luka Pacar")
 
 = Dynamische Formulare
-Bei der Architektur von _DiagNet_ wurde großer Wert auf eine klare Trennung zwischen der Testlogik und der grafischen Oberfläche gelegt.
+Bei der Architektur von _#htl3r.long[diagnet]_ wurde großer Wert auf eine klare Trennung zwischen der Testlogik und der grafischen Oberfläche gelegt.
 Während die Implementierung der Netzwerktests und deren Parameterdefinitionen ausschließlich in Python-Dateien vorliegt, muss die Benutzeroberfläche diese Strukturen abbilden können.
 Da sich die erforderlichen Eingaben für jedes Testszenario stark unterscheiden, ist ein statisches #htl3r.full[html]-Formular keine Lösung.
 Stattdessen generiert das System die Eingabefelder dynamisch, indem es die Struktur aus den empfangenen Testattributen ableitet.
@@ -70,7 +70,7 @@ Diese Struktur ermöglicht eine einfache Überprüfung der Eingabe. Ein `EventHa
 
 == Abhängigkeitsmanagement
 In komplexen Netzwerkszenarien sind Parameter meistens voneinander abhängig.
-Oft bestimmt die Auswahl einer Option, ob weitere Eingaben nötig oder verboten sind. _DiagNet_ bildet diese Abhängigkeiten durch ein System ab, das auf Änderungen reagiert.
+Oft bestimmt die Auswahl einer Option, ob weitere Eingaben nötig oder verboten sind. _#htl3r.long[diagnet]_ bildet diese Abhängigkeiten durch ein System ab, das auf Änderungen reagiert.
 
 Das System unterscheidet dabei zwei Arten von Abhängigkeiten:
 
