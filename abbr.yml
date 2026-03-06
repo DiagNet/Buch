@@ -149,6 +149,11 @@ eigrp:
     plural: Enhanced Interior Gateway Routing Protocols
   description: Ein fortschrittliches Distanzvektor-Routing-Protokoll von Cisco, das Bandbreite und Verzögerung zur Pfadberechnung kombiniert.
 
+eventhandler:
+  long:
+    singular: Event-Handler
+  description: Eine Softwarekomponente oder Funktion, die auf spezifische Ereignisseinnerhalb eines Systems reagiert, wie beispielsweise Benutzereingaben oder Statusänderungen.
+
 exception:
   long:
     singular: Exception
