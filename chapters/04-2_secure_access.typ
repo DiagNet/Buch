@@ -13,9 +13,7 @@ Die Umsetzung erfolgt mittels einer Network-Access-Control-Lösung auf Basis der
 - Authentifizierung von Administratoren auf Netzwerkgeräten über das RADIUS-Protokoll
 - Authentifizierung von Endgeräten an Access-Switchports mittels IEEE 802.1X
 
-Durch diese Architektur können Zugriffe auf das Netzwerk und auf Netzwerkgeräte zentral gesteuert werden. Gleichzeitig ermöglicht die zentrale Authentifizierungsinstanz eine konsistente Verwaltung von Benutzern, Richtlinien und Zugriffsrechten.
-
-Ein wesentliches Ziel dieser Architektur ist außerdem eine Single Source of Truth für Authentifizierungs- und Autorisierungsinformationen. Dabei werden Benutzerkonten, Geräteinformationen sowie Zugriffsrichtlinien nicht mehr lokal auf einzelnen Netzwerkgeräten gespeichert, sondern zentral durch die Cisco Identity Services Engine verwaltet. Änderungen an Zugriffsrechten oder Richtlinien müssen dadurch nur an einer Stelle vorgenommen werden und gelten unmittelbar für alle angebundenen Netzwerkkomponenten.
+Ein wesentliches Ziel dieser Architektur ist eine Single Source of Truth für Authentifizierungs- und Autorisierungsinformationen. Dabei werden Benutzerkonten, Geräteinformationen sowie Zugriffsrichtlinien nicht mehr lokal auf einzelnen Netzwerkgeräten gespeichert, sondern zentral durch die Cisco Identity Services Engine verwaltet. Änderungen an Zugriffsrechten oder Richtlinien müssen dadurch nur an einer Stelle vorgenommen werden und gelten unmittelbar für alle angebundenen Netzwerkkomponenten.
 
 Die im Rahmen der Testumgebung implementierte Lösung verfolgt somit mehrere Ziele:
 
@@ -68,17 +66,14 @@ Ein weiterer wichtiger Bestandteil der Plattform ist die Protokollierung von Aut
 
 In der aufgebauten Testumgebung wird die Cisco Identity Services Engine als zentrale Authentifizierungsinstanz für zwei unterschiedliche Anwendungsfälle eingesetzt. Einerseits erfolgt die administrative Anmeldung auf Netzwerkgeräten über das RADIUS-Protokoll. Andererseits wird die ISE für die Authentifizierung von Endgeräten über IEEE 802.1X verwendet. In beiden Fällen übernehmen die Netzwerkgeräte die Rolle eines RADIUS-Clients und leiten Authentifizierungsanfragen an die ISE weiter.
 
-Die Cisco Identity Services Engine wird in der Testumgebung auf einem dedizierten Server betrieben. Als Hardwareplattform kommt ein Server des Typs Cisco UCS C220 M4 zum Einsatz. Dabei handelt es sich um einen Rack-Server aus der Cisco Unified Computing System (UCS) Produktfamilie, der für den Betrieb von Infrastrukturservices und Netzwerkmanagementsystemen ausgelegt ist. Die ISE läuft auf diesem System als Appliance und stellt sämtliche Funktionen zur Authentifizierung, Autorisierung und Protokollierung zentral bereit.
-
-Durch den Einsatz der Cisco ISE können Authentifizierungs- und Autorisierungsrichtlinien zentral verwaltet werden. Änderungen an Benutzerkonten oder Zugriffsrichtlinien müssen nicht mehr auf einzelnen Netzwerkgeräten vorgenommen werden, sondern können an einer zentralen Stelle administriert werden. Dies vereinfacht die Verwaltung der Infrastruktur und reduziert gleichzeitig das Risiko von Inkonsistenzen in der Konfiguration.
-
-#figure(
-  caption: [Administrationsoberfläche der Cisco Identity Services Engine mit Policy- und Authentifizierungseinstellungen],
-  placement: auto,
-)[
-  // Screenshot einfügen: ISE Web Interface (Policy Sets / Authentication Policy / Authorization Policy)
-]
+Die Cisco Identity Services Engine wird in der Testumgebung auf einem dedizierten Server betrieben. Als Hardwareplattform kommt ein Server des Typs Cisco UCS C220 M4 zum Einsatz. Dabei handelt es sich um einen Rack-Server aus der Cisco Unified Computing System (UCS) Produktfamilie, der für den Betrieb von Infrastrukturservices und Netzwerkmanagementsystemen ausgelegt ist.
 
 Die grafische Administrationsoberfläche der Cisco Identity Services Engine ermöglicht die Konfiguration von Authentifizierungs- und Autorisierungsrichtlinien sowie die Verwaltung von Netzwerkgeräten, Benutzern und Gruppen. Zusätzlich können über die Monitoring-Funktionen aktuelle Authentifizierungsereignisse und Systemmeldungen eingesehen werden.
+
+In folgender Abbildung ist das Dashboard der ISE zu sehen, welches unter anderem die Anzahl der Authentifizierungen und die Auslastung des Arbeitsspeichers zeigt:
+#figure(
+  image("../assets/ise-dashboard.png", width: 100%),
+  caption: [abbildung der NAC Rollen],
+)
 
 Im weiteren Verlauf dieses Kapitels wird beschrieben, wie die Cisco Identity Services Engine konkret zur Absicherung administrativer Zugriffe auf Netzwerkgeräte sowie zur Authentifizierung von Endgeräten mittels IEEE 802.1X eingesetzt wurde.
