@@ -251,4 +251,15 @@ whitenoise-docs:
     value: https://whitenoise.readthedocs.io/en/stable/
     date: 2026-03-07
   date: 2025-01-01
+
+zerover:
+  type: web
+  title: "ZeroVer: 0-based Versioning"
+  author:
+    - name: Hashemi
+      given-name: Mahmoud
+  url:
+    value: https://0ver.org/
+    date: 2026-03-07
+  date: 2019-01-01
 # keep-sorted end
