@@ -47,6 +47,16 @@ bootstrap-docs:
     date: 2026-03-07
   date: 2024-01-01
 
+daphne-docs:
+  type: web
+  title: "Daphne: Django Channels HTTP/WebSocket server"
+  author:
+    - name: Django Software Foundation
+  url:
+    value: https://github.com/django/daphne
+    date: 2026-03-07
+  date: 2024-01-01
+
 direnv-docs:
   type: web
   title: "direnv: unclutter your .profile"
@@ -129,6 +139,16 @@ just-command-runner:
     date: 2026-02-07
   date: 2025-01-15
 
+nix-docker-tools:
+  type: web
+  title: "NixOS Manual: pkgs.dockerTools"
+  author:
+    - name: NixOS Contributors
+  url:
+    value: https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-dockerTools
+    date: 2026-03-07
+  date: 2026-01-01
+
 nixos-homepage:
   type: web
   title: "NixOS: Reproducible builds and deployments"
@@ -158,6 +178,16 @@ owasp-top10:
     value: https://owasp.org/www-project-top-ten/
     date: 2026-03-07
   date: 2021-09-01
+
+podman-docs:
+  type: web
+  title: "Podman Documentation"
+  author:
+    - name: Red Hat Inc.
+  url:
+    value: https://docs.podman.io/en/latest/
+    date: 2026-03-07
+  date: 2026-01-01
 
 pyats-docs:
   type: web
@@ -210,4 +240,15 @@ treefmt-docs:
     value: https://github.com/numtide/treefmt
     date: 2026-02-07
   date: 2024-11-20
+
+whitenoise-docs:
+  type: web
+  title: "WhiteNoise Documentation"
+  author:
+    - name: Evans
+      given-name: David
+  url:
+    value: https://whitenoise.readthedocs.io/en/stable/
+    date: 2026-03-07
+  date: 2025-01-01
 # keep-sorted end
