@@ -91,12 +91,26 @@ bgp:
     plural: Border Gateway Protocols
   description: Das Standard-Routing-Protokoll des Internets, das den Datenaustausch zwischen verschiedenen Autonomen Systemen (AS) steuert.
 
+bootstrap:
+  long:
+    singular: Bootstrap
+  description: >-
+    Ein komponentenbasiertes CSS-Framework, das ein Grid-System sowie vorgefertigte
+    UI-Komponenten für die Entwicklung responsiver Webanwendungen bereitstellt.
+
 cd:
   short:
     singular: CD
   long:
     singular: Continuous Deployment
   description: Die automatisierte Bereitstellung von Software in Produktionsumgebungen nach erfolgreicher Integration.
+
+chartjs:
+  long:
+    singular: Chart.js
+  description: >-
+    Eine JavaScript-Bibliothek zur Erstellung interaktiver Diagramme und
+    Datenvisualisierungen im Browser mittels HTML5-Canvas.
 
 ci:
   short:
@@ -117,6 +131,16 @@ csrf:
   long:
     singular: Cross-Site Request Forgery
   description: Ein Angriff auf Webanwendungen, bei dem ein Angreifer ungewollte Aktionen im Namen eines authentifizierten Benutzers ausführt.
+
+css:
+  short:
+    singular: CSS
+  long:
+    singular: Cascading Style Sheets
+  description: >-
+    Eine Stylesheet-Sprache zur Beschreibung der visuellen Darstellung von
+    HTML-Dokumenten, die Layout, Farben, Schriften und weitere
+    Gestaltungseigenschaften von Webseiten definiert.
 
 # Danijel
 diagnet:
@@ -148,6 +172,16 @@ dmvpn:
     singular: Dynamic Multipoint Virtual Private Network
     plural: Dynamic Multipoint Virtual Private Networks
   description: Eine VPN-Technologie, die den dynamischen Aufbau von IPsec-Tunneln zwischen mehreren Standorten ohne permanente Konfiguration ermöglicht.
+
+dom:
+  short:
+    singular: DOM
+  long:
+    singular: Document Object Model
+  description: >-
+    Eine plattform- und sprachneutrale Schnittstelle, die ein HTML- oder
+    XML-Dokument als Baumstruktur darstellt und Programmen ermöglicht, Inhalt,
+    Struktur und Stil dynamisch zu ändern.
 
 ebgp:
   short:
@@ -204,6 +238,16 @@ firewall_policy:
     singular: Firewall-Policy
     plural: Firewall-Policies
   description: Eine Regel oder Richtlinie einer Firewall, die festlegt, welcher Datenverkehr zwischen Netzwerkbereichen erlaubt, geprüft oder blockiert wird.
+
+fouc:
+  short:
+    singular: FOUC
+  long:
+    singular: Flash of Unstyled Content
+  description: >-
+    Ein Darstellungsfehler in Webbrowsern, bei dem kurzzeitig unstylisierter
+    HTML-Inhalt sichtbar wird, bevor das zugehörige CSS vollständig geladen
+    und angewendet wurde.
 
 framework:
   long:
@@ -277,6 +321,14 @@ html:
     singular: Hypertext Markup Language
   description: >-
     Eine strukturierte Auszeichnungssprache, die zur Erstellung und Gestaltung digitaler Dokumente im World Wide Web dient.
+
+htmx:
+  long:
+    singular: HTMX
+  description: >-
+    Eine JavaScript-Bibliothek, die es ermöglicht, AJAX-Requests, CSS-Transitions
+    und WebSockets direkt über HTML-Attribute zu steuern, ohne eigenen
+    JavaScript-Code schreiben zu müssen.
 
 http:
   short:
@@ -385,6 +437,17 @@ just:
   long:
     singular: "`just`"
   description: Ein Task-Runner, der Projektaufgaben in einem Justfile definiert und als moderne Alternative zu `make` dient.
+
+kpi:
+  short:
+    singular: KPI
+    plural: KPIs
+  long:
+    singular: Key Performance Indicator
+    plural: Key Performance Indicators
+  description: >-
+    Eine messbare Kennzahl, die den Fortschritt oder Erfolg eines Systems,
+    Prozesses oder Projekts in Bezug auf ein definiertes Ziel bewertet.
 
 lsdb:
   short:
@@ -559,6 +622,15 @@ python_dictionary:
     singular: Python-Dictionary
   description: Eine Datenstruktur in Python zur Speicherung von Schlüssel-Wert-Paaren.
 
+rce:
+  short:
+    singular: RCE
+  long:
+    singular: Remote Code Execution
+  description: >-
+    Eine Klasse von Sicherheitslücken, bei der ein Angreifer über eine
+    Netzwerkverbindung beliebigen Code auf einem fremden System ausführen kann.
+
 regex:
   short:
     singular: Regex
@@ -603,6 +675,16 @@ site_to_site_vpn:
     singular: Site-to-Site-VPN
     plural: Site-to-Site-VPNs
   description: Eine VPN-Verbindung, die zwei räumlich getrennte Standorte über ein öffentliches Netzwerk sicher miteinander verbindet.
+
+spa:
+  short:
+    singular: SPA
+  long:
+    singular: Single-Page Application
+  description: >-
+    Eine Webanwendung, die im Browser eine einzige HTML-Seite lädt und deren
+    Inhalte dynamisch per JavaScript aktualisiert, ohne vollständige Seitenneuladen
+    durchzuführen.
 
 sql:
   short:
