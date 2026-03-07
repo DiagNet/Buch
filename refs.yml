@@ -47,6 +47,36 @@ bootstrap-docs:
     date: 2026-03-07
   date: 2024-01-01
 
+chartjs-docs:
+  type: web
+  title: "Chart.js Documentation"
+  author:
+    - name: Chart.js Contributors
+  url:
+    value: https://www.chartjs.org/docs/latest/
+    date: 2026-03-08
+  date: 2024-01-01
+
+cisco-layer2-security:
+  type: web
+  title: "Catalyst Switches: Configuring DHCP Snooping, Dynamic ARP Inspection, and Port Security"
+  author:
+    - name: Cisco Systems
+  url:
+    value: https://www.cisco.com/c/en/us/support/docs/lan-switching/8021x/82047-layer2-sec.html
+    date: 2026-03-08
+  date: 2023-01-01
+
+cisco-stp-pvst:
+  type: web
+  title: "Understanding and Configuring Spanning Tree Protocol (STP) on Catalyst Switches"
+  author:
+    - name: Cisco Systems
+  url:
+    value: https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/5234-5.html
+    date: 2026-03-08
+  date: 2023-01-01
+
 daphne-docs:
   type: web
   title: "Daphne: Django Channels HTTP/WebSocket server"
@@ -108,6 +138,16 @@ fernet-spec:
     date: 2026-03-07
   date: 2013-01-01
 
+gns3-docs:
+  type: web
+  title: "GNS3 Documentation"
+  author:
+    - name: GNS3 Technologies Inc.
+  url:
+    value: https://docs.gns3.com/docs/
+    date: 2026-03-08
+  date: 2024-01-01
+
 htmx-docs:
   type: web
   title: "htmx Documentation"
@@ -138,6 +178,17 @@ just-command-runner:
     value: https://github.com/casey/just
     date: 2026-02-07
   date: 2025-01-15
+
+netmiko-docs:
+  type: web
+  title: "Netmiko: Multi-vendor library to simplify Paramiko SSH connections to network devices"
+  author:
+    - name: Eiesland
+      given-name: Kirk
+  url:
+    value: https://netmiko.readthedocs.io/en/latest/
+    date: 2026-03-08
+  date: 2024-01-01
 
 nix-docker-tools:
   type: web
@@ -199,6 +250,16 @@ pyats-docs:
     date: 2026-03-05
   date: 2026-03-05
 
+reportlab-docs:
+  type: web
+  title: "ReportLab PDF Library User Guide"
+  author:
+    - name: ReportLab Inc.
+  url:
+    value: https://docs.reportlab.com/reportlab/userguide/ch1_intro/
+    date: 2026-03-08
+  date: 2024-01-01
+
 rfc2104:
   type: web
   title: "RFC 2104: HMAC: Keyed-Hashing for Message Authentication"
@@ -213,6 +274,23 @@ rfc2104:
     value: https://www.rfc-editor.org/rfc/rfc2104
     date: 2026-03-07
   date: 1997-02-01
+
+rfc2865:
+  type: web
+  title: "RFC 2865: Remote Authentication Dial In User Service (RADIUS)"
+  author:
+    - name: Rigney
+      given-name: C.
+    - name: Willens
+      given-name: S.
+    - name: Rubens
+      given-name: A.
+    - name: Simpson
+      given-name: W.
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc2865
+    date: 2026-03-08
+  date: 2000-06-01
 
 rfc9106:
   type: web
