@@ -13,7 +13,7 @@ Die Umsetzung erfolgt mittels einer #htl3r.long[nac]-Lösung auf Basis der Cisco
 - Authentifizierung von Administratoren auf Netzwerkgeräten über das #htl3r.long[radius]-Protokoll
 - Authentifizierung von Endgeräten an Access-Switchports mittels IEEE 802.1X
 
-Ein wesentliches Ziel dieser Architektur ist eine Single Source of Truth für Authentifizierungs- und Autorisierungsinformationen. Dabei werden Benutzerkonten, Geräteinformationen sowie Zugriffsrichtlinien nicht mehr lokal auf einzelnen Netzwerkgeräten gespeichert, sondern zentral durch die Cisco #htl3r.short[ise] verwaltet. Änderungen an Zugriffsrechten oder Richtlinien müssen dadurch nur an einer Stelle vorgenommen werden und gelten unmittelbar für alle angebundenen Netzwerkkomponenten.
+Ein wesentliches Ziel dieser Architektur ist eine Single Source of Truth für Authentifizierungs- und Autorisierungsinformationen. Dabei werden Benutzerkonten, Geräteinformationen sowie Zugriffsrichtlinien nicht mehr lokal auf einzelnen Netzwerkgeräten gespeichert, sondern zentral durch die Cisco #htl3r.short[ise] verwaltet. Änderungen an Zugriffsrechten oder Richtlinien müssen dadurch nur an einer Stelle vorgenommen werden und gelten sofort für alle angebundenen Netzwerkkomponenten.
 
 Die im Rahmen der Testumgebung implementierte Lösung verfolgt somit mehrere Ziele:
 
@@ -29,8 +29,6 @@ Die folgenden Abschnitte erläutern zunächst die grundlegenden Konzepte von #ht
 
 #htl3r.long[nac] bezeichnet ein Sicherheitskonzept zur Kontrolle des Zugriffs auf ein Netzwerk. Ziel von #htl3r.short[nac] ist es, sicherzustellen, dass nur berechtigte Benutzer und Geräte Zugriff auf Netzwerkressourcen erhalten. Dabei wird der Netzwerkzugang nicht mehr ausschließlich durch die physische Verbindung zu einem Switchport bestimmt, sondern durch eine Authentifizierungs- und Autorisierungsprüfung.
 
-In modernen Netzwerken ist #htl3r.short[nac] ein zentraler Bestandteil der Netzwerksicherheit. Ohne entsprechende Zugriffskontrollen könnte jedes beliebige Gerät, das physisch mit dem Netzwerk verbunden wird, potenziell Zugriff auf interne Ressourcen erhalten. #htl3r.short[nac] ermöglicht es, diesen Zugriff zu kontrollieren und auf Basis definierter Richtlinien zu steuern.
-
 Ein typisches #htl3r.short[nac]-System besteht aus drei zentralen Komponenten:
 
 - einem Endgerät, das Zugriff auf das Netzwerk anfordert
@@ -39,38 +37,34 @@ Ein typisches #htl3r.short[nac]-System besteht aus drei zentralen Komponenten:
 
 Das Endgerät wird als #htl3r.long[supplicant] bezeichnet. Dabei handelt es sich beispielsweise um einen Laptop oder einen Arbeitsplatzrechner, der mit dem Netzwerk verbunden wird. Das Netzwerkgerät, üblicherweise ein Access-Switch, übernimmt die Rolle des #htl3r.long[authenticator]. Dieser kontrolliert den Zugriff auf den jeweiligen Switchport und leitet Authentifizierungsanfragen an den zentralen Authentifizierungsserver weiter. Der Authentifizierungsserver überprüft die Identität des Benutzers oder Geräts und entscheidet auf Basis definierter Richtlinien, ob der Zugriff auf das Netzwerk erlaubt wird.
 
-In der hier aufgebauten Testumgebung übernimmt die Cisco #htl3r.long[ise], auf welche später noch genauer eingegangen wird, die Rolle des zentralen Authentifizierungsservers. Die Access-Switches fungieren als #htl3r.longpl[authenticator] und setzen die vom Authentifizierungsserver getroffenen Entscheidungen auf den jeweiligen Switchports um.
-
 #figure(
   image("../assets/nac_diagram.png", width: 100%),
   caption: [Abbildung der #htl3r.short[nac]-Rollen],
 )
 
-Ein grundlegendes Konzept im Zusammenhang mit #htl3r.long[nac] ist das sogenannte #htl3r.long[aaa]-Modell. #htl3r.short[aaa] steht für Authentication, Authorization und Accounting und beschreibt drei zentrale Funktionen der Zugriffskontrolle in Netzwerken.
+In der hier aufgebauten Testumgebung übernimmt die Cisco #htl3r.long[ise], auf welche später noch genauer eingegangen wird, die Rolle des zentralen Authentifizierungsservers. Die Access-Switches fungieren als #htl3r.longpl[authenticator] und setzen die vom Authentifizierungsserver getroffenen Entscheidungen auf den jeweiligen Switchports um.
 
-- *Authentication* bezeichnet die Überprüfung der Identität eines Benutzers oder Geräts. Dabei wird festgestellt, ob die angegebene Identität gültig ist. Dies kann beispielsweise durch Benutzername und Passwort, Zertifikate oder andere Authentifizierungsmechanismen erfolgen.
+Ein grundlegendes Konzept im Zusammenhang mit #htl3r.long[nac] ist das sogenannte #htl3r.short[aaa]-Modell. #htl3r.short[aaa] steht für Authentication, Authorization und Accounting und beschreibt drei zentrale Funktionen der Zugriffskontrolle in Netzwerken.
 
-- *Authorization* beschreibt die Entscheidung darüber, welche Rechte einem authentifizierten Benutzer oder Gerät im Netzwerk gewährt werden. Nach erfolgreicher Authentifizierung kann der Zugriff beispielsweise auf bestimmte Netzwerksegmente beschränkt oder ein bestimmtes #htl3r.short[vlan] zugewiesen werden.
+- *Authentication* bezeichnet die Überprüfung der Identität eines Benutzers oder Geräts. Dabei wird festgestellt, ob die angegebene Identität gültig ist. Dies kann beispielsweise durch Benutzername und Passwort, Zertifikate oder andere Authentifizierungsarten erfolgen.
+
+- *Authorization* beschreibt die Entscheidung darüber, welche Rechte einem authentifizierten Benutzer oder Gerät im Netzwerk gegeben werden. Nach erfolgreicher Authentifizierung kann der Zugriff beispielsweise auf bestimmte Netzwerksegmente beschränkt oder ein bestimmtes #htl3r.short[vlan] zugewiesen werden.
 
 - *Accounting* dient der Protokollierung und Nachvollziehbarkeit von Zugriffen. Dabei werden Authentifizierungsereignisse, Sitzungen sowie Netzwerkzugriffe protokolliert. Diese Informationen können für Sicherheitsanalysen, Fehlersuche oder Auditing-Zwecke verwendet werden.
 
-Durch die Kombination von #htl3r.long[nac], dem #htl3r.short[aaa]-Modell und einem zentralen Authentifizierungsserver wird eine kontrollierte und nachvollziehbare Zugriffskontrolle im Netzwerk ermöglicht. Zugriff auf das Netzwerk erhalten nur Benutzer und Geräte, die erfolgreich authentifiziert wurden und deren Zugriff durch definierte Richtlinien autorisiert wurde.
+Durch die Kombination von #htl3r.long[nac], dem #htl3r.short[aaa]-Modell und einem zentralen Authentifizierungsserver wird eine kontrollierte und nachvollziehbare Zugriffssteuerung im Netzwerk ermöglicht. Zugriff auf das Netzwerk erhalten nur Benutzer und Geräte, die erfolgreich authentifiziert wurden und deren Zugriff durch definierte Richtlinien autorisiert wurde.
 
 === Cisco Identity Services Engine
 
 Die Cisco #htl3r.long[ise] ist eine zentrale Plattform zur Umsetzung von #htl3r.long[nac] in Cisco-Netzwerken. Sie übernimmt die Rolle des Authentifizierungs- und Autorisierungsservers und ermöglicht eine zentrale Verwaltung von Benutzern, Geräten sowie Zugriffsrichtlinien.
 
-Neben der reinen Authentifizierung stellt die #htl3r.short[ise] auch umfangreiche Autorisierungsfunktionen bereit. Auf Basis definierter Richtlinien können unterschiedliche Zugriffsrechte vergeben werden. Authentifizierten Geräten können beispielsweise bestimmte #htl3r.shortpl[vlan] zugewiesen oder Netzwerkzugriffe erlaubt beziehungsweise eingeschränkt werden.
+Neben der reinen Authentifizierung stellt die #htl3r.short[ise] auch umfangreiche Autorisierungsfunktionen bereit. Auf Basis definierter Richtlinien können unterschiedliche Zugriffsrechte vergeben werden. Authentifizierten Geräten können beispielsweise bestimmte #htl3r.shortpl[vlan] zugewiesen oder Netzwerkzugriffe erlaubt beziehungsweise verweigert werden.
 
-Ein weiterer wichtiger Bestandteil der Plattform ist die Protokollierung von Authentifizierungsereignissen. Über die integrierten Monitoring- und Logging-Funktionen können Administratoren nachvollziehen, wann und von welchem Gerät aus eine Authentifizierung stattgefunden hat. Dadurch wird eine bessere Transparenz und Nachvollziehbarkeit von Netzwerkzugriffen ermöglicht.
-
-In der aufgebauten Testumgebung wird die Cisco #htl3r.short[ise] als zentrale Authentifizierungsinstanz für zwei unterschiedliche Anwendungsfälle eingesetzt. Einerseits erfolgt die administrative Anmeldung auf Netzwerkgeräten über das #htl3r.long[radius]-Protokoll. Andererseits wird die #htl3r.short[ise] für die Authentifizierung von Endgeräten über IEEE 802.1X verwendet. In beiden Fällen übernehmen die Netzwerkgeräte die Rolle eines #htl3r.short[radius]-Clients und leiten Authentifizierungsanfragen an die #htl3r.short[ise] weiter.
-
-Die Cisco #htl3r.short[ise] wird in der Testumgebung auf einem dedizierten Server betrieben. Als Hardwareplattform kommt ein Server des Typs Cisco UCS C220 M4 zum Einsatz. Dabei handelt es sich um einen Rack-Server aus der Cisco Unified Computing System (UCS) Produktfamilie, der für den Betrieb von Infrastrukturservices und Netzwerkmanagementsystemen ausgelegt ist.
+In der aufgebauten Testumgebung wird die Cisco #htl3r.short[ise] als zentrale Authentifizierungsinstanz für zwei unterschiedliche Anwendungsfälle eingesetzt. Einerseits erfolgt die administrative Anmeldung auf Netzwerkgeräten über das #htl3r.long[radius]-Protokoll. Andererseits wird die #htl3r.short[ise] für die Authentifizierung von Endgeräten über IEEE 802.1X verwendet. In beiden Fällen übernehmen die Netzwerkgeräte die Rolle eines #htl3r.short[radius]-Clients und leiten Authentifizierungsanfragen an die #htl3r.short[ise] weiter. Diese wird in der Testumgebung auf einem dedizierten Server betrieben. Als Hardwareplattform kommt ein Server des Typs Cisco UCS C220 M4 zum Einsatz. Dabei handelt es sich um einen Rack-Server aus der Cisco Unified Computing System Produktfamilie, der für den Betrieb von Infrastrukturservices und Netzwerkmanagementsystemen ausgelegt ist.
 
 Die grafische Administrationsoberfläche der Cisco #htl3r.short[ise] ermöglicht die Konfiguration von Authentifizierungs- und Autorisierungsrichtlinien sowie die Verwaltung von Netzwerkgeräten, Benutzern und Gruppen. Zusätzlich können über die Monitoring-Funktionen aktuelle Authentifizierungsereignisse und Systemmeldungen eingesehen werden.
 
-In folgender Abbildung ist das Dashboard der #htl3r.short[ise] zu sehen, welches unter anderem die Anzahl der Authentifizierungen und die Auslastung des Arbeitsspeichers zeigt:
+In folgender Abbildung ist das Dashboard der #htl3r.short[ise] zu sehen:
 
 #figure(
   image("../assets/ise-dashboard.png", width: 100%),
@@ -84,16 +78,15 @@ Im weiteren Verlauf dieses Kapitels wird beschrieben, wie die Cisco #htl3r.short
 In der Testumgebung wurde die administrative Anmeldung auf Netzwerkkomponenten an einen zentralen Punkt ausgelagert. Administratoren greifen typischerweise über #htl3r.long[ssh] auf Router und Switches zu, um Konfigurationen vorzunehmen oder den Zustand der Geräte zu überprüfen.
 Anstatt lokale Benutzerkonten auf jedem einzelnen Netzwerkgerät zu verwalten, werden Authentifizierungsanfragen an einen #htl3r.long[radius]-Server weitergeleitet. In der aufgebauten Infrastruktur übernimmt die Cisco #htl3r.long[ise] diese Rolle. Netzwerkgeräte fungieren dabei als #htl3r.short[radius]-Clients und übermitteln Anmeldeversuche an die #htl3r.short[ise], welche die Authentifizierung sowie die zugehörige Autorisierung gemäß den definierten Policies durchführt.
 
-Durch diese zentrale Authentifizierung können Benutzerkonten und Zugriffsrechte an einer Stelle verwaltet werden. Änderungen an Benutzerkonten müssen nicht mehr auf jedem Gerät einzeln vorgenommen werden, sondern werden unmittelbar für alle angebundenen Netzwerkgeräte wirksam. Zusätzlich ermöglicht diese Authentifizierungsinstanz eine Protokollierung administrativer Zugriffe, welche in der folgenden Abbildung zu sehen ist:
-
-Ein zentraler Vorteil dieser Architektur ist, dass Logs einheitlich protokolliert und an einem Punkt ersichtlich sind. In der folgenden Abbildung sind zwei Anmeldeversuche zu erkennen. Beide wurden an demselben Netzwerkgerät durchgeführt, jedoch ist der zweite fehlgeschlagen, da die verwendete Richtlinie nur Benutzer einer bestimmten Gruppe authentifiziert:
+Durch diese zentrale Authentifizierung können Benutzerkonten und Zugriffsrechte an einer Stelle verwaltet werden. Änderungen an Benutzerkonten müssen nicht mehr auf jedem Gerät einzeln vorgenommen werden, sondern werden unmittelbar für alle angebundenen Netzwerkgeräte wirksam.
+Ein weiterer zentraler Vorteil dieser Architektur ist, dass Logs einheitlich protokolliert und an einem Punkt ersichtlich sind. In der folgenden Abbildung sind zwei Anmeldeversuche zu erkennen. Beide wurden an demselben Netzwerkgerät durchgeführt, jedoch ist der zweite fehlgeschlagen, da die verwendete Richtlinie nur Benutzer einer bestimmten Gruppe authentifiziert:
 
 #figure(
   image("../assets/ise-logs.png", width: 100%),
   caption: [#htl3r.short[ise] Live Logs],
 )
 
-Damit Netzwerkgeräte Authentifizierungsanfragen an die Cisco #htl3r.short[ise] weiterleiten können, müssen sie als #htl3r.short[radius]-Clients konfiguriert werden. Dazu wird auf dem jeweiligen Gerät der #htl3r.short[radius]-Server definiert und anschließend in die Authentifizierung der Managementzugänge eingebunden.
+Damit Netzwerkgeräte Authentifizierungsanfragen an die Cisco #htl3r.short[ise] weiterleiten können, müssen sie als #htl3r.short[radius]-Clients konfiguriert werden. Dazu wird auf dem jeweiligen Gerät der #htl3r.short[radius]-Server definiert und anschließend für die Authentifizierung der Managementzugänge verwendet.
 
 In folgendem Beispiel wird der #htl3r.short[radius]-Server auf der Firewall ZBFW-1 definiert:
 
@@ -110,24 +103,23 @@ In folgendem Beispiel wird der #htl3r.short[radius]-Server auf der Firewall ZBFW
 
 Die verwendeten Ports sowie das Passwort wurden im Vorhinein auf der #htl3r.short[ise] festgelegt.
 
-In dieser Konfiguration werden Anmeldeversuche zunächst an den zentralen #htl3r.short[radius]-Server weitergeleitet. Ist dieser nicht erreichbar, kann optional ein lokaler Benutzer als Fallback verwendet werden. Auf diese Weise wird eine zentrale Verwaltung administrativer Zugriffe ermöglicht, ohne die Erreichbarkeit der Geräte im Fehlerfall zu gefährden.
+In dieser Konfiguration werden Anmeldeversuche zunächst an den zentralen #htl3r.short[radius]-Server weitergeleitet. Ist dieser nicht erreichbar, kann optional ein lokaler Benutzer als Fallback verwendet werden. Auf diese Weise wird eine zentrale Verwaltung administrativer Zugriffe ermöglicht, ohne die Erreichbarkeit der Geräte im Fehlerfall zu verlieren.
 
 === Authentifizierung von Endgeräten mittels IEEE 802.1X
 
 Neben der Absicherung administrativer Zugriffe wurde in der Testumgebung auch der Netzwerkzugang von Endgeräten kontrolliert. Hierfür wird der Standard IEEE 802.1X verwendet, der eine portbasierte Authentifizierung von Geräten an Access-Switchports ermöglicht.
-
 Bei der portbasierten Authentifizierung wird der Zugriff auf einen Switchport zunächst blockiert, bis sich ein angeschlossenes Gerät erfolgreich authentifiziert hat. Erst nach erfolgreicher Authentifizierung wird der Port freigeschaltet und das Gerät erhält Zugriff auf das Netzwerk. Dadurch wird verhindert, dass unbekannte oder nicht autorisierte Geräte automatisch Zugang zum internen Netzwerk erhalten.
 
 Ein 802.1X-System besteht aus drei zentralen Komponenten: dem Endgerät (#htl3r.long[supplicant]), dem Access-Switch (#htl3r.long[authenticator]) und einem Authentifizierungsserver. In der aufgebauten Infrastruktur übernimmt die Cisco #htl3r.long[ise] die Rolle des Authentifizierungsservers. Der Switch kontrolliert den Zugriff auf den Port und leitet Authentifizierungsanfragen über das #htl3r.long[radius]-Protokoll an die #htl3r.short[ise] weiter.
 
-Der Authentifizierungsprozess läuft in mehreren Schritten ab. Nach dem Anschluss eines Endgeräts bleibt der Switchport zunächst im nicht autorisierten Zustand. Das Endgerät startet anschließend den 802.1X-Authentifizierungsprozess und übermittelt seine Zugangsdaten über #htl3r.long[eap]. Der Switch leitet diese Informationen an die Cisco #htl3r.short[ise] weiter, welche die Authentifizierung und Autorisierung gemäß den definierten Richtlinien durchführt. Nach einer erfolgreichen Authentifizierung wird der Port freigeschaltet und dem Gerät ein bestimmtes #htl3r.short[vlan] zugewiesen. Dieser Ablauf wird im folgenden Diagramm dargestellt:
+Der Authentifizierungsprozess läuft in mehreren Schritten ab. Nach dem Anschluss eines Endgeräts bleibt der Switchport zunächst im nicht autorisierten Zustand. Das Endgerät startet anschließend den 802.1X-Authentifizierungsprozess und übermittelt seine Zugangsdaten über das #htl3r.long[eap]. Der Switch leitet diese Informationen an die Cisco #htl3r.short[ise] weiter, welche die Authentifizierung und Autorisierung gemäß den definierten Richtlinien durchführt. Nach einer erfolgreichen Authentifizierung wird der Port freigeschaltet und dem Gerät ein bestimmtes #htl3r.short[vlan] zugewiesen. Dieser Ablauf wird im folgenden Diagramm dargestellt:
 
 #figure(
   image("../assets/dot1x_ablauf.png", width: 100%),
   caption: [802.1X Ablauf],
 )
 
-Die Autorisierung der Endgeräte erfolgt über Richtlinien innerhalb der Cisco #htl3r.short[ise]. Dort können Authentifizierungs- und Autorisierungspolicies definiert werden, anhand derer entschieden wird, welche Berechtigungen ein Gerät nach erfolgreicher Authentifizierung erhält.
+Die Autorisierung der Endgeräte erfolgt über Richtlinien innerhalb der #htl3r.short[ise]. Dort können Authentifizierungs- und Autorisierungspolicies definiert werden, anhand derer entschieden wird, welche Berechtigungen ein Gerät nach erfolgreicher Authentifizierung erhält.
 
 #figure(
   image("../assets/ise_authz_policy.png", width: 100%),
@@ -143,10 +135,10 @@ Bei der obigen Abbildung handelt es sich um die Authorization Policy, welche ver
 - Der Benutzername ist dem System nicht bekannt oder das Kennwort ist falsch: #linebreak()
   Der Switchport bleibt im unautorisierten Zustand.
 
-Auf den Access-Switches wird 802.1X aktiviert und der Switchport als #htl3r.long[authenticator] konfiguriert. Dies ist mit folgendem Skript möglich:
+Auf den Access-Switches wurde 802.1X aktiviert und der Switchport als #htl3r.long[authenticator] konfiguriert. Dies ist mit folgendem Skript möglich:
 #htl3r.code(
   caption: [Auszug der 802.1X-Konfiguration auf einem Access-Switch],
-  description: `Cisco IOS Script`,
+  description: `Cisco IOS Skript`,
 )[
   ```cisco
   dot1x system-auth-control
@@ -161,7 +153,7 @@ Auf den Access-Switches wird 802.1X aktiviert und der Switchport als #htl3r.long
   ```
 ]
 
-Nach erfolgreicher Authentifizierung kann der Status eines Ports über entsprechende Befehle überprüft werden. Auf Cisco-Switches liefert der Befehl `show authentication sessions interface` detaillierte Informationen über den aktuellen Authentifizierungszustand eines Ports:
+Nach erfolgreicher Authentifizierung kann der Status eines Ports durch entsprechende Befehle überprüft werden. Auf Cisco-Switches liefert der Befehl `show authentication sessions interface` detaillierte Informationen über den aktuellen Authentifizierungszustand eines Ports:
 
 #htl3r.code(
   caption: [Ausgabe eines Befehls zur Überprüfung von Authentifizierungen],
