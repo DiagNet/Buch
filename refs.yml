@@ -37,6 +37,16 @@ astral-uv:
     date: 2026-02-07
   date: 2024-02-15
 
+bootstrap-docs:
+  type: web
+  title: "Bootstrap 5 Documentation"
+  author:
+    - name: The Bootstrap Authors
+  url:
+    value: https://getbootstrap.com/docs/5.3/
+    date: 2026-03-07
+  date: 2024-01-01
+
 direnv-docs:
   type: web
   title: "direnv: unclutter your .profile"
@@ -87,6 +97,16 @@ fernet-spec:
     value: https://github.com/fernet/spec/blob/master/Spec.md
     date: 2026-03-07
   date: 2013-01-01
+
+htmx-docs:
+  type: web
+  title: "htmx Documentation"
+  author:
+    - name: Big Sky Software
+  url:
+    value: https://htmx.org/docs/
+    date: 2026-03-07
+  date: 2024-01-01
 
 jetbrains-config-drift:
   type: web

@@ -2,7 +2,7 @@
 
 #htl3r.author("Luka Pacar")
 
-= Dynamische Formulare
+= Dynamische Formulare <dynamic_forms>
 Bei der Architektur von _#htl3r.long[diagnet]_ wurde großer Wert auf eine klare Trennung zwischen der Testlogik und der grafischen Oberfläche gelegt.
 Während die Implementierung der Netzwerktests und deren Parameterdefinitionen ausschließlich in Python-Dateien vorliegt, muss die Benutzeroberfläche diese Strukturen abbilden können.
 Da sich die erforderlichen Eingaben für jedes Testszenario stark unterscheiden, ist ein statisches #htl3r.full[html]-Formular keine Lösung.
