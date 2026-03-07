@@ -87,6 +87,15 @@ asgi:
     die als Nachfolger von WSGI WebSocket-Verbindungen und andere
     asynchrone Protokolle nativ unterstützt.
 
+asw:
+  short:
+    singular: ASW
+    plural: ASWs
+  long:
+    singular: Access Switch
+    plural: Access Switches
+  description: Ein Netzwerk-Switch auf der Zugriffsebene, an den Endgeräte direkt angeschlossen werden.
+
 authenticator:
   long:
     singular: Authenticator
@@ -121,12 +130,35 @@ bootstrap:
     Ein komponentenbasiertes CSS-Framework, das ein Grid-System sowie vorgefertigte
     UI-Komponenten für die Entwicklung responsiver Webanwendungen bereitstellt.
 
+bpdu:
+  short:
+    singular: BPDU
+    plural: BPDUs
+  long:
+    singular: Bridge Protocol Data Unit
+    plural: Bridge Protocol Data Units
+  description: Steuerpakete des Spanning Tree Protocols, welche Switches untereinander austauschen, um die Netzwerktopologie zu ermitteln und Schleifen zu verhindern.
+
+cam:
+  short:
+    singular: CAM
+  long:
+    singular: Content Addressable Memory
+  description: Ein Hochgeschwindigkeitsspeicher in Switches, der die MAC-Adresstabelle vorhält und eine sofortige Zuordnung von MAC-Adressen zu Ports ermöglicht.
+
 cd:
   short:
     singular: CD
   long:
     singular: Continuous Deployment
   description: Die automatisierte Bereitstellung von Software in Produktionsumgebungen nach erfolgreicher Integration.
+
+cdp:
+  short:
+    singular: CDP
+  long:
+    singular: Cisco Discovery Protocol
+  description: Ein proprietäres Cisco-Protokoll zur automatischen Erkennung benachbarter Cisco-Geräte und zum Austausch von Geräteinformationen wie Hostname, Plattform und IP-Adresse.
 
 chartjs:
   long:
@@ -165,6 +197,13 @@ css:
     HTML-Dokumenten, die Layout, Farben, Schriften und weitere
     Gestaltungseigenschaften von Webseiten definiert.
 
+dai:
+  short:
+    singular: DAI
+  long:
+    singular: Dynamic ARP Inspection
+  description: Ein Layer-2-Sicherheitsmechanismus in Cisco-Switches, welcher ARP-Pakete anhand der DHCP-Snooping-Bindungstabelle validiert und gefälschte ARP-Antworten verwirft.
+
 daphne:
   long:
     singular: Daphne
@@ -180,6 +219,13 @@ dh:
     singular: Diffie-Hellman
     plural: Diffie-Hellman-Verfahren
   description: Kryptografisches Verfahren zum sicheren Austausch von Schlüsseln über unsichere Netzwerke, das häufig bei VPN-Verbindungen eingesetzt wird.
+
+dhcp:
+  short:
+    singular: DHCP
+  long:
+    singular: Dynamic Host Configuration Protocol
+  description: Ein Netzwerkprotokoll zur automatischen Zuweisung von IP-Adressen und weiteren Netzwerkparametern an Clients in einem lokalen Netzwerk.
 
 # Danijel
 diagnet:
@@ -231,6 +277,22 @@ dot1x:
     plural: IEEE 802.1X Port-Based Network Access Control
   description: Standard zur portbasierten Authentifizierung von Geräten in Netzwerken.
 
+dsw:
+  short:
+    singular: DSW
+    plural: DSWs
+  long:
+    singular: Distribution Switch
+    plural: Distribution Switches
+  description: Ein zentraler Switch, der die Verbindung zwischen der Access-Ebene und dem Kernnetzwerk herstellt und häufig das Inter-VLAN-Routing übernimmt.
+
+dtp:
+  short:
+    singular: DTP
+  long:
+    singular: Dynamic Trunking Protocol
+  description: Ein Cisco-proprietäres Protokoll zur automatischen Aushandlung von Trunk-Verbindungen zwischen Switches, welches in sicherheitsbewussten Umgebungen deaktiviert werden sollte.
+
 eap:
   short:
     singular: EAP
@@ -278,6 +340,13 @@ fabrikmethode:
     singular: Fabrikmethode
   description: >-
     Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert, wobei die konkrete Instanziierung den Unterklassen überlassen wird.
+
+fg:
+  short:
+    singular: FG
+  long:
+    singular: FortiGate
+  description: Eine Next-Generation Firewall des Herstellers Fortinet zur Absicherung von Netzwerken.
 
 fhrp:
   short:
@@ -445,6 +514,20 @@ interface:
     singular: Netzwerkinterface
   description: Eine physische oder logische Schnittstelle eines Netzwerkgeräts zur Datenübertragung.
 
+ios:
+  short:
+    singular: IOS
+  long:
+    singular: Internetwork Operating System
+  description: Das Betriebssystem von Cisco für Router und Switches, welches die Konfiguration und den Betrieb von Netzwerkfunktionen steuert.
+
+ip:
+  short:
+    singular: IP
+  long:
+    singular: Internet Protocol
+  description: Das grundlegende Netzwerkprotokoll zur Adressierung und Weiterleitung von Datenpaketen in paketbasierten Netzwerken.
+
 ipsec:
   short:
     singular: IPsec
@@ -512,6 +595,29 @@ kpi:
   description: >-
     Eine messbare Kennzahl, die den Fortschritt oder Erfolg eines Systems,
     Prozesses oder Projekts in Bezug auf ein definiertes Ziel bewertet.
+
+lacp:
+  short:
+    singular: LACP
+  long:
+    singular: Link Aggregation Control Protocol
+  description: Ein IEEE-802.3ad-Standard zur dynamischen Bündelung mehrerer physischer Netzwerkverbindungen zu einem logischen Link, um Bandbreite und Redundanz zu erhöhen.
+
+lan:
+  short:
+    singular: LAN
+    plural: LANs
+  long:
+    singular: Local Area Network
+    plural: Local Area Networks
+  description: Ein lokales Netzwerk, das Geräte innerhalb eines räumlich begrenzten Bereichs wie einem Gebäude oder Campus miteinander verbindet.
+
+lldp:
+  short:
+    singular: LLDP
+  long:
+    singular: Link Layer Discovery Protocol
+  description: Ein herstellerneutraler IEEE-802.1AB-Standard zur automatischen Erkennung benachbarter Netzwerkgeräte und zum Austausch von Geräteinformationen auf Schicht 2.
 
 lsdb:
   short:
@@ -684,6 +790,15 @@ pat:
     plural: Port Address Translations
   description: Eine Erweiterung von NAT, die es ermöglicht, mehrere Geräte im lokalen Netzwerk über eine einzige öffentliche IP-Adresse abzubilden, indem unterschiedliche Source-Ports verwendet werden.
 
+pdf:
+  short:
+    singular: PDF
+    plural: PDFs
+  long:
+    singular: Portable Document Format
+    plural: Portable Document Formats
+  description: Ein plattformunabhängiges Dateiformat für elektronische Dokumente, welches das Layout originalgetreu bewahrt.
+
 pid:
   short:
     singular: PID
@@ -711,6 +826,13 @@ prettier:
     singular: Prettier
   description: Ein "opinionated" Code-Formatter, der vorrangig für Web-Technologies (JavaScript, CSS, HTML, JSON) eingesetzt wird, um einen einheitlichen Stil zu erzwenken.
 
+pvst:
+  short:
+    singular: PVST+
+  long:
+    singular: Rapid Per-VLAN Spanning Tree Plus
+  description: Eine Cisco-Erweiterung des Spanning Tree Protocols, welche für jedes VLAN eine eigene Spanning-Tree-Instanz betreibt und dadurch lastverteiltes Routing über redundante Pfade ermöglicht.
+
 pyats:
   long:
     singular: pyATS
@@ -720,6 +842,13 @@ python_dictionary:
   long:
     singular: Python-Dictionary
   description: Eine Datenstruktur in Python zur Speicherung von Schlüssel-Wert-Paaren.
+
+qos:
+  short:
+    singular: QoS
+  long:
+    singular: Quality of Service
+  description: Mechanismen zur priorisierten Behandlung von Netzwerkverkehr, um bestimmten Anwendungen wie VoIP eine garantierte Bandbreite und geringe Latenz zuzusichern.
 
 radius:
   short:
@@ -806,11 +935,27 @@ ssh:
     singular: Secure Shell
   description: Ein verschlüsseltes Netzwerkprotokoll für den sicheren Fernzugriff auf Geräte.
 
+stp:
+  short:
+    singular: STP
+  long:
+    singular: Spanning Tree Protocol
+  description: Ein Netzwerkprotokoll auf Schicht 2, welches redundante Pfade in einem geswitchten Netzwerk erkennt und logisch blockiert, um Schleifen und Broadcast-Stürme zu verhindern.
+
 supplicant:
   long:
     singular: Supplicant
     plural: Supplicants
   description: Ein Client-System oder eine Softwarekomponente auf einem Endgerät, die im Rahmen von 802.1X Authentifizierungsinformationen an einen Authenticator sendet.
+
+svi:
+  short:
+    singular: SVI
+    plural: SVIs
+  long:
+    singular: Switch Virtual Interface
+    plural: Switch Virtual Interfaces
+  description: Eine virtuelle Layer-3-Schnittstelle auf einem Multilayer-Switch, welche Inter-VLAN-Routing sowie den Management-Zugriff auf das Gerät ermöglicht.
 
 tcp:
   short:
@@ -854,6 +999,13 @@ ucs:
     plural: Cisco Unified Computing Systems
   description: Von Cisco entwickeltes Rechenzentrums-System, das Server, Netzwerkkomponenten und Managementfunktionen in einer Plattform zusammenführt.
 
+udld:
+  short:
+    singular: UDLD
+  long:
+    singular: Unidirectional Link Detection
+  description: Ein Cisco-Protokoll zur Erkennung unidirektionaler Glasfaserverbindungen, bei welchen Daten nur in eine Richtung fließen, was zu Schleifen oder Black Holes führen kann.
+
 udp:
   short:
     singular: UDP
@@ -889,6 +1041,13 @@ vlan:
     plural: Virtual Local Area Networks
   description: Ein logisches Teilnetz innerhalb eines physischen Netzwerks, das Geräte unabhängig von ihrem Standort isoliert.
 
+voip:
+  short:
+    singular: VoIP
+  long:
+    singular: Voice over IP
+  description: Eine Technologie zur Übertragung von Sprach- und Videokommunikation über IP-basierte Netzwerke, welche spezielle QoS-Anforderungen an die Switching-Infrastruktur stellt.
+
 vpn:
   short:
     singular: VPN
@@ -905,9 +1064,18 @@ vpn_tunnel:
   description: Ein logisch aufgebauter, verschlüsselter Kommunikationskanal innerhalb eines Virtual Private Networks.
 
 vsphere:
+  short:
+    singular: vSphere
   long:
     singular: vSphere
   description: Eine Virtualisierungsplattform von VMware zur Verwaltung virtueller Maschinen, Hosts und Netzwerke.
+
+vtp:
+  short:
+    singular: VTP
+  long:
+    singular: VLAN Trunking Protocol
+  description: Ein Cisco-proprietäres Protokoll zur zentralen Verwaltung und Synchronisation der VLAN-Datenbank zwischen allen Switches einer gemeinsamen VTP-Domain.
 
 wan:
   short:

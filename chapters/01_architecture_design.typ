@@ -1,141 +1,98 @@
 #import "@preview/htl3r-da:2.0.0" as htl3r
 
 #htl3r.author("Danijel Stamenkovic")
-= Design und Aufbau der Infrastruktur
+= Design und Aufbau der Infrastruktur <architektur>
 
-Für die Umsetzung von #htl3r.long[diagnet] war eine Testumgebung notwendig, in der sowohl reale Netzwerkeigenschaften als auch komplexe Topologien abgebildet werden können.
-Eine rein virtuelle Umgebung hätte zwar viel Flexibilität geboten, jedoch lassen sich bestimmte Funktionen wie Port-Security, #htl3r.full[vlan]-Zuweisungen oder das Verhalten physischer Switch-Ports nur eingeschränkt realistisch testen.
-Aus diesem Grund wurde ein hybrider Ansatz gewählt, der aus einer Kombination von echter Hardware und einer virtuellen Umgebung auf Basis von #htl3r.full[gns3] besteht.
-Ziel war es, eine möglichst praxisnahe Infrastruktur aufzubauen, die gleichzeitig flexibel erweiterbar bleibt.
+Damit #htl3r.long[diagnet] unter realistischen Bedingungen entwickelt und getestet werden konnte, wurden zwei voneinander unabhängige Umgebungen aufgebaut. Der erste Bereich umfasst das physische Labor mit echter Cisco-Hardware. Der zweite Bereich ist eine vollständig separate Simulationsumgebung auf Basis von #htl3r.full[gns3]. Beide Umgebungen sind nicht miteinander verbunden und wurden jeweils eigenständig betrieben.
+
+Diese Trennung wurde bewusst gewählt, da eine reine Simulation für viele Testfälle nicht die erforderliche Aussagekraft besitzt. Sicherheitsfunktionen wie Port-Security verhalten sich auf den physischen Chips eines Switches oft anders als in einer Software-Simulation. Dadurch konnten dieselben Testfälle einmal in der Simulation und einmal an realer Hardware ausgeführt und die Ergebnisse verglichen werden.
+
+== Physischer Standort (Labor)
+
+Im physischen Labor befindet sich die Hardware von Cisco, welche von der CANCOM Austria AG bereitgestellt wurde. Die Abbildung @fig-physische-topologie zeigt das Zusammenspiel der einzelnen Komponenten an diesem Standort.
+
 #figure(
-  image("../assets/Topologie - DiagNet.jpg", width: 95%),
-  caption: [Detaillierte Topologie: Links die virtuelle #htl3r.short[gns3]-Instanz, rechts die physische Hardware, verbunden über den #htl3r.full[802.1Q] #htl3r.long[trunk].],
-) <fig-hybrid-arch>
+  image("../assets/topo_physisch_final.png", width: 96%),
+  caption: [
+    Physische Topologie: Das Cisco-Labor mit ISR-Routern, Catalyst-Switches und dem UCS-Server für den Fernzugriff.
+  ],
+) <fig-physische-topologie>
 
+Den Eingang zum Labor bilden zwei Cisco ISR4331 Router, welche als #htl3r.full[zbf] konfiguriert wurden. Ein zentraler Bestandteil des Labors ist ein Cisco UCS-Server, der als administrativer Zugangspunkt für die Verwaltung der Netzwerkgeräte dient.
 
+Hinter den Firewalls arbeitet ein Catalyst-Switch als Distribution-Switch, welcher das Routing zwischen den verschiedenen #htl3r.full[vlan] Segmenten übernimmt. An diesem Switch sind die Access-Switches angeschlossen, an denen die Layer-2-Sicherheitsfunktionen wie Port-Security und DHCP Snooping implementiert wurden. Zur zentralen Authentifizierung der Zugriffe wird eine Cisco Identity Services Engine eingesetzt, welche als #htl3r.short[ise] bezeichnet wird.
 
+== Virtueller Standort (GNS3)
 
-== Entscheidung für ein hybrides Design
+Parallel zum hybriden Aufbau wurde eine vollständig separate Simulationsumgebung in der Software #htl3r.short[gns3] erstellt @gns3-docs. Diese Umgebung besitzt keine direkte Verbindung zum physischen Labor. Es handelt sich um ein eigenständiges System, das ausschließlich für die Entwicklung und Simulation von komplexen Topologien genutzt wird. In dieser Umgebung wird die DiagNet-Applikation betrieben und gegen die simulierten Netzwerkkomponenten getestet.
 
-Der hybride Aufbau ermöglicht es, sicherheitskritische und ressourcenintensive Komponenten auf echter Hardware zu betreiben, während Router, #htl3r.full[wan]-Strecken und zusätzliche Standorte virtuell realisiert werden.
-Dadurch können reale Tests durchgeführt werden, ohne auf die Vorteile einer Simulation verzichten zu müssen.
-Gerade für Testszenarien mit wechselnden Anforderungen ist diese Flexibilität ein großer Vorteil.
-== Physische Infrastruktur
+#figure(
+  image("../assets/topo_gns3_final.png", width: 100%),
+  caption: [
+    GNS3-Simulationsumgebung: Diese Topologie dient als primäre Umgebung für die Entwicklung der Testfälle und ist vollständig vom physischen Aufbau getrennt.
+  ],
+) <fig-gns3>
 
-Die physische Umgebung besteht aus einem Multilayer-Switch, mehreren Access-Switches sowie verschiedenen Security-Komponenten.
-Der Multilayer-Switch übernimmt die Rolle des zentralen Verteilers. Auf diesem Gerät werden #htl3r.short[vlan]s konfiguriert, Inter-#htl3r.short[vlan]-Routing durchgeführt und die Verbindung zur virtuellen Umgebung hergestellt.
-An den Access-Switches sind Endgeräte wie Test-PCs oder Laptops angeschlossen.
-Diese Switches werden verwendet, um Funktionen wie Port-Security, #htl3r.short[vlan]-Zuweisung und Zugriffsbeschränkungen praxisnah zu testen.
-Zusätzlich kommt eine Cisco #htl3r.full[ise] zum Einsatz, die für die Authentifizierung von Clients zuständig ist.
-Da dieser Dienst hohe Anforderungen an CPU und Arbeitsspeicher stellt, wird er auf dedizierter Hardware betrieben, um einen stabilen Betrieb zu gewährleisten.
+Die Simulation war während der gesamten Entwicklungsphase unverzichtbar, da dort Netzwerke mit einer größeren Anzahl an Switches aufgebaut werden konnten, als physisch im Labor zur Verfügung standen. Da DiagNet über das Protokoll #htl3r.full[ssh] mit den Geräten kommuniziert, ist der Ablauf eines Testfalls identisch, unabhängig davon, ob das Zielgerät physisch vorhanden ist oder in GNS3 simuliert wird.
 
+== Designentscheidungen
 
+Die Entscheidung für eine zentrale Authentifizierung über die ISE wurde getroffen, um die Verwaltung von Administrator-Passwörtern zu vereinfachen. Anstatt Passwörter auf jedem Switch einzeln zu pflegen, ermöglicht dieses Design eine zentrale Änderung, die sofort für alle Geräte im Labor wirksam wird.
 
+Beim Spanning-Tree-Protokoll wurde auf Rapid PVST+ gesetzt. Dieser Standard bietet den Vorteil, dass der Zustand für jedes VLAN separat geprüft werden kann. Dies macht die Auswertung der automatisierten Tests in DiagNet deutlich präziser und erleichtert die Identifizierung von Konfigurationsfehlern in einzelnen Netzwerksegmenten.
 
-== Virtuelle Umgebung gns3
+== VLAN-Konzept
 
-In der virtuellen Umgebung werden hauptsächlich Router und #htl3r.short[wan]-Strecken simuliert.
-Dazu zählen Core-Router, Standort-Router sowie eine Internet-Anbindung über eine #htl3r.full[nat]-Cloud.
-Diese Struktur ermöglicht es, Routing-Protokolle, Redundanzmechanismen und Ausfallszenarien zu testen, ohne Änderungen an der physischen Verkabelung vornehmen zu müssen.
+Das Netzwerk im Labor wurde in vier funktionale Bereiche unterteilt, um eine klare Trennung der Datenströme zu erreichen.
 
+#figure(
+  table(
+    columns: (auto, auto, 1fr),
+    inset: 8pt,
+    align: (center, center, left),
+    table.header([*VLAN-ID*], [*Name*], [*Zweck*]),
+    [10], [CLIENTS-A], [Endgeräte am ersten Access-Switch],
+    [20], [CLIENTS-B], [Endgeräte am zweiten Access-Switch],
+    [99], [MANAGEMENT], [Verwaltung der Switches über SSH],
+    [999], [NATIVE-VLAN], [Native VLAN für ungetaggten Datenverkehr],
+  ),
+  caption: [Einteilung der VLAN-Segmente im physischen Labor.],
+) <tab-vlans>
 
+Der Datenverkehr zwischen den produktiven VLANs wird ausschließlich über den Distribution-Switch geleitet. Die Access-Switches fungieren als reine Layer-2-Geräte. Durch die Nutzung eines dedizierten Native VLANs wurde sichergestellt, dass ungetaggter Datenverkehr nicht unkontrolliert in die produktiven Netze gelangen kann.
 
+== IP-Adressierungsschema
 
-== Verbindung zwischen physischer und virtueller Umgebung
+Das gewählte Adressschema folgt dem logischen Muster `10.0.VLAN.Host`. Dies ermöglicht es, die Zugehörigkeit eines Geräts zu einem bestimmten Netzwerksegment direkt an der IP-Adresse zu erkennen.
 
-Die Verbindung zwischen Hardware und #htl3r.short[gns3] erfolgt über einen #htl3r.long[trunk]-Port des Multilayer-Switches, der mit einer zweiten Netzwerkkarte des #htl3r.short[gns3]-Servers verbunden ist.
-Damit #htl3r.short[vlan]-Tags korrekt in #htl3r.short[gns3] ankommen, wurde auf dem Server das #htl3r.short[vlan]-Offloading deaktiviert.
-Zusätzlich läuft die Netzwerkkarte im Promiscuous Mode, sodass getaggte Ethernet-Frames unverändert an die virtuellen Geräte weitergegeben werden.
+#figure(
+  table(
+    columns: (auto, auto, auto),
+    inset: 8pt,
+    align: (center, center, left),
+    table.header([*Gerät*], [*IP-Adresse*], [*Funktion*]),
+    [DSW], [10.0.99.1], [Distribution-Switch und Gateway für VLAN 99],
+    [ASW-1], [10.0.99.2], [Erster Access-Switch im Management-Netz],
+    [ASW-2], [10.0.99.3], [Zweiter Access-Switch im Management-Netz],
+    [ISE], [10.0.99.10], [Zentraler Server für Authentifizierung],
+  ),
+  caption: [IP-Adressierung für die Verwaltung der Infrastruktur.],
+) <tab-ips>
 
+Über das Management-VLAN greift die DiagNet-Applikation direkt auf diese IP-Adressen zu, um die Testläufe gegen die physischen Geräte durchzuführen.
 
+== Management-Netzwerk und Zugriffsschutz
 
+Das Management-VLAN wurde strikt vom restlichen Datenverkehr getrennt. Dies stellt sicher, dass der administrative Zugriff auf die Geräte auch bei einer hohen Auslastung oder Fehlern im produktiven Netz stabil bleibt. Die Anmeldung erfolgt verschlüsselt über SSH in der Version 2 oder über Telnet, wenn die Sicherheit von zweitrangiger Bedeutung ist.
 
-== Routing-Konzept
+```
+line vty 0 15
+ transport input ssh telnet
+ login authentication SSH_AUTH
+```
 
-Für die Kommunikation zwischen allen Netzwerkteilen wird ein dynamisches Routing-Protokoll eingesetzt.
-Statische Routen wären bei der Größe der Infrastruktur nur schwer wartbar.
+Um den Zugriff auch bei einem Ausfall des zentralen RADIUS-Servers sicherzustellen, wurde auf den Geräten ein lokaler Zugang für den Notfall eingerichtet. Dies verhindert, dass man sich im Falle einer Störung der ISE selbst vom System ausschließt.
 
-Es wird #htl3r.full[ospf]v2 verwendet.
-Das Netzwerk ist in mehrere Areas unterteilt:
+== Benennung und Trennung der Logik
 
-- Area 0: Backbone-Area mit Multilayer-Switch und virtuellen Core-Routern
-- Area 1: Enthält die simulierten Außenstellen
-
-Fällt eine Verbindung aus, berechnet #htl3r.short[ospf] automatisch eine alternative Route.
-
-
-
-
-== Management-Netzwerk
-
-Zusätzlich zum produktiven Netzwerk existiert ein separates Management-Netzwerk.
-
-Jedes physische Gerät verfügt über einen dedizierten Management-Port.
-Diese Ports befinden sich in #htl3r.short[vlan] 10 und sind vollständig vom produktiven Datenverkehr getrennt.
-Auch bei fehlerhaften Konfigurationen im produktiven Netzwerk bleibt der Zugriff auf die Geräte über das Management-Netz bestehen.
-
-
-
-
-== IP-Adressierung
-
-Das verwendete IP-Adressschema lautet:
-
-`10.Site.VLAN.Host`
-
-Zusätzlich wird anhand des Hostbereichs unterschieden, ob es sich um physische oder virtuelle Geräte handelt:
-
-- 1–100: Physische Geräte
-- 101–200: Virtuelle Geräte
-
-Beispiel:
-
-- `10.1.20.5` – Physischer Server
-- `10.1.20.150` – Virtueller Router
-
-Dieses Schema erleichtert die Übersicht und wird auch für Automatisierungsskripte verwendet.
-
-
-
-
-== Native-VLAN-Strategie
-
-Standardmäßig wird #htl3r.short[vlan] 1 als Native #htl3r.short[vlan] verwendet. Im hybriden Betrieb führte dies zu Problemen bei der Übergabe von ungetaggten Frames.
-Aus diesem Grund wurde das Native #htl3r.short[vlan] global auf #htl3r.short[vlan] 999 geändert.
-Dadurch ist jedes produktive Paket gezwungen, ein #htl3r.short[vlan]-Tag zu tragen.
-Ungetaggte Frames werden #htl3r.short[vlan] 999 zugeordnet und beeinflussen das produktive Netzwerk nicht.
-Diese Maßnahme erhöht die Stabilität der Verbindung zwischen physischer Infrastruktur und #htl3r.short[gns3] deutlich.
-== Dokumentation und Strukturierung
-
-Alle relevanten Informationen zur Infrastruktur werden dokumentiert. Dazu zählen Topologiepläne, IP-Adressbereiche, #htl3r.short[vlan]-Übersichten sowie Gerätebezeichnungen.
-Die Dokumentation wird im selben GitHub-Repository wie das Diplomarbeitsbuch verwaltet. Änderungen an der Infrastruktur können dadurch versioniert nachvollzogen werden.
-Diese Vorgehensweise ermöglicht es auch anderen Personen, die Umgebung später nachzubauen oder weiterzuentwickeln.
-== Namenskonzept für Netzwerkgeräte
-
-Für alle Netzwerkgeräte wurde ein einheitliches Namensschema definiert.
-Das Schema setzt sich aus Gerätekategorie, Standort und laufender Nummer zusammen, zum Beispiel:
-
-- CORE-R1
-- DIST-SW1
-- ACC-SW1
-- SITE1-R1
-
-Durch dieses Namenskonzept ist bereits anhand des Gerätenamens erkennbar, welche Funktion ein Gerät im Netzwerk übernimmt.
-
-
-
-
-== Trennung zwischen Testumgebung und Infrastruktur
-
-Ein wesentliches Designprinzip von #htl3r.long[diagnet] ist die klare Trennung zwischen der zugrunde liegenden Infrastruktur und den darauf ausgeführten Testfällen.
-Die Infrastruktur stellt ausschließlich die Netzwerkumgebung bereit (Router, Switches, Verbindungen, IP-Strukturen und Routing).
-Die eigentlichen Testcases sind davon logisch getrennt und greifen nur über definierte Schnittstellen auf die Geräte zu.
-Dadurch sind die Testfälle unabhängig vom konkreten Aufbau der Topologie.
-Ein Testcase beschreibt, *was* überprüft werden soll (z. B. Erreichbarkeit eines Geräts oder Vorhandensein einer Route), jedoch nicht, *wie* die Infrastruktur intern umgesetzt ist.
-Diese Entkopplung hat mehrere Vorteile:
-
-- Testfälle können unverändert weiterverwendet werden, auch wenn sich die Topologie ändert
-- Neue Standorte oder Geräte können hinzugefügt werden, ohne bestehende Tests anpassen zu müssen
-- Fehler lassen sich besser eingrenzen, da klar zwischen Infrastrukturproblemen und Testlogik unterschieden werden kann
-
-Somit fungiert die Infrastruktur als hilfreiche Basis, während die Testcases flexibel und unabhängig davon weiterentwickelt werden können.
+Die Benennung der Geräte folgt einem funktionalen Schema (z. B. DSW, ASW), welches in der Datenbank von DiagNet als Bezeichner dient. Ein wesentliches Prinzip beim Aufbau war die Trennung zwischen der physikalischen Infrastruktur und der Testlogik. Die Testfälle sind so konzipiert, dass sie unabhängig von der spezifischen Verkabelung funktionieren. Sie verbinden sich mit einer IP-Adresse und prüfen die Konfigurationsparameter, was den Einsatz derselben Testfälle sowohl in der GNS3-Simulation als auch im physischen Labor ermöglicht.
