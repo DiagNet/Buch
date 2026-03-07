@@ -254,6 +254,13 @@ hermetic:
     plural: hermetische
   description: Beschreibt in Build-Systemen eine Umgebung, die vollständig isoliert ist und keinen Zugriff auf das Dateisystem oder Netzwerk des Host-Computers hat, außer explizit deklarierte Eingaben.
 
+hmac:
+  short:
+    singular: HMAC
+  long:
+    singular: Hash-based Message Authentication Code
+  description: Ein kryptografischer Mechanismus zur Überprüfung der Integrität und Authentizität von Nachrichten, der eine Hash-Funktion in Kombination mit einem geheimen Schlüssel verwendet.
+
 hsrp:
   short:
     singular: HSRP
@@ -504,6 +511,13 @@ ospf_area:
   long:
     singular: OSPF Area
   description: Ein logischer Bereich innerhalb eines OSPF-Netzwerks zur Strukturierung und Skalierung.
+
+owasp:
+  short:
+    singular: OWASP
+  long:
+    singular: Open Web Application Security Project
+  description: Eine gemeinnützige Organisation, die frei verfügbare Ressourcen, Werkzeuge und Richtlinien zur Verbesserung der Sicherheit von Webanwendungen bereitstellt.
 
 parser:
   long:
