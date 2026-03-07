@@ -16,6 +16,13 @@
     singular: IEEE 802.1Q
   description: Der gängigste Standard für das VLAN-Tagging in Ethernet-Netzwerken, der es ermöglicht, mehrere VLANs über eine einzige physische Verbindung zu übertragen.
 
+aaa:
+  short:
+    singular: AAA
+  long:
+    singular: Authentication, Authorization and Accounting
+  description: Ein Sicherheitskonzept zur zentralen Verwaltung von Authentifizierung, Autorisierung und Protokollierung von Benutzerzugriffen auf Netzwerkgeräte.
+
 abr:
   short:
     singular: ABR
@@ -79,6 +86,12 @@ asgi:
     Eine Python-Spezifikation für asynchrone Webserver und -anwendungen,
     die als Nachfolger von WSGI WebSocket-Verbindungen und andere
     asynchrone Protokolle nativ unterstützt.
+
+authenticator:
+  long:
+    singular: Authenticator
+    plural: Authenticators
+  description: Ein Netzwerkgerät, das im Rahmen von 802.1X den Zugriff eines Clients kontrolliert und die Authentifizierungsinformationen an einen Authentication-Server weiterleitet.
 
 backbone:
   long:
@@ -199,6 +212,13 @@ dom:
     Eine plattform- und sprachneutrale Schnittstelle, die ein HTML- oder
     XML-Dokument als Baumstruktur darstellt und Programmen ermöglicht, Inhalt,
     Struktur und Stil dynamisch zu ändern.
+
+eap:
+  short:
+    singular: EAP
+  long:
+    singular: Extensible Authentication Protocol
+  description: Ein Framework für Authentifizierungsverfahren, das häufig in Verbindung mit 802.1X verwendet wird.
 
 ebgp:
   short:
@@ -516,6 +536,13 @@ mvt:
     singular: Model-View-Template
   description: Ein leicht abgewandeltes MVC-Architekturmuster, das im Django-Framework verwendet wird. Hierbei übernimmt das Framework die Controller-Rolle und das Template die Präsentation.
 
+nac:
+  short:
+    singular: NAC
+  long:
+    singular: Network Access Control
+  description: Ein Sicherheitskonzept zur Kontrolle des Zugriffs auf ein Netzwerk, bei dem Geräte oder Benutzer vor der Gewährung des Netzwerkzugangs authentifiziert und überprüft werden.
+
 nat:
   short:
     singular: NAT
@@ -660,6 +687,13 @@ python_dictionary:
     singular: Python-Dictionary
   description: Eine Datenstruktur in Python zur Speicherung von Schlüssel-Wert-Paaren.
 
+radius:
+  short:
+    singular: RADIUS
+  long:
+    singular: Remote Authentication Dial-In User Service
+  description: Ein Netzwerkprotokoll zur zentralen Authentifizierung, Autorisierung und Protokollierung von Benutzerzugriffen auf Netzwerkgeräte.
+
 rce:
   short:
     singular: RCE
@@ -738,6 +772,12 @@ ssh:
     singular: Secure Shell
   description: Ein verschlüsseltes Netzwerkprotokoll für den sicheren Fernzugriff auf Geräte.
 
+supplicant:
+  long:
+    singular: Supplicant
+    plural: Supplicants
+  description: Ein Client-System oder eine Softwarekomponente auf einem Endgerät, die im Rahmen von 802.1X Authentifizierungsinformationen an einen Authenticator sendet.
+
 tcp:
   short:
     singular: TCP
@@ -800,8 +840,10 @@ vip:
 vlan:
   short:
     singular: VLAN
+    plural: VLANs
   long:
     singular: Virtual Local Area Network
+    plural: Virtual Local Area Networks
   description: Ein logisches Teilnetz innerhalb eines physischen Netzwerks, das Geräte unabhängig von ihrem Standort isoliert.
 
 vpn:
