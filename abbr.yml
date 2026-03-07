@@ -70,6 +70,16 @@ as:
     plural: Autonome Systeme
   description: Eine Sammlung von IP-Netzwerken unter der Kontrolle einer einzigen administrativen Einheit, die eine gemeinsame Routing-Politik verfolgt.
 
+asgi:
+  short:
+    singular: ASGI
+  long:
+    singular: Asynchronous Server Gateway Interface
+  description: >-
+    Eine Python-Spezifikation für asynchrone Webserver und -anwendungen,
+    die als Nachfolger von WSGI WebSocket-Verbindungen und andere
+    asynchrone Protokolle nativ unterstützt.
+
 backbone:
   long:
     singular: Backbone
@@ -141,6 +151,13 @@ css:
     Eine Stylesheet-Sprache zur Beschreibung der visuellen Darstellung von
     HTML-Dokumenten, die Layout, Farben, Schriften und weitere
     Gestaltungseigenschaften von Webseiten definiert.
+
+daphne:
+  long:
+    singular: Daphne
+  description: >-
+    Ein HTTP-, HTTP/2- und WebSocket-Server für ASGI-Applikationen,
+    der als Referenzimplementierung für Django Channels dient.
 
 # Danijel
 diagnet:
@@ -554,6 +571,16 @@ nixfmt:
     singular: nixfmt
   description: Ein Formatter für Nix-Code, der sicherstellt, dass alle `.nix`-Konfigurationsdateien einem Standardstil folgen.
 
+oci:
+  short:
+    singular: OCI
+  long:
+    singular: Open Container Initiative
+  description: >-
+    Eine offene Industrienorm für Container-Formate und -Laufzeiten,
+    die sicherstellt, dass Container-Images zwischen verschiedenen
+    Laufzeitumgebungen wie Docker und Podman kompatibel sind.
+
 orm:
   short:
     singular: ORM
@@ -595,6 +622,17 @@ pat:
     singular: Port Address Translation
     plural: Port Address Translations
   description: Eine Erweiterung von NAT, die es ermöglicht, mehrere Geräte im lokalen Netzwerk über eine einzige öffentliche IP-Adresse abzubilden, indem unterschiedliche Source-Ports verwendet werden.
+
+pid:
+  short:
+    singular: PID
+  long:
+    singular: Process Identifier
+  description: >-
+    Eine eindeutige numerische Kennung, die vom Betriebssystem jedem
+    laufenden Prozess zugewiesen wird. PID 1 ist der erste Prozess
+    im Userspace und übernimmt besondere Aufgaben bei der
+    Signalweiterleitung und Prozessverwaltung.
 
 port_forwarding:
   long:
@@ -794,6 +832,14 @@ wan:
     singular: Wide Area Network
     plural: Wide Area Networks
   description: Ein Rechnernetz, das sich über einen sehr großen geografischen Bereich erstreckt und verschiedene lokale Netze (LANs) miteinander verbindet.
+
+whitenoise:
+  long:
+    singular: WhiteNoise
+  description: >-
+    Eine Python-Bibliothek, die es Django-Applikationen ermöglicht,
+    statische Dateien direkt aus dem ASGI/WSGI-Prozess heraus
+    effizient auszuliefern, ohne einen separaten Webserver zu benötigen.
 
 xss:
   short:
