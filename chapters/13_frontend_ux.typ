@@ -4,7 +4,7 @@
 
 = User Interface & Visualisierung <frontend_ux>
 
-Die Benutzeroberfläche von #htl3r.long[diagnet] deckt alle Kernfunktionen der Plattform ab: Geräteverwaltung, Testfall-Erstellung und -Ausführung, Ergebnisvisualisierung, Gruppierung sowie Benutzer- und Rechteverwaltung. Das gesamte Frontend basiert auf serverseitigem Rendering nach dem #htl3r.short[mvt]-Muster und wird durch #htl3r.long[bootstrap] 5.3 und #htl3r.long[htmx] 2.0 ergänzt, um Responsivität und partielle Seitenaktualisierungen ohne eigenes JavaScript-Framework zu ermöglichen. Die Visualisierung der Testergebnisse im Dashboard ist in @data_visualization beschrieben.
+Eine Netzwerkverwaltungsplattform lebt davon, dass Statusänderungen sofort sichtbar sind. Das naheliegende Gegenmittel wäre ein clientseitiges JavaScript-Framework wie React oder Vue, das jedoch eine eigenständige API zwischen Frontend und Backend erfordert hätte. Stattdessen setzt #htl3r.long[diagnet] auf #htl3r.long[htmx], das dieselbe Interaktivität direkt aus HTML-Attributen heraus ermöglicht, während der Server die vollständige Kontrolle über das Rendering behält. Die Diagramme und Auswertungen im Dashboard sind in @data_visualization beschrieben.
 
 == Frontend-Technologien <frontend_technologien>
 
