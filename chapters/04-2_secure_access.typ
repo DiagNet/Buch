@@ -39,7 +39,7 @@ Das Endgerät wird als #htl3r.long[supplicant] bezeichnet. Dabei handelt es sich
 
 #figure(
   image("../assets/nac_diagram.png", width: 100%),
-  caption: [Abbildung der #htl3r.short[nac]-Rollen],
+  caption: [Abbildung der NAC-Rollen],
 )
 
 In der hier aufgebauten Testumgebung übernimmt die Cisco #htl3r.long[ise], auf welche später noch genauer eingegangen wird, die Rolle des zentralen Authentifizierungsservers. Die Access-Switches fungieren als #htl3r.longpl[authenticator] und setzen die vom Authentifizierungsserver getroffenen Entscheidungen auf den jeweiligen Switchports um.
@@ -68,7 +68,7 @@ In folgender Abbildung ist das Dashboard der #htl3r.short[ise] zu sehen:
 
 #figure(
   image("../assets/ise-dashboard.png", width: 100%),
-  caption: [Abbildung des #htl3r.short[ise]-Dashboards],
+  caption: [Abbildung des ISE-Dashboards],
 )
 
 Im weiteren Verlauf dieses Kapitels wird beschrieben, wie die Cisco #htl3r.short[ise] konkret zur Absicherung administrativer Zugriffe auf Netzwerkgeräte sowie zur Authentifizierung von Endgeräten mittels IEEE 802.1X eingesetzt wurde.
@@ -83,7 +83,7 @@ Ein weiterer zentraler Vorteil dieser Architektur ist, dass Logs einheitlich pro
 
 #figure(
   image("../assets/ise-logs.png", width: 100%),
-  caption: [#htl3r.short[ise] Live Logs],
+  caption: [ISE Live Logs],
 )
 
 Damit Netzwerkgeräte Authentifizierungsanfragen an die Cisco #htl3r.short[ise] weiterleiten können, müssen sie als #htl3r.short[radius]-Clients konfiguriert werden. Dazu wird auf dem jeweiligen Gerät der #htl3r.short[radius]-Server definiert und anschließend für die Authentifizierung der Managementzugänge verwendet.
@@ -123,7 +123,7 @@ Die Autorisierung der Endgeräte erfolgt über Richtlinien innerhalb der #htl3r.
 
 #figure(
   image("../assets/ise_authz_policy.png", width: 100%),
-  caption: [#htl3r.short[ise] Authorization Policy],
+  caption: [ISE Authorization Policy],
 )
 
 Bei der obigen Abbildung handelt es sich um die Authorization Policy, welche verwendet wird, um Endgeräte über 802.1X zu autorisieren. Es gibt drei mögliche Situationen:
