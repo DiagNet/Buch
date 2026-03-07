@@ -55,7 +55,7 @@ Zusätzlich steht eine "Check All Devices"-Schaltfläche zur Verfügung, die ein
 
 === Hinzufügen und Bearbeiten via Modal
 
-Das Anlegen und Bearbeiten von Geräten erfolgt in einem #htl3r.long[bootstrap]-Modal, das bei Klick auf "Add Device" bzw. "Edit" dynamisch mit dem jeweiligen Formular befüllt wird. Beim Öffnen des Modals wird das Formular per HTMX frisch vom Server geladen, was sicherstellt, dass bei einem erneuten Öffnen keine Überreste aus dem vorherigen Aufruf im #htl3r.short[dom] verbleiben. Nach erfolgreicher Speicherung sendet der Server den HTTP-Status `204 No Content` zurück, was clientseitig das Modal schließt und die Gerätetabelle über das `devicesRefresh`-Event aktualisiert.
+Das Anlegen und Bearbeiten von Geräten erfolgt in einem #htl3r.long[bootstrap]-Modal, das bei Klick auf "Add Device" bzw. "Edit" dynamisch mit dem jeweiligen Formular befüllt wird. Beim Öffnen des Modals wird das Formular per #htl3r.long[htmx] frisch vom Server geladen, was sicherstellt, dass bei einem erneuten Öffnen keine Überreste aus dem vorherigen Aufruf im #htl3r.short[dom] verbleiben. Nach erfolgreicher Speicherung sendet der Server den HTTP-Status `204 No Content` zurück, was clientseitig das Modal schließt und die Gerätetabelle über das `devicesRefresh`-Event aktualisiert.
 
 Das Löschen eines Geräts wird direkt aus der Tabelle heraus mit einem `DELETE`-Request per #htl3r.long[htmx] ausgelöst, wobei ein nativer Browser-Bestätigungsdialog (`hx-confirm`) dem Anwender eine letzte Sicherheitsabfrage stellt.
 
@@ -73,7 +73,7 @@ Die Testverwaltung gliedert sich in die Testfall-Liste mit Detailansicht und Aus
 
 Unter `/tests/` werden alle angelegten Testfälle tabellarisch aufgeführt, jeweils mit Label, zugehörigem Testmodul und dem Ergebnis des letzten Testlaufs. Ein Klick auf einen Testfall öffnet die Detailansicht als Modal, das per HTMX lazy geladen wird. Das Modal gliedert sich in zwei Bereiche: Der obere Teil zeigt einen PASS/FAIL/NEW-Badge mit dem Zeitstempel des letzten Laufs, die konfigurierten Eingabeparameter als zweispaltige Tabelle sowie die zugewiesenen Geräte mit ihrer jeweiligen Rolle. Der untere Bereich enthält eine paginierte Ausführungshistorie, in der jede Zeile die Versuchsnummer (`attempt_id`), Zeitstempel und Pass/Fail-Status ausweist. Ein Klick auf eine Zeile klappt ein Accordion auf, das die einzelnen Testmodule des jeweiligen Laufs mit Modulname, Ergebnis, Meldung und Laufzeit auflistet. Dabei kann jeweils nur ein Accordion gleichzeitig offen sein.
 
-Das Erstellen neuer Testfälle erfolgt über ein dynamisch generiertes Formular, das in @dynamic_forms beschrieben ist. Die Ausführung eines Testfalls erfolgt per "Run"-Button direkt aus der Liste, der einen `POST`-Request an `/tests/<pk>/run/` sendet und das aktualisierte Ergebnis als Fragment zurückbekommt.
+Die Ausführung eines Testfalls erfolgt per "Run"-Button direkt aus der Liste, der einen `POST`-Request an `/tests/<pk>/run/` sendet und das aktualisierte Ergebnis als Fragment zurückbekommt.
 
 === Testgruppen und Accordion-Ansicht
 
@@ -121,7 +121,7 @@ Die Standardrollen werden per `post_migrate`-Signal angelegt, sodass sie nach je
 
 === User anlegen und bearbeiten
 
-Das Anlegen und Bearbeiten von Benutzern folgt dem etablierten Modal-Pattern der Anwendung. Über separate Modals können Benutzerdaten, Gruppen-Zuordnungen und Passwörter bearbeitet werden. Beim Laden eines Edit-Modals wird das Formular per #htl3r.long[htmx] vom Server frisch abgerufen. Eine Besonderheit hier ist, dass das Löschen des eigenen Accounts wird serverseitig explizit verhindert, um ein versehentliches Aussperren aller Administratoren zu verhindern.
+Das Anlegen und Bearbeiten von Benutzern folgt dem etablierten Modal-Pattern der Anwendung. Über separate Modals können Benutzerdaten, Gruppen-Zuordnungen und Passwörter bearbeitet werden. Eine Besonderheit: Das Löschen des eigenen Accounts wird serverseitig explizit verhindert, um ein versehentliches Aussperren aller Administratoren zu verhindern.
 
 === Permission-basiertes Template-Rendering
 
