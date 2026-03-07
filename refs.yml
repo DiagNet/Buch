@@ -10,6 +10,23 @@
     date: 2026-02-07
   date: 2017-01-01
 
+argon2-phc:
+  type: web
+  title: "Argon2: The Memory-Hard Function for Password Hashing and Other Applications"
+  author:
+    - name: Biryukov
+      given-name: Alex
+    - name: Dinu
+      given-name: Daniel
+    - name: Khovratovich
+      given-name: Dmitry
+    - name: Josefsson
+      given-name: Simon
+  url:
+    value: https://github.com/P-H-C/phc-winner-argon2/blob/master/argon2-specs.pdf
+    date: 2026-03-07
+  date: 2021-09-01
+
 astral-uv:
   type: web
   title: "uv: An extremely fast Python package installer and resolver"
@@ -61,6 +78,16 @@ dolstra-nix:
   date: 2006-01-01
   institution: Utrecht University
 
+fernet-spec:
+  type: web
+  title: "Fernet (symmetric encryption) Specification"
+  author:
+    - name: Python Cryptographic Authority
+  url:
+    value: https://github.com/fernet/spec/blob/master/Spec.md
+    date: 2026-03-07
+  date: 2013-01-01
+
 jetbrains-config-drift:
   type: web
   title: "Configuration Drift: The Pitfall of Local Machines"
@@ -92,6 +119,26 @@ nixos-homepage:
     date: 2026-02-07
   date: 2026-02-07
 
+owasp-password-storage:
+  type: web
+  title: "OWASP Password Storage Cheat Sheet"
+  author:
+    - name: OWASP Foundation
+  url:
+    value: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
+    date: 2026-03-07
+  date: 2025-01-01
+
+owasp-top10:
+  type: web
+  title: "OWASP Top Ten Web Application Security Risks"
+  author:
+    - name: OWASP Foundation
+  url:
+    value: https://owasp.org/www-project-top-ten/
+    date: 2026-03-07
+  date: 2021-09-01
+
 pyats-docs:
   type: web
   title: "pyATS Documentation"
@@ -101,6 +148,38 @@ pyats-docs:
     value: https://pubhub.devnetcloud.com/media/pyats/docs/getting_started/index.html
     date: 2026-03-05
   date: 2026-03-05
+
+rfc2104:
+  type: web
+  title: "RFC 2104: HMAC: Keyed-Hashing for Message Authentication"
+  author:
+    - name: Krawczyk
+      given-name: Hugo
+    - name: Bellare
+      given-name: Mihir
+    - name: Canetti
+      given-name: Ran
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc2104
+    date: 2026-03-07
+  date: 1997-02-01
+
+rfc9106:
+  type: web
+  title: "RFC 9106: Argon2 Memory-Hard Function for Password Hashing and Proof-of-Work Applications"
+  author:
+    - name: Biryukov
+      given-name: Alex
+    - name: Dinu
+      given-name: Daniel
+    - name: Khovratovich
+      given-name: Dmitry
+    - name: Josefsson
+      given-name: Simon
+  url:
+    value: https://www.rfc-editor.org/rfc/rfc9106
+    date: 2026-03-07
+  date: 2021-09-01
 
 treefmt-docs:
   type: web
