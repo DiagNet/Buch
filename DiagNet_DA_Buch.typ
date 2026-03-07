@@ -38,7 +38,10 @@
   abstract-english: [#include "text/abstract.typ"],
   date: datetime.today(),
   print-ref: false,
-  generative-ai-clause: none,
+  generative-ai-clause: [
+    - *LanguageTool* (_ltex-ls-plus_, Version 18.6.1): Grammatik- und Rechtschreibprüfung. Das Plugin wurde zur Korrektur von Grammatik-, Rechtschreib- und Stilfehlern im deutschen Text der Diplomarbeit eingesetzt. Ein Prompt ist nicht erforderlich.
+    - *LanguageTool* (_Web-Version_, abgerufen am 06.03.2026): Grammatik- und Rechtschreibprüfung. Die Web-Version wurde zur ergänzenden Stilprüfung eingesetzt. Ein Prompt ist nicht erforderlich.
+  ],
   abbreviation: {
     let data = yaml("abbr.yml")
     for (key, value) in data {
