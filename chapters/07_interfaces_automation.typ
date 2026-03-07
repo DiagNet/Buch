@@ -5,7 +5,7 @@
 #htl3r.long[pyats] ist ein Test- und Automatisierungs-#htl3r.long[framework], welches Python-basiert ist und von Cisco entwickelt wird. Es spezialisiert sich vor allem auf das Testen von Netzwerkgeräten aus dem Cisco Ökosystem, jedoch unterstützt es auch andere Plattformen.
 
 === Automatisiertes Testen von Netzwerken
-Automatisierung im Netzwerkbereich ist ein Thema, welches zunehmend an Relevanz gewinnt. Die Effizienz von Netzwerkoperationen wird durch eine automatische Ausführung erheblich gesteigert. Außerdem könnte bei diesem Konzept menschliche Fehler nur noch bei dem Aufsetzen der Automatisierung selbst auftreten.
+Automatisierung im Netzwerkbereich ist ein Thema, welches zunehmend an Relevanz gewinnt. Die Effizienz von Netzwerkoperationen wird durch eine automatische Ausführung erheblich gesteigert. Außerdem könnten bei diesem Konzept menschliche Fehler nur noch bei dem Aufsetzen der Automatisierung selbst auftreten.
 
 Das Testen von Infrastrukturen stellt einen besonders geeigneten Anwendungsbereich dar. Wird dieses manuell ausgeführt, müssen bei jeder Änderung an Systemen bestimmte Befehle händisch eingegeben werden. Mit einem automatisierten Ansatz kann dieser Aufwand minimiert werden, da es möglich ist, die gesamte Infrastruktur mit einem Befehl oder per Knopfdruck zu testen.
 
@@ -121,11 +121,11 @@ Der Ablauf des Skripts kann in folgende Teile gegliedert werden:
 + Zuletzt wird im obigen Script die `learn` Methode mit dem Parameter `ospf` ausgeführt. Diese gibt folglich alle Informationen über das dynamische #htl3r.long[routingprotokoll] #htl3r.long[ospf] zurück, welche #htl3r.long[pyats] von einem Router extrahieren kann.
 Einige häufig benötigte Funktionen sind:
 - #htl3r.long[router_id]
-- #htl3r.long[ospf_area]s
+- #htl3r.longpl[ospf_area]
 - Jegliche Timer
 - OSPF-Prozess-ID
 - OSPF-Version (v2/v3)
-- #htl3r.long[neighbor]s
+- #htl3r.longpl[neighbor]
 
 - Routen in der OSPF-Routing-Tabelle
 Folgendes stellt den Teil der Ausgabe des Befehls dar, welcher Informationen über die OSPF-Areas liefert:

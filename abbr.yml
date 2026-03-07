@@ -562,6 +562,7 @@ nat_traversal:
 neighbor:
   long:
     singular: Neighbor
+    plural: Neighbors
   description: Ein benachbartes Netzwerkgerät, mit dem Routing-Informationen ausgetauscht werden.
 
 nextcloud:
@@ -627,6 +628,7 @@ ospf:
 ospf_area:
   long:
     singular: OSPF Area
+    plural: OSPF Areas
   description: Ein logischer Bereich innerhalb eines OSPF-Netzwerks zur Strukturierung und Skalierung.
 
 owasp:
