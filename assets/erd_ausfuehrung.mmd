@@ -1,0 +1,25 @@
+erDiagram
+    TestCase {
+        int id PK
+        string test_module
+        bool expected_result
+        string label
+        datetime created_at
+        string description
+    }
+    TestResult {
+        int id PK
+        int attempt_id
+        int test_case_id FK
+        datetime started_at
+        datetime finished_at
+        bool result
+        json log
+    }
+    TestGroup {
+        int id PK
+        string name
+    }
+
+    TestCase ||--o{ TestResult : "results"
+    TestGroup }o--o{ TestCase : "testcases"
