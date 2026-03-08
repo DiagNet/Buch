@@ -1,7 +1,7 @@
 #import "@preview/htl3r-da:2.0.0" as htl3r
 
 #htl3r.author("Luka Pacar")
-= Die Test-Engine
+= Die Test-Engine <test_engine_arch>
 Das Backend von #htl3r.long[diagnet] sorgt für die Ausführung, Auswertung und Steuerung der Netzwerktests. Um eine einheitliche und wartbare Testinfrastruktur zu gewährleisten, haben wir eine modulare Architektur entwickelt, die auf einer abstrakten Basisklasse basiert.
 `DiagNetTest` bildet das Fundament für alle implementierten Tests und kapselt die gesamte Logik zur Testausführung, einschließlich Parameter-Validierung, Abhängigkeitsmanagement und Ergebnisverarbeitung.
 
