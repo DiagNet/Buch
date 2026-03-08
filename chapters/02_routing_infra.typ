@@ -43,7 +43,7 @@ Dies signalisiert dem benachbarten #htl3r.short[as] eine schlechtere Verbindungs
 
 Die nachfolgende Konfiguration veranschaulicht diesen Vorgang konkret: Zunächst wird das betroffene Zielnetz über eine #htl3r.full[acl] identifiziert. Anschließend greift eine Route-Map namens `MED`, die genau für dieses Netz den Metrik-Wert auf 200 anhebt. Ein zweiter, leerer Eintrag in der Route-Map stellt sicher, dass alle übrigen Routen unverändert weitergegeben werden. Abschließend wird diese Richtlinie an den BGP-Prozess gebunden und für alle ausgehenden Routing-Updates in Richtung des Nachbarn `60.60.60.2` aktiviert.
 #htl3r.code(
-  caption: [Konfiguration der Routen-Manipulation mittels #htl3r.short[med]],
+  caption: [Konfiguration der Routen-Manipulation mittels MED],
   description: `route_map_config`,
 )[
   ```cisco
@@ -95,7 +95,7 @@ Die Kernfunktion der Phase 3 wird schließlich mit `ip nhrp redirect` eingeschal
 Genau dieser Befehl versetzt den Hub in die Lage, den Außenstellen einen Pfad mitzuteilen und so einen direkten Verbindungsaufbau einzuleiten.
 
 #htl3r.code(
-  caption: [Konfiguration des #htl3r.short[dmvpn]-Hubs],
+  caption: [Konfiguration des DMVPN-Hubs],
   description: `dmvpn_hub_config`,
 )[
   ```cisco
