@@ -104,7 +104,7 @@ Ein Suchmuster extrahiert dabei den aktuellen Status der Redundanzgruppe aus dem
 
 
 #htl3r.code(
-  caption: [Extraktion des GLBP-Status mit #htl3r.short[regex]],
+  caption: [Extraktion des GLBP-Status Regex],
   description: `GLBP.py`,
 )[
   ```python
