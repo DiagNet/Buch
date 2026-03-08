@@ -124,7 +124,7 @@ Um Netzwerkadministratoren die Möglichkeit zu geben, eine ganze Batterie von Te
   ```
 ]
 
-In der relationalen Datenbank wird diese Beziehung durch eine automatisch von Djangos #htl3r.short[orm] verwaltete Zwischentabelle realisiert, die nur die Fremdschlüssel beider Entitäten hält. Das bedeutet, dass derselbe `TestCase` in mehreren `TestGroup`-Instanzen referenziert werden kann, ohne dass dessen Konfiguration dupliziert werden muss. Ändert ein Administrator die Parameter eines Testfalls, so profitieren automatisch alle Gruppen, die diesen Testfall enthalten, von der aktualisierten Definition.
+In der relationalen Datenbank wird diese Beziehung durch eine automatisch von Djangos #htl3r.short[orm] verwaltete Zwischentabelle realisiert, die nur die Fremdschlüssel beider Entitäten hält. Das bedeutet, dass derselbe `TestCase` in mehreren `TestGroup`-Instanzen referenziert werden kann, ohne dass dessen Konfiguration dupliziert werden muss.
 
 === Persistierung von Testergebnissen
 
