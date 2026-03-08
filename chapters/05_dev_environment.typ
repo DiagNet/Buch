@@ -2,7 +2,6 @@
 
 #htl3r.author("Karun Sandhu")
 = Development & Environment <dev_env>
-#htl3r.info[Kapitel wurde gekürzt um Platz für andere Kapitel zu schaffen. Alle wichtigen Inhalte sind noch drin.]
 
 Ein wiederkehrendes Problem in Teamprojekten ist die schleichende Divergenz zwischen den Entwicklungsumgebungen einzelner Teammitglieder. Pakete werden in unterschiedlichen Versionen installiert, Umgebungsvariablen fehlen oder sind falsch gesetzt, und ein Fehler, der auf einem Rechner reproduzierbar ist, tritt auf einem anderen gar nicht auf @jetbrains-config-drift. Um dieses Problem von Grund auf auszuschließen, setzt #htl3r.long[diagnet] auf einen vollständig deklarativen Ansatz: Die Entwicklungsumgebung ist nicht dokumentiert, sondern im Code definiert und damit zwingend reproduzierbar.
 
