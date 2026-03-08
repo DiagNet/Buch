@@ -12,7 +12,7 @@ Das gesamte #htl3r.short[wan] basiert dabei auf Cisco-Komponenten, wobei bewusst
   caption: [WAN Topologie],
 ) <fig-kahn>
 === Architektur des WAN
-Das Zentrum der Topologie bildet ein simuliertes #htl3r.full[wan], das in vier unabhängige #htl3r.fullpl[as] unterteilt ist.
+Das Zentrum der Topologie bildet ein simuliertes Weitverkehrsnetz, das in vier unabhängige #htl3r.fullpl[as] unterteilt ist.
 Jedes dieser Systeme agiert als eigenständiger #htl3r.full[isp].
 Der Austausch von Routing-Informationen zwischen den Providern erfolgt über das #htl3r.full[ebgp].
 
