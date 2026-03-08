@@ -135,7 +135,7 @@ Die Verwaltung benutzerdefinierter Testvorlagen unter `/tests/templates/manage/`
 
 Beim Aufruf der Seite wird unabhängig von der aktuellen Systemkonfiguration immer ein rot hinterlegter Warnhinweis angezeigt:
 
-_"Custom test templates are Python scripts that execute with the same permissions as the application server. Only enable templates from trusted sources. Malicious templates can lead to Remote Code Execution (RCE) and full system compromise."_
+_"Custom test templates are Python scripts that execute with the same permissions as the application server. Only enable templates from trusted sources. Malicious templates can lead to #htl3r.full[rce] and full system compromise."_
 
 Diese Warnung ist permanent sichtbar und kann nicht weggeklickt werden, um den ernsten Charakter der Funktion zu unterstreichen. Zusätzlich wird ein zweiter Hinweis angezeigt, wenn das Feature serverseitig über die Umgebungsvariable `DIAGNET_ENABLE_CUSTOM_TESTCASES` deaktiviert ist: In diesem Fall werden zwar Templates in der Tabelle gelistet und können aktiviert werden, sie werden aber beim Start der Anwendung nicht geladen, ein Verhalten, das im Hinweis explizit beschrieben wird.
 
