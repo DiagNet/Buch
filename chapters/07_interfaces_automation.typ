@@ -14,6 +14,8 @@ Das Ziel von DiagNet ist es, ein Programm zu entwickeln, welches das Testen von 
 
 Zusätzlich ermöglicht es, Daten auf Netzwerkgeräten zu sammeln und sie in ein für die weitere Verarbeitung in Python geeignetes Format umzuwandeln. Diese Funktionalität bietet eine Grundlage für die automatisierte Analyse und Auswertung innerhalb von DiagNet.
 
+#pagebreak()
+
 === Grundlagen
 #htl3r.long[pyats] basiert auf einer modularen Architektur. Eine seiner wichtigsten Komponenten ist #htl3r.long[genie]. Dabei handelt es sich um eine Library innerhalb von #htl3r.long[pyats], welche zahlreiche #htl3r.long[parser] zur Verfügung stellt. Ein #htl3r.long[parser] ist dafür verantwortlich, den Geräteoutput in ein verwendbares Format umzuwandeln.
 
@@ -66,8 +68,9 @@ uv add pyats[full]
 ```
 Die Option *Full* gibt an, dass alle Komponenten des Frameworks installiert werden sollen.
 
-Mit diesem Paket und dem Testbed von @testbeds kann ein Python-Skript geschrieben werden, welches die Funktionalität von #htl3r.long[pyats] demonstriert:
 #pagebreak()
+
+Mit diesem Paket und dem Testbed von @testbeds kann ein Python-Skript geschrieben werden, welches die Funktionalität von #htl3r.long[pyats] demonstriert:
 
 #htl3r.code(
   caption: [Ein pyATS Beispielskript],
@@ -102,6 +105,8 @@ Mit diesem Paket und dem Testbed von @testbeds kann ein Python-Skript geschriebe
   pprint(ospf.info)
   ```
 ]
+
+#pagebreak()
 Der Ablauf des Skripts kann in folgende Teile gegliedert werden:
 + Am Anfang werden die benötigten #htl3r.long[genie] Komponenten und pprint importiert. Pprint ist dafür zuständig, die Ausgaben der Funktionen in einem übersichtlichen Format darzustellen.
 
@@ -119,6 +124,9 @@ Der Ablauf des Skripts kann in folgende Teile gegliedert werden:
 + Anschließend wird von dem `device`-Objekt ein #htl3r.long[interface] Objekt erstellt. Mit diesem können durch die `learn` Methode sämtliche Informationen über Interfaces auf dem Router gesammelt und als Python-Dictionary zurückgegeben werden. Die Umfangreiche Ausgabe wird durch `interfaces.info["GigabitEthernet0/0"]["enabled"]` auf den Status eines bestimmten Interfaces, hier GigabitEthernet0/0, reduziert. Die Ausgabe beschränkt sich daher auf `True` bei einem aktiven Interface, und `False` bei einem inaktiven Interface.
 
 + Zuletzt wird im obigen Script die `learn` Methode mit dem Parameter `ospf` ausgeführt. Diese gibt folglich alle Informationen über das dynamische #htl3r.long[routingprotokoll] #htl3r.short[ospf] zurück, welche #htl3r.long[pyats] von einem Router extrahieren kann.
+
+#pagebreak()
+
 Einige häufig benötigte Funktionen sind:
 - #htl3r.long[router_id]
 - #htl3r.longpl[ospf_area]
@@ -140,6 +148,7 @@ Folgendes stellt den Teil der Ausgabe des Befehls dar, welcher Informationen üb
 
 === Integration in die DiagNet-Applikation
 #htl3r.long[pyats] wird im #htl3r.long[backend] von DiagNet eingesetzt, da dieser Teil des Programmcodes unter anderem dafür verantwortlich ist, mit den zu testenden Netzwerkgeräten zu interagieren und von ihnen diverse Informationen zu extrahieren.
+#pagebreak()
 ==== Technische Anbindung
 Um die Funktionalität von #htl3r.long[pyats] in der DiagNet Applikation nutzen zu können, werden mehrere Datenstrukturen benötigt. Eine von ihnen ist eine Liste, die mit Geräteobjekten bzw. Geräteverbindungen befüllt wird. Dieses Speichern von Verbindungen hat den Vorteil, dass bei dem Ausführen von Testfällen nicht immer neue Objekte erstellt werden müssen. Folglich wird die Anzahl der offenen Verbindungen kleiner, was sowohl den Prozess der DiagNet Anwendung, als auch die Netzwerkgeräte entlastet.
 Von dieser Liste bekommt das Backend ein #htl3r.long[genie]-Device-Objekt. In den einzelnen Testfällen wird dann spezifiziert, welche #htl3r.long[pyats]-Methoden mit dem Objekt ausgeführt werden müssen, um die für die Auswertung erforderlichen Informationen zu erhalten.

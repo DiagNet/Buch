@@ -26,6 +26,8 @@ Das Backend von #htl3r.long[diagnet] sorgt für die Ausführung, Auswertung und 
 
 Der Aufbau von `DiagNetTest` gliedert sich in drei wesentliche Komponenten: die Definition der Parameter, die Implementierung der Testmethoden sowie die Ausführung durch die `run()`-Methode.
 
+#pagebreak()
+
 == Definition der Parameter
 Die Schnittstelle für Eingabedaten wird deklarativ über das Klassenattribut `_params` definiert. Dies ist eine Liste von #htl3r.longpl[dictionary], wobei jeder Eintrag einen spezifischen Eingabeparameter beschreibt. Die Definition unterscheidet hierbei zwischen Schlüsseln, die für die technische Verarbeitung zwingend notwendig sind, und solchen, die der Steuerung oder der Benutzerfreundlichkeit dienen.
 
@@ -136,6 +138,7 @@ Das folgende Codebeispiel veranschaulicht die Anwendung dieser Steuerungslogik, 
   ]
   ```
 ]
+#pagebreak()
 === Logische Ausschlüsse (Mutually Exclusive)
 Einige Testszenarien erfordern Parameter, die sich logisch ausschließen (z. B. darf ein Ping-Test nicht gleichzeitig eine feste Anzahl an Paketen senden und unendlich laufen). Um solche Konflikte im Framework abzubilden, stellt die Basisklasse das Attribut *`mutually_exclusive_parameters`* bereit.
 
@@ -165,6 +168,7 @@ Die Validierungslogik unterscheidet dabei automatisch zwischen optionalen und ve
 ]
 In diesem Szenario unterbindet das Framework die gleichzeitige Übergabe von *`count`* und *`duration`*. Somit wird der Testablauf entweder durch die Paketanzahl oder die Zeitdauer begrenzt.
 
+#pagebreak()
 
 == Implementierung der Testmethoden
 Die eigentliche Testlogik wird innerhalb der Testklasse in dedizierten Methoden implementiert. Das Framework folgt hierbei einem strikten Namensschema, um Testfälle automatisch zu identifizieren und von internen Hilfsfunktionen zu unterscheiden.
@@ -192,6 +196,8 @@ Ein Test gilt als erfolgreich, wenn die Methode entweder `True`, `None` oder ein
       raise ValueError("unable to fetch data")
   ```
 ]
+
+#pagebreak()
 
 === Steuerung mittels Dekoratoren
 Um das Verhalten einzelner Testmethoden zu modifizieren, ohne den eigentlichen Testcode mit Verwaltungslogik zu vermischen, setzt #htl3r.long[diagnet] auf Python-Dekoratoren. Diese ermöglichen eine praktische Steuerung, bei der Eigenschaften wie Wiederholungen oder Ausführungsbedingungen direkt vor der Methodendefinition annotiert werden. Diese Metadaten werden vom Framework vor der Ausführung evaluiert.
@@ -221,6 +227,8 @@ Um das Verhalten einzelner Testmethoden zu modifizieren, ohne den eigentlichen T
 === Definition von Abhängigkeiten
 Innerhalb komplexer Testabläufe bestehen oft logische Kausalitäten zwischen verschiedenen Prüfungen. Eine detaillierte Protokoll-Analyse ist beispielsweise obsolet, sofern bereits die grundlegende Erreichbarkeit des Gerätes gescheitert ist. Um kaskadierende Fehlermeldungen zu vermeiden und die Ausführungszeit zu optimieren, stellt das Framework den Dekorator *`@depends_on`* bereit.
 
+#pagebreak()
+
 Dieser markiert eine Testmethode als abhängig von einem spezifischen Vorgänger. Die Referenzierung erfolgt hierbei über den Methodennamen als Text. Das Framework stellt sicher, dass der abhängige Test erst nach dem erfolgreichen Abschluss der referenzierten Methode ausgeführt wird. Sollte die Vorbedingung scheitern oder selbst übersprungen werden, entfällt die Ausführung des abhängigen Tests und dieser erhält im Protokoll automatisch den Status `SKIPPED`.
 
 #htl3r.code(
@@ -243,6 +251,7 @@ Dieser markiert eine Testmethode als abhängig von einem spezifischen Vorgänger
 In diesem Fall wird die Konfiguration erst abgefragt, nachdem die Erreichbarkeitsprüfung erfolgreich abgeschlossen wurde.
 Schlägt bereits der erste Test fehl, wird die Abfrage automatisch übersprungen.
 
+#pagebreak()
 
 == Komponenten der `run()`-Methode
 Die Methode `run()` ist der zentrale Einstiegspunkt für die Testausführung.
@@ -272,6 +281,8 @@ Sie steuert den gesamten Testablauf zentral und stellt sicher, dass alle Vorauss
   ```
 ]
 
+#pagebreak()
+
 === Dynamisches Test-Discovery
 Mittels Introspektion durchsucht das Framework die Klasse zur Laufzeit nach Methoden, die dem Namensschema *`test_`* entsprechen. Diese Methoden werden als einzelne Testmodule interpretiert.
 
@@ -295,6 +306,7 @@ Die `run()`-Methode analysiert diese Beziehungen und erstellt mittels topologisc
 ==== Kahn's Algorithmus
 Um die definierten Abhängigkeiten in eine linear ausführbare Sequenz zu überführen, nutzt die `run()`-Methode eine Implementierung des Algorithmus von Kahn. Dieser Ansatz interpretiert die Testmethoden und ihre Beziehungen als gerichteten Graphen und ermöglicht eine topologische Sortierung.
 
+#pagebreak()
 Die nachfolgende Abbildung visualisiert beispielhaft die Abhängigkeiten zwischen den einzelnen Testmethoden in Form eines gerichteten Graphen.
 #figure(
   image("../assets/gerichteter_graph.png", width: 60%),
@@ -318,6 +330,7 @@ Zunächst iteriert das System über alle aktiven Testmethoden und baut eine #htl
           in_degree[name] += 1 # Erhöht die Anzahl an Abhängigkeiten
   ```
 ]
+#pagebreak()
 *Initialisierung der Warteschlange:*
 Alle Tests die keine Abhängigkeiten besitzen, werden in eine Warteschlange eingereiht. Da für diese Elemente keine Vorbedingungen erfüllt werden müssen, bilden sie die Startmenge der ausführbaren Tests.
 #htl3r.code(
@@ -362,7 +375,7 @@ Nachdem die Warteschlange abgearbeitet ist, prüft das System, ob noch Verbindun
   ```
 ]
 
-Das Ergebnis des Algorithmus ist eine Liste, die alle Testmethoden in ihrer topologisch korrekten Reihenfolge enthält
+Das Ergebnis des Algorithmus ist eine Liste, die alle Testmethoden in ihrer topologisch korrekten Reihenfolge enthält.
 
 Die nachfolgende Abbildung veranschaulicht dieses Resultat anhand des ursprünglichen Graphen. Durch die topologische Sortierung wurden die Knoten in eine lineare Abfolge gebracht, sodass sämtliche Kanten nun in dieselbe Richtung zeigen. Diese Struktur garantiert eine konfliktfreie, sequentielle Abarbeitung der Tests.
 
@@ -376,6 +389,7 @@ Die run()-Methode verwendet diese Liste anschließend als Ausführungsplan. Sie 
 === Ausführung und Resultate der Testfälle
 Vor dem eigentlichen Aufruf der Testfunktionen evaluiert das Framework die hinterlegten Dekoratoren und modifiziert den Ablauf entsprechend. Dies stellt sicher, dass Abfolgen wie Wiederholungen oder Ausschlüsse technisch abgearbeitet werden, noch bevor der erste Testfall ausgeführt wird.
 
+#pagebreak()
 Nach Abschluss aller Testfälle aggregiert das Framework die Einzelresultate in einem universellen Ergebnisobjekt. Dieses #htl3r.long[dictionary] dient als standardisierte Schnittstelle für das Frontend und beinhaltet neben dem Gesamtstatus eine statistische Zusammenfassung sowie die detaillierten Laufzeitdaten jedes Tests.
 
 #htl3r.code(

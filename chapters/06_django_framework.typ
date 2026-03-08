@@ -49,6 +49,8 @@ Aus diesem Vergleich ergibt sich folgende Gewichtung (Anzahl der Nennungen):
 - Rendering: 1
 - #htl3r.short[api]-Fokus: 0
 
+#pagebreak()
+
 ==== Punktevergabe und Auswertung
 
 Im zweiten Schritt wurden die #htl3r.longpl[framework] in den einzelnen Kategorien mit Punkten von 1 (sehr schlecht) bis 5 (sehr gut) bewertet. Das Kriterium "#htl3r.full[api]-Fokus" floss mit der Gewichtung 0 nicht in die finale Punktzahl ein, wurde der Vollständigkeit halber jedoch evaluiert.
@@ -94,6 +96,8 @@ Das *Model* definiert die Datenstrukturen und kommuniziert mit der Datenbank. Di
 === "Fat Models": Integration der Netzwerk-Engines
 
 #htl3r.long[diagnet] folgt darüber hinaus auch dem "Fat Models"-Prinzip: Die Geschäftslogik wird nicht in den Views implementiert, sondern direkt in den Datenmodellen gekapselt. Das `Device`-Modell dient dabei als direkte Schnittstelle zur Netzwerk-Engine #htl3r.long[pyats]. Die netzwerktechnischen Grundlagen, Parsing-Mechanismen und statischen #htl3r.longpl[testbed] von #htl3r.long[pyats] werden in @pyats_chapter erläutert.
+
+#pagebreak()
 
 Das `Device`-Modell erzeugt aus seinen eigenen Tabellenspalten (IP, Username, Password) dynamisch die benötigten #htl3r.long[pyats]-#htl3r.longpl[testbed] und instanziiert die Verbindungen direkt im Speicher des #htl3r.longpl[backend]. Bereits offene Verbindungen werden über ein globales Cache-Dictionary (`device_connections`) für nachfolgende Tests wiederverwendet. Da `is_connected()` nur den lokalen Verbindungsstatus prüft, wird die Session zusätzlich mit einem `show clock`-Befehl aktiv verifiziert. Schlägt dieser fehl, wird der Cache-Eintrag verworfen und eine neue Verbindung aufgebaut:
 

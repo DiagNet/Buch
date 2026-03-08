@@ -7,12 +7,14 @@ Damit #htl3r.long[diagnet] unter realistischen Bedingungen entwickelt und getest
 
 Diese Trennung wurde bewusst gewählt, da eine reine Simulation für viele Testfälle nicht die erforderliche Aussagekraft besitzt. Sicherheitsfunktionen wie Port-Security verhalten sich auf den physischen Chips eines Switches oft anders als in einer Software-Simulation. Dadurch konnten dieselben Testfälle einmal in der Simulation und einmal an realer Hardware ausgeführt und die Ergebnisse verglichen werden.
 
+#pagebreak()
+
 == Physischer Standort (Labor)
 
 Im physischen Labor befindet sich die Hardware von Cisco, welche von der CANCOM Austria AG bereitgestellt wurde. Die Abbildung @fig-physische-topologie zeigt das Zusammenspiel der einzelnen Komponenten an diesem Standort.
 
 #figure(
-  image("../assets/topo_physisch_final.png", width: 96%),
+  image("../assets/topo_physisch_final.png", width: 90%),
   caption: [
     Physische Topologie: Das Cisco-Labor mit ISR-Routern, Catalyst-Switches und dem UCS-Server für den Fernzugriff.
   ],
@@ -61,6 +63,8 @@ Das Netzwerk im Labor wurde in vier funktionale Bereiche unterteilt, um eine kla
 
 Der Datenverkehr zwischen den produktiven VLANs wird über die Firewalls geroutet. Die Access-Switches fungieren als reine Layer-2-Geräte. Durch die Nutzung eines dedizierten Native VLANs wurde sichergestellt, dass ungetaggter Datenverkehr nicht unkontrolliert in die produktiven Netze gelangen kann.
 
+#pagebreak()
+
 == IP-Adressierungsschema
 
 Das gewählte Adressschema folgt dem logischen Muster `10.0.VLAN.Host`. Dies ermöglicht es, die Zugehörigkeit eines Geräts zu einem bestimmten Netzwerksegment direkt an der IP-Adresse zu erkennen.
@@ -92,6 +96,8 @@ line vty 0 15
 ```
 
 Um den Zugriff auch bei einem Ausfall des zentralen RADIUS-Servers sicherzustellen, wurde auf den Geräten ein lokaler Zugang für den Notfall eingerichtet. Dies verhindert, dass man sich im Falle einer Störung der ISE selbst vom System ausschließt.
+
+#pagebreak()
 
 == Benennung und Trennung der Logik
 

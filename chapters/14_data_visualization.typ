@@ -25,6 +25,8 @@ testgroups = TestGroup.objects.prefetch_related(
 
 Durch dieses Vorgehen wird verhindert, dass für jedes einzelne Element auf der Seite eine eigene Anfrage an die Datenbank geschickt werden muss. Dies spart Zeit und sorgt dafür, dass das Dashboard auch bei hunderten Testergebnissen sofort geladen wird.
 
+#pagebreak()
+
 === Das Dashboard
 
 Das Dashboard bildet das Herzstück der Benutzeroberfläche und führt die in Kapitel @frontend_ux beschriebenen Prinzipien für die Benutzererfahrung zusammen. Es ist der zentrale Punkt für den Techniker, an dem alle Testgruppen und deren aktueller Status angezeigt werden. Sobald sich ein Status ändert, wird dieser Bereich der Seite automatisch aktualisiert, ohne dass man die Seite neu laden muss.
@@ -38,6 +40,8 @@ Unter den Kennzahlen werden die Ergebnisse in Balkendiagrammen visualisiert. Man
 === Detailansicht der Testgruppen
 
 Die Testgruppen werden in einer einklappbaren Liste dargestellt. Wenn man eine Gruppe öffnet, werden die zugehörigen Testfälle nachgeladen. Über verschiedene Schaltflächen kann man einen Testlauf starten, einen Vergleich mit früheren Ergebnissen öffnen oder einen Bericht exportieren. Der Zugriff auf diese Funktionen ist über ein Berechtigungssystem geschützt.
+
+#pagebreak()
 
 === Aktualisierung in Echtzeit
 

@@ -15,6 +15,8 @@ Die Sicherheitsarchitektur verfolgt dabei folgende Ziele:
 - sichere Verbindung der beiden Standorte über einen verschlüsselten #htl3r.short[vpn]
 - Bereitstellung einer realistischen Testumgebung für Netzwerktests
 
+#pagebreak()
+
 === Virtuelle FortiGate Infrastruktur
 Der virtuelle Standort der Testumgebung wird durch eine FortiGate-Firewall abgesichert. Dieser Standort ist vollständig virtualisiert und wird innerhalb einer #htl3r.long[vsphere]-Umgebung betrieben. Die einzelnen Netzwerke werden dabei als #htl3r.longpl[port_group] umgesetzt und logisch voneinander getrennt.
 
@@ -71,6 +73,8 @@ Erklärung:
 Die Firewall-Engine erkennt #htl3r.short[isakmp] und #htl3r.short[ipsec] meist problemlos als Protokoll-Signaturen, da es sich um Standard-#htl3r.full[udp]-Verbindungen handelt. #htl3r.short[isakmp] bzw. IKE verwendet #htl3r.short[udp] Port 500 für den Aufbau des Tunnels sowie für den Schlüsselaustausch.
 #htl3r.short[esp] hingegen ist kein TCP- oder #htl3r.short[udp]-Protokoll, sondern ein eigenständiges IP-Protokoll mit der Nummer 50, was manchmal zu Problemen führt:
 
+#pagebreak()
+
 In der Praxis kommt häufig #htl3r.short[nat] zwischen den VPN-Endpunkten zum Einsatz. Klassisches #htl3r.short[esp] ist dafür nur eingeschränkt geeignet, da NAT-Geräte üblicherweise Verbindungen anhand von TCP- oder UDP-Portinformationen zuordnen. Da #htl3r.short[esp] keine solchen Felder besitzt, können manche Implementierungen den Datenstrom nicht korrekt behandeln.
 Zur Umgehung dieses Problems wird häufig #htl3r.full[nat_traversal] eingesetzt. Erkennt IKE während dem Verbindungsaufbau ein #htl3r.short[nat]-Gerät im Übertragungsweg, werden die #htl3r.short[esp]-Pakete in #htl3r.short[udp] gekapselt und anschließend über #htl3r.short[udp] Port 4500 transportiert. Für die Firewall erscheint der verschlüsselte Datenstrom in diesem Fall daher als gewöhnlicher UDP-Verkehr.
 
@@ -84,6 +88,8 @@ Um eine sichere Kommunikation zwischen den beiden Standorten zu ermöglichen, wi
 #htl3r.short[ikev2] stellt einen modernen Mechanismus zum Aufbau und zur Verwaltung von #htl3r.short[ipsec]-Tunneln dar. Im Vergleich zu IKEv1 bietet es eine effizientere Aushandlung der Sicherheitsparameter, eine verbesserte Stabilität sowie eine geringere Anzahl an Nachrichten während des Tunnelaufbaus. Dadurch eignet sich #htl3r.short[ikev2] besonders für stabile und langfristige Standortverbindungen.
 
 Der Aufbau eines solchen #htl3r.short[ipsec]-Tunnels erfolgt grundsätzlich in zwei Phasen.
+
+#pagebreak()
 
 *Phase 1 – IKE Security Association:*
 
@@ -184,6 +190,8 @@ Die zu verschlüsselnden Netzwerke werden über eine #htl3r.short[acl] bestimmt:
 
 Diese #htl3r.short[acl] wird anschließend in einer Crypto Map angegeben, welche auf dem externen Interface des Routers aktiviert wird.
 Durch diese Konfiguration wird der Datenverkehr zwischen den definierten Netzwerken automatisch über den #htl3r.short[ipsec]-#htl3r.long[vpn_tunnel] verschlüsselt übertragen.
+
+#pagebreak()
 
 === Zusammenfassung
 

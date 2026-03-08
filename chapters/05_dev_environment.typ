@@ -44,12 +44,16 @@ Nachfolgend ein vereinfachter Auszug aus der Konfiguration, der zeigt, wie Pytho
   ```
 ]
 
+#pagebreak()
+
 Da die `flake.nix` von allen Entwicklern und der #htl3r.full[ci]-Pipeline gleichermaßen verwendet wird, ist sichergestellt, dass Compiler, Python-Version und Systembibliotheken überall identisch sind. Das entspricht dem Prinzip der *Dev/Prod Parity* aus der #htl3r.long[twelvefactor]-Methodik @12factor. Da die Pipeline dieselbe `flake.nix` nutzt, sind Versionskonflikte zwischen Entwickler-Laptop und Build-Server strukturell ausgeschlossen. Tests, die lokal bestehen, bestehen auch in der Pipeline (für die konkrete Pipeline-Implementierung siehe @cicd_pipelines).
 
 === Verwaltung von Python-Paketen: Die hermetische Shell
 Klassische virtuelle Python-Umgebungen lösen das Isolationsproblem nur teilweise: Sie kapseln zwar installierte Pakete, greifen aber weiterhin auf systemweit verfügbare Bibliotheken zurück, wenn ein Paket fehlt. Für #htl3r.long[diagnet] wurde deshalb #htl3r.long[nix] mit #htl3r.long[uv] kombiniert @astral-uv.
 
 #htl3r.long[uv] übernimmt dabei die Rolle des Dependency Managers: Es löst die Abhängigkeiten auf und fixiert deren Versionen in der `uv.lock`-Datei. #htl3r.long[nix] baut darauf aufbauend eine vollständig *#htl3r.longpl[hermetic] Shell*: Der Python-Interpreter hat technisch *keinen Zugriff* auf globale Systempakete (z. B. in `/usr/lib/python3.13`) oder lokale Nutzer-Installationen. Er sieht ausschließlich jene Bibliotheken, die im Projekt explizit deklariert wurden. Eine Bibliothek, die nicht in der Konfiguration steht, lässt sich nicht importieren, selbst wenn sie auf dem Host-Rechner zufällig installiert ist.
+
+#pagebreak()
 
 == Automatische Umgebung mit Direnv
 Das manuelle Aktivieren der Shell via `nix develop` bei jedem Wechsel ins Projektverzeichnis wäre im Arbeitsalltag zu umständlich. #htl3r.long[direnv] löst dieses Problem: Die Shell-Erweiterung überwacht Verzeichnisse und lädt beim Betreten des Projektordners automatisch die in `.envrc` definierten Umgebungsvariablen sowie die #htl3r.long[nix]-Umgebung @direnv-docs.
@@ -66,6 +70,7 @@ Der Inhalt der `.envrc` beschränkt sich auf eine einzige Zeile:
 
 `use flake` weist #htl3r.long[direnv] an, die in der `flake.nix` definierte Umgebung zu laden, Umgebungsvariablen zu setzen und Tools wie `python` oder #htl3r.long[just] in den `PATH` einzutragen. Verlässt man das Verzeichnis, wird die Umgebung wieder entladen. Für einen neuen Entwickler bedeutet das: Repository klonen, in den Ordner wechseln, und die vollständige Entwicklungsumgebung steht bereit, ohne manuelle Installationsschritte.
 
+#pagebreak()
 == Task-Automation mit Just
 Für wiederkehrende Aufgaben wie das Starten des Servers, das Ausführen von Tests oder das Anlegen von Datenbankmigrationen kommt der Command-Runner #htl3r.long[just] zum Einsatz @just-command-runner. Anders als `make`, das primär für Build-Prozesse in C/C++ ausgelegt ist, ist #htl3r.long[just] sprachenunabhängig und hat keine impliziten Abhängigkeitsannahmen. Die Rezepte im `justfile` dienen gleichzeitig als maschinenlesbare Dokumentation aller verfügbaren Entwicklungsbefehle.
 
@@ -93,6 +98,7 @@ Für wiederkehrende Aufgaben wie das Starten des Servers, das Ausführen von Tes
 
 Das `manage`-Rezept prüft über die Variable `IN_NIX_SHELL`, ob die #htl3r.long[nix]-Umgebung aktiv ist, und wählt daraufhin den passenden Ausführungspfad: entweder direkt via `python` oder gekapselt über `uv run`. Damit funktioniert dasselbe Rezept sowohl innerhalb als auch außerhalb der #htl3r.long[nix-shell] korrekt. `just migrate` führt `makemigrations` und `migrate` in einem Schritt aus; `just s` startet den integrierten Django-Server.
 
+#pagebreak()
 == Einheitliche Code-Qualität durch Treefmt
 #htl3r.long[diagnet] vereint drei Sprachen mit jeweils eigenen Formatter-Anforderungen: Python im #htl3r.long[backend], #htl3r.full[html]/#htl3r.short[js] im Frontend und #htl3r.long[nix] für die Infrastruktur. Jede Sprache hat etablierte Formatter-Tools, aber ohne eine gemeinsame Steuerungsschicht müssten diese separat konfiguriert und aufgerufen werden.
 

@@ -1,5 +1,7 @@
 #import "@preview/htl3r-da:2.0.0" as htl3r
 
+#pagebreak()
+
 #htl3r.author("Luka Pacar")
 
 == Dynamische Formulare <dynamic_forms>
@@ -21,6 +23,8 @@ Fügt ein Entwickler im Backend einen neuen Parameter hinzu, erscheint dieser au
 
 === Abstraktion der Eingabefelder
 Damit der Code wartbar bleibt, verzichtet das System auf komplexe Funktionen zur Erstellung der Felder. Stattdessen definiert eine abstrakte Basisklasse das Verhalten aller Eingabeelemente. Sie garantiert eine einheitliche Schnittstelle, unabhängig von der eigentlichen visuellen Darstellung.
+
+#pagebreak()
 
 Jedes Eingabefeld, ob Textfeld, Dropdown-Liste oder eine spezielle Auswahl für Netzwerkgeräte, muss von dieser Basisklasse erben. Das garantiert, dass der Code für das Parametermanagement jedes Feld gleich behandeln kann, ohne dessen interne Details zu kennen. Eine #htl3r.long[fabrikmethode] prüft den geforderten Datentyp und erstellt die passende Unterklasse.
 
@@ -45,6 +49,8 @@ Durch diese Struktur kann das System entscheiden, welche Implementierung für ei
 Neben der Darstellung muss auch die inhaltliche Korrektheit der eingegebenen Daten sichergestellt werden. Dafür nutzt das System ein eigenes Validierungsverfahren, dessen Logik in einer separaten Klassenstruktur organisiert wird. Während die `ParameterField`-Klasse für das #htl3r.short[html]-Element zuständig ist, übergibt sie die inhaltliche Prüfung an Datentyp-Klassen.
 
 Auch hier wird ein modularer Ansatz verfolgt. Die abstrakte Basisklasse `Datatype` definiert die Methode `check(value)`, welche die Gültigkeit eines Wertes bestätigt. Klassen wie `IPv4` oder `CiscoInterface` implementieren diese Methode mit der jeweiligen Logik.
+
+#pagebreak()
 
 Der folgende Ausschnitt zeigt die Implementierung einer solchen Prüfung am Beispiel einer #htl3r.short[ipv4]-Adresse:
 
@@ -107,6 +113,8 @@ Diese können dann in Echtzeit reagieren und sich passend einblenden oder sperre
   }
   ```
 ]
+
+#pagebreak()
 
 === Zusammenführung und Erstellung
 Den Abschluss bildet das Einsammeln der Benutzereingaben. Da das System die Gültigkeit der Daten bereits während der Eingabe überwacht, ist beim finalen Absenden keine erneute Prüfung notwendig. Sobald der Anwender die Erstellung bestätigt, geht der Algorithmus die Liste aller Parameter durch. Dabei greift er auf die `getValue()`-Methode der Felder zurück, um die eingetragenen Werte auszulesen. Die Daten werden in einem #htl3r.short[json]-Objekt gesammelt und über eine #htl3r.short[api]-Schnittstelle an das Backend übermittelt. Dieses nutzt die Informationen, um den Testfall zu erstellen und in der Datenbank zu speichern.

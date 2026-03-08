@@ -32,6 +32,8 @@ Ein wichtiger Schwerpunkt ist die Automatisierung von Netzwerktests. Durch autom
 
 Ein weiterer Fokus liegt auf der Übersichtlichkeit der Ergebnisse. Die Resultate der Testläufe werden in einer webbasierten Oberfläche dargestellt, sodass Administratoren den Zustand des Netzwerks auf einen Blick erkennen können. Grafische Darstellungen und übersichtliche Tabellen erleichtern dabei die Analyse der Ergebnisse.
 
+#pagebreak()
+
 Darüber hinaus spielt auch die Modularität der Anwendung eine wichtige Rolle. Neue Testfälle können flexibel hinzugefügt werden, ohne dass die gesamte Anwendung angepasst werden muss. Dadurch lässt sich das System an unterschiedliche Netzwerkumgebungen und Anforderungen anpassen.
 
 Ein weiterer wichtiger Punkt ist die Nachvollziehbarkeit von Änderungen. Durch die Speicherung von Testergebnissen können verschiedene Testläufe miteinander verglichen werden. Auf diese Weise wird sichtbar, ob sich der Zustand des Netzwerks im Laufe der Zeit verändert hat.

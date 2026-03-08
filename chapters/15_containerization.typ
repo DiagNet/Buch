@@ -46,6 +46,8 @@ Das resultierende Image ist #htl3r.full[oci]-kompatibel, trägt den Tag `diagnet
   ```
 ]
 
+#pagebreak()
+
 === Statische Assets zur Build-Zeit
 Django's `collectstatic` sammelt alle statischen Dateien aus den installierten Apps und kopiert sie in ein gemeinsames Verzeichnis, von dem aus sie ausgeliefert werden. In #htl3r.long[diagnet] übernimmt das #htl3r.long[whitenoise], das die Dateien direkt aus dem #htl3r.full[asgi]-Prozess heraus serviert, ohne separaten Webserver @whitenoise-docs. Dieser Schritt wird als eigenständige #htl3r.long[nix]-Derivation (`staticRoot`) bereits zur Build-Zeit ausgeführt:
 
@@ -103,6 +105,8 @@ Die Schlüsselgenerierung läuft in einer Subshell mit `umask 077`, damit die `s
 ]
 
 Fehlt `DIAGNET_SECRET_KEY`, wird er über `get_random_secret_key()` erzeugt, fehlt `DIAGNET_DEVICE_ENCRYPTION_KEY`, über `Fernet.generate_key()`. Beide Werte werden an `secrets.env` angehängt und danach erneut in die aktuelle Shell gesourct. Bei Folgestarts sind die Variablen bereits gesetzt, sodass die Generierung übersprungen wird.
+
+#pagebreak()
 
 Schlägt `migrate --noinput` fehl, bricht das Skript ab, damit der Container nicht in einen Zustand mit inkonsistentem Datenbankschema startet. Anschließend übernimmt `exec` den Serverstart:
 

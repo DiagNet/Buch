@@ -1,5 +1,7 @@
 #import "@preview/htl3r-da:2.0.0" as htl3r
 
+#pagebreak()
+
 #htl3r.author("Karun Sandhu")
 == CI/CD-Automatisierung <cicd_pipelines>
 
@@ -10,6 +12,8 @@ Für die Versionierung verwendet #htl3r.long[diagnet] *ZeroVer* @zerover. Anders
 === GitHub Actions
 
 GitHub Actions ist die in GitHub integrierte #htl3r.short[ci]/#htl3r.short[cd]-Plattform. Automatisierte Abläufe werden als *Workflows* in YAML-Dateien unter `.github/workflows/` definiert. Jeder Workflow besteht aus einem oder mehreren *Jobs*, die auf einem von GitHub bereitgestellten virtuellen Runner-Server ausgeführt werden. Ein Job wiederum setzt sich aus einzelnen *Steps* zusammen, von denen jeder entweder einen Shell-Befehl ausführt oder eine vorgefertigte *Action* aus dem GitHub Marketplace aufruft. Über den `on`-Schlüssel wird festgelegt, welche Ereignisse einen Workflow auslösen, z. B. ein Push auf einen bestimmten Branch, das Erstellen eines Tags oder ein Pull Request.
+
+#pagebreak()
 
 Ein minimales Beispiel verdeutlicht den Aufbau: Der folgende Workflow läuft bei jedem Push auf `main` und führt auf einem Ubuntu-Runner zwei Befehle aus.
 
@@ -41,6 +45,8 @@ Die Pipelines von #htl3r.long[diagnet] lassen sich in drei funktionale Gruppen e
 
 Alle drei Gruppen teilen eine gemeinsame Basis: den wiederverwendbaren `nix.yml`-Workflow. GitHub Actions erlaubt es, Workflows über den Trigger `workflow_call` von anderen Workflows aufzurufen und dabei Parameter zu übergeben. `nix.yml` wird nie direkt durch ein Git-Ereignis ausgelöst, sondern nimmt ausschließlich solche Aufrufe entgegen. Er erwartet einen einzigen Parameter, nämlich den auszuführenden Shell-Befehl, installiert Nix auf dem Runner und richtet anschließend Cachix ein.
 
+#pagebreak()
+
 Cachix ist ein Binary-Cache-Dienst für den #htl3r.long[nix]-Store @nixos-homepage. Im #htl3r.long[nix]-Modell wird jede Abhängigkeit als sogenannte *Derivation* bezeichnet und durch einen kryptographischen Hash eindeutig identifiziert. Cachix speichert bereits gebaute Derivations und stellt sie über eine öffentliche URL bereit. Statt bei jedem Pipeline-Lauf alle Pakete neu zu kompilieren, prüft der Runner zuerst, ob eine Derivation mit dem passenden Hash bereits im Cache liegt, und lädt sie in diesem Fall direkt herunter. Dieser Cache ist auch in der `flake.nix` als `extra-substituters` eingetragen, sodass er lokal und in der Pipeline gleichermaßen greift:
 
 #htl3r.code(
@@ -62,6 +68,8 @@ Cachix ist ein Binary-Cache-Dienst für den #htl3r.long[nix]-Store @nixos-homepa
 ]
 
 Der letzte Step führt den übergebenen Befehl aus und setzt dabei drei Umgebungsvariablen, die Django auch ohne laufende Datenbank benötigt: `DIAGNET_DEBUG` deaktiviert den Debug-Modus, `DIAGNET_SECRET_KEY` stellt einen Fallback-Schlüssel für kryptographische Operationen bereit, und `DIAGNET_DEVICE_ENCRYPTION_KEY` ist für die verschlüsselte Geräteverwaltung notwendig. Ohne diese Variablen würden `collectstatic` und die Testsuite bereits beim Import der Django-Settings scheitern. Der aufrufende Workflow übergibt nur den Befehl; alles andere, von der Nix-Installation bis zum Cache-Setup, erledigt die Basis. Das vermeidet Wiederholungen und stellt sicher, dass alle Workflows dieselbe Nix-Konfiguration verwenden.
+
+#pagebreak()
 
 === Qualitätssicherung
 
@@ -85,6 +93,8 @@ Der `nix-ci.yml`-Workflow läuft bei jedem Pull Request und bei Merge-Group-Akti
 === Container-Build und Veröffentlichung
 
 Der Container-Workflow gliedert sich in drei Jobs: `build`, `publish` und `release`. Sowohl `publish` als auch `release` hängen über `needs: build` direkt vom Build-Job ab und laufen nach dessen Abschluss parallel zueinander, wobei jeder nur unter einer bestimmten Bedingung aktiv wird.
+
+#pagebreak()
 
 Der Build-Job läuft bei jedem Pull Request, bei Pushes auf `main` und bei Version-Tags. Er ruft `nix build .#container` auf, das die in `nix/diagnet.nix` definierte `buildLayeredImage`-Derivation baut (siehe @containerization). Das Ergebnis landet als Symlink in `./result`. Da GitHub Actions keine Symlinks als Artefakte hochladen kann, wird der Symlink vor dem Upload dereferenziert:
 

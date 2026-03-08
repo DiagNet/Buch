@@ -14,6 +14,8 @@ Die Wahl der Frontend-Technologien folgt direkt aus der Architekturentscheidung 
 
 Für das visuelle Erscheinungsbild und die Responsivität der Oberfläche kommt #htl3r.long[bootstrap] 5.3 zum Einsatz. #htl3r.long[bootstrap] ist ein komponentenbasiertes #htl3r.full[css]-Framework, das ein umfangreiches Grid-System sowie vorgefertigte UI-Komponenten wie Navigationsleisten, Karten, Modale, Tabellen und Badges mitliefert @bootstrap-docs.
 
+#pagebreak()
+
 Außerdem unterstützt #htl3r.long[bootstrap] einen Dark Mode über das `data-bs-theme`-Attribut, das beim Seitenaufruf automatisch aus dem `localStorage` gesetzt wird. Da die Diagramme ihre Farben aus #htl3r.long[bootstrap]-#htl3r.short[css]-Variablen beziehen, reagieren sie auf Theme-Wechsel ohne Neuinitialisierung. Dafür überwacht ein `MutationObserver` das Attribut und ruft bei einer Änderung die Aktualisierungsfunktion aller Chart-Instanzen auf.
 
 === HTMX
@@ -36,6 +38,8 @@ Die interaktivsten Teile der Oberfläche, also Gerätelisten, Testausführung, M
 
 In diesem Beispiel löst das Attribut `hx-trigger="load"` beim Seitenaufruf automatisch einen `GET`-Request aus, der den Tabelleninhalt nachlädt. Der zusätzliche Trigger `refresh from:body` ermöglicht es, die Tabelle von beliebigen anderen Stellen der Seite aus per `htmx.trigger(document.body, 'refresh')` zu aktualisieren, beispielsweise nachdem ein Gerät erstellt, bearbeitet oder gelöscht wurde. Der Server liefert in diesem Fall kein vollständiges HTML-Dokument zurück, sondern nur das Fragment, das in den Ziel-Container eingefügt werden soll.
 
+#pagebreak()
+
 Während #htl3r.long[htmx]-Requests laufen, werden Skeleton-Platzhalter angezeigt, die die spätere Tabellenstruktur bereits andeuten und ein Layout-Springen beim Laden verhindern. Für Schreiboperationen (`POST`, `DELETE`) werden die #htl3r.short[csrf]-Token über den `hx-headers`-Parameter mitgeliefert, da Django #htl3r.short[csrf]-Schutz für alle zustandsverändernden Requests erzwingt. Serverseitige Rückmeldungen werden nicht als Teil des HTML-Fragments, sondern über den `HX-Trigger`-Response-Header als benutzerdefinierte Events übermittelt. Das `showMessage`-Event fängt ein globaler Event-Listener ab und zeigt daraufhin einen #htl3r.long[bootstrap]-Toast an. Dieses Pattern ersetzt ein #htl3r.full[spa]-Framework vollständig: Routing, State-Management und eine separate Build-Pipeline entfallen, da #htl3r.long[diagnet] auf Djangos Session-System und serverseitiges Rendering aufbaut.
 
 == Geräteverwaltung <frontend_geraeteverwaltung>
@@ -45,6 +49,8 @@ Die Geräteverwaltung unter `/devices/` bildet die Grundlage für alle testbezog
 === Geräteliste mit Live-Statusanzeige
 
 Jede Zeile der Gerätetabelle enthält neben Name, IP-Adresse, Port, Protokoll und Gerättyp eine Statusspalte, die den aktuellen Verbindungsstatus des Geräts anzeigt. Dieser Status wird nicht beim Seitenaufruf automatisch geprüft, da ein simultaner Verbindungstest aller Geräte die Ladezeit massiv erhöhen würde. Stattdessen gibt es pro Zeile eine "Check Status"-Schaltfläche, die per #htl3r.long[htmx] einen `GET`-Request an `/devices/<pk>/check/` sendet und das Ergebnis direkt in die Statusspalte der betreffenden Zeile schreibt.
+
+#pagebreak()
 
 Zusätzlich steht eine "Check All Devices"-Schaltfläche zur Verfügung, die einen `POST`-Request an einen dedizierten `/devices/check-all/`-Endpunkt sendet. Der Server prüft dort alle Geräte parallel über einen `ThreadPoolExecutor`, sodass alle Verbindungstests gleichzeitig ablaufen. Das Ergebnis wird als Toast-Nachricht mit der Anzahl erreichbarer und nicht erreichbarer Geräte zurückgemeldet. Während der Request läuft, ist die Schaltfläche deaktiviert und zeigt einen Spinner, um Doppelklicks zu verhindern.
 
@@ -64,6 +70,7 @@ Das Löschen eines Geräts wird direkt aus der Tabelle heraus mit einem `DELETE`
   caption: [Modal zum Anlegen eines neuen Geräts],
 ) <screenshot_device_modal>
 
+#pagebreak()
 
 == Testverwaltung <frontend_testverwaltung>
 
@@ -79,12 +86,16 @@ Die Ausführung eines Testfalls erfolgt per "Run"-Button direkt aus der Liste, d
 
 Die Gruppierung von Testfällen in Testgruppen ist eine zentrale Funktion von #htl3r.long[diagnet]. Die Testgruppen werden im Dashboard als #htl3r.long[bootstrap]-Accordion dargestellt: Jede Gruppe entspricht einem aufklappbaren Element, das beim Öffnen die zugehörigen Testfälle in einer Tabelle anzeigt. Jede Gruppe verfügt über Schaltflächen zum Ausführen aller enthaltenen Tests ("Run all tests"), zum Bearbeiten und Löschen der Gruppe.
 
+#pagebreak()
+
 Das Anlegen und Bearbeiten von Testgruppen folgt demselben Modal-Muster wie die Geräteverwaltung. Bei einer Bearbeitung wird nach dem Speichern nicht das gesamte Accordion neu gerendert, sondern nur das betroffene Accordion-Item per `HX-Retarget`- und `HX-Reswap`-Header gezielt ausgetauscht und dabei offen gelassen. Eine Neuerstellung der Gruppe hingegen erfordert ein vollständiges Refresh des Dashboard-Inhalts via `refreshDashboard`-Event, da das neue Item an die richtige Position im Accordion eingefügt werden muss.
 
 #figure(
   image("../assets/screenshot_testgroup_accordion.png", width: 100%),
   caption: [Accordion-Ansicht mit aufgeklappter Testgruppe und Testergebnissen],
 ) <screenshot_testgroup_accordion>
+
+#pagebreak()
 
 == Benutzerverwaltung <frontend_benutzerverwaltung>
 
@@ -131,6 +142,8 @@ Die Sichtbarkeit von Schaltflächen und Aktionen ist in jedem Template direkt an
 
 Die Verwaltung benutzerdefinierter Testvorlagen unter `/tests/templates/manage/` ist ausschließlich Admins zugänglich. Custom Templates erweitern den Testfall-Katalog von #htl3r.long[diagnet] um selbst geschriebene Python-Klassen, die auf dem Server abgelegt und über die Oberfläche aktiviert werden. Da diese Klassen mit den vollen Rechten des Anwendungsprozesses ausgeführt werden, ist die Verwaltungsseite mit expliziten Sicherheitshinweisen versehen.
 
+#pagebreak()
+
 === Sicherheitswarnung
 
 Beim Aufruf der Seite wird unabhängig von der aktuellen Systemkonfiguration immer ein rot hinterlegter Warnhinweis angezeigt:
@@ -143,6 +156,8 @@ Diese Warnung ist permanent sichtbar und kann nicht weggeklickt werden, um den e
   image("../assets/screenshot_custom_templates_warning.png", width: 100%),
   caption: [Verwaltungsseite für Custom Templates mit permanenter Sicherheitswarnung],
 ) <screenshot_custom_templates>
+
+#pagebreak()
 
 === Template-Tabelle und Sync
 

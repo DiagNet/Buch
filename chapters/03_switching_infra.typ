@@ -16,6 +16,8 @@ spanning-tree mode rapid-pvst
 spanning-tree vlan 1-4094 root primary
 ```
 
+#pagebreak()
+
 An den Ports, an denen Endgeräte angeschlossen sind, wurde die Funktion _PortFast_ aktiviert. Normalerweise müsste man bis zu 30 Sekunden warten, bis ein Port Daten senden darf, was durch PortFast umgangen wird. Damit jedoch kein fremder Switch an so einen Port gesteckt werden kann, ist gleichzeitig der _#htl3r.full[bpdu] Guard_ aktiv. Sobald ein BPDU-Paket an einem solchen Port empfangen wird, schaltet der Switch diesen sofort ab.
 
 ```
@@ -61,6 +63,8 @@ Das Protokoll #htl3r.short[dhcp] ist oft ein Ziel für Angriffe. Ein Angreifer k
 
 Nur die Uplinks zum Distribution-Switch wurden als vertrauenswürdig markiert. Wenn an einem normalen Port für Endgeräte eine Antwort von einem DHCP-Server ankommt, wird diese vom Switch sofort verworfen @cisco-layer2-security.
 
+#pagebreak()
+
 ```
 ip dhcp snooping
 ip dhcp snooping vlan 10,20,99
@@ -83,6 +87,8 @@ ip arp inspection vlan 10,20,99
 interface GigabitEthernet0/24
  ip arp inspection trust
 ```
+
+#pagebreak()
 
 === Sicherheit am Port durch Port Security
 
@@ -110,6 +116,8 @@ interface GigabitEthernet0/5
 ```
 
 Auf diese Weise lässt sich mit dem `Storm_Control_Audit`-Testfall in DiagNet automatisch prüfen, ob die Grenzwerte auf allen Access-Ports korrekt gesetzt sind und die eingestellte Aktion im Ernstfall greift.
+
+#pagebreak()
 
 === Einseitige Fehler mit UDLD erkennen
 

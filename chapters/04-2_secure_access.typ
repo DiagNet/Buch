@@ -25,6 +25,8 @@ Die im Rahmen der Testumgebung implementierte Lösung verfolgt somit mehrere Zie
 
 Die folgenden Abschnitte erläutern zunächst die grundlegenden Konzepte von #htl3r.short[nac] sowie die Funktionsweise der eingesetzten Technologien. Anschließend wird die konkrete Umsetzung der Authentifizierungsmechanismen in der aufgebauten Testumgebung beschrieben.
 
+#pagebreak()
+
 === Network Access Control
 
 #htl3r.short[nac] bezeichnet ein Sicherheitskonzept zur Kontrolle des Zugriffs auf ein Netzwerk. Ziel von #htl3r.short[nac] ist es, sicherzustellen, dass nur berechtigte Benutzer und Geräte Zugriff auf Netzwerkressourcen erhalten. Dabei wird der Netzwerkzugang nicht mehr ausschließlich durch die physische Verbindung zu einem Switchport bestimmt, sondern durch eine Authentifizierungs- und Autorisierungsprüfung.
@@ -59,6 +61,8 @@ Durch die Kombination von #htl3r.short[nac], dem #htl3r.short[aaa]-Modell und ei
 Die Cisco #htl3r.short[ise] dient in der aufgebauten Testumgebung als zentrale Plattform zur Verwaltung von Authentifizierungs- und Autorisierungsprozessen. Über die #htl3r.short[ise] werden Benutzer, Netzwerkgeräte sowie Zugriffsrichtlinien zentral verwaltet und kontrolliert.
 Als Hardwareplattform kommt ein Server des Typs Cisco #htl3r.full[ucs] C220 M4 zum Einsatz. Dabei handelt es sich um einen Rack-Server aus der #htl3r.short[ucs] Produktfamilie, der für den Betrieb von Infrastrukturservices und Netzwerkmanagementsystemen ausgelegt ist.
 
+#pagebreak()
+
 In der Testumgebung wird die #htl3r.short[ise] für zwei zentrale Aufgaben eingesetzt. Einerseits übernimmt sie die Authentifizierung von Administratoren, die sich über das #htl3r.full[radius]-Protokoll auf Netzwerkgeräten anmelden. Andererseits wird sie für die Authentifizierung von Endgeräten an Access-Switchports mittels #htl3r.full[ieee] #htl3r.full[dot1x] verwendet. Die Netzwerkgeräte fungieren dabei als #htl3r.short[radius]-Clients und leiten Authentifizierungsanfragen an die #htl3r.short[ise] weiter.
 
 
@@ -72,6 +76,8 @@ In folgender Abbildung ist das Dashboard der #htl3r.short[ise] zu sehen:
 )
 
 Im weiteren Verlauf dieses Kapitels wird beschrieben, wie die #htl3r.short[ise] zur Absicherung administrativer Zugriffe sowie zur Authentifizierung von Endgeräten mittels #htl3r.short[ieee] #htl3r.short[dot1x] eingesetzt wurde.
+
+#pagebreak()
 
 === Authentifizierung von Netzwerkadministratoren über RADIUS
 
@@ -87,6 +93,8 @@ Ein weiterer zentraler Vorteil dieser Architektur ist, dass Logs einheitlich pro
 )
 
 Damit Netzwerkgeräte Authentifizierungsanfragen an die Cisco #htl3r.short[ise] weiterleiten können, müssen sie als #htl3r.short[radius]-Clients konfiguriert werden. Dazu wird auf dem jeweiligen Gerät der #htl3r.short[radius]-Server definiert und anschließend für die Authentifizierung der Managementzugänge verwendet.
+
+#pagebreak()
 
 In folgendem Beispiel wird der #htl3r.short[radius]-Server auf der Firewall ZBFW-1 definiert:
 
@@ -110,6 +118,8 @@ In dieser Konfiguration werden Anmeldeversuche zunächst an den zentralen #htl3r
 Neben der Absicherung administrativer Zugriffe wurde in der Testumgebung auch der Netzwerkzugang von Endgeräten kontrolliert. Hierfür wird der Standard #htl3r.short[ieee] #htl3r.short[dot1x] verwendet, der eine portbasierte Authentifizierung an Access-Switchports ermöglicht. Ein Switchport bleibt dabei zunächst blockiert und wird erst nach erfolgreicher Authentifizierung für den Netzwerkzugriff freigeschaltet.
 
 Ein #htl3r.short[dot1x]-System besteht aus drei Komponenten: dem Endgerät (#htl3r.long[supplicant]), dem Access-Switch (#htl3r.long[authenticator]) und einem Authentifizierungsserver. In der aufgebauten Infrastruktur übernimmt die Cisco #htl3r.short[ise] diese Rolle. Der Switch kontrolliert den Zugriff auf den Port und leitet Authentifizierungsanfragen über #htl3r.short[radius] an die #htl3r.short[ise] weiter.
+
+#pagebreak()
 
 Nach dem Anschluss eines Endgeräts startet der #htl3r.short[dot1x]-Authentifizierungsprozess. Das Endgerät übermittelt seine Zugangsdaten über das #htl3r.full[eap], welche vom Switch an die #htl3r.short[ise] weitergeleitet werden. Nach erfolgreicher Authentifizierung wird der Port freigeschaltet und dem Gerät ein entsprechendes #htl3r.short[vlan] zugewiesen. Der Ablauf ist in der folgenden Abbildung dargestellt:
 

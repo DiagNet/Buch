@@ -23,6 +23,8 @@ class EtherChannel_Audit(DiagNetTest):
         ...
 ```
 
+#pagebreak()
+
 === Alle Switching-Testfälle im Überblick
 
 In der folgenden Tabelle sind alle 18 entwickelten Testfälle für den Switching-Bereich aufgelistet. Man kann diese über die Weboberfläche konfigurieren und einem bestimmten Gerät zuweisen.
