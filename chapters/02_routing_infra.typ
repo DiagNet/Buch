@@ -34,8 +34,8 @@ Wie schon bei #htl3r.short[isp] 2 dienen auch hier #htl3r.short[gre]-Tunnel dazu
 Fungiert als reines Transit-#htl3r.short[as] zur Kopplung der Provider ohne eigene #htl3r.long[backbone]-Logik.
 
 ==== Pfadmanipulation und Traffic Engineering
-Ein zentrales Element des WAN-Designs ist das Traffic Engineering, um Datenströme gezielt zu steuern.
-Während das #htl3r.short[bgp] standardmäßig den Pfad mit der geringsten AS-Pfad-Länge bevorzugt, werden in dieser Topologie Attribute manipuliert, um spezifische Routing-Entscheidungen zu erzwingen.
+Ein zentrales Element des #htl3r.short[wan]-Designs ist das Traffic Engineering, um Datenströme gezielt zu steuern.
+Während das #htl3r.short[bgp] standardmäßig den Pfad mit der geringsten #htl3r.short[as]-Pfad-Länge bevorzugt, werden in dieser Topologie Attribute manipuliert, um spezifische Routing-Entscheidungen zu erzwingen.
 
 Am Peering-Punkt zwischen `ISP1` und `ISP2` kommt hierfür beispielsweise der #htl3r.full[med] zum Einsatz.
 Für ausgewählte Zielnetze wird die Metrik ausgehender Updates künstlich erhöht.
@@ -65,7 +65,7 @@ Die nachfolgende Konfiguration veranschaulicht diesen Vorgang konkret: Zunächst
 ]
 
 === Standort-Vernetzung und Redundanz
-Die angebundenen Netze demonstrieren verschiedene fortgeschrittene Konzepte zur Hochverfügbarkeit und Standortvernetzung, deren primäres Ziel es ist, eine unterbrechungsfreie Kommunikation sicherzustellen und Endgeräte zuverlässig an das WAN anzubinden.
+Die angebundenen Netze demonstrieren verschiedene fortgeschrittene Konzepte zur Hochverfügbarkeit und Standortvernetzung, deren primäres Ziel es ist, eine unterbrechungsfreie Kommunikation sicherzustellen und Endgeräte zuverlässig an das #htl3r.short[wan] anzubinden.
 
 ==== Gateway-Redundanz
 Zur Absicherung des Default-Gateways für Endgeräte werden zwei unterschiedliche #htl3r.fullpl[fhrp] eingesetzt:
@@ -123,13 +123,13 @@ Ein spezialisierter Standort bildet die Schnittstelle zwischen privaten Adressen
 Dabei kommen drei Verfahren des #htl3r.full[nat] zum Einsatz, um unterschiedliche Übersetzungsszenarien zu simulieren:
 
 - *Static #htl3r.short[nat]:*
-  Eine feste 1-zu-1-Zuordnung einer öffentlichen IP-Adresse zu einem internen Host.
+  Eine feste 1-zu-1-Zuordnung einer öffentlichen #htl3r.short[ip]-Adresse zu einem internen Host.
 
 - *Dynamic #htl3r.short[nat]:*
   Die temporäre Zuweisung einer globalen Adresse aus einem definierten Pool für die Dauer der Kommunikation.
 
 - *Port Address Translation (PAT):*
-  Das Multiplexing mehrerer interner Clients über eine einzige öffentliche IP-Adresse unter Verwendung unterschiedlicher Source-Ports.
+  Das Multiplexing mehrerer interner Clients über eine einzige öffentliche #htl3r.short[ip]-Adresse unter Verwendung unterschiedlicher Source-Ports.
 
 ==== OSPF Multi-Area Design
 Zur Demonstration hierarchischer Routing-Strukturen wurde ein Standort in mehrere #htl3r.short[ospf]-Areas unterteilt.

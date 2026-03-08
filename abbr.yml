@@ -106,7 +106,7 @@ backbone:
   long:
     singular: Backbone
     plural: Backbones
-  description: Der zentrale Hauptteil eines Netzwerks, der verschiedene Teilnetze miteinander verbindet und für den Datentransport über große Distanzen oder hohe Bandbreiten optimiert ist.
+  description: Der zentrale Hauptteil eines Netzwerks, der verschiedene Teilnetze miteinander verbindet.
 
 backend:
   long:
@@ -121,7 +121,7 @@ bgp:
   long:
     singular: Border Gateway Protocol
     plural: Border Gateway Protocols
-  description: Das Standard-Routing-Protokoll des Internets, das den Datenaustausch zwischen verschiedenen Autonomen Systemen (AS) steuert.
+  description: Das Standard-Routing-Protokoll des Internets, das den Datenaustausch zwischen verschiedenen Autonomen Systemen steuert.
 
 bootstrap:
   long:
@@ -225,7 +225,7 @@ dhcp:
     singular: DHCP
   long:
     singular: Dynamic Host Configuration Protocol
-  description: Ein Netzwerkprotokoll zur automatischen Zuweisung von IP-Adressen und weiteren Netzwerkparametern an Clients in einem lokalen Netzwerk.
+  description: Ein Netzwerkprotokoll zur automatischen Zuweisung von IP-Adressen und weiteren Netzwerkparametern an Clients.
 
 # Danijel
 diagnet:
@@ -256,7 +256,7 @@ dmvpn:
   long:
     singular: Dynamic Multipoint Virtual Private Network
     plural: Dynamic Multipoint Virtual Private Networks
-  description: Eine VPN-Technologie, die den dynamischen Aufbau von IPsec-Tunneln zwischen mehreren Standorten ohne permanente Konfiguration ermöglicht.
+  description: Eine VPN-Technologie, die den dynamischen Aufbau von IPsec-Tunneln zwischen mehreren Standorten ermöglicht.
 
 dom:
   short:
@@ -307,7 +307,7 @@ ebgp:
   long:
     singular: External Border Gateway Protocol
     plural: External Border Gateway Protocols
-  description: Eine Variante des Border Gateway Protocols, die für den Austausch von Routing-Informationen zwischen unterschiedlichen Autonomen Systemen (AS) verwendet wird.
+  description: Eine Variante des Border Gateway Protocols, die für den Austausch von Routing-Informationen zwischen unterschiedlichen Autonomen Systemen verwendet wird.
 
 eigrp:
   short:
@@ -316,7 +316,7 @@ eigrp:
   long:
     singular: Enhanced Interior Gateway Routing Protocol
     plural: Enhanced Interior Gateway Routing Protocols
-  description: Ein fortschrittliches Distanzvektor-Routing-Protokoll von Cisco, das Bandbreite und Verzögerung zur Pfadberechnung kombiniert.
+  description: Ein Distanzvektor-Routing-Protokoll von Cisco, das Bandbreite und Verzögerung zur Pfadberechnung kombiniert.
 
 esp:
   short:
@@ -339,7 +339,7 @@ fabrikmethode:
   long:
     singular: Fabrikmethode
   description: >-
-    Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert, wobei die konkrete Instanziierung den Unterklassen überlassen wird.
+    Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert.
 
 fg:
   short:
@@ -436,7 +436,7 @@ hsrp:
   long:
     singular: Hot Standby Router Protocol
     plural: Hot Standby Router Protocols
-  description: Ein proprietäres Redundanzprotokoll von Cisco, das durch ein Active/Standby-Modell die Ausfallsicherheit des Standard-Gateways gewährleistet.
+  description: Ein Redundanzprotokoll von Cisco, das durch ein Active/Standby-Modell die Ausfallsicherheit des Standard-Gateways gewährleistet.
 
 html:
   short:
@@ -485,7 +485,7 @@ igp:
   long:
     singular: Interior Gateway Protocol
     plural: Interior Gateway Protocols
-  description: Ein Routing-Protokoll, das zum Austausch von Routing-Informationen zwischen Gateways (Routern) innerhalb eines einzelnen Autonomen Systems (AS) verwendet wird.
+  description: Ein Routing-Protokoll, das zum Austausch von Routing-Informationen zwischen Routern innerhalb eines einzelnen Autonomen Systems verwendet wird.
 
 ike:
   short:
@@ -507,7 +507,7 @@ instanzattribute:
   long:
     singular: Instanzattribute
   description: >-
-    Variablen, die an eine spezifische Instanz einer Klasse gebunden sind und deren individuellen Zustand speichern.
+    Variablen, die an eine spezifische Instanz einer Klasse gebunden sind.
 
 interface:
   long:
@@ -644,7 +644,7 @@ med:
   long:
     singular: Multi-Exit Discriminator
     plural: Multi-Exit Discriminators
-  description: Ein optionales BGP-Pfadattribut, das verwendet wird, um den eingehenden Datenverkehr von einem benachbarten Autonomen System zu steuern.
+  description: Ein BGP-Pfadattribut, das verwendet wird, um den eingehenden Datenverkehr von einem benachbarten Autonomen System zu steuern.
 
 mpls:
   short:
@@ -882,7 +882,7 @@ rip:
   long:
     singular: Routing Information Protocol
     plural: Routing Information Protocols
-  description: Ein klassisches Distanzvektor-Routing-Protokoll, das den Hop-Count zur Bestimmung des besten Pfades verwendet.
+  description: Ein Distanzvektor-Routing-Protokoll, das den Hop-Count zur Bestimmung des besten Pfades verwendet.
 
 router_id:
   long:
@@ -1084,7 +1084,7 @@ wan:
   long:
     singular: Wide Area Network
     plural: Wide Area Networks
-  description: Ein Rechnernetz, das sich über einen sehr großen geografischen Bereich erstreckt und verschiedene lokale Netze (LANs) miteinander verbindet.
+  description: Ein Netzwerk, das sich über einen sehr großen geografischen Bereich erstreckt und verschiedene lokale Netze miteinander verbindet.
 
 whitenoise:
   long:

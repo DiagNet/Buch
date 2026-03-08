@@ -46,7 +46,7 @@ Neben der Darstellung muss auch die inhaltliche Korrektheit der eingegebenen Dat
 
 Auch hier wird ein modularer Ansatz verfolgt. Die abstrakte Basisklasse `Datatype` definiert die Methode `check(value)`, welche die Gültigkeit eines Wertes bestätigt. Klassen wie `IPv4` oder `CiscoInterface` implementieren diese Methode mit der jeweiligen Logik.
 
-Der folgende Ausschnitt zeigt die Implementierung einer solchen Prüfung am Beispiel einer IPv4-Adresse:
+Der folgende Ausschnitt zeigt die Implementierung einer solchen Prüfung am Beispiel einer #htl3r.short[ipv4]-Adresse:
 
 #htl3r.code(
   caption: [Implementierung der Datentyp-Klasse IPv4],

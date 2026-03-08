@@ -38,7 +38,7 @@ Dieser String dient als interne Referenz und wird zur Laufzeit als Attributname 
 Daher muss er zwingend die syntaktischen Merkmale einer validen Python-Variable aufweisen (keine Leerzeichen, keine Sonderzeichen, Beginn mit Buchstaben oder Underscore).
 
 *`type`*:
-Das Attribut `type` bestimmt das erwartete Datenformat und die Validierung im Frontend. Für die Implementierung der Testlogik ist jedoch die Art der Datenübergabe an Python entscheidend. Grundsätzlich reicht das Framework alle Parameter inklusive numerischer Werte und IP-Adressen als einfache Zeichenkette an den Test weiter. Eine manuelle Konvertierung ist daher bei Bedarf notwendig.
+Das Attribut `type` bestimmt das erwartete Datenformat und die Validierung im Frontend. Für die Implementierung der Testlogik ist jedoch die Art der Datenübergabe an Python entscheidend. Grundsätzlich reicht das Framework alle Parameter inklusive numerischer Werte und #htl3r.short[ip]-Adressen als einfache Zeichenkette an den Test weiter. Eine manuelle Konvertierung ist daher bei Bedarf notwendig.
 
 Das Backend implementiert jedoch drei zentrale Ausnahmen, bei denen eine automatische Validierung stattfindet:
 
