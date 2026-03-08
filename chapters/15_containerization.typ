@@ -2,7 +2,7 @@
 
 #htl3r.author("Karun Sandhu")
 = Deployment & Operations <deployment_operations>
-#htl3r.long[diagnet] wird als Container-Image ausgeliefert, dessen Abhängigkeiten vollständig durch #htl3r.long[nix] fixiert sind. Die automatisierte #htl3r.full[ci]/#htl3r.full[cd]-Pipeline übernimmt Build, Test und Veröffentlichung bei jeder Codeänderung (siehe @cicd_pipelines).
+#htl3r.long[diagnet] wird als Container-Image ausgeliefert, dessen Abhängigkeiten vollständig durch #htl3r.long[nix] fixiert sind. Die automatisierte #htl3r.short[ci]/#htl3r.full[cd]-Pipeline übernimmt Build, Test und Veröffentlichung bei jeder Codeänderung (siehe @cicd_pipelines).
 
 == Containerisierung <containerization>
 Das Container-Image wird direkt durch #htl3r.long[nix] gebaut, wobei jede Abhängigkeit durch einen kryptographischen Hash im #htl3r.long[nix]-Store fixiert ist, nicht durch einen Versionsnamen. Damit gilt dieselbe Garantie wie für die Entwicklungsumgebung (siehe @dev_env): Die #htl3r.long[nix]-Derivation, die lokal gebaut wird, landet byte-identisch in der Registry.
@@ -47,7 +47,7 @@ Das resultierende Image ist #htl3r.full[oci]-kompatibel, trägt den Tag `diagnet
 ]
 
 === Statische Assets zur Build-Zeit
-Django's `collectstatic` sammelt alle statischen Dateien aus den installierten Apps und kopiert sie in ein gemeinsames Verzeichnis, von dem aus sie ausgeliefert werden. In #htl3r.long[diagnet] übernimmt das #htl3r.long[whitenoise], das die Dateien direkt aus dem #htl3r.short[asgi]-Prozess heraus serviert, ohne separaten Webserver @whitenoise-docs. Dieser Schritt wird als eigenständige #htl3r.long[nix]-Derivation (`staticRoot`) bereits zur Build-Zeit ausgeführt:
+Django's `collectstatic` sammelt alle statischen Dateien aus den installierten Apps und kopiert sie in ein gemeinsames Verzeichnis, von dem aus sie ausgeliefert werden. In #htl3r.long[diagnet] übernimmt das #htl3r.long[whitenoise], das die Dateien direkt aus dem #htl3r.full[asgi]-Prozess heraus serviert, ohne separaten Webserver @whitenoise-docs. Dieser Schritt wird als eigenständige #htl3r.long[nix]-Derivation (`staticRoot`) bereits zur Build-Zeit ausgeführt:
 
 #htl3r.code(
   caption: [Generierung statischer Assets als Nix-Derivation zur Build-Zeit],
@@ -120,7 +120,7 @@ Schlägt `migrate --noinput` fehl, bricht das Skript ab, damit der Container nic
   ```
 ]
 
-Als #htl3r.long[asgi]-Server kommt #htl3r.long[daphne] zum Einsatz, da es das offizielle Server-Tool des Django-Projekts ist @daphne-docs. Das `exec` ersetzt den Shell-Prozess, sodass #htl3r.long[daphne] als #htl3r.full[pid] 1 läuft und `SIGTERM` beim Containershutdown direkt empfängt, ohne auf einen übergeordneten Shell-Prozess warten zu müssen.
+Als #htl3r.short[asgi]-Server kommt #htl3r.long[daphne] zum Einsatz, da es das offizielle Server-Tool des Django-Projekts ist @daphne-docs. Das `exec` ersetzt den Shell-Prozess, sodass #htl3r.long[daphne] als #htl3r.full[pid] 1 läuft und `SIGTERM` beim Containershutdown direkt empfängt, ohne auf einen übergeordneten Shell-Prozess warten zu müssen.
 
 === Lokales Testen des Images
 Das `justfile` stellt zwei Befehle bereit, mit denen das Container-Image lokal gebaut und gestartet werden kann:
