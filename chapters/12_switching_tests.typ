@@ -3,7 +3,7 @@
 #htl3r.author("Danijel Stamenkovic")
 == Switching-Tests <switching_tests>
 
-Die automatische Prüfung einer Netzwerkinfrastruktur hängt stark von der Qualität der eingesetzten Testfälle ab. Für die Switching-Ebene wurden im Rahmen von DiagNet insgesamt 18 Testfälle entwickelt, welche die wichtigsten Sicherheitsmerkmale auf Layer 2 abdecken. Damit wurde die Anforderung der Diplomarbeit, welche mindestens 15 Testfälle für diesen Bereich vorsieht, bewusst übertroffen, um eine lückenlose Abdeckung zu erreichen. Jeder Testfall wurde als eigene Python-Klasse umgesetzt, welche von einer gemeinsamen Basisklasse erbt.
+Die automatische Prüfung einer Netzwerkinfrastruktur hängt stark von der Qualität der eingesetzten Testfälle ab. Für die Switching-Ebene wurden im Rahmen von DiagNet insgesamt 18 Testfälle entwickelt, welche die wichtigsten Sicherheitsmerkmale auf Layer 2 abdecken. Jeder Testfall wurde als eigene Python-Klasse umgesetzt, welche von einer gemeinsamen Basisklasse erbt.
 
 === Aufbau der Testfälle und Basisklasse
 
