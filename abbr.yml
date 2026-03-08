@@ -172,6 +172,15 @@ daphne:
     Ein HTTP-, HTTP/2- und WebSocket-Server für ASGI-Applikationen,
     der als Referenzimplementierung für Django Channels dient.
 
+dh:
+  short:
+    singular: DH
+    plural: DH
+  long:
+    singular: Diffie-Hellman
+    plural: Diffie-Hellman-Verfahren
+  description: Kryptografisches Verfahren zum sicheren Austausch von Schlüsseln über unsichere Netzwerke, das häufig bei VPN-Verbindungen eingesetzt wird.
+
 # Danijel
 diagnet:
   long:
@@ -212,6 +221,15 @@ dom:
     Eine plattform- und sprachneutrale Schnittstelle, die ein HTML- oder
     XML-Dokument als Baumstruktur darstellt und Programmen ermöglicht, Inhalt,
     Struktur und Stil dynamisch zu ändern.
+
+dot1x:
+  short:
+    singular: 802.1X
+    plural: 802.1X
+  long:
+    singular: IEEE 802.1X Port-Based Network Access Control
+    plural: IEEE 802.1X Port-Based Network Access Control
+  description: Standard zur portbasierten Authentifizierung von Geräten in Netzwerken.
 
 eap:
   short:
@@ -381,6 +399,15 @@ icmp:
     singular: Internet Control Message Protocol
   description: >-
     Ein Netzwerkprotokoll, das zum Austausch von Informations- und Fehlermeldungen in IP-Netzwerken dient. Es wird primär für Diagnosezwecke verwendet, etwa um die Erreichbarkeit von Hosts zu prüfen.
+
+ieee:
+  short:
+    singular: IEEE
+    plural: IEEE
+  long:
+    singular: Institute of Electrical and Electronics Engineers
+    plural: Institute of Electrical and Electronics Engineers
+  description: Internationale Organisation für Elektrotechnik, Elektronik und Informationstechnik, die unter anderem zahlreiche Netzwerkstandards entwickelt und veröffentlicht.
 
 igp:
   short:
@@ -812,6 +839,15 @@ twelvefactor:
   long:
     singular: The Twelve-Factor App
   description: Eine Methodik zur Erstellung skalierbarer und wartbarer Software-as-a-Service-Anwendungen.
+
+ucs:
+  short:
+    singular: UCS
+    plural: UCS
+  long:
+    singular: Cisco Unified Computing System
+    plural: Cisco Unified Computing Systems
+  description: Von Cisco entwickeltes Rechenzentrums-System, das Server, Netzwerkkomponenten und Managementfunktionen in einer Plattform zusammenführt.
 
 udp:
   short:

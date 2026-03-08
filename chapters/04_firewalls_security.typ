@@ -3,7 +3,7 @@
 #htl3r.author("Benedikt Theuretzbachner")
 == Firewalls & Perimetersicherheit
 
-In modernen Netzwerkinfrastrukturen spielen Firewalls eine zentrale Rolle beim Schutz von Systemen und Daten. Sie kontrollieren den Datenverkehr zwischen verschiedenen Netzwerksegmenten und stellen sicher, dass nur definierte und erlaubte Verbindungen zugelassen werden. Dadurch können unautorisierte Zugriffe verhindert und potenzielle Sicherheitsrisiken reduziert werden.
+In modernen Netzwerkinfrastrukturen spielen Firewalls eine zentrale Rolle beim Schutz von Systemen und Daten. Sie kontrollieren den Datenverkehr zwischen verschiedenen Netzwerksegmenten und stellen sicher, dass nur definierte Verbindungen zugelassen werden. Dadurch können unautorisierte Zugriffe verhindert und potenzielle Sicherheitsrisiken reduziert werden.
 
 Im Rahmen dieses Projekts wurde eine Sicherheitsarchitektur implementiert, welche die beiden Standorte der Testumgebung voneinander trennt und gleichzeitig eine sichere Kommunikation ermöglicht. Dabei kommen unterschiedliche Firewall-Technologien zum Einsatz, die jeweils spezifische Aufgaben innerhalb der Infrastruktur erfüllen.
 
@@ -93,10 +93,10 @@ In der implementierten Konfiguration werden folgende Parameter verwendet:
 
 - Verschlüsselung: AES-256
 - Integrität: SHA-256
-- Diffie-Hellman Gruppe: 14
+- #htl3r.long[dh] Gruppe: 14
 - Authentifizierung: Pre-Shared Key
 
-AES-256 sorgt für eine starke symmetrische Verschlüsselung des Datenverkehrs, während SHA-256 zur Sicherstellung der Datenintegrität eingesetzt wird. Die Diffie-Hellman Gruppe 14 ermöglicht den Austausch der kryptographischen Schlüssel während der Aushandlung. Sie bietet ein höheres Sicherheitsniveau als veraltete Gruppen wie 1, 2 oder 5 und ist dabei weniger Hardware intensiv als die Gruppen 19 oder 21.
+AES-256 sorgt für eine starke symmetrische Verschlüsselung des Datenverkehrs, während SHA-256 zur Sicherstellung der Datenintegrität eingesetzt wird. Die #htl3r.long[dh] Gruppe 14 ermöglicht den Austausch der kryptographischen Schlüssel während der Aushandlung. Sie bietet ein höheres Sicherheitsniveau als veraltete Gruppen wie 1, 2 oder 5 und ist dabei weniger Hardware intensiv als die Gruppen 19 oder 21.
 
 *Phase 2 – IPsec Security Association:*
 
