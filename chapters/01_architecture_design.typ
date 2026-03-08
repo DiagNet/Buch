@@ -20,7 +20,7 @@ Im physischen Labor befindet sich die Hardware von Cisco, welche von der CANCOM 
 
 Den Eingang zum Labor bilden zwei Cisco ISR4331 Router, welche als #htl3r.full[zbf] konfiguriert wurden. Ein zentraler Bestandteil des Labors ist ein Cisco UCS-Server, der als administrativer Zugangspunkt für die Verwaltung der Netzwerkgeräte dient.
 
-Hinter den Firewalls arbeitet ein Catalyst-Switch als Distribution-Switch, welcher das Routing zwischen den verschiedenen #htl3r.full[vlan] Segmenten übernimmt. An diesem Switch sind die Access-Switches angeschlossen, an denen die Layer-2-Sicherheitsfunktionen wie Port-Security und DHCP Snooping implementiert wurden. Zur zentralen Authentifizierung der Zugriffe wird eine Cisco Identity Services Engine eingesetzt, welche als #htl3r.short[ise] bezeichnet wird.
+Hinter den Firewalls arbeitet ein Catalyst-Switch als Distribution-Switch, an dem die Access-Switches angeschlossen sind. Das Routing zwischen den #htl3r.full[vlan] Segmenten übernehmen die vorgelagerten Firewalls. An den Access-Switches wurden die Layer-2-Sicherheitsfunktionen wie Port-Security und DHCP Snooping implementiert. Zur zentralen Authentifizierung der Zugriffe wird eine Cisco Identity Services Engine eingesetzt, welche als #htl3r.short[ise] bezeichnet wird.
 
 == Virtueller Standort (GNS3)
 
@@ -59,7 +59,7 @@ Das Netzwerk im Labor wurde in vier funktionale Bereiche unterteilt, um eine kla
   caption: [Einteilung der VLAN-Segmente im physischen Labor.],
 ) <tab-vlans>
 
-Der Datenverkehr zwischen den produktiven VLANs wird ausschließlich über den Distribution-Switch geleitet. Die Access-Switches fungieren als reine Layer-2-Geräte. Durch die Nutzung eines dedizierten Native VLANs wurde sichergestellt, dass ungetaggter Datenverkehr nicht unkontrolliert in die produktiven Netze gelangen kann.
+Der Datenverkehr zwischen den produktiven VLANs wird über die Firewalls geroutet. Die Access-Switches fungieren als reine Layer-2-Geräte. Durch die Nutzung eines dedizierten Native VLANs wurde sichergestellt, dass ungetaggter Datenverkehr nicht unkontrolliert in die produktiven Netze gelangen kann.
 
 == IP-Adressierungsschema
 
