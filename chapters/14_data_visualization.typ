@@ -3,7 +3,7 @@
 #htl3r.author("Danijel Stamenkovic")
 == Datenvisualisierung <data_visualization>
 
-Ein Werkzeug für die Prüfung von Netzwerken ist nur dann wirklich nützlich, wenn die Ergebnisse verständlich und übersichtlich dargestellt werden. Bei DiagNet wurde deshalb auf eine Strategie gesetzt, welche die Informationen auf verschiedenen Ebenen aufbereitet. Ein Dashboard gibt einen schnellen Überblick über das gesamte Netz, während man in den Detailansichten jeden einzelnen Testschritt genau nachvollziehen kann. Für die Dokumentation lassen sich zudem PDF-Berichte erstellen. Die gesamte Oberfläche wurde mit #htl3r.long[htmx] umgesetzt @htmx-docs, wodurch die Seite schnell reagiert, ohne dass man ein schwerfälliges JavaScript-Framework benötigt hätte.
+Ein Werkzeug für die Prüfung von Netzwerken ist nur dann wirklich nützlich, wenn die Ergebnisse verständlich und übersichtlich dargestellt werden. Bei DiagNet wurde deshalb auf eine Strategie gesetzt, welche die Informationen auf verschiedenen Ebenen aufbereitet. Ein Dashboard gibt einen schnellen Überblick über das gesamte Netz, während man in den Detailansichten jeden einzelnen Testschritt genau nachvollziehen kann. Für die Dokumentation lassen sich zudem PDF-Berichte erstellen.
 
 === Speicherung und Abfrage der Daten
 
