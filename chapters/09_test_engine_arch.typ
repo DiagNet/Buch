@@ -15,7 +15,7 @@ Das Backend von #htl3r.long[diagnet] sorgt für die Ausführung, Auswertung und 
       _mutually_exclusive_parameters = []
 
       def run(self):
-          "Führt den Test mit den übergebenen Parametern aus"
+          # Führt den Test mit den übergebenen Parametern aus
           self.check_parameter_validity()
           self.discover_testcases()
           self.apply_decorators()
@@ -102,7 +102,7 @@ Anhand des folgenden Beispiels wird deutlich, wie diese Frontend-Attribute integ
           "name": "target_as",
           "type": "positive-number",
           "displayName": "Remote AS Number",
-          "description": "Die erwartete Autonomous System Number des Peers"
+          "description": "The expected Autonomous System Number"
       },
   ]
   ```
