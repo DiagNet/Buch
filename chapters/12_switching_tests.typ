@@ -29,81 +29,61 @@ In der folgenden Tabelle sind alle 18 entwickelten Testfälle für den Switching
 
 #figure(
   table(
-    columns: (auto, 1fr, auto),
+    columns: (auto, 1fr),
     inset: 8pt,
-    align: (left, left, center),
-    table.header([*Testfall*], [*Was wird geprüft?*], [*Zielgerät*]),
+    align: (left, left),
+    table.header([*Testfall*], [*Was wird geprüft?*]),
     [`AAA_Radius_Configuration`],
     [RADIUS-Anbindung und die Methoden für den Login],
-    [Alle Switches],
 
     [`Access_Port_Compliance`],
     [VLAN-Zuweisung und der Modus der Endgeräte-Ports],
-    [ASW-1, ASW-2],
 
     [`Device_Identity_Crypto_Audit`],
     [Hostname, Domain und die Stärke der SSH-Verschlüsselung],
-    [Alle Switches],
 
     [`DHCP_Snooping_Security_Audit`],
     [Aktivierung von DHCP Snooping und die vertrauenswürdigen Ports],
-    [ASW-1, ASW-2],
 
     [`Dynamic_ARP_Inspection_Audit`],
     [Aktivierung von DAI und die korrekten Einstellungen je VLAN],
-    [ASW-1, ASW-2],
 
     [`Errdisable_Recovery_Audit`],
     [Gründe für die Wiederherstellung und die Zeitintervalle],
-    [Alle Switches],
 
     [`EtherChannel_Audit`],
     [Zustand des Port-Channels und die aktiven Leitungen],
-    [DSW, ASW-1/2],
 
     [`LLDP_CDP_Infrastructure_Audit`],
     [Zustand von LLDP und CDP sowie die Liste der Nachbarn],
-    [Alle Switches],
 
     [`Local_Account_Security`],
     [Lokale Nutzer für den Notfall und deren Verschlüsselung],
-    [Alle Switches],
 
     [`MAC_Address_Table_Stability`],
     [Größe der MAC-Tabelle und Stabilität der Einträge],
-    [ASW-1, ASW-2],
 
     [`Management_Plane_Security`],
     [Deaktivierung von HTTP, verfügbare Protokolle sowie SSH-Version],
-    [Alle Switches],
 
     [`Port_Security_Audit`],
     [MAC-Limit, Sticky-Funktion und die Reaktion bei Verstößen],
-    [ASW-1, ASW-2],
 
-    [`Rapid_PVST_Root_Audit`],
-    [Rolle der Root-Bridge für jedes einzelne VLAN],
-    [DSW, ASW-1/2],
+    [`Rapid_PVST_Root_Audit`], [Rolle der Root-Bridge für jedes einzelne VLAN],
 
     [`Storm_Control_Audit`],
     [Grenzwerte für Broadcasts und die eingestellte Aktion],
-    [ASW-1, ASW-2],
 
     [`SVI_Management_Hardening`],
     [IP-Adresse und Erreichbarkeit der Management-Schnittstelle],
-    [DSW],
 
-    [`Switchport_Trunk_Audit`],
-    [Modus der Trunk-Ports und das Native VLAN 999],
-    [DSW, ASW-1/2],
+    [`Switchport_Trunk_Audit`], [Modus der Trunk-Ports und das Native VLAN 999],
 
     [`UDLD_Fiber_Integrity_Audit`],
     [Aktivierung von UDLD im aggressiven Modus auf den Uplinks],
-    [DSW, ASW-1/2],
 
     [`VTP_DTP_Security_Audit`],
     [Modus von VTP und Deaktivierung von DTP auf allen Ports],
-    [DSW, ASW-1/2],
   ),
   caption: [Die 18 Switching-Testfälle von DiagNet.],
 ) <tab-switching-testcases>

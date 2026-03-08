@@ -68,6 +68,62 @@ Der folgende Codeausschnitt demonstriert die Definition einer solchen tabellaris
   ```
 ]
 
+=== Alle Routing-Testfälle im Überblick
+
+Die folgende Tabelle listet alle entwickelten Testfälle für den Routing-Bereich auf.
+
+#figure(
+  table(
+    columns: (auto, 1fr),
+    inset: 8pt,
+    align: (left, left),
+    table.header([*Testfall*], [*Was wird geprüft?*]),
+    [`BGP_Attributes`],
+    [Pfadattribute wie Local Preference, Weight und Next-Hop],
+
+    [`BGP_RoutingTable`],
+    [Einträge in der BGP-Routing-Tabelle nach Netz, Next-Hop und Best-Path],
+
+    [`BGP_Session`],
+    [Session-Status zwischen zwei BGP-Peers (One-Way oder Two-Way)],
+
+    [`DMVPN`],
+    [Tunnel-Verbindungen zwischen Hub und Spokes sowie NHRP-Einträge],
+
+    [`EIGRP_Neighbors`],
+    [EIGRP-Nachbarschaft und Adjacency-Status zwischen zwei Geräten],
+
+    [`GLBP`], [Virtual IP und Priorität der GLBP-Gruppen],
+
+    [`HSRP`],
+    [Aktiver/Standby-Status, Virtual IP und Priorität der HSRP-Gruppen],
+
+    [`IPSec_VPN`],
+    [Aufbau des IPSec-Tunnels und Datenverkehr zwischen zwei Peers],
+
+    [`MPLS`], [MPLS-aktivierte Interfaces und LDP-Nachbarschaften],
+
+    [`NAT`],
+    [NAT-Interface-Richtungen, aktive Übersetzungen und statische Einträge],
+
+    [`OSPF_Adjacency`],
+    [OSPF-Adjacency-Status und optionale Konfigurationskonsistenz zwischen zwei Peers],
+
+    [`OSPF_Areas`],
+    [Area-Hierarchie, Area-Typ und Mitgliedschaft aller OSPF-Router],
+
+    [`OSPF_Interfaces`],
+    [OSPF-Interface-Konfiguration und Authentifizierungsrichtlinie],
+
+    [`RIP_Neighbors`],
+    [RIP-Nachbarschaft und Protokollstatus zwischen zwei Geräten],
+
+    [`RoutingTable`],
+    [Einträge in der Routing-Tabelle nach Netz, Next-Hop, Protokoll und Interface],
+  ),
+  caption: [Die Routing-Testfälle von DiagNet.],
+) <tab-routing-testcases>
+
 === Implementierungsbeispiele
 Die praktische Anwendung der Methoden zur Datenbeschaffung zeigt sich in drei unterschiedlichen Modulen, welche die theoretischen Konzepte in funktionalen Testcode umsetzen.
 
