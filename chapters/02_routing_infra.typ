@@ -3,9 +3,9 @@
 #htl3r.author("Luka Pacar")
 == Routing-Infrastruktur
 
-Die Routing-Infrastruktur ist die Grundlage der gesamten Simulationsumgebung von #htl3r.long[diagnet].
+Die Routing-Infrastruktur ist die Grundlage der gesamten #htl3r.long[wan]-Infrastruktur von #htl3r.long[diagnet].
 Das Design zielt darauf ab, eine komplexe und heterogene Topologie bereitzustellen, die unterschiedliche Protokoll-Standards und Routing-Protokolle vereint.
-Die gesamte #htl3r.short[wan]-Infrastruktur basiert dabei auf Cisco-Komponenten, wobei bewusst verschiedene Konfigurationen implementiert wurden, um ein möglichst breites Spektrum an Netzwerk-Verhalten abzubilden.
+Das gesamte #htl3r.short[wan] basiert dabei auf Cisco-Komponenten, wobei bewusst verschiedene Konfigurationen implementiert wurden, um ein möglichst breites Spektrum an Netzwerk-Verhalten abzubilden.
 
 #figure(
   image("../assets/WAN10.jpg", width: 95%),
