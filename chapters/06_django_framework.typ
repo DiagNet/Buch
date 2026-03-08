@@ -3,7 +3,7 @@
 #htl3r.author("Karun Sandhu")
 = Backend & Applikationsarchitektur <backend_architektur>
 
-#htl3r.long[diagnet] verwaltet Netzwerkgeräte, Testfälle, Testergebnisse und Benutzerrechte. Diese Daten stehen nicht isoliert nebeneinander: Ein Testfall gehört zu einem Gerät, ein Ergebnis zu einem Testfall, eine Berechtigung zu einem Benutzer. Je mehr solcher Relationen eine Plattform abbilden muss, desto mehr bestimmt die Wahl des Frameworks, wie viel davon selbst implementiert werden muss und wie viel von Haus aus mitgeliefert wird. Diese Entscheidung war der Ausgangspunkt für die Architektur des #htl3r.longpl[backend].
+#htl3r.long[diagnet] verwaltet Netzwerkgeräte, Testfälle, Testergebnisse und Benutzerrechte. Diese Daten stehen nicht isoliert nebeneinander: Ein Testfall gehört zu einem Gerät, ein Ergebnis zu einem Testfall, eine Berechtigung zu einem Benutzer. Je mehr solcher Relationen eine Plattform abbilden muss, desto mehr bestimmt die Wahl des #htl3r.longpl[framework], wie viel davon selbst implementiert werden muss und wie viel von Haus aus mitgeliefert wird. Diese Entscheidung war der Ausgangspunkt für die Architektur des #htl3r.longpl[backend].
 
 == Das Django Framework <django_framework>
 
@@ -13,7 +13,7 @@ Da #htl3r.long[diagnet] komplexe Relationen zwischen Netzwerkgeräten, Testfäll
 
 === Alternativen und Entscheidungsfindung
 
-Die Wahl des serverseitigen #htl3r.long[framework]s wurde maßgeblich durch #htl3r.long[pyats] @pyats-docs beeinflusst. Da dieses Tool nativ auf Python basiert, war ein Python-#htl3r.long[backend] zwingend erforderlich. Um zwischen Django, Flask und FastAPI eine nachvollziehbare Entscheidung zu treffen, wurde eine Nutzwertanalyse durchgeführt.
+Die Wahl des serverseitigen #htl3r.longpl[framework] wurde maßgeblich durch #htl3r.long[pyats] @pyats-docs beeinflusst. Da dieses Tool nativ auf Python basiert, war ein Python-#htl3r.long[backend] zwingend erforderlich. Um zwischen Django, Flask und FastAPI eine nachvollziehbare Entscheidung zu treffen, wurde eine Nutzwertanalyse durchgeführt.
 
 Folgende vier Kriterien wurden für die Bewertung definiert:
 - *Funktionsumfang:* Verfügbarkeit von "Out-of-the-Box"-Features wie #htl3r.short[orm] und Authentifizierung.
@@ -51,7 +51,7 @@ Aus diesem Vergleich ergibt sich folgende Gewichtung (Anzahl der Nennungen):
 
 ==== Punktevergabe und Auswertung
 
-Im zweiten Schritt wurden die #htl3r.long[framework]s in den einzelnen Kategorien mit Punkten von 1 (sehr schlecht) bis 5 (sehr gut) bewertet. Das Kriterium "#htl3r.full[api]-Fokus" floss mit der Gewichtung 0 nicht in die finale Punktzahl ein, wurde der Vollständigkeit halber jedoch evaluiert.
+Im zweiten Schritt wurden die #htl3r.longpl[framework] in den einzelnen Kategorien mit Punkten von 1 (sehr schlecht) bis 5 (sehr gut) bewertet. Das Kriterium "#htl3r.full[api]-Fokus" floss mit der Gewichtung 0 nicht in die finale Punktzahl ein, wurde der Vollständigkeit halber jedoch evaluiert.
 
 #figure(
   table(
@@ -75,7 +75,7 @@ Im zweiten Schritt wurden die #htl3r.long[framework]s in den einzelnen Kategorie
 
 ==== Entscheidung für Django
 
-Django erreicht mit 30 Punkten den höchsten Wert. Den Ausschlag gibt der Funktionsumfang: Flask und FastAPI sind Micro-#htl3r.long[framework]s, die für eine vollständige Webanwendung mit Datenbank, Authentifizierung und serverseitigem Rendering auf externe Bibliotheken angewiesen sind. Django liefert diese Komponenten von Haus aus mit, was den Implementierungsaufwand für die Web-Infrastruktur deutlich reduzierte und den Fokus auf die Netzwerklogik ermöglichte.
+Django erreicht mit 30 Punkten den höchsten Wert. Den Ausschlag gibt der Funktionsumfang: Flask und FastAPI sind Micro-#htl3r.longpl[framework], die für eine vollständige Webanwendung mit Datenbank, Authentifizierung und serverseitigem Rendering auf externe Bibliotheken angewiesen sind. Django liefert diese Komponenten von Haus aus mit, was den Implementierungsaufwand für die Web-Infrastruktur deutlich reduzierte und den Fokus auf die Netzwerklogik ermöglichte.
 
 === Applikationsstruktur und Modularität
 
@@ -87,9 +87,9 @@ Datenmodelle oder Programmlogik angepasst werden müssen.
 
 === Model-View-Template (MVT) Architektur
 
-Django basiert auf einer Abwandlung der klassischen #htl3r.full[mvc]-Architektur, die als Model-View-Template (#htl3r.short[mvt]) bezeichnet wird @django-docs. #htl3r.long[diagnet] nutzt dieses Paradigma für eine strikte Trennung von Datenmodellierung, Geschäftslogik und Präsentationsebene.
+Django basiert auf einer Abwandlung der klassischen #htl3r.full[mvc]-Architektur, die als #htl3r.full[mvt] bezeichnet wird @django-docs. #htl3r.long[diagnet] nutzt dieses Paradigma für eine strikte Trennung von Datenmodellierung, Geschäftslogik und Präsentationsebene.
 
-Das *Model* definiert die Datenstrukturen und kommuniziert mit der Datenbank. Die *View* nimmt #htl3r.full[http]-Requests entgegen, orchestriert die #htl3r.long[backend]-Logik und bereitet die Daten auf. Das *Template* rendert die von der View übergebenen Variablen in valides #htl3r.full[html].
+Das *Model* definiert die Datenstrukturen und kommuniziert mit der Datenbank. Die *View* nimmt #htl3r.full[http]-Requests entgegen, orchestriert die #htl3r.long[backend]-Logik und bereitet die Daten auf. Das *Template* rendert die von der View übergebenen Variablen in valides #htl3r.short[html].
 
 === "Fat Models": Integration der Netzwerk-Engines
 

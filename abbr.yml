@@ -572,6 +572,15 @@ isp:
     plural: Internet Service Provider
   description: Ein Dienstleister, der Kunden die Anbindung an das Internet sowie weitere technische Dienstleistungen bereitstellt.
 
+js:
+  short:
+    singular: JS
+  long:
+    singular: JavaScript
+  description: >-
+    Eine weit verbreitete Skriptsprache, die primär für die Entwicklung
+    interaktiver Webinhalte im Browser eingesetzt wird.
+
 json:
   short:
     singular: JSON
