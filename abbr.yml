@@ -589,6 +589,11 @@ nix-shell:
     singular: Nix Shell
   description: Eine temporäre, isolierte Entwicklungsumgebung, in der alle definierten Abhängigkeiten verfügbar sind, ohne das Host-System zu verändern.
 
+nix-store:
+  long:
+    singular: Nix-Store
+  description: Das unveränderliche, inhaltsadressierte Verzeichnis unter `/nix/store/`, in dem Nix alle Build-Ergebnisse und Abhängigkeiten als eindeutige, isolierte Pfade ablegt.
+
 nix:
   long:
     singular: Nix
