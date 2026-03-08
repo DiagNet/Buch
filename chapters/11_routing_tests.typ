@@ -2,30 +2,30 @@
 
 #htl3r.author("Luka Pacar")
 
-= Routing Tests
+== Routing Tests
 Die Routing-Tests validieren die korrekte Weiterleitung von Netzwerkverkehr über alle Schichten der Netzwerktopologie hinweg.
 Der Fokus liegt auf der Überprüfung der dynamischen Routing-Protokolle *#htl3r.full[rip]*, *#htl3r.full[eigrp]*, *#htl3r.full[ospf]* und *#htl3r.full[bgp]*.
 Zusätzlich deckt das Framework Technologien für Redundanz und Sicherheit ab, darunter *#htl3r.full[hsrp]*, *#htl3r.full[glbp]*, *#htl3r.full[dmvpn]* und *#htl3r.full[ipsec]*.
 Im Gegensatz zu einfachen Verbindungstests analysieren diese Module den operativen Zustand der Protokolle direkt auf den Geräten.
 Das System vergleicht die Routing-Tabellen, Nachbarschaften und Interfaces mit den konfigurierten Soll-Werten.
 
-== Datenbeschaffung
+=== Datenbeschaffung
 Die Test-Engine bezieht die notwendigen Informationen direkt aus der Ausgabe der Netzwerkgeräte.
 Da diese Rückgaben aus unformatiertem Text bestehen, muss das Framework die relevanten Daten isolieren.
 Hierfür kommen zwei unterschiedliche Verfahren zum Einsatz.
 Die Wahl der Methode hängt davon ab, ob für den spezifischen Befehl eine Bibliothek zur Verarbeitung existiert.
 
-=== Strukturierte Daten
+==== Strukturierte Daten
 Die bevorzugte Methode nutzt die Parser der Bibliothek #htl3r.long[pyats], welche die Text-Ausgabe der Konsole direkt in strukturierte Datenobjekte umwandelt.
 Dadurch muss der Testcode den Text nicht manuell durchsuchen, sondern greift über definierte Namen auf die gewünschten Werte zu.
 Dieses Verfahren macht die Testfälle unempfindlich gegenüber kleinen Formatänderungen in der Geräteantwort.
 
-=== Rohdaten
+==== Rohdaten
 Besitzen Befehle keinen Parser oder liefern keine strukturierten Daten, nutzt das System die Rohdatenausgabe der Konsole.
 Hierfür kommen #htl3r.fullpl[regex] zum Einsatz, um die gesuchten Informationen aus dem unveränderten Text zu extrahieren.
 Dieses Verfahren bietet zwar maximale Flexibilität für exotische Befehle, ist in der Implementierung jedoch deutlich aufwendiger, da der Entwickler das Antwortformat des Gerätes manuell interpretieren muss.
 
-=== Parallele Ausführung
+==== Parallele Ausführung
 Da Tests für Protokolle wie #htl3r.short[ospf] oft viele Geräte gleichzeitig betreffen, würde eine nacheinander folgende Abfrage zu langen Wartezeiten führen.
 Das Modul `OSPF_Areas` nutzt deshalb die in das #htl3r.long[pyats]-Framework integrierte Funktion `pcall` für asynchrone Aufrufe, wodurch die Abfrage auf allen Geräten zum gleichen Zeitpunkt startet.
 Die Gesamtdauer des Tests hängt somit nur noch vom langsamsten Gerät ab und ist nicht mehr von der Anzahl der Router abhängig.
@@ -43,7 +43,7 @@ Die Gesamtdauer des Tests hängt somit nur noch vom langsamsten Gerät ab und is
   ```
 ]
 
-== Modellierung von Tabellen
+=== Modellierung von Tabellen
 Da Routing-Informationen wie Nachbarschaftslisten oder Routing-Tabellen eine variable Anzahl an Einträgen besitzen, ist die Modellierung der Parameter als tabellarische Struktur notwendig.
 Eine einfache Definition von Einzelparametern würde die Flexibilität des Systems einschränken, da die Anzahl der prüfbaren Werte begrenzt wäre.
 Durch den Einsatz des Datentyps `list` lassen sich beliebig viele Erwartungswerte in einem einzigen Testfall bündeln, was den administrativen Aufwand im Vergleich zu statischen Parametern erheblich reduziert.
@@ -68,10 +68,10 @@ Der folgende Codeausschnitt demonstriert die Definition einer solchen tabellaris
   ```
 ]
 
-== Implementierungsbeispiele
+=== Implementierungsbeispiele
 Die praktische Anwendung der Methoden zur Datenbeschaffung zeigt sich in drei unterschiedlichen Modulen, welche die theoretischen Konzepte in funktionalen Testcode umsetzen.
 
-=== Routing Tabelle
+==== Routing Tabelle
 Das Modul `RoutingTable` verifiziert die Einträge in der Routing-Tabelle des Gerätes, wobei es die strukturierte Datenverarbeitung über Parser nutzt.
 Die Logik iteriert über die Liste der Soll-Routen und sucht die entsprechenden Netze in den abgerufenen Gerätedaten.
 Durch diesen systematischen Abgleich stellt das Framework sicher, dass wichtige Netze über die korrekten Gateways sowie mit der geplanten Metrik erreichbar sind. Abweichungen werden für den Abschlussbericht gesammelt, um eine vollständige Analyse des Routing-Zustands zu ermöglichen.
@@ -97,7 +97,7 @@ Durch diesen systematischen Abgleich stellt das Framework sicher, dass wichtige 
   ```
 ]
 
-=== GLBP
+==== GLBP
 Im Gegensatz dazu überprüft das Modul #htl3r.short[glbp] die Redundanz von Gateways mithilfe der Rohdaten.
 Da für diesen spezifischen Befehl kein Parser zur Verfügung steht, greift der Test auf #htl3r.longpl[regex] zum Filtern der Informationen zurück.
 Ein Suchmuster extrahiert dabei den aktuellen Status der Redundanzgruppe aus dem Text der Konsole, damit der konfigurierte Wert gegen den erwarteten Zustand geprüft werden kann.
@@ -122,7 +122,7 @@ Ein Suchmuster extrahiert dabei den aktuellen Status der Redundanzgruppe aus dem
   ```
 ]
 
-=== BGP Nachbarschaften
+==== BGP Nachbarschaften
 Das Modul `BGP_Neighbors` stellt sicher, dass die Verbindungen zu den konfigurierten Nachbarn aktiv sind.
 Da #htl3r.short[bgp] oft eine Vielzahl von Verbindungen umfasst, nutzt dieser Test ebenfalls die Listen-Verarbeitung.
 Die Logik prüft für jeden definierten Nachbarn, ob der Status den Wert `Established` erreicht hat.
