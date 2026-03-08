@@ -38,11 +38,11 @@ Auf beiden Routern ist eine #htl3r.long[zbf] implementiert. Netzwerkinterfaces w
 
 In der implementierten Architektur werden drei Zonen verwendet:
 
-- INSIDE
-- OUTSIDE
-- self
+- `INSIDE`
+- `OUTSIDE`
+- `self`
 
-Die Zone INSIDE repräsentiert das interne Netzwerk des Standorts, während die Zone OUTSIDE den externen Bereich darstellt. Die Zone self beschreibt den Router selbst und wird verwendet, um den Zugriff auf Management- oder Steuerprotokolle zu regulieren.
+Die Zone `INSIDE` repräsentiert das interne Netzwerk des Standorts, während die Zone `OUTSIDE` den externen Bereich darstellt. Die Zone `self` beschreibt den Router selbst und wird verwendet, um den Zugriff auf Management- oder Steuerprotokolle zu regulieren.
 
 Der #htl3r.short[ipsec]-#htl3r.long[vpn_tunnel] zum virtuellen Standort wird über den Router ZBFW-1 aufgebaut. Damit der Aufbau und Betrieb des #htl3r.long[vpn_tunnel]s durch die Firewall nicht blockiert wird, muss entsprechender #htl3r.short[vpn]-Verkehr explizit erlaubt werden. Dazu werden innerhalb der #htl3r.long[zbf] entsprechende Klassen definiert, welche die für #htl3r.short[ipsec] notwendigen Protokolle erkennen und zulassen.
 
