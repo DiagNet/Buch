@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant C as Endgerät (Supplicant)
+    participant S as Access Switch (Authenticator)
+    participant I as Cisco ISE (Authentication Server)
+
+    C->>S: Verbindung zum Switchport
+    S-->>C: Port im nicht autorisierten Zustand
+
+    C->>S: EAP Request
+    S->>I: RADIUS Access-Request
+
+    I->>I: Authentifizierung & Policyprüfung
+    I-->>S: RADIUS Access-Accept / Reject
+
+    alt Authentifizierung erfolgreich
+        S-->>C: Port wird autorisiert
+        S-->>C: Zugriff auf Netzwerk + VLAN-Zuweisung
+    else Authentifizierung fehlgeschlagen
+        S-->>C: Zugriff verweigert
+    end

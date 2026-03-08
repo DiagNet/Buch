@@ -1,0 +1,17 @@
+flowchart LR
+    subgraph Supplicant
+        A[Client / Laptop]
+    end
+
+    subgraph Access_Network
+        B[Access Switch]
+    end
+
+    subgraph Authentication Server
+        C[Cisco ISE]
+    end
+
+    A -- "802.1X" --> B
+    B -- "RADIUS Request" --> C
+    C -- "RADIUS Accept / Reject" --> B
+    B -- "Network Access" --> A

@@ -11,7 +11,7 @@ Zur Verbesserung der Netzwerksicherheit wurde daher eine zentrale Lösung zur Ab
 Die Umsetzung erfolgt mittels einer #htl3r.long[nac]-Lösung auf Basis der Cisco #htl3r.long[ise]. Dabei werden zwei zentrale Mechanismen eingesetzt:
 
 - Authentifizierung von Administratoren auf Netzwerkgeräten über das #htl3r.long[radius]-Protokoll
-- Authentifizierung von Endgeräten an Access-Switchports mittels IEEE 802.1X
+- Authentifizierung von Endgeräten an Access-Switchports mittels #htl3r.short[ieee] #htl3r.short[dot1x]
 
 Ein wesentliches Ziel dieser Architektur ist eine Single Source of Truth für Authentifizierungs- und Autorisierungsinformationen. Dabei werden Benutzerkonten, Geräteinformationen sowie Zugriffsrichtlinien nicht mehr lokal auf einzelnen Netzwerkgeräten gespeichert, sondern zentral durch die Cisco #htl3r.short[ise] verwaltet. Änderungen an Zugriffsrechten oder Richtlinien müssen dadurch nur an einer Stelle vorgenommen werden und gelten sofort für alle angebundenen Netzwerkkomponenten.
 
@@ -19,7 +19,7 @@ Die im Rahmen der Testumgebung implementierte Lösung verfolgt somit mehrere Zie
 
 - Erhöhung der Netzwerksicherheit durch kontrollierten Netzwerkzugang
 - Zentrale Authentifizierung von Administratoren auf Netzwerkgeräten über #htl3r.short[radius]
-- Authentifizierung von Endgeräten über IEEE 802.1X
+- Authentifizierung von Endgeräten über #htl3r.short[ieee] #htl3r.short[dot1x]
 - Dynamische Zuweisung von #htl3r.longpl[vlan] auf Basis definierter Richtlinien
 - Zentrale Verwaltung von Benutzern, Geräten und Zugriffspolicies im Sinne einer Single Source of Truth
 
@@ -57,8 +57,10 @@ Durch die Kombination von #htl3r.long[nac], dem #htl3r.short[aaa]-Modell und ein
 === Cisco Identity Services Engine
 
 Die Cisco #htl3r.long[ise] dient in der aufgebauten Testumgebung als zentrale Plattform zur Verwaltung von Authentifizierungs- und Autorisierungsprozessen. Über die #htl3r.short[ise] werden Benutzer, Netzwerkgeräte sowie Zugriffsrichtlinien zentral verwaltet und kontrolliert.
+Als Hardwareplattform kommt ein Server des Typs Cisco #htl3r.short[ucs] C220 M4 zum Einsatz. Dabei handelt es sich um einen Rack-Server aus der #htl3r.long[ucs] Produktfamilie, der für den Betrieb von Infrastrukturservices und Netzwerkmanagementsystemen ausgelegt ist.
 
-In der Testumgebung wird die #htl3r.short[ise] für zwei zentrale Aufgaben eingesetzt. Einerseits übernimmt sie die Authentifizierung von Administratoren, die sich über das #htl3r.long[radius]-Protokoll auf Netzwerkgeräten anmelden. Andererseits wird sie für die Authentifizierung von Endgeräten an Access-Switchports mittels IEEE 802.1X verwendet. Die Netzwerkgeräte fungieren dabei als #htl3r.short[radius]-Clients und leiten Authentifizierungsanfragen an die #htl3r.short[ise] weiter.
+In der Testumgebung wird die #htl3r.short[ise] für zwei zentrale Aufgaben eingesetzt. Einerseits übernimmt sie die Authentifizierung von Administratoren, die sich über das #htl3r.long[radius]-Protokoll auf Netzwerkgeräten anmelden. Andererseits wird sie für die Authentifizierung von Endgeräten an Access-Switchports mittels #htl3r.short[ieee] #htl3r.short[dot1x] verwendet. Die Netzwerkgeräte fungieren dabei als #htl3r.short[radius]-Clients und leiten Authentifizierungsanfragen an die #htl3r.short[ise] weiter.
+
 
 Die Administration erfolgt über eine webbasierte Oberfläche, über die Richtlinien definiert, Netzwerkgeräte registriert sowie Authentifizierungsereignisse überwacht werden können.
 
@@ -69,7 +71,7 @@ In folgender Abbildung ist das Dashboard der #htl3r.short[ise] zu sehen:
   caption: [Abbildung des ISE-Dashboards],
 )
 
-Im weiteren Verlauf dieses Kapitels wird beschrieben, wie die #htl3r.short[ise] zur Absicherung administrativer Zugriffe sowie zur Authentifizierung von Endgeräten mittels IEEE 802.1X eingesetzt wurde.
+Im weiteren Verlauf dieses Kapitels wird beschrieben, wie die #htl3r.short[ise] zur Absicherung administrativer Zugriffe sowie zur Authentifizierung von Endgeräten mittels #htl3r.short[ieee] #htl3r.short[dot1x] eingesetzt wurde.
 
 === Authentifizierung von Netzwerkadministratoren über RADIUS
 
@@ -90,7 +92,7 @@ In folgendem Beispiel wird der #htl3r.short[radius]-Server auf der Firewall ZBFW
 
 #htl3r.code(
   caption: [Auszug aus der Firewall Konfiguration],
-  description: `Cisco IOS Script`,
+  description: `Cisco IOS Skript`,
 )[
   ```cisco
   radius server ISE
@@ -105,11 +107,11 @@ In dieser Konfiguration werden Anmeldeversuche zunächst an den zentralen #htl3r
 
 === Authentifizierung von Endgeräten mittels IEEE 802.1X
 
-Neben der Absicherung administrativer Zugriffe wurde in der Testumgebung auch der Netzwerkzugang von Endgeräten kontrolliert. Hierfür wird der Standard IEEE 802.1X verwendet, der eine portbasierte Authentifizierung an Access-Switchports ermöglicht. Ein Switchport bleibt dabei zunächst blockiert und wird erst nach erfolgreicher Authentifizierung für den Netzwerkzugriff freigeschaltet.
+Neben der Absicherung administrativer Zugriffe wurde in der Testumgebung auch der Netzwerkzugang von Endgeräten kontrolliert. Hierfür wird der Standard #htl3r.short[ieee] #htl3r.short[dot1x] verwendet, der eine portbasierte Authentifizierung an Access-Switchports ermöglicht. Ein Switchport bleibt dabei zunächst blockiert und wird erst nach erfolgreicher Authentifizierung für den Netzwerkzugriff freigeschaltet.
 
-Ein 802.1X-System besteht aus drei Komponenten: dem Endgerät (#htl3r.long[supplicant]), dem Access-Switch (#htl3r.long[authenticator]) und einem Authentifizierungsserver. In der aufgebauten Infrastruktur übernimmt die Cisco #htl3r.long[ise] diese Rolle. Der Switch kontrolliert den Zugriff auf den Port und leitet Authentifizierungsanfragen über #htl3r.short[radius] an die #htl3r.short[ise] weiter.
+Ein #htl3r.short[dot1x]-System besteht aus drei Komponenten: dem Endgerät (#htl3r.long[supplicant]), dem Access-Switch (#htl3r.long[authenticator]) und einem Authentifizierungsserver. In der aufgebauten Infrastruktur übernimmt die Cisco #htl3r.long[ise] diese Rolle. Der Switch kontrolliert den Zugriff auf den Port und leitet Authentifizierungsanfragen über #htl3r.short[radius] an die #htl3r.short[ise] weiter.
 
-Nach dem Anschluss eines Endgeräts startet der 802.1X-Authentifizierungsprozess. Das Endgerät übermittelt seine Zugangsdaten über das #htl3r.long[eap], welche vom Switch an die #htl3r.short[ise] weitergeleitet werden. Nach erfolgreicher Authentifizierung wird der Port freigeschaltet und dem Gerät ein entsprechendes #htl3r.short[vlan] zugewiesen. Der Ablauf ist in der folgenden Abbildung dargestellt:
+Nach dem Anschluss eines Endgeräts startet der #htl3r.short[dot1x]-Authentifizierungsprozess. Das Endgerät übermittelt seine Zugangsdaten über das #htl3r.long[eap], welche vom Switch an die #htl3r.short[ise] weitergeleitet werden. Nach erfolgreicher Authentifizierung wird der Port freigeschaltet und dem Gerät ein entsprechendes #htl3r.short[vlan] zugewiesen. Der Ablauf ist in der folgenden Abbildung dargestellt:
 
 #figure(
   image("../assets/dot1x_ablauf.png", width: 100%),
@@ -123,7 +125,7 @@ Die Autorisierung der Endgeräte erfolgt über Richtlinien innerhalb der #htl3r.
   caption: [ISE Authorization Policy],
 )
 
-Bei der obigen Abbildung handelt es sich um die Authorization Policy, welche verwendet wird, um Endgeräte über 802.1X zu autorisieren. Es gibt drei mögliche Situationen:
+Bei der obigen Abbildung handelt es sich um die Authorization Policy, welche verwendet wird, um Endgeräte über #htl3r.short[dot1x] zu autorisieren. Es gibt drei mögliche Situationen:
 
 - Der Benutzer, welcher die Anfrage stellt, ist Teil der `dn-admins` Gruppe: #linebreak()
   Hier wird dem Switchport das Management-#htl3r.short[vlan] 99 zugewiesen. Der Benutzer kann sich somit administrativ auf Netzwerkgeräte verbinden.
@@ -132,7 +134,7 @@ Bei der obigen Abbildung handelt es sich um die Authorization Policy, welche ver
 - Der Benutzername ist dem System nicht bekannt oder das Kennwort ist falsch: #linebreak()
   Der Switchport bleibt im unautorisierten Zustand.
 
-Auf den Access-Switches wurde 802.1X aktiviert und der Switchport als #htl3r.long[authenticator] konfiguriert. Dies ist mit folgendem Skript möglich:
+Auf den Access-Switches wurde #htl3r.short[dot1x] aktiviert und der Switchport als #htl3r.long[authenticator] konfiguriert. Dies ist mit folgendem Skript möglich:
 #htl3r.code(
   caption: [Auszug der 802.1X-Konfiguration auf einem Access-Switch],
   description: `Cisco IOS Skript`,
@@ -154,7 +156,7 @@ Nach erfolgreicher Authentifizierung kann der Status eines Ports durch entsprech
 
 #htl3r.code(
   caption: [Ausgabe eines Befehls zur Überprüfung von Authentifizierungen],
-  description: `Cisco IOS Script`,
+  description: `Cisco IOS Skript`,
 )[
   ```
   ASW1#sh authentication sessions interface g1/0/5 details
@@ -189,7 +191,7 @@ Nach erfolgreicher Authentifizierung kann der Status eines Ports durch entsprech
   ```
 ]
 
-Die Ausgabe zeigt unter anderem den verwendeten Benutzer sowie den aktuellen Status der Sitzung und das zugewiesene #htl3r.short[vlan]. Auf diese Weise kann überprüft werden, ob ein Endgerät erfolgreich über IEEE 802.1X authentifiziert wurde und Zugriff auf das Netzwerk erhalten hat.
+Die Ausgabe zeigt unter anderem den verwendeten Benutzer sowie den aktuellen Status der Sitzung und das zugewiesene #htl3r.short[vlan]. Auf diese Weise kann überprüft werden, ob ein Endgerät erfolgreich über #htl3r.short[ieee] #htl3r.short[dot1x] authentifiziert wurde und Zugriff auf das Netzwerk erhalten hat.
 
 === Zusammenfassung
 
