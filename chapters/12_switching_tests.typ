@@ -7,7 +7,7 @@ Die automatische Prüfung einer Netzwerkinfrastruktur hängt stark von der Quali
 
 === Aufbau der Testfälle und Basisklasse
 
-Die Grundlage für jeden Testfall bildet die Klasse `DiagNetTest`. Diese Klasse kümmert sich um die Auflösung von Parametern, die Verwaltung von Abhängigkeiten und die Behandlung von Fehlern. Wenn man einen neuen Testfall erstellt, muss man lediglich die spezifischen Methoden für die Prüfung definieren, während das restliche Grundgerüst von der Basisklasse bereitgestellt wird.
+Jeder Switching-Testfall erbt von `DiagNetTest` (siehe @test_engine_arch) und implementiert die Prüflogik in Methoden mit dem Präfix `test_`. Zusätzlich steht die Methode `_setup()` zur Verfügung, die genau einmal vor allen Testmethoden ausgeführt wird. Man nutzt sie, um die SSH-Verbindung zum Switch aufzubauen und alle benötigten Geräteantworten zwischenzuspeichern, sodass alle Teilprüfungen auf demselben Konfigurationsstand arbeiten:
 
 ```python
 from networktests.testcases.base import DiagNetTest, depends_on
@@ -23,43 +23,9 @@ class EtherChannel_Audit(DiagNetTest):
         ...
 ```
 
-Die Methode `_setup()` ist dabei von großer Bedeutung. Sie wird genau einmal vor allen anderen Methoden in der Klasse ausgeführt. Man nutzt sie, um die SSH-Verbindung zum Switch aufzubauen und alle benötigten Ausgaben der Befehle zwischenzuspeichern. Durch dieses Vorgehen vermeidet man unnötige Verbindungen zum Gerät und stellt sicher, dass alle Teilprüfungen innerhalb einer Klasse auf dem exakt gleichen Stand der Konfiguration arbeiten.
-
-Über den Dekorator `@depends_on` lassen sich Abhängigkeiten zwischen den Methoden festlegen. Wenn eine grundlegende Prüfung fehlschlägt, werden alle darauf aufbauenden Methoden automatisch übersprungen und als `SKIPPED` markiert. Dies ist sinnvoll, da ein Test ohne erfüllte Voraussetzungen keine verlässlichen Aussagen liefern kann und nicht mit einem echten Fehler verwechselt werden soll.
-
-=== Parameter und Validierung der Eingaben
-
-Jeder Testfall legt seine benötigten Parameter über die Liste `_params` fest. Dort werden der Name, der Text für die Anzeige sowie der Typ des Parameters definiert. Auf Basis dieser Informationen wird in der Weboberfläche von DiagNet automatisch das passende Eingabefeld erstellt. Man kann auf verschiedene Typen zurückgreifen.
-
-#figure(
-  table(
-    columns: (auto, 1fr),
-    inset: 8pt,
-    align: (left, left),
-    table.header([*Typ*], [*Verhalten und Nutzen*]),
-    [`device`], [Auswahl eines Geräts aus der Datenbank über ein Dropdown-Menü],
-
-    [`cisco-interface`],
-    [Eingabefeld für Schnittstellen wie zum Beispiel Gi0/1 oder GigabitEthernet0/1],
-
-    [`positive-number`],
-    [Feld für positive ganze Zahlen inklusive einer Prüfung der Eingabe],
-
-    [`choice`], [Dropdown-Menü mit fest vorgegebenen Antwortmöglichkeiten],
-
-    [`ipv4`], [Feld für IP-Adressen mit einer automatischen Formatprüfung],
-
-    [`text`],
-    [Einfaches Textfeld für beliebige Eingaben wie Namen oder Domains],
-  ),
-  caption: [Die verschiedenen Parametertypen in DiagNet.],
-) <tab-param-types>
-
-Der Typ `cisco-interface` ist in der Praxis sehr wichtig, da Cisco-Geräte die Namen von Schnittstellen in verschiedenen Befehlen unterschiedlich ausgeben. Ob man nun Gi0/1 oder den vollen Namen eingibt, spielt für DiagNet keine Rolle, da die Eingabe intern auf ein einheitliches Format gebracht wird.
-
 === Alle Switching-Testfälle im Überblick
 
-In der folgenden Tabelle sind alle 19 entwickelten Testfälle für den Switching-Bereich aufgelistet. Man kann diese über die Weboberfläche konfigurieren und einem bestimmten Gerät zuweisen.
+In der folgenden Tabelle sind alle 18 entwickelten Testfälle für den Switching-Bereich aufgelistet. Man kann diese über die Weboberfläche konfigurieren und einem bestimmten Gerät zuweisen.
 
 #figure(
   table(
