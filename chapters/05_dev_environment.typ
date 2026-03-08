@@ -44,7 +44,7 @@ Nachfolgend ein vereinfachter Auszug aus der Konfiguration, der zeigt, wie Pytho
   ```
 ]
 
-Da die `flake.nix` von allen Entwicklern und der #htl3r.short[ci]-Pipeline gleichermaßen verwendet wird, ist sichergestellt, dass Compiler, Python-Version und Systembibliotheken überall identisch sind. Das entspricht dem Prinzip der *Dev/Prod Parity* aus der #htl3r.long[twelvefactor]-Methodik @12factor. Da die Pipeline dieselbe `flake.nix` nutzt, sind Versionskonflikte zwischen Entwickler-Laptop und Build-Server strukturell ausgeschlossen. Tests, die lokal bestehen, bestehen auch in der Pipeline (für die konkrete Pipeline-Implementierung siehe @cicd_pipelines).
+Da die `flake.nix` von allen Entwicklern und der #htl3r.full[ci]-Pipeline gleichermaßen verwendet wird, ist sichergestellt, dass Compiler, Python-Version und Systembibliotheken überall identisch sind. Das entspricht dem Prinzip der *Dev/Prod Parity* aus der #htl3r.long[twelvefactor]-Methodik @12factor. Da die Pipeline dieselbe `flake.nix` nutzt, sind Versionskonflikte zwischen Entwickler-Laptop und Build-Server strukturell ausgeschlossen. Tests, die lokal bestehen, bestehen auch in der Pipeline (für die konkrete Pipeline-Implementierung siehe @cicd_pipelines).
 
 === Verwaltung von Python-Paketen: Die hermetische Shell
 Klassische virtuelle Python-Umgebungen lösen das Isolationsproblem nur teilweise: Sie kapseln zwar installierte Pakete, greifen aber weiterhin auf systemweit verfügbare Bibliotheken zurück, wenn ein Paket fehlt. Für #htl3r.long[diagnet] wurde deshalb #htl3r.long[nix] mit #htl3r.long[uv] kombiniert @astral-uv.

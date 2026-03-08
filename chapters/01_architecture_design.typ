@@ -20,7 +20,7 @@ Im physischen Labor befindet sich die Hardware von Cisco, welche von der CANCOM 
 
 Den Eingang zum Labor bilden zwei Cisco ISR4331 Router, welche als #htl3r.full[zbf] konfiguriert wurden. Ein zentraler Bestandteil des Labors ist ein Cisco UCS-Server, der als administrativer Zugangspunkt für die Verwaltung der Netzwerkgeräte dient.
 
-Hinter den Firewalls arbeitet ein Catalyst-Switch als Distribution-Switch, an dem die Access-Switches angeschlossen sind. Das Routing zwischen den #htl3r.full[vlan] Segmenten übernehmen die vorgelagerten Firewalls. An den Access-Switches wurden die Layer-2-Sicherheitsfunktionen wie Port-Security und DHCP Snooping implementiert. Zur zentralen Authentifizierung der Zugriffe wird eine Cisco Identity Services Engine eingesetzt, welche als #htl3r.short[ise] bezeichnet wird.
+Hinter den Firewalls arbeitet ein Catalyst-Switch als Distribution-Switch, an dem die Access-Switches angeschlossen sind. Das Routing zwischen den #htl3r.short[vlan] Segmenten übernehmen die vorgelagerten Firewalls. An den Access-Switches wurden die Layer-2-Sicherheitsfunktionen wie Port-Security und DHCP Snooping implementiert. Zur zentralen Authentifizierung der Zugriffe wird eine Cisco #htl3r.full[ise] eingesetzt.
 
 == Virtueller Standort (GNS3)
 
@@ -33,7 +33,7 @@ Parallel zum hybriden Aufbau wurde eine vollständig separate Simulationsumgebun
   ],
 ) <fig-gns3>
 
-Die Simulation war während der gesamten Entwicklungsphase unverzichtbar, da dort Netzwerke mit einer größeren Anzahl an Switches aufgebaut werden konnten, als physisch im Labor zur Verfügung standen. Da DiagNet über das Protokoll #htl3r.full[ssh] mit den Geräten kommuniziert, ist der Ablauf eines Testfalls identisch, unabhängig davon, ob das Zielgerät physisch vorhanden ist oder in GNS3 simuliert wird.
+Die Simulation war während der gesamten Entwicklungsphase unverzichtbar, da dort Netzwerke mit einer größeren Anzahl an Switches aufgebaut werden konnten, als physisch im Labor zur Verfügung standen. Da DiagNet über das Protokoll #htl3r.short[ssh] mit den Geräten kommuniziert, ist der Ablauf eines Testfalls identisch, unabhängig davon, ob das Zielgerät physisch vorhanden ist oder in GNS3 simuliert wird.
 
 == Designentscheidungen
 

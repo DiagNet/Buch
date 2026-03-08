@@ -3,7 +3,7 @@
 #htl3r.author("Luka Pacar")
 == Routing-Infrastruktur
 
-Die Routing-Infrastruktur ist die Grundlage der gesamten #htl3r.long[wan]-Infrastruktur von #htl3r.long[diagnet].
+Die Routing-Infrastruktur ist die Grundlage der gesamten #htl3r.full[wan]-Infrastruktur von #htl3r.long[diagnet].
 Das Design zielt darauf ab, eine komplexe und heterogene Topologie bereitzustellen, die unterschiedliche Protokoll-Standards und Routing-Protokolle vereint.
 Das gesamte #htl3r.short[wan] basiert dabei auf Cisco-Komponenten, wobei bewusst verschiedene Konfigurationen implementiert wurden, um ein möglichst breites Spektrum an Netzwerk-Verhalten abzubilden.
 
@@ -24,7 +24,7 @@ Die #htl3r.longpl[backbone] der einzelnen #htl3r.shortpl[isp] sind technisch unt
 In diesem #htl3r.long[backbone] wird #htl3r.full[ospf] als Basis-Protokoll eingesetzt, um die interne Erreichbarkeit sicherzustellen. Darauf aufbauend kommt #htl3r.full[mpls] zum Einsatz, um den Datentransport über Label-Switching zu optimieren.
 
 *ISP 2 (#htl3r.short[rip] & #htl3r.short[gre])*:
-Hier wird #htl3r.short[rip] als internes Protokoll genutzt. Zusätzlich werden #htl3r.full[gre] Tunnel eingesetzt, um eine direkte virtuelle Leitung zwischen den #htl3r.short[bgp]-Routern zu schaffen. So können diese ihre Daten austauschen, ohne dass die Router dazwischen den Inhalt verarbeiten müssen.
+Hier wird #htl3r.full[rip] als internes Protokoll genutzt. Zusätzlich werden #htl3r.full[gre] Tunnel eingesetzt, um eine direkte virtuelle Leitung zwischen den #htl3r.full[bgp]-Routern zu schaffen. So können diese ihre Daten austauschen, ohne dass die Router dazwischen den Inhalt verarbeiten müssen.
 
 *ISP 3 (#htl3r.short[eigrp] & #htl3r.short[gre])*:
 Dieser Provider nutzt #htl3r.full[eigrp] zur Routen-Berechnung.
@@ -35,7 +35,7 @@ Fungiert als reines Transit-#htl3r.short[as] zur Kopplung der Provider ohne eige
 
 ==== Pfadmanipulation und Traffic Engineering
 Ein zentrales Element des WAN-Designs ist das Traffic Engineering, um Datenströme gezielt zu steuern.
-Während das #htl3r.full[bgp] standardmäßig den Pfad mit der geringsten AS-Pfad-Länge bevorzugt, werden in dieser Topologie Attribute manipuliert, um spezifische Routing-Entscheidungen zu erzwingen.
+Während das #htl3r.short[bgp] standardmäßig den Pfad mit der geringsten AS-Pfad-Länge bevorzugt, werden in dieser Topologie Attribute manipuliert, um spezifische Routing-Entscheidungen zu erzwingen.
 
 Am Peering-Punkt zwischen `ISP1` und `ISP2` kommt hierfür beispielsweise der #htl3r.full[med] zum Einsatz.
 Für ausgewählte Zielnetze wird die Metrik ausgehender Updates künstlich erhöht.
@@ -111,7 +111,7 @@ Genau dieser Befehl versetzt den Hub in die Lage, den Außenstellen einen Pfad m
   ```
 ]
 ==== Site-to-Site VPN
-Die zwei Standorte `IPSEC` sind über eine klassische Site-to-Site #htl3r.short[vpn]-Verbindung gekoppelt.
+Die zwei Standorte `IPSEC` sind über eine klassische Site-to-Site #htl3r.full[vpn]-Verbindung gekoppelt.
 Der verschlüsselte Tunnel überspannt das gesamte #htl3r.short[wan].
 Die Endpunkte handeln dabei eigenständig die #htl3r.full[ike]-Phase 1 zur Authentifizierung und die #htl3r.short[ike]-Phase 2 zur Verschlüsselung des Nutzdatenverkehrs aus.
 

@@ -5,13 +5,13 @@
 == Dynamische Formulare <dynamic_forms>
 Bei der Architektur von _#htl3r.long[diagnet]_ wurde großer Wert auf eine klare Trennung zwischen der Testlogik und der grafischen Oberfläche gelegt.
 Während die Implementierung der Netzwerktests und deren Parameterdefinitionen ausschließlich in Python-Dateien vorliegt, muss die Benutzeroberfläche diese Strukturen abbilden können.
-Da sich die erforderlichen Eingaben für jedes Testszenario stark unterscheiden, ist ein statisches #htl3r.full[html]-Formular keine Lösung.
+Da sich die erforderlichen Eingaben für jedes Testszenario stark unterscheiden, ist ein statisches #htl3r.short[html]-Formular keine Lösung.
 Stattdessen generiert das System die Eingabefelder dynamisch, indem es die Struktur aus den empfangenen Testattributen ableitet.
 
 === Aufbau der Benutzeroberfläche
 Der Aufbau des Formulars beginnt, sobald der Anwender eine Testklasse auswählt.
-Das System sendet eine Anfrage an die #htl3r.full[api] des Servers, um die Konfiguration des gewählten Tests zu laden.
-Das Backend liest dabei die Attribute der Python-Klasse aus und wandelt sie in ein standardisiertes #htl3r.full[json]-Format um.
+Das System sendet eine Anfrage an die #htl3r.short[api] des Servers, um die Konfiguration des gewählten Tests zu laden.
+Das Backend liest dabei die Attribute der Python-Klasse aus und wandelt sie in ein standardisiertes #htl3r.short[json]-Format um.
 Dieses Datenobjekt dient als Bauplan für den Client und enthält neben den Parameternamen und Datentypen auch Informationen über Pflichtfelder sowie Abhängigkeiten zwischen den Eingabewerten.
 
 Nach dem Empfang der Daten wird der Container für die Parameter vorbereitet und nötige Abhängigkeiten definiert.

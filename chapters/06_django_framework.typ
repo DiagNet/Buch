@@ -9,7 +9,7 @@
 
 Für die Entwicklung der zentralen Verwaltungsplattform von #htl3r.long[diagnet] fiel die Wahl auf das in Python geschriebene Web-#htl3r.long[framework] Django. Django folgt dem Prinzip "Batteries included" @django-docs: Authentifizierung, Session-Management und Schutzmechanismen gegen gängige Web-Vulnerabilitäten sind standardmäßig integriert, ohne dass externe Bibliotheken eingebunden werden müssen. Wie diese Mechanismen konkret zum Einsatz kommen, wird in @data_security behandelt.
 
-Da #htl3r.long[diagnet] komplexe Relationen zwischen Netzwerkgeräten, Testfällen und historischen Testergebnissen abbilden muss, war Djangos integriertes #htl3r.full[orm] ein entscheidender Faktor. Statt rohe #htl3r.short[sql]-Zugriffe von Hand zu implementieren, lassen sich Datenbankoperationen direkt über Python-Objekte ausdrücken. Das resultierende Datenbankschema und die konkreten Modellentscheidungen sind in @data_modeling dokumentiert.
+Da #htl3r.long[diagnet] komplexe Relationen zwischen Netzwerkgeräten, Testfällen und historischen Testergebnissen abbilden muss, war Djangos integriertes #htl3r.full[orm] ein entscheidender Faktor. Statt rohe #htl3r.full[sql]-Zugriffe von Hand zu implementieren, lassen sich Datenbankoperationen direkt über Python-Objekte ausdrücken. Das resultierende Datenbankschema und die konkreten Modellentscheidungen sind in @data_modeling dokumentiert.
 
 === Alternativen und Entscheidungsfindung
 
@@ -51,7 +51,7 @@ Aus diesem Vergleich ergibt sich folgende Gewichtung (Anzahl der Nennungen):
 
 ==== Punktevergabe und Auswertung
 
-Im zweiten Schritt wurden die #htl3r.long[framework]s in den einzelnen Kategorien mit Punkten von 1 (sehr schlecht) bis 5 (sehr gut) bewertet. Das Kriterium "#htl3r.short[api]-Fokus" floss mit der Gewichtung 0 nicht in die finale Punktzahl ein, wurde der Vollständigkeit halber jedoch evaluiert.
+Im zweiten Schritt wurden die #htl3r.long[framework]s in den einzelnen Kategorien mit Punkten von 1 (sehr schlecht) bis 5 (sehr gut) bewertet. Das Kriterium "#htl3r.full[api]-Fokus" floss mit der Gewichtung 0 nicht in die finale Punktzahl ein, wurde der Vollständigkeit halber jedoch evaluiert.
 
 #figure(
   table(
@@ -89,7 +89,7 @@ Datenmodelle oder Programmlogik angepasst werden müssen.
 
 Django basiert auf einer Abwandlung der klassischen #htl3r.full[mvc]-Architektur, die als Model-View-Template (#htl3r.short[mvt]) bezeichnet wird @django-docs. #htl3r.long[diagnet] nutzt dieses Paradigma für eine strikte Trennung von Datenmodellierung, Geschäftslogik und Präsentationsebene.
 
-Das *Model* definiert die Datenstrukturen und kommuniziert mit der Datenbank. Die *View* nimmt #htl3r.short[http]-Requests entgegen, orchestriert die #htl3r.long[backend]-Logik und bereitet die Daten auf. Das *Template* rendert die von der View übergebenen Variablen in valides #htl3r.short[html].
+Das *Model* definiert die Datenstrukturen und kommuniziert mit der Datenbank. Die *View* nimmt #htl3r.full[http]-Requests entgegen, orchestriert die #htl3r.long[backend]-Logik und bereitet die Daten auf. Das *Template* rendert die von der View übergebenen Variablen in valides #htl3r.full[html].
 
 === "Fat Models": Integration der Netzwerk-Engines
 

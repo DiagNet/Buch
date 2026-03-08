@@ -19,7 +19,7 @@ Zusätzlich ermöglicht es, Daten auf Netzwerkgeräten zu sammeln und sie in ein
 
 Bei #htl3r.long[genie] kann es sich dabei konkret um show-Befehle handeln. Diese werden auf Geräten wie Cisco Routern eingesetzt, um Informationen über den aktuellen Zustand des Systems anzuzeigen. Da die Befehle lediglich Text zurückgeben, wandeln #htl3r.long[genie]-#htl3r.long[parser] diesen in Python Dictionary-Strukturen um. Darauf kann im Programmcode ohne weiteren Aufwand direkt zugegriffen werden.
 
-Weitere Komponenten von #htl3r.long[pyats] sind #htl3r.long[aetest], welches die Basis für die Strukturierung der Testfälle und Automatisierung der Testabläufe darstellt, sowie #htl3r.long[unicon]. Letzteres kümmert sich um die Geräteverbindungen und bietet eine einheitliche Schnittstelle um auf Protokolle wie #htl3r.long[ssh] oder #htl3r.long[telnet] zuzugreifen.
+Weitere Komponenten von #htl3r.long[pyats] sind #htl3r.long[aetest], welches die Basis für die Strukturierung der Testfälle und Automatisierung der Testabläufe darstellt, sowie #htl3r.long[unicon]. Letzteres kümmert sich um die Geräteverbindungen und bietet eine einheitliche Schnittstelle um auf Protokolle wie #htl3r.short[ssh] oder #htl3r.long[telnet] zuzugreifen.
 
 === Testbeds <testbeds>
 Ein #htl3r.long[testbed] in #htl3r.long[pyats] ist eine Datei, in der zur Verbindung benötigte Daten von Geräten deklariert werden.
@@ -35,7 +35,7 @@ Zu den relevantesten unterstützten Betriebssystemen/Plattformen gehören:
 - Cisco IOSXR - Optimiert für Einsatz bei Service Providern
 - Cisco ASA - Betriebssystem für Firewalls
 
-Testbeds werden in dem Format #htl3r.short[yaml] gespeichert und können folgendermaßen aussehen:
+Testbeds werden in dem Format #htl3r.full[yaml] gespeichert und können folgendermaßen aussehen:
 
 #htl3r.code(
   caption: [Ein Beispiel einer Testbed-Datei],
@@ -118,7 +118,7 @@ Der Ablauf des Skripts kann in folgende Teile gegliedert werden:
 
 + Anschließend wird von dem `device`-Objekt ein #htl3r.long[interface] Objekt erstellt. Mit diesem können durch die `learn` Methode sämtliche Informationen über Interfaces auf dem Router gesammelt und als Python-Dictionary zurückgegeben werden. Die Umfangreiche Ausgabe wird durch `interfaces.info["GigabitEthernet0/0"]["enabled"]` auf den Status eines bestimmten Interfaces, hier GigabitEthernet0/0, reduziert. Die Ausgabe beschränkt sich daher auf `True` bei einem aktiven Interface, und `False` bei einem inaktiven Interface.
 
-+ Zuletzt wird im obigen Script die `learn` Methode mit dem Parameter `ospf` ausgeführt. Diese gibt folglich alle Informationen über das dynamische #htl3r.long[routingprotokoll] #htl3r.long[ospf] zurück, welche #htl3r.long[pyats] von einem Router extrahieren kann.
++ Zuletzt wird im obigen Script die `learn` Methode mit dem Parameter `ospf` ausgeführt. Diese gibt folglich alle Informationen über das dynamische #htl3r.long[routingprotokoll] #htl3r.short[ospf] zurück, welche #htl3r.long[pyats] von einem Router extrahieren kann.
 Einige häufig benötigte Funktionen sind:
 - #htl3r.long[router_id]
 - #htl3r.longpl[ospf_area]

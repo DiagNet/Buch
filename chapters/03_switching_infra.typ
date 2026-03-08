@@ -57,7 +57,7 @@ interface GigabitEthernet0/24
 
 === DHCP Snooping als Schutzmaßnahme
 
-Das Protokoll #htl3r.full[dhcp] ist oft ein Ziel für Angriffe. Ein Angreifer könnte einen eigenen Server ins Netz hängen, um den Datenverkehr über sich umzuleiten. Um das zu verhindern, wird DHCP Snooping eingesetzt. Dabei legt man fest, welchen Ports man vertraut und welchen nicht.
+Das Protokoll #htl3r.short[dhcp] ist oft ein Ziel für Angriffe. Ein Angreifer könnte einen eigenen Server ins Netz hängen, um den Datenverkehr über sich umzuleiten. Um das zu verhindern, wird DHCP Snooping eingesetzt. Dabei legt man fest, welchen Ports man vertraut und welchen nicht.
 
 Nur die Uplinks zum Distribution-Switch wurden als vertrauenswürdig markiert. Wenn an einem normalen Port für Endgeräte eine Antwort von einem DHCP-Server ankommt, wird diese vom Switch sofort verworfen @cisco-layer2-security.
 
@@ -73,7 +73,7 @@ Durch das Snooping baut der Switch zudem eine Tabelle auf, in der die Zuweisunge
 
 === Überprüfung mit Dynamic ARP Inspection
 
-Das Protokoll #htl3r.full[arp] hat von Haus aus keine Sicherheitsfunktionen, was Angriffe wie das ARP-Spoofing ermöglicht. Hierbei werden gefälschte Nachrichten verschickt, um Daten abzufangen. Zur Abwehr nutzt man #htl3r.short[dai], welche jedes eingehende Paket gegen die Tabelle aus dem DHCP Snooping prüft.
+Das Protokoll #htl3r.full[arp] hat von Haus aus keine Sicherheitsfunktionen, was Angriffe wie das ARP-Spoofing ermöglicht. Hierbei werden gefälschte Nachrichten verschickt, um Daten abzufangen. Zur Abwehr nutzt man #htl3r.full[dai], welche jedes eingehende Paket gegen die Tabelle aus dem DHCP Snooping prüft.
 
 Passt die Kombination aus IP und MAC nicht zu den gespeicherten Daten, wird das Paket gelöscht. Wie beim Snooping werden auch hier nur die Uplink-Ports als vertrauenswürdig eingestuft.
 

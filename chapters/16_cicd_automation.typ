@@ -5,7 +5,7 @@
 
 Dass #htl3r.long[diagnet] auf #htl3r.long[nix] als Fundament setzt, zahlt sich nicht nur lokal aus, sondern die gesamte Pipeline profitiert davon. Da die `flake.nix` alle Abhängigkeiten deklarativ fixiert, braucht ein frischer GitHub-Actions-Runner kein manuelles Setup: Ein einziger `nix`-Aufruf genügt, um dieselbe Umgebung zu reproduzieren, die auch auf dem Entwickler-Laptop läuft. Die Pipeline ist damit kein separates System, das gepflegt werden müsste, sondern eine direkte Verlängerung der lokalen Entwicklungsumgebung.
 
-Für die Versionierung verwendet #htl3r.long[diagnet] *ZeroVer* @zerover. Anders als Semantic Versioning signalisiert eine Version mit führender Null, z. B. `v0.3.1`, explizit, dass sich die Software noch in aktiver Entwicklung befindet und keine stabile #htl3r.full[api]-Stabilität garantiert wird. Für ein Schüler-Diplomprojekt ist das die ehrlichere Wahl: Die Software wird aktiv weiterentwickelt und ausgeliefert, ohne dabei Stabilitätsversprechen zu machen, die man zu diesem Zeitpunkt nicht halten kann.
+Für die Versionierung verwendet #htl3r.long[diagnet] *ZeroVer* @zerover. Anders als Semantic Versioning signalisiert eine Version mit führender Null, z. B. `v0.3.1`, explizit, dass sich die Software noch in aktiver Entwicklung befindet und keine stabile #htl3r.short[api]-Stabilität garantiert wird. Für ein Schüler-Diplomprojekt ist das die ehrlichere Wahl: Die Software wird aktiv weiterentwickelt und ausgeliefert, ohne dabei Stabilitätsversprechen zu machen, die man zu diesem Zeitpunkt nicht halten kann.
 
 === GitHub Actions
 
