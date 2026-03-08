@@ -57,7 +57,7 @@ Das manuelle Aktivieren der Shell via `nix develop` bei jedem Wechsel ins Projek
 
 Der Inhalt der `.envrc` beschränkt sich auf eine einzige Zeile:
 #htl3r.code(
-  caption: [Inhalt einer `.envrc`-Datei für das automatische Aktivieren einer #htl3r.long[nix-shell]],
+  caption: [Inhalt einer `.envrc`-Datei für das automatische Aktivieren einer Nix Shell],
   description: `.envrc`,
 )[
   ```bash
@@ -94,7 +94,7 @@ Für wiederkehrende Aufgaben wie das Starten des Servers, das Ausführen von Tes
 
 Das `manage`-Rezept prüft über die Variable `IN_NIX_SHELL`, ob die #htl3r.long[nix]-Umgebung aktiv ist, und wählt daraufhin den passenden Ausführungspfad: entweder direkt via `python` oder gekapselt über `uv run`. Damit funktioniert dasselbe Rezept sowohl innerhalb als auch außerhalb der #htl3r.long[nix-shell] korrekt. `just migrate` führt `makemigrations` und `migrate` in einem Schritt aus; `just s` startet den integrierten Django-Server.
 
-== Ganzheitliche Code-Qualität durch Treefmt
+== Einheitliche Code-Qualität durch Treefmt
 #htl3r.long[diagnet] vereint drei Sprachen mit jeweils eigenen Formatter-Anforderungen: Python im Backend, HTML/JavaScript im Frontend und #htl3r.long[nix] für die Infrastruktur. Jede Sprache hat etablierte Formatter-Tools, aber ohne eine gemeinsame Steuerungsschicht müssten diese separat konfiguriert und aufgerufen werden.
 
 #htl3r.long[treefmt] löst dieses Problem als Meta-Formatter: Anhand der Dateiendung ruft es das jeweils passende Werkzeug auf @treefmt-docs. Die Konfiguration in `nix/treefmt.nix` bindet dabei #htl3r.long[ruff] für Python-Code, #htl3r.long[prettier] für CSS & JS, #htl3r.long[djlint] für HTML-Templates und #htl3r.long[nixfmt] für #htl3r.long[nix]-Dateien ein.

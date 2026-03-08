@@ -50,7 +50,7 @@ Das resultierende Image ist #htl3r.full[oci]-kompatibel, trägt den Tag `diagnet
 Django's `collectstatic` sammelt alle statischen Dateien aus den installierten Apps und kopiert sie in ein gemeinsames Verzeichnis, von dem aus sie ausgeliefert werden. In #htl3r.long[diagnet] übernimmt das #htl3r.long[whitenoise], das die Dateien direkt aus dem #htl3r.short[asgi]-Prozess heraus serviert, ohne separaten Webserver @whitenoise-docs. Dieser Schritt wird als eigenständige #htl3r.long[nix]-Derivation (`staticRoot`) bereits zur Build-Zeit ausgeführt:
 
 #htl3r.code(
-  caption: [Generierung statischer Assets als #htl3r.long[nix]-Derivation zur Build-Zeit],
+  caption: [Generierung statischer Assets als Nix-Derivation zur Build-Zeit],
   description: `nix/diagnet.nix`,
 )[
   ```nix
@@ -126,7 +126,7 @@ Als #htl3r.long[asgi]-Server kommt #htl3r.long[daphne] zum Einsatz, da es das of
 Das `justfile` stellt zwei Befehle bereit, mit denen das Container-Image lokal gebaut und gestartet werden kann:
 
 #htl3r.code(
-  caption: [#htl3r.long[just]-Befehle zum lokalen Bauen und Starten des Containers],
+  caption: [`just`-Befehle zum lokalen Bauen und Starten des Containers],
   description: `justfile`,
 )[
   ```just
@@ -147,7 +147,7 @@ Das `justfile` stellt zwei Befehle bereit, mit denen das Container-Image lokal g
 Für den Produktionseinsatz wird das Image über die GitHub Container Registry unter `ghcr.io/diagnet/diagnet` verteilt. Der Build- und Veröffentlichungsprozess ist vollständig automatisiert (siehe @cicd_pipelines). Zur Inbetriebnahme genügt eine einzige `compose.yaml`:
 
 #htl3r.code(
-  caption: [Minimale `compose.yaml` für den Produktionseinsatz von #htl3r.long[diagnet]],
+  caption: [Minimale `compose.yaml` für den Produktionseinsatz von DiagNet],
   description: `compose.yaml`,
 )[
   ```yaml

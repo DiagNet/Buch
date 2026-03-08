@@ -19,7 +19,7 @@ Folgende vier Kriterien wurden für die Bewertung definiert:
 - *Funktionsumfang:* Verfügbarkeit von "Out-of-the-Box"-Features wie #htl3r.short[orm] und Authentifizierung.
 - *Tool-Integration:* Einbindung der nativen Python-Netzwerk-Bibliotheken.
 - *Rendering:* Eignung für serverseitiges #htl3r.short[html]-Rendering.
-- *#htl3r.short[api]-Fokus:* Ausrichtung auf reine Schnittstellen-Entwicklung (für #htl3r.long[diagnet] weniger relevant).
+- *#htl3r.short[api]-Fokus:* Ausrichtung auf reine Schnittstellen-Entwicklung.
 
 ==== Gegenüberstellung der Kriterien
 
@@ -70,7 +70,7 @@ Im zweiten Schritt wurden die #htl3r.long[framework]s in den einzelnen Kategorie
     [Flask], [2], [5], [3], [4], [$6 + 10 + 3 = 19$],
     [FastAPI], [2], [5], [2], [5], [$6 + 10 + 2 = 18$],
   ),
-  caption: [Nutzwertanalyse und finale Auswertung der #htl3r.long[framework]s],
+  caption: [Nutzwertanalyse und finale Auswertung der Frameworks],
 ) <nutzwertanalyse>
 
 ==== Entscheidung für Django
@@ -98,7 +98,7 @@ Das *Model* definiert die Datenstrukturen und kommuniziert mit der Datenbank. Di
 Das `Device`-Modell erzeugt aus seinen eigenen Tabellenspalten (IP, Username, Password) dynamisch die benötigten #htl3r.long[pyats]-#htl3r.longpl[testbed] und instanziiert die Verbindungen direkt im Speicher des #htl3r.longpl[backend]. Bereits offene Verbindungen werden über ein globales Cache-Dictionary (`device_connections`) für nachfolgende Tests wiederverwendet. Da `is_connected()` nur den lokalen Verbindungsstatus prüft, wird die Session zusätzlich mit einem `show clock`-Befehl aktiv verifiziert. Schlägt dieser fehl, wird der Cache-Eintrag verworfen und eine neue Verbindung aufgebaut:
 
 #htl3r.code(
-  caption: [Dynamische Instanziierung von #htl3r.long[pyats]-Geräteobjekten aus der Datenbank],
+  caption: [Dynamische Instanziierung von pyATS-Geräteobjekten aus der Datenbank],
   description: `devices/models.py`,
 )[
   ```python
