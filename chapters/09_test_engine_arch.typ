@@ -206,7 +206,7 @@ Um das Verhalten einzelner Testmethoden zu modifizieren, ohne den eigentlichen T
       return self.device.ping()
 
   # Markiert Tests, die aufgrund fehlender Features übersprungen werden sollen
-  @skip("Feature noch nicht implementiert")
+  @skip("Feature not implemented yet")
   def test_future_feature(self):
       pass
 
