@@ -134,3 +134,5 @@ Den Abschluss bildet das Einsammeln der Benutzereingaben. Da das System die Gül
       return JsonResponse({"status": "success"}, status=201)
   ```
 ]
+
+#pagebreak()
