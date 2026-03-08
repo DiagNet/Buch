@@ -2,19 +2,17 @@
 
 #htl3r.author("Karun Sandhu")
 = Development & Environment <dev_env>
-Durch die steigende Komplexität moderner Softwareprojekte werden stabile, reproduzierbare und isolierte Entwicklungsumgebungen immer wichtiger. Eines der wichtigsten Herausforderungen, die es zu meistern gilt, ist die Diskrepanz zwischen der lokalen Umgebung der Entwickler und der Produktionsumgebung. Dies beschreibt das weit verbreitete "It works on my machine"-Problem @jetbrains-config-drift. Damit derartige Probleme nicht auftreten können, wurde in unserer Diplomarbeit ein neuer, deklarativer Ansatz gewählt, mit dem sichergestellt wird, dass alle Abhängigkeiten exakt definiert und versioniert sind.
+#htl3r.info[Kapitel wurde gekürzt um Platz für andere Kapitel zu schaffen. Alle wichtigen Inhalte sind noch drin.]
+
+Ein wiederkehrendes Problem in Teamprojekten ist die schleichende Divergenz zwischen den Entwicklungsumgebungen einzelner Teammitglieder. Pakete werden in unterschiedlichen Versionen installiert, Umgebungsvariablen fehlen oder sind falsch gesetzt, und ein Fehler, der auf einem Rechner reproduzierbar ist, tritt auf einem anderen gar nicht auf @jetbrains-config-drift. Um dieses Problem von Grund auf auszuschließen, setzt #htl3r.long[diagnet] auf einen vollständig deklarativen Ansatz: Die Entwicklungsumgebung ist nicht dokumentiert, sondern im Code definiert und damit zwingend reproduzierbar.
 
 == Reproduzierbarkeit durch Nix
-Das Fundament bildet der Paketmanager #htl3r.long[nix]. Im Gegensatz zu herkömmlichen, imperativen Paketmanagern, die globale Zustände im Betriebssystem verändern, isoliert #htl3r.long[nix] jede Abhängigkeit in einem eigenen, unveränderlichen Pfad im sogenannten _#htl3r.long[nix] Store_ (z. B. `/nix/store/bfs3...-python-3.13`). Dieser Ansatz basiert auf dem funktionalen Deployment-Modell, bei dem Softwarekomponenten als unveränderliche Werte betrachtet werden @dolstra-nix. Dies verhindert Konflikte zwischen verschiedenen Versionen derselben Bibliothek und garantiert, dass die Entwicklungsumgebung auf jedem Rechner identisch ist @nixos-homepage.
+Das Fundament bildet der Paketmanager #htl3r.long[nix]. Im Gegensatz zu herkömmlichen, imperativen Paketmanagern, die globale Zustände im Betriebssystem verändern, isoliert #htl3r.long[nix] jede Abhängigkeit in einem eigenen, unveränderlichen Pfad im sogenannten _#htl3r.long[nix] Store_ (z. B. `/nix/store/bfs3...-python-3.13`). Dieser Ansatz basiert auf dem funktionalen Deployment-Modell, bei dem Softwarekomponenten als unveränderliche Werte betrachtet werden @dolstra-nix. Konflikte zwischen verschiedenen Versionen derselben Bibliothek sind damit strukturell ausgeschlossen, da jede Version unter einem eigenen Hash-Pfad liegt und nie eine andere überschreibt @nixos-homepage.
 
 === Nix Flakes
-Um die Versionierung der Abhängigkeiten zu fixieren, verwenden wir #htl3r.long[nix-flakes]. Diese Erweiterung des #htl3r.long[nix]-Ökosystems ermöglicht eine #htl3r.longpl[hermetic] Abriegelung der Umgebung.
+Für die Versionierung der Abhängigkeiten kommen #htl3r.long[nix-flakes] zum Einsatz. Zwei Dateien im Repository bilden dabei die vollständige Spezifikation der Umgebung: `flake.nix` definiert die *Inputs* (z. B. Paketquellen wie `nixpkgs`) und die *Outputs* (z. B. die Entwicklungsumgebung `devShell`). `flake.lock` fixiert die exakten Hash-Werte aller verwendeten Pakete, analog zu `package-lock.json` in JavaScript-Projekten.
 
-Zentral sind dabei zwei Dateien im Repository:
-- `flake.nix`: Diese Datei definiert die *Inputs* (z. B. Paketquellen wie `nixpkgs`) und die *Outputs* (z. B. die Entwicklungsumgebung `devShell`). Sie beschreibt deklarativ, welche Tools benötigt werden.
-- `flake.lock`: Ähnlich wie bei `package-lock.json` in JavaScript, "pinnt" diese Datei die exakten Hash-Werte aller verwendeten Pakete.
-
-Nachfolgend ein stark vereinfachter Auszug aus unserer Konfiguration, der dennoch zeigt, wie Python und externe Tools einer #htl3r.long[nix-shell] hinzugefügt werden:
+Nachfolgend ein vereinfachter Auszug aus der Konfiguration, der zeigt, wie Python und externe Tools einer #htl3r.long[nix-shell] hinzugefügt werden:
 
 #htl3r.code(
   caption: [Eine vereinfachte `flake.nix`-Datei],
@@ -47,21 +45,17 @@ Nachfolgend ein stark vereinfachter Auszug aus unserer Konfiguration, der dennoc
   ```
 ]
 
-Dadurch wird sichergestellt, dass alle Entwickler im Team exakt denselben Compiler, dieselbe Python-Version und dieselben Systembibliotheken verwenden. Dies erfüllt das Prinzip der *Dev/Prod Parity* der #htl3r.long[twelvefactor]-Methodik @12factor.
+Da die `flake.nix` von allen Entwicklern und der #htl3r.short[ci]-Pipeline gleichermaßen verwendet wird, ist sichergestellt, dass Compiler, Python-Version und Systembibliotheken überall identisch sind. Das entspricht dem Prinzip der *Dev/Prod Parity* aus der #htl3r.long[twelvefactor]-Methodik @12factor. Da die Pipeline dieselbe `flake.nix` nutzt, sind Versionskonflikte zwischen Entwickler-Laptop und Build-Server strukturell ausgeschlossen. Tests, die lokal bestehen, bestehen auch in der Pipeline (für die konkrete Pipeline-Implementierung siehe @cicd_pipelines).
 
 === Verwaltung von Python-Paketen: Die hermetische Shell
-Ein häufiges Problem bei klassischen virtuellen Umgebungen ist, dass sie oft ungewollt auf systemweit installierte Bibliotheken zurückgreifen. Um dies zu verhindern und gleichzeitig die Performance moderner Tools zu nutzen, kombinieren wir #htl3r.long[nix] mit #htl3r.long[uv] @astral-uv.
+Klassische virtuelle Python-Umgebungen lösen das Isolationsproblem nur teilweise: Sie kapseln zwar installierte Pakete, greifen aber weiterhin auf systemweit verfügbare Bibliotheken zurück, wenn ein Paket fehlt. Für #htl3r.long[diagnet] wurde deshalb #htl3r.long[nix] mit #htl3r.long[uv] kombiniert @astral-uv.
 
-In diesem Setup übernimmt #htl3r.long[uv] die Rolle des Dependency Managers: Es löst die Abhängigkeiten auf und friert deren Versionen in der `uv.lock` Datei ein. #htl3r.long[nix] geht jedoch einen entscheidenden Schritt weiter als die bloße Bereitstellung von Werkzeugen. Es konstruiert basierend auf diesen Definitionen eine vollständig *#htl3r.long[hermetic]e Shell*.
-
-Innerhalb dieser von #htl3r.long[nix] gebauten Umgebung existiert eine Python-Instanz, die strikt isoliert ist. Dieser Interpreter hat technisch *keinen Zugriff* auf globale Systempakete (z. B. in `/usr/lib/python3.13`) oder lokale Nutzer-Installationen. Er "sieht" ausschließlich jene Bibliotheken, die im Projekt explizit definiert wurden. Dies garantiert absolute Reinheit: Wenn eine Bibliothek nicht in der Konfiguration steht, kann sie im Code nicht importiert werden, selbst wenn sie auf dem Host-Computer des Entwicklers zufällig vorhanden wäre. Dies eliminiert eine ganze Klasse von Fehlern, die durch unsaubere Umgebungen entstehen.
+#htl3r.long[uv] übernimmt dabei die Rolle des Dependency Managers: Es löst die Abhängigkeiten auf und fixiert deren Versionen in der `uv.lock`-Datei. #htl3r.long[nix] baut darauf aufbauend eine vollständig *#htl3r.longpl[hermetic] Shell*: Der Python-Interpreter hat technisch *keinen Zugriff* auf globale Systempakete (z. B. in `/usr/lib/python3.13`) oder lokale Nutzer-Installationen. Er sieht ausschließlich jene Bibliotheken, die im Projekt explizit deklariert wurden. Eine Bibliothek, die nicht in der Konfiguration steht, lässt sich nicht importieren, selbst wenn sie auf dem Host-Rechner zufällig installiert ist.
 
 == Automatische Umgebung mit Direnv
-Obwohl #htl3r.long[nix] eine mächtige Umgebung bereitstellt, wäre das manuelle Aktivieren der Shell (via `nix develop`) im Arbeitsalltag umständlich. Hier kommt #htl3r.long[direnv] zum Einsatz.
+Das manuelle Aktivieren der Shell via `nix develop` bei jedem Wechsel ins Projektverzeichnis wäre im Arbeitsalltag zu umständlich. #htl3r.long[direnv] löst dieses Problem: Die Shell-Erweiterung überwacht Verzeichnisse und lädt beim Betreten des Projektordners automatisch die in `.envrc` definierten Umgebungsvariablen sowie die #htl3r.long[nix]-Umgebung @direnv-docs.
 
-#htl3r.long[direnv] ist eine Shell-Erweiterung, die Verzeichnisse überwacht. Sobald ein Entwickler mit dem Terminal in das Projektverzeichnis wechselt, lädt #htl3r.long[direnv] automatisch die in der Datei `.envrc` definierten Umgebungsvariablen und aktiviert die #htl3r.long[nix]-Umgebung @direnv-docs.
-
-Der Inhalt der `.envrc` ist in unserem Projekt denkbar einfach:
+Der Inhalt der `.envrc` beschränkt sich auf eine einzige Zeile:
 #htl3r.code(
   caption: [Inhalt einer `.envrc`-Datei für das automatische Aktivieren einer #htl3r.long[nix-shell]],
   description: `.envrc`,
@@ -71,14 +65,10 @@ Der Inhalt der `.envrc` ist in unserem Projekt denkbar einfach:
   ```
 ]
 
-Dies lädt im Hintergrund vollautomatisch die in der `flake.nix` definierte Umgebung. Umgebungsvariablen werden gesetzt und Tools (wie `python` oder #htl3r.long[just]) werden in den `PATH` injiziert. Verlässt man das Verzeichnis, wird die Umgebung wieder entladen.
+`use flake` weist #htl3r.long[direnv] an, die in der `flake.nix` definierte Umgebung zu laden, Umgebungsvariablen zu setzen und Tools wie `python` oder #htl3r.long[just] in den `PATH` einzutragen. Verlässt man das Verzeichnis, wird die Umgebung wieder entladen. Für einen neuen Entwickler bedeutet das: Repository klonen, in den Ordner wechseln, und die vollständige Entwicklungsumgebung steht bereit, ohne manuelle Installationsschritte.
 
 == Task-Automation mit Just
-Um wiederkehrende Aufgaben wie das Starten des Servers, das Ausführen von Tests oder das Formatieren des Codes zu vereinfachen, setzen wir auf den Command-Runner #htl3r.long[just] @just-command-runner.
-
-Im Gegensatz zu `make`, das primär für Build-Prozesse in C/C++ gedacht ist, ist #htl3r.long[just] ein moderner, sprachenunabhängiger Task-Runner. Die Befehle werden in einem Justfile definiert. Dies dient gleichzeitig als "lebende Dokumentation" für alle verfügbaren Entwicklungsbefehle.
-
-Die folgende Konfiguration im `justfile` demonstriert die Umsetzung dieser Vereinfachung:
+Für wiederkehrende Aufgaben wie das Starten des Servers, das Ausführen von Tests oder das Anlegen von Datenbankmigrationen kommt der Command-Runner #htl3r.long[just] zum Einsatz @just-command-runner. Anders als `make`, das primär für Build-Prozesse in C/C++ ausgelegt ist, ist #htl3r.long[just] sprachenunabhängig und hat keine impliziten Abhängigkeitsannahmen. Die Rezepte im `justfile` dienen gleichzeitig als maschinenlesbare Dokumentation aller verfügbaren Entwicklungsbefehle.
 
 #htl3r.code(caption: [Auszug unseres `justfile`s], description: `justfile`)[
   ```just
@@ -102,33 +92,11 @@ Die folgende Konfiguration im `justfile` demonstriert die Umsetzung dieser Verei
   ```
 ]
 
-Das Kernstück dieses Skripts ist die bedingte Logik innerhalb des `manage`-Rezepts. Es prüft dynamisch, ob die #htl3r.long[nix-shell] bereits aktiv ist (`IN_NIX_SHELL`) und wählt daraufhin die korrekte Ausführungsumgebung, entweder direkt via `python` oder gekapselt mittels #htl3r.long[uv] `run`. Für den Entwickler reduziert sich der Aufwand signifikant: Ein einfaches `just migrate` genügt, um sowohl die Erstellung der Migrationen als auch deren Anwendung auf die Datenbank durchzuführen oder ein `just s` um schnell den integrierten Django Server zu starten. Diese Abstraktion verringert nicht nur die kognitive Belastung, sondern minimiert auch Fehlerquellen und spart über die Projektlaufzeit hinweg wertvolle Zeit.
+Das `manage`-Rezept prüft über die Variable `IN_NIX_SHELL`, ob die #htl3r.long[nix]-Umgebung aktiv ist, und wählt daraufhin den passenden Ausführungspfad: entweder direkt via `python` oder gekapselt über `uv run`. Damit funktioniert dasselbe Rezept sowohl innerhalb als auch außerhalb der #htl3r.long[nix-shell] korrekt. `just migrate` führt `makemigrations` und `migrate` in einem Schritt aus; `just s` startet den integrierten Django-Server.
 
 == Ganzheitliche Code-Qualität durch Treefmt
-In einem Projekt wie diesem, das Python (Backend), HTML/JavaScript (Frontend) und #htl3r.long[nix] (Infrastruktur) vereint, ist die Einhaltung eines konsistenten Code-Stils eine Herausforderung. Unterschiedliche Sprachen erfordern unterschiedliche Tools, was oft zu komplexen Toolchains führt.
+#htl3r.long[diagnet] vereint drei Sprachen mit jeweils eigenen Formatter-Anforderungen: Python im Backend, HTML/JavaScript im Frontend und #htl3r.long[nix] für die Infrastruktur. Jede Sprache hat etablierte Formatter-Tools, aber ohne eine gemeinsame Steuerungsschicht müssten diese separat konfiguriert und aufgerufen werden.
 
-Um dies zu vereinheitlichen, setzen wir #htl3r.long[treefmt] ein @treefmt-docs. #htl3r.long[treefmt] fungiert als Meta-Formatter, der anhand der Dateiendung das passende Werkzeug aufruft. Unsere Konfiguration (`nix/treefmt.nix`) orchestriert dabei:
-- *#htl3r.long[ruff]* für Python-Code.
-- *#htl3r.long[prettier]* für CSS & JS.
-- *#htl3r.long[djlint]* für HTML-Templates.
-- *#htl3r.long[nixfmt]* für #htl3r.long[nix]-Dateien.
+#htl3r.long[treefmt] löst dieses Problem als Meta-Formatter: Anhand der Dateiendung ruft es das jeweils passende Werkzeug auf @treefmt-docs. Die Konfiguration in `nix/treefmt.nix` bindet dabei #htl3r.long[ruff] für Python-Code, #htl3r.long[prettier] für CSS & JS, #htl3r.long[djlint] für HTML-Templates und #htl3r.long[nixfmt] für #htl3r.long[nix]-Dateien ein.
 
-Durch den Befehl #box(`nix fmt`) wird #htl3r.long[treefmt] angestoßen und formatiert das gesamte Repository in einem Durchgang. Dies eliminiert Diskussionen über Einrückungen oder Klammersetzung ("Bikeshedding") im Team vollständig und automatisiert die Einhaltung der Richtlinien.
-
-== Vorteile der gewählten Architektur
-Die Kombination aus #htl3r.long[nix], #htl3r.long[direnv] und #htl3r.long[just] bietet signifikante Vorteile gegenüber traditionellen Setups.
-
-=== Onboarding-Geschwindigkeit
-Ohne dieses Setup müsste ein neuer Entwickler:
-+ Die exakte Python-Version manuell installieren und Konflikte mit dem System-Python vermeiden.
-+ Eine virtuelle Umgebung (`venv`) anlegen und aktivieren.
-+ Abhängigkeiten manuell via `pip` oder #htl3r.long[uv] synchronisieren.
-+ Notwendige Umgebungsvariablen für die Konfiguration manuell setzen.
-
-Bei *DiagNet* klont ein Entwickler das Repository und betritt den Ordner. Das System installiert *alles* automatisch. Die "Time-to-Code" sinkt von Stunden auf Minuten.
-
-=== Identische Umgebungen (Dev/Prod Parity)
-Ein entscheidender Vorteil dieser Architektur ist die Garantie, dass die lokale Entwicklungsumgebung exakt der Umgebung in der #htl3r.full[ci] entspricht. Da die #htl3r.short[ci]-Pipeline dieselbe `flake.nix` nutzt, um ihre Testumgebung aufzubauen, sind Versionskonflikte zwischen Entwickler-Laptop und Build-Server ausgeschlossen. Tests, die lokal bestehen, werden mit an Sicherheit grenzender Wahrscheinlichkeit auch in der Pipeline erfolgreich sein (für Details zur Implementierung der #htl3r.short[ci]-Pipelines siehe @cicd_pipelines).
-
-=== Tooling-Konsistenz
-Da auch Werkzeuge wie Linter oder Formatierer über #htl3r.long[nix] bereitgestellt werden, arbeiten alle Teammitglieder automatisch mit denselben Programmversionen. Dies stellt sicher, dass der Code immer einheitlich formatiert bleibt, was die gemeinsame Arbeit erleichtert und unnötige Diskussionen über den Programmierstil verhindert.
+Ein einzelner Aufruf von #box(`nix fmt`) formatiert damit das gesamte Repository in einem Durchgang. Diskussionen über Einrückungen oder Klammersetzung erübrigen sich, da das Ergebnis deterministisch ist.
