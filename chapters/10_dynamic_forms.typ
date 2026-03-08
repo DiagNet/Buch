@@ -52,7 +52,7 @@ Auch hier wird ein modularer Ansatz verfolgt. Die abstrakte Basisklasse `Datatyp
 
 #pagebreak()
 
-Der folgende Ausschnitt zeigt die Implementierung einer solchen Prüfung am Beispiel einer #htl3r.short[ipv4]-Adresse:
+Der folgende Ausschnitt zeigt die Implementierung einer solchen Prüfung am Beispiel einer IPv4-Adresse:
 
 #htl3r.code(
   caption: [Implementierung der Datentyp-Klasse IPv4],
