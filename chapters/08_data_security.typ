@@ -123,7 +123,7 @@ Um Netzwerkadministratoren die Möglichkeit zu geben, eine ganze Batterie von Te
 
 #htl3r.code(
   caption: [Gruppierung von Testfällen via ManyToMany-Relation],
-  description: `testgroups/models.py`,
+  description: `networktests/models.py`,
 )[
   ```python
   class TestGroup(models.Model):
