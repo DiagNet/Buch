@@ -13,8 +13,10 @@ erDiagram
     }
     TestDevice {
         int id PK
+        string name
         int test_case_id FK
         int device_id FK
+        int parent_test_parameter_id FK
     }
     TestParameter {
         int id PK
@@ -27,5 +29,5 @@ erDiagram
     TestCase ||--o{ TestDevice : "devices"
     TestCase ||--o{ TestParameter : "parameters"
     Device ||--o{ TestDevice : "device"
-    TestParameter ||--o{ TestParameter : "parent"
+    TestParameter ||--o{ TestParameter : "parent_parameter"
     TestParameter ||--o{ TestDevice : "device_parent_parameter"
