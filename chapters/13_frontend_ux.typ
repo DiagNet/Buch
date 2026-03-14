@@ -4,7 +4,7 @@
 
 = User Interface & Visualisierung <frontend_ux>
 
-Eine Netzwerkverwaltungsplattform lebt davon, dass Statusänderungen sofort sichtbar sind. Das naheliegende Gegenmittel wäre ein clientseitiges JavaScript-Framework wie React oder Vue, das jedoch eine eigenständige API zwischen Frontend und Backend erfordert hätte. Stattdessen setzt #htl3r.long[diagnet] auf #htl3r.long[htmx], das dieselbe Interaktivität direkt aus HTML-Attributen heraus ermöglicht, während der Server die vollständige Kontrolle über das Rendering behält. Die Diagramme und Auswertungen im Dashboard sind in @data_visualization beschrieben.
+Eine Netzwerkverwaltungsplattform lebt davon, dass Statusänderungen sofort sichtbar sind. Das naheliegende Tool wäre ein clientseitiges JavaScript-Framework wie React oder Vue, das jedoch eine eigenständige API zwischen Frontend und Backend erfordert hätte. Stattdessen setzt #htl3r.long[diagnet] auf #htl3r.long[htmx], das dieselbe Interaktivität direkt aus HTML-Attributen heraus ermöglicht, während der Server die vollständige Kontrolle über das Rendering behält. Die Diagramme und Auswertungen im Dashboard sind in @data_visualization beschrieben.
 
 == Frontend-Technologien <frontend_technologien>
 
