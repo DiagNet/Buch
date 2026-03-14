@@ -1,7 +1,7 @@
 #import "@preview/htl3r-da:2.0.0" as htl3r
 
 #htl3r.author("Karun Sandhu")
-= Backend & Applikationsarchitektur <backend_architektur>
+= Applikationsarchitektur des #box[Backends] <backend_architektur>
 
 #htl3r.long[diagnet] verwaltet Netzwerkgeräte, Testfälle, Testergebnisse und Benutzerrechte. Diese Daten stehen nicht isoliert nebeneinander: Ein Testfall gehört zu einem Gerät, ein Ergebnis zu einem Testfall, eine Berechtigung zu einem Benutzer. Je mehr solcher Relationen eine Plattform abbilden muss, desto mehr bestimmt die Wahl des #htl3r.longpl[framework], wie viel davon selbst implementiert werden muss und wie viel von Haus aus mitgeliefert wird. Diese Entscheidung war der Ausgangspunkt für die Architektur des #htl3r.longpl[backend].
 
@@ -99,7 +99,7 @@ Das *Model* definiert die Datenstrukturen und kommuniziert mit der Datenbank. Di
 
 #pagebreak()
 
-Das `Device`-Modell erzeugt aus seinen eigenen Tabellenspalten (IP, Username, Password) dynamisch die benötigten #htl3r.long[pyats]-#htl3r.longpl[testbed] und instanziiert die Verbindungen direkt im Speicher des #htl3r.longpl[backend]. Bereits offene Verbindungen werden über ein globales Cache-Dictionary (`device_connections`) für nachfolgende Tests wiederverwendet. Da `is_connected()` nur den lokalen Verbindungsstatus prüft, wird die Session zusätzlich mit einem `show clock`-Befehl aktiv verifiziert. Schlägt dieser fehl, wird der Cache-Eintrag verworfen und eine neue Verbindung aufgebaut:
+Das `Device`-Modell erzeugt aus seinen eigenen Tabellenspalten (IP, Username, Password) dynamisch die benötigten #htl3r.long[pyats]-#htl3r.longpl[testbed] und instanziiert die Verbindungen direkt im Speicher des #htl3r.longpl[backend]. Bereits offene Verbindungen werden über ein globales Cache-Dictionary (`device_connections`) für nachfolgende Tests wiederverwendet. Da `is_connected()` nur den lokalen Verbindungsstatus prüft, wird die Session zusätzlich mit einem #box(`show clock`)-Befehl aktiv verifiziert. Schlägt dieser fehl, wird der Cache-Eintrag verworfen und eine neue Verbindung aufgebaut:
 
 #htl3r.code(
   caption: [Dynamische Instanziierung von pyATS-Geräteobjekten aus der Datenbank],
