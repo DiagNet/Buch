@@ -5,7 +5,7 @@
 #htl3r.author("Karun Sandhu")
 == CI/CD-Automatisierung <cicd_pipelines>
 
-Dass #htl3r.long[diagnet] auf #htl3r.long[nix] als Fundament setzt, zahlt sich nicht nur lokal aus, sondern die gesamte Pipeline profitiert davon. Da die `flake.nix` alle Abhängigkeiten deklarativ fixiert, braucht ein frischer GitHub-Actions-Runner kein manuelles Setup: Ein einziger `nix`-Aufruf genügt, um dieselbe Umgebung zu reproduzieren, die auch auf dem Entwickler-Laptop läuft. Die Pipeline ist damit kein separates System, das gepflegt werden müsste, sondern eine direkte Verlängerung der lokalen Entwicklungsumgebung.
+Dass #htl3r.long[diagnet] auf #htl3r.long[nix] als Fundament setzt, zahlt sich nicht nur lokal aus, sondern die gesamte Pipeline profitiert davon. Da die `flake.nix`-Datei alle Abhängigkeiten deklarativ fixiert, braucht ein frischer GitHub-Actions-Runner kein manuelles Setup: Ein einziger `nix`-Aufruf genügt, um dieselbe Umgebung zu reproduzieren, die auch auf dem Entwickler-Laptop läuft. Die Pipeline ist damit kein separates System, das gepflegt werden muss, sondern eine direkte Verlängerung der lokalen Entwicklungsumgebung.
 
 Für die Versionierung verwendet #htl3r.long[diagnet] *ZeroVer* @zerover. Anders als Semantic Versioning signalisiert eine Version mit führender Null, z. B. `v0.3.1`, explizit, dass sich die Software noch in aktiver Entwicklung befindet und keine stabile #htl3r.short[api]-Stabilität garantiert wird. Für ein Schüler-Diplomprojekt ist das die ehrlichere Wahl: Die Software wird aktiv weiterentwickelt und ausgeliefert, ohne dabei Stabilitätsversprechen zu machen, die man zu diesem Zeitpunkt nicht halten kann.
 
@@ -47,7 +47,7 @@ Alle drei Gruppen teilen eine gemeinsame Basis: den wiederverwendbaren `nix.yml`
 
 #pagebreak()
 
-Cachix ist ein Binary-Cache-Dienst für den #htl3r.long[nix]-Store @nixos-homepage. Im #htl3r.long[nix]-Modell wird jede Abhängigkeit als sogenannte *Derivation* bezeichnet und durch einen kryptographischen Hash eindeutig identifiziert. Cachix speichert bereits gebaute Derivations und stellt sie über eine öffentliche URL bereit. Statt bei jedem Pipeline-Lauf alle Pakete neu zu kompilieren, prüft der Runner zuerst, ob eine Derivation mit dem passenden Hash bereits im Cache liegt, und lädt sie in diesem Fall direkt herunter. Dieser Cache ist auch in der `flake.nix` als `extra-substituters` eingetragen, sodass er lokal und in der Pipeline gleichermaßen greift:
+Cachix ist ein Binary-Cache-Dienst für den #htl3r.long[nix]-Store @nixos-homepage. Im #htl3r.long[nix]-Modell wird jede Abhängigkeit als sogenannte *Derivation* bezeichnet und durch einen kryptographischen Hash eindeutig identifiziert. Cachix speichert bereits gebaute Derivations und stellt sie über eine öffentliche URL bereit. Statt bei jedem Pipeline-Lauf alle Pakete neu zu kompilieren, prüft der Runner zuerst, ob eine Derivation mit dem passenden Hash bereits im Cache liegt, und lädt sie in diesem Fall direkt herunter. Dieser Cache ist auch in der `flake.nix`-Datei als `extra-substituters` eingetragen, sodass er lokal und in der Pipeline gleichermaßen greift:
 
 #htl3r.code(
   caption: [Cachix-Konfiguration im gemeinsamen Nix-Basis-Workflow],
@@ -73,9 +73,9 @@ Der letzte Step führt den übergebenen Befehl aus und setzt dabei drei Umgebung
 
 === Qualitätssicherung
 
-Der `nix-ci.yml`-Workflow läuft bei jedem Pull Request und bei Merge-Group-Aktionen, also kurz bevor ein Branch in `main` gemergt wird. Er ruft den Basis-Workflow in zwei separaten Jobs auf: einmal mit `nix flake check` für statische Checks, einmal für die Tests.
+Der `nix-ci.yml`-Workflow läuft bei jedem Pull Request und bei Merge-Group-Aktionen, also kurz bevor ein Branch in `main` gemergt wird. Er ruft den Basis-Workflow in zwei separaten Jobs auf: einmal mit #box(`nix flake check`) für statische Checks, einmal für die Tests.
 
-`nix flake check` ist ein eingebauter Nix-Befehl, der alle in der `flake.nix` deklarierten Checks ausführt. Darunter fallen Formatierungsprüfung via #htl3r.long[treefmt], statische Analyse und Pre-Commit-Hooks. Schlägt auch nur einer davon fehl, blockiert der Check den Merge. Der zweite Job startet die Entwickler-Shell über `nix develop` und ruft darin die `just`-Rezepte auf:
+#box(`nix flake check`) ist ein eingebauter Nix-Befehl, der alle in der `flake.nix`-Datei deklarierten Checks ausführt. Darunter fallen Formatierungsprüfung via #htl3r.long[treefmt], statische Analyse und Pre-Commit-Hooks. Schlägt auch nur einer davon fehl, blockiert der Check den Merge. Der zweite Job startet die Entwickler-Shell über #box(`nix develop`) und ruft darin die `just`-Rezepte auf:
 
 #htl3r.code(
   caption: [Testausführung in der Nix-Entwicklungsumgebung],
@@ -88,7 +88,7 @@ Der `nix-ci.yml`-Workflow läuft bei jedem Pull Request und bei Merge-Group-Akti
   ```
 ]
 
-`nix develop` öffnet eine Shell mit der in der `flake.nix` definierten Entwicklungsumgebung, in der dann `just collectstatic` die statischen Dateien einsammelt und `just test` die Testsuite ausführt. Da diese Umgebung deterministisch aus derselben `flake.nix` aufgebaut wird wie lokal, ist sichergestellt, dass kein "works on my machine"-Problem auftreten kann.
+#box(`nix develop`) öffnet eine Shell mit der in der `flake.nix`-Datei definierten Entwicklungsumgebung, in der dann #box(`just collectstatic`) die statischen Dateien einsammelt und #box(`just test`) die Testsuite ausführt. Da diese Umgebung deterministisch aus derselben `flake.nix` aufgebaut wird wie lokal, ist sichergestellt, dass kein "works on my machine"-Problem auftreten kann.
 
 === Container-Build und Veröffentlichung
 
@@ -96,7 +96,7 @@ Der Container-Workflow gliedert sich in drei Jobs: `build`, `publish` und `relea
 
 #pagebreak()
 
-Der Build-Job läuft bei jedem Pull Request, bei Pushes auf `main` und bei Version-Tags. Er ruft `nix build .#container` auf, das die in `nix/diagnet.nix` definierte `buildLayeredImage`-Derivation baut (siehe @containerization). Das Ergebnis landet als Symlink in `./result`. Da GitHub Actions keine Symlinks als Artefakte hochladen kann, wird der Symlink vor dem Upload dereferenziert:
+Der Build-Job läuft bei jedem Pull Request, bei Pushes auf `main` und bei Version-Tags. Er ruft #box(`nix build .#container`) auf, das die in `nix/diagnet.nix` definierte `buildLayeredImage`-Derivation baut (siehe @containerization). Das Ergebnis landet als Symlink in `./result`. Da GitHub Actions keine Symlinks als Artefakte hochladen kann, wird der Symlink vor dem Upload dereferenziert:
 
 #htl3r.code(
   caption: [Dereferenzierung des Nix-Symlinks vor dem Artefakt-Upload],
@@ -126,7 +126,7 @@ Das Tarball-Artefakt hat eine Aufbewahrungsdauer von einem Tag, da es nur als Zw
   ```
 ]
 
-Der `release`-Job wird ausschließlich bei Tags ausgelöst, die dem Muster `refs/tags/v` entsprechen. Er lädt ebenfalls das Tarball-Artefakt herunter und legt über `softprops/action-gh-release` ein GitHub Release mit automatisch generierten Release-Notes an, an das das Container-Image direkt angehängt wird.
+Der `release`-Job wird ausschließlich bei Tags ausgelöst, die dem Muster #box(`refs/tags/v`) entsprechen. Er lädt ebenfalls das Tarball-Artefakt herunter und legt über `softprops/action-gh-release` ein GitHub Release mit automatisch generierten Release-Notes an, an das das Container-Image direkt angehängt wird.
 
 === Dokumentations-Build
 
@@ -146,4 +146,4 @@ Parallel zum Applikations-Code wird auch das Diplomarbeitsbuch selbst automatisi
   ```
 ]
 
-`nix run .#build` ruft die in der `flake.nix` definierte Typix-Derivation auf, die Typst installiert und das PDF kompiliert. Das resultierende PDF wird als Artefakt hochgeladen und bei einem Tag-Release direkt an das GitHub Release angehängt.
+#box(`nix run .#build`) ruft die in der `flake.nix`-Datei definierte Typix-Derivation auf, die Typst installiert und als PDF kompiliert. Diese wird als Artefakt hochgeladen und bei einem Tag-Release direkt an das GitHub Release angehängt.
