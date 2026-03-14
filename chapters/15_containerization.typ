@@ -104,7 +104,7 @@ Die Schlüsselgenerierung läuft in einer Subshell mit `umask 077`, damit die `s
   ```
 ]
 
-Fehlt `DIAGNET_SECRET_KEY`, wird er über `get_random_secret_key()` erzeugt, fehlt `DIAGNET_DEVICE_ENCRYPTION_KEY`, über `Fernet.generate_key()`. Beide Werte werden an `secrets.env` angehängt und danach erneut in die aktuelle Shell gesourct. Bei Folgestarts sind die Variablen bereits gesetzt, sodass die Generierung übersprungen wird.
+Fehlt `DIAGNET_SECRET_KEY`, wird er über `get_random_secret_key()` erzeugt, fehlt `DIAGNET_DEVICE_ENCRYPTION_KEY`, erzeugt diesen `Fernet.generate_key()`. Beide Werte werden an `secrets.env` angehängt und danach erneut in die aktuelle Shell gesourct. Bei Folgestarts sind die Variablen bereits gesetzt, sodass die Generierung übersprungen wird.
 
 #pagebreak()
 
@@ -148,7 +148,7 @@ Das `justfile` stellt zwei Befehle bereit, mit denen das Container-Image lokal g
 `just load-container` baut das Image via `nix build .#container` und lädt das resultierende Tar-Archiv direkt in Podman. `just run-container` startet den Container anschließend mit der in `compose.yml` definierten Konfiguration, wobei Port 8000 auf den Host weitergeleitet und `./data` als Volume für persistente Daten eingebunden wird. Podman wurde gegenüber Docker bevorzugt: Es läuft rootless und verarbeitet das #htl3r.short[oci]-kompatible Tar-Archiv, das `nix build` erzeugt, direkt über `podman load`, ohne laufenden Docker-Daemon @podman-docs.
 
 === Distribution über die GitHub Container Registry
-Für den Produktionseinsatz wird das Image über die GitHub Container Registry unter `ghcr.io/diagnet/diagnet` verteilt. Der Build- und Veröffentlichungsprozess ist vollständig automatisiert (siehe @cicd_pipelines). Zur Inbetriebnahme genügt eine einzige `compose.yaml`:
+Für den Produktionseinsatz wird das Image über die GitHub Container Registry unter `ghcr.io/diagnet/diagnet` verteilt. Der Build- und Veröffentlichungsprozess ist vollständig automatisiert (siehe @cicd_pipelines). Zur Inbetriebnahme genügt eine einzige `compose.yaml`-Datei:
 
 #htl3r.code(
   caption: [Minimale `compose.yaml` für den Produktionseinsatz von DiagNet],
