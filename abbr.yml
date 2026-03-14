@@ -7,7 +7,7 @@
   description: >-
     Die dritte Normalform ist eine Stufe der Datenbankormalisierung,
     bei der alle Nicht-Schlüsselattribute ausschließlich vom Primärschlüssel
-    abhängen und keine transitiven Abhängigkeiten bestehen.
+    abhängen, keine transitiven Abhängigkeiten bestehen und alle Attribute atomar sind.
 
 aaa:
   short:

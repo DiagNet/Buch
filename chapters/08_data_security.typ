@@ -10,6 +10,10 @@ Eine Webanwendung ist letztlich nur so zuverlässig wie das Datenbankschema, auf
   caption: [Datenbankschema: Geräteverwaltung und Teststruktur],
 ) <erd_struktur>
 
+Die rekursive Selbstreferenz von `TestParameter` über `parent_test_parameter_id` ist aus Gründen der Übersichtlichkeit nicht dargestellt.
+
+#pagebreak()
+
 #figure(
   image("../assets/erd_ausfuehrung.png", width: 100%),
   caption: [Datenbankschema: Testausführung und Gruppierung],
@@ -119,7 +123,7 @@ Zum Zeitpunkt der Testausführung muss diese Datenbankstruktur in ein maschinenl
 
 === Die TestGroup: Batch-Ausführung durch ManyToMany
 
-Um Netzwerkadministratoren die Möglichkeit zu geben, eine ganze Batterie von Tests mit einem einzigen Aufruf zu starten, wurde die Entität `TestGroup` eingeführt. Das Modell besitzt eine `ManyToManyField`-Beziehung zu `TestCase` und bündelt damit eine beliebige Sammlung von Testfällen.
+Um Netzwerkadministratoren die Möglichkeit zu geben, eine große Anzahl an Tests mit einem einzigen Aufruf zu starten, wurde die Entität `TestGroup` eingeführt. Das Modell besitzt eine `ManyToManyField`-Beziehung zu `TestCase` und bündelt damit eine beliebige Sammlung von Testfällen.
 
 #htl3r.code(
   caption: [Gruppierung von Testfällen via ManyToMany-Relation],
@@ -248,7 +252,7 @@ Der Chiffretext wird mit *AES-128-CBC* erzeugt. Der 256-Bit-Fernet-Schlüssel wi
 
 ==== HMAC als Integritätssicherung
 
-Der #htl3r.short[hmac] am Ende des Tokens ist der entscheidende Unterschied zwischen reiner Verschlüsselung und *authentifizierter* Verschlüsselung @rfc2104. AES-CBC allein würde nur Vertraulichkeit bieten, aber keine Integrität: Ein Angreifer könnte Bits im Chiffretext verändern, und das System würde beim Entschlüsseln fehlerhafte Daten produzieren, ohne dies zu erkennen. Fernet löst dieses Problem durch #htl3r.short[hmac]-SHA256: Bevor entschlüsselt wird, verifiziert die Bibliothek den MAC kryptografisch gegen den gespeicherten Schlüssel. Schlägt diese Verifikation fehl, wird eine `InvalidToken`-Exception geworfen; die Entschlüsselung beginnt gar nicht erst.
+Der #htl3r.short[hmac] am Ende des Tokens ist der entscheidende Unterschied zwischen reiner Verschlüsselung und *authentifizierter* Verschlüsselung @rfc2104. AES-CBC allein würde nur Vertraulichkeit bieten, aber keine Integrität: Ein Angreifer oder ein Übertragungsfehler könnte Bits im Chiffretext verändern, und das System würde beim Entschlüsseln fehlerhafte Daten produzieren, ohne dies zu erkennen. Fernet löst dieses Problem durch #htl3r.short[hmac]-SHA256: Bevor entschlüsselt wird, verifiziert die Bibliothek den MAC kryptografisch gegen den gespeicherten Schlüssel. Schlägt diese Verifikation fehl, wird eine `InvalidToken`-Exception geworfen; die Entschlüsselung beginnt gar nicht erst.
 
 #pagebreak()
 
