@@ -4,8 +4,8 @@
 
 == Routing Tests
 Die Routing-Tests validieren die korrekte Weiterleitung von Netzwerkverkehr über alle Schichten der Netzwerktopologie hinweg.
-Der Fokus liegt auf der Überprüfung der dynamischen Routing-Protokolle *#htl3r.full[rip]*, *#htl3r.full[eigrp]*, *#htl3r.full[ospf]* und *#htl3r.full[bgp]*.
-Zusätzlich deckt das Framework Technologien für Redundanz und Sicherheit ab, darunter *#htl3r.full[hsrp]*, *#htl3r.full[glbp]*, *#htl3r.full[dmvpn]* und *#htl3r.full[ipsec]*.
+Der Fokus liegt auf der Überprüfung der dynamischen Routing-Protokolle #htl3r.long[rip] (*#htl3r.short[rip]*), #htl3r.long[eigrp] (*#htl3r.short[eigrp]*), #htl3r.long[ospf] (*#htl3r.short[ospf]*) und #htl3r.long[bgp] (*#htl3r.short[bgp]*).
+Zusätzlich deckt das Framework Technologien für Redundanz und Sicherheit ab, darunter #htl3r.long[hsrp] (*#htl3r.short[hsrp]*), #htl3r.long[glbp] (*#htl3r.short[glbp]*), #htl3r.long[dmvpn] (*#htl3r.short[dmvpn]*) und #htl3r.long[ipsec] (*#htl3r.short[ipsec]*).
 Im Gegensatz zu einfachen Verbindungstests analysieren diese Module den operativen Zustand der Protokolle direkt auf den Geräten.
 Das System vergleicht die Routing-Tabellen, Nachbarschaften und Interfaces mit den konfigurierten Soll-Werten.
 
@@ -127,7 +127,7 @@ Die folgende Tabelle listet alle entwickelten Testfälle für den Routing-Bereic
     [`RoutingTable`],
     [Einträge in der Routing-Tabelle nach Netz, Next-Hop, Protokoll und Interface],
   ),
-  caption: [Die Routing-Testfälle von DiagNet.],
+  caption: [Die Routing-Testfälle von DiagNet],
 ) <tab-routing-testcases>
 
 === Implementierungsbeispiele
@@ -168,7 +168,7 @@ Ein Suchmuster extrahiert dabei den aktuellen Status der Redundanzgruppe aus dem
 
 
 #htl3r.code(
-  caption: [Extraktion des GLBP-Status Regex],
+  caption: [Extraktion des GLBP-Status],
   description: `GLBP.py`,
 )[
   ```python
