@@ -87,7 +87,7 @@ Um eine sichere Kommunikation zwischen den beiden Standorten zu ermöglichen, wi
 
 #htl3r.short[ikev2] stellt einen modernen Mechanismus zum Aufbau und zur Verwaltung von #htl3r.short[ipsec]-Tunneln dar. Im Vergleich zu IKEv1 bietet es eine effizientere Aushandlung der Sicherheitsparameter, eine verbesserte Stabilität sowie eine geringere Anzahl an Nachrichten während des Tunnelaufbaus. Dadurch eignet sich #htl3r.short[ikev2] besonders für stabile und langfristige Standortverbindungen.
 
-Der Aufbau eines solchen #htl3r.short[ipsec]-Tunnels erfolgt grundsätzlich in zwei Phasen.
+Der Aufbau eines solchen #htl3r.short[ipsec]-Tunnels erfolgt grundsätzlich in zwei Phasen:
 
 #pagebreak()
 
