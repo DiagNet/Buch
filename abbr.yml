@@ -353,13 +353,6 @@ gre:
     plural: Generic Routing Encapsulations
   description: Ein Tunneling-Protokoll, das beliebige Netzwerkprotokolle in IP-Pakete verpackt, um sie über ein öffentliches Netzwerk zu transportieren.
 
-gui:
-  short:
-    singular: GUI
-  long:
-    singular: Graphical User Interface
-  description: Bezeichnet eine Benutzeroberfläche, die dem Anwender die Interaktion mit der Software durch visuelle Elemente wie Fenster, Menüs und Symbole ermöglicht, anstatt textbasierte Befehle zu erfordern.
-
 hermetic:
   long:
     singular: hermetisch

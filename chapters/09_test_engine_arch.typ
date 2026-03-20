@@ -90,7 +90,7 @@ Neben den zwingend erforderlichen Definitionen unterstützt das Parameterschema 
 ==== Präsentation und Frontend
 Diese Attribute steuern ausschließlich die visuelle Darstellung der Parameter in der Benutzeroberfläche und haben keinen direkten Einfluss auf die interne Testlogik.
 
-*`display_name`*: Definiert die Beschriftung des Eingabefeldes in der #htl3r.full[gui]. Fehlt dieser Schlüssel, greift das System automatisch auf den technischen Variablennamen zurück. Dies ermöglicht eine benutzerfreundliche Darstellung wie "BGP AS Number" bei gleichzeitiger Beibehaltung des technisch notwendigen Variablennamens bgp_as_number.
+*`display_name`*: Definiert die Beschriftung des Eingabefeldes in der grafischen Oberfläche. Fehlt dieser Schlüssel, greift das System automatisch auf den technischen Variablennamen zurück. Dies ermöglicht eine benutzerfreundliche Darstellung wie "BGP AS Number" bei gleichzeitiger Beibehaltung des technisch notwendigen Variablennamens bgp_as_number.
 
 *`description`*: Ermöglicht die Definition eines ausführlichen Hilfetextes. Dieser wird dem Anwender im Frontend angezeigt und dient dazu, die Bedeutung des Parameters zu erläutern.
 
