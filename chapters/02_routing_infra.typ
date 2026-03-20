@@ -75,7 +75,7 @@ Zur Absicherung des Default-Gateways für Endgeräte werden zwei unterschiedlich
 
 #htl3r.short[hsrp]-Standort:
 Hier wird das #htl3r.full[hsrp] verwendet.
-Eine virtuelle IP-Adresse wird von einem primären Router bedient, während der zweite Router lediglich den Status überwacht und nur im Fehlerfall übernimmt.
+Eine virtuelle #htl3r.short[ip]-Adresse wird von einem primären Router bedient, während der zweite Router lediglich den Status überwacht und nur im Fehlerfall übernimmt.
 
 #htl3r.short[glbp]-Standort:
 Im Gegensatz dazu nutzt dieser Standort das #htl3r.full[glbp].

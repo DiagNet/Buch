@@ -26,7 +26,7 @@ Das erste Subnetz beinhaltet einen Rocky Linux Server, auf dem eine #htl3r.long[
 
 Im zweiten Subnetz befinden sich ein Windows 11 Client sowie ein weiterer Rocky Linux Server. Der Windows Client dient hauptsächlich für Test- und Validierungszwecke innerhalb der Netzwerkumgebung. Auf dem zweiten Rocky Linux System läuft die #htl3r.long[diagnet]-Applikation, welche die automatisierten Netzwerktests ausführt.
 
-Für dieses Subnetz übernimmt die FortiGate zusätzlich die Rolle eines DHCP-Servers. Dadurch können Clients innerhalb dieses Netzwerks automatisch eine IP-Adresse sowie weitere Parameter beziehen.
+Für dieses Subnetz übernimmt die FortiGate zusätzlich die Rolle eines DHCP-Servers. Dadurch können Clients innerhalb dieses Netzwerks automatisch eine #htl3r.short[ip]-Adresse sowie weitere Parameter beziehen.
 
 Über den aufgebauten #htl3r.long[vpn_tunnel] zwischen den beiden Standorten kann die DiagNet-Instanz auf die Geräte des zweiten Standorts zugreifen. Dadurch ist es möglich, automatisierte Tests auf den dort verfügbaren Netzwerkgeräten durchzuführen und deren Zustand zu überprüfen.
 

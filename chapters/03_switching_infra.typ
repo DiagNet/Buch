@@ -95,13 +95,13 @@ Nur die Uplinks zum Distribution-Switch wurden als vertrauenswürdig markiert. W
   ```
 ]
 
-Durch das Snooping baut der Switch zudem eine Tabelle auf, in der die Zuweisungen von IP-Adressen zu MAC-Adressen gespeichert sind. Diese Informationen sind die Grundlage für weitere Sicherheitsprüfungen im Netzwerk.
+Durch das Snooping baut der Switch zudem eine Tabelle auf, in der die Zuweisungen von #htl3r.short[ip]-Adressen zu MAC-Adressen gespeichert sind. Diese Informationen sind die Grundlage für weitere Sicherheitsprüfungen im Netzwerk.
 #pagebreak()
 === Überprüfung mit Dynamic ARP Inspection
 
 Das Protokoll #htl3r.full[arp] hat von Haus aus keine Sicherheitsfunktionen, was Angriffe wie das ARP-Spoofing ermöglicht. Hierbei werden gefälschte Nachrichten verschickt, um Daten abzufangen. Zur Abwehr wird #htl3r.short[dai] eingesetzt, welche jedes eingehende Paket gegen die Tabelle aus dem DHCP Snooping prüft.
 
-Passt die Kombination aus IP und MAC nicht zu den gespeicherten Daten, wird das Paket gelöscht. Wie beim Snooping werden auch hier nur die Uplink-Ports als vertrauenswürdig eingestuft.
+Passt die Kombination aus #htl3r.short[ip] und MAC nicht zu den gespeicherten Daten, wird das Paket gelöscht. Wie beim Snooping werden auch hier nur die Uplink-Ports als vertrauenswürdig eingestuft.
 
 #htl3r.code(
   caption: [Aktivierung von Dynamic ARP Inspection je VLAN mit vertrauenswürdigem Port],

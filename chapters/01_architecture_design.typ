@@ -68,7 +68,7 @@ Der Datenverkehr zwischen den produktiven VLANs wird ausschließlich über den D
 
 == IP-Adressierungsschema
 
-Das gewählte Adressschema folgt dem logischen Muster `10.0.VLAN.Host`. Dies ermöglicht es, die Zugehörigkeit eines Geräts zu einem bestimmten Netzwerksegment direkt an der IP-Adresse zu erkennen.
+Das gewählte Adressschema folgt dem logischen Muster `10.0.VLAN.Host`. Dies ermöglicht es, die Zugehörigkeit eines Geräts zu einem bestimmten Netzwerksegment direkt an der #htl3r.short[ip]-Adresse zu erkennen.
 
 #figure(
   table(
@@ -84,7 +84,7 @@ Das gewählte Adressschema folgt dem logischen Muster `10.0.VLAN.Host`. Dies erm
   caption: [IP-Adressierung für die Verwaltung der Infrastruktur.],
 ) <tab-ips>
 
-Über das Management-VLAN greift die DiagNet-Applikation direkt auf diese IP-Adressen zu, um die Testläufe gegen die physischen Geräte durchzuführen.
+Über das Management-VLAN greift die DiagNet-Applikation direkt auf diese #htl3r.short[ip]-Adressen zu, um die Testläufe gegen die physischen Geräte durchzuführen.
 
 == Management-Netzwerk und Zugriffsschutz
 
@@ -105,4 +105,4 @@ Um den Zugriff auch bei einem Ausfall des zentralen RADIUS-Servers sicherzustell
 
 == Benennung und Trennung der Logik
 
-Die Benennung der Geräte folgt einem funktionalen Schema (z. B. DSW, ASW), welches in der Datenbank von DiagNet als Bezeichner dient. Ein wesentliches Prinzip beim Aufbau war die Trennung zwischen der physikalischen Infrastruktur und der Testlogik. Die Testfälle sind so konzipiert, dass sie unabhängig von der spezifischen Verkabelung funktionieren. Sie verbinden sich mit einer IP-Adresse und prüfen die Konfigurationsparameter, was den Einsatz derselben Testfälle sowohl in der GNS3-Simulation als auch im physischen Labor ermöglicht.
+Die Benennung der Geräte folgt einem funktionalen Schema (z. B. DSW, ASW), welches in der Datenbank von DiagNet als Bezeichner dient. Ein wesentliches Prinzip beim Aufbau war die Trennung zwischen der physikalischen Infrastruktur und der Testlogik. Die Testfälle sind so konzipiert, dass sie unabhängig von der spezifischen Verkabelung funktionieren. Sie verbinden sich mit einer #htl3r.short[ip]-Adresse und prüfen die Konfigurationsparameter, was den Einsatz derselben Testfälle sowohl in der GNS3-Simulation als auch im physischen Labor ermöglicht.
