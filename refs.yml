@@ -59,23 +59,23 @@ chartjs-docs:
 
 cisco-layer2-security:
   type: web
-  title: "Catalyst Switches: Configuring DHCP Snooping, Dynamic ARP Inspection, and Port Security"
+  title: "Security Configuration Guide, Cisco IOS XE Dublin 17.12.x (Catalyst 9300 Switches)"
   author:
     - name: Cisco Systems
   url:
-    value: https://www.cisco.com/c/en/us/support/docs/lan-switching/8021x/82047-layer2-sec.html
-    date: 2026-03-08
-  date: 2023-01-01
+    value: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-12/configuration_guide/sec/b_1712_sec_9300_cg.html
+    date: 2026-03-20
+  date: 2024-01-01
 
 cisco-stp-pvst:
   type: web
-  title: "Understanding and Configuring Spanning Tree Protocol (STP) on Catalyst Switches"
+  title: "Configuring Spanning Tree Protocol, Cisco IOS XE 17.17.x (Catalyst 9300 Switches)"
   author:
     - name: Cisco Systems
   url:
-    value: https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/5234-5.html
-    date: 2026-03-08
-  date: 2023-01-01
+    value: https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-17/configuration_guide/lyr2/b_1717_lyr2_9300_cg/configuring_spanning_tree_protocol.html
+    date: 2026-03-20
+  date: 2024-01-01
 
 daphne-docs:
   type: web
@@ -178,6 +178,17 @@ just-command-runner:
     value: https://github.com/casey/just
     date: 2026-02-07
   date: 2025-01-15
+
+netmiko-docs:
+  type: web
+  title: "Netmiko: Multi-vendor library to simplify Paramiko SSH connections to network devices"
+  author:
+    - name: Eiesland
+      given-name: Kirk
+  url:
+    value: https://netmiko.readthedocs.io/en/latest/
+    date: 2026-03-08
+  date: 2024-01-01
 
 nix-docker-tools:
   type: web
@@ -318,15 +329,4 @@ whitenoise-docs:
     value: https://whitenoise.readthedocs.io/en/stable/
     date: 2026-03-07
   date: 2025-01-01
-
-zerover:
-  type: web
-  title: "ZeroVer: 0-based Versioning"
-  author:
-    - name: Hashemi
-      given-name: Mahmoud
-  url:
-    value: https://0ver.org/
-    date: 2026-03-07
-  date: 2019-01-01
 # keep-sorted end

@@ -7,7 +7,14 @@
   description: >-
     Die dritte Normalform ist eine Stufe der Datenbankormalisierung,
     bei der alle Nicht-Schlüsselattribute ausschließlich vom Primärschlüssel
-    abhängen, keine transitiven Abhängigkeiten bestehen und alle Attribute atomar sind.
+    abhängen und keine transitiven Abhängigkeiten bestehen.
+
+802.1Q:
+  short:
+    singular: 802.1Q
+  long:
+    singular: IEEE 802.1Q
+  description: Der gängigste Standard für das VLAN-Tagging in Ethernet-Netzwerken, der es ermöglicht, mehrere VLANs über eine einzige physische Verbindung zu übertragen.
 
 aaa:
   short:
@@ -80,6 +87,15 @@ asgi:
     die als Nachfolger von WSGI WebSocket-Verbindungen und andere
     asynchrone Protokolle nativ unterstützt.
 
+asw:
+  short:
+    singular: ASW
+    plural: ASWs
+  long:
+    singular: Access Switch
+    plural: Access Switches
+  description: Ein Netzwerk-Switch auf der Zugriffsebene, an den Endgeräte direkt angeschlossen werden.
+
 authenticator:
   long:
     singular: Authenticator
@@ -90,7 +106,7 @@ backbone:
   long:
     singular: Backbone
     plural: Backbones
-  description: Der zentrale Hauptteil eines Netzwerks, der verschiedene Teilnetze miteinander verbindet.
+  description: Der zentrale Hauptteil eines Netzwerks, der verschiedene Teilnetze miteinander verbindet und für den Datentransport über große Distanzen oder hohe Bandbreiten optimiert ist.
 
 backend:
   long:
@@ -105,7 +121,7 @@ bgp:
   long:
     singular: Border Gateway Protocol
     plural: Border Gateway Protocols
-  description: Das Standard-Routing-Protokoll des Internets, das den Datenaustausch zwischen verschiedenen Autonomen Systemen steuert.
+  description: Das Standard-Routing-Protokoll des Internets, das den Datenaustausch zwischen verschiedenen Autonomen Systemen (AS) steuert.
 
 bootstrap:
   long:
@@ -123,12 +139,26 @@ bpdu:
     plural: Bridge Protocol Data Units
   description: Steuerpakete des Spanning Tree Protocols, welche Switches untereinander austauschen, um die Netzwerktopologie zu ermitteln und Schleifen zu verhindern.
 
+cam:
+  short:
+    singular: CAM
+  long:
+    singular: Content Addressable Memory
+  description: Ein Hochgeschwindigkeitsspeicher in Switches, der die MAC-Adresstabelle vorhält und eine sofortige Zuordnung von MAC-Adressen zu Ports ermöglicht.
+
 cd:
   short:
     singular: CD
   long:
     singular: Continuous Deployment
   description: Die automatisierte Bereitstellung von Software in Produktionsumgebungen nach erfolgreicher Integration.
+
+cdp:
+  short:
+    singular: CDP
+  long:
+    singular: Cisco Discovery Protocol
+  description: Ein proprietäres Cisco-Protokoll zur automatischen Erkennung benachbarter Cisco-Geräte und zum Austausch von Geräteinformationen wie Hostname, Plattform und IP-Adresse.
 
 chartjs:
   long:
@@ -181,21 +211,12 @@ daphne:
     Ein HTTP-, HTTP/2- und WebSocket-Server für ASGI-Applikationen,
     der als Referenzimplementierung für Django Channels dient.
 
-dh:
-  short:
-    singular: DH
-    plural: DH
-  long:
-    singular: Diffie-Hellman
-    plural: Diffie-Hellman-Verfahren
-  description: Kryptografisches Verfahren zum sicheren Austausch von Schlüsseln über unsichere Netzwerke, das häufig bei VPN-Verbindungen eingesetzt wird.
-
 dhcp:
   short:
     singular: DHCP
   long:
     singular: Dynamic Host Configuration Protocol
-  description: Ein Netzwerkprotokoll zur automatischen Zuweisung von IP-Adressen und weiteren Netzwerkparametern an Clients.
+  description: Ein Netzwerkprotokoll zur automatischen Zuweisung von IP-Adressen und weiteren Netzwerkparametern an Clients in einem lokalen Netzwerk.
 
 # Danijel
 diagnet:
@@ -226,7 +247,7 @@ dmvpn:
   long:
     singular: Dynamic Multipoint Virtual Private Network
     plural: Dynamic Multipoint Virtual Private Networks
-  description: Eine VPN-Technologie, die den dynamischen Aufbau von IPsec-Tunneln zwischen mehreren Standorten ermöglicht.
+  description: Eine VPN-Technologie, die den dynamischen Aufbau von IPsec-Tunneln zwischen mehreren Standorten ohne permanente Konfiguration ermöglicht.
 
 dom:
   short:
@@ -238,14 +259,14 @@ dom:
     XML-Dokument als Baumstruktur darstellt und Programmen ermöglicht, Inhalt,
     Struktur und Stil dynamisch zu ändern.
 
-dot1x:
+dsw:
   short:
-    singular: 802.1X
-    plural: 802.1X
+    singular: DSW
+    plural: DSWs
   long:
-    singular: IEEE 802.1X Port-Based Network Access Control
-    plural: IEEE 802.1X Port-Based Network Access Control
-  description: Standard zur portbasierten Authentifizierung von Geräten in Netzwerken.
+    singular: Distribution Switch
+    plural: Distribution Switches
+  description: Ein zentraler Switch, der die Verbindung zwischen der Access-Ebene und dem Kernnetzwerk herstellt und häufig das Inter-VLAN-Routing übernimmt.
 
 dtp:
   short:
@@ -268,7 +289,7 @@ ebgp:
   long:
     singular: External Border Gateway Protocol
     plural: External Border Gateway Protocols
-  description: Eine Variante des Border Gateway Protocols, die für den Austausch von Routing-Informationen zwischen unterschiedlichen Autonomen Systemen verwendet wird.
+  description: Eine Variante des Border Gateway Protocols, die für den Austausch von Routing-Informationen zwischen unterschiedlichen Autonomen Systemen (AS) verwendet wird.
 
 eigrp:
   short:
@@ -277,7 +298,7 @@ eigrp:
   long:
     singular: Enhanced Interior Gateway Routing Protocol
     plural: Enhanced Interior Gateway Routing Protocols
-  description: Ein Distanzvektor-Routing-Protokoll von Cisco, das Bandbreite und Verzögerung zur Pfadberechnung kombiniert.
+  description: Ein fortschrittliches Distanzvektor-Routing-Protokoll von Cisco, das Bandbreite und Verzögerung zur Pfadberechnung kombiniert.
 
 esp:
   short:
@@ -300,7 +321,14 @@ fabrikmethode:
   long:
     singular: Fabrikmethode
   description: >-
-    Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert.
+    Ein softwaretechnisches Entwurfsmuster, das eine Schnittstelle zur Erzeugung von Objekten definiert, wobei die konkrete Instanziierung den Unterklassen überlassen wird.
+
+fg:
+  short:
+    singular: FG
+  long:
+    singular: FortiGate
+  description: Eine Next-Generation Firewall des Herstellers Fortinet zur Absicherung von Netzwerken.
 
 fhrp:
   short:
@@ -316,6 +344,16 @@ firewall_policy:
     singular: Firewall-Policy
     plural: Firewall-Policies
   description: Eine Regel oder Richtlinie einer Firewall, die festlegt, welcher Datenverkehr zwischen Netzwerkbereichen erlaubt, geprüft oder blockiert wird.
+
+fouc:
+  short:
+    singular: FOUC
+  long:
+    singular: Flash of Unstyled Content
+  description: >-
+    Ein Darstellungsfehler in Webbrowsern, bei dem kurzzeitig unstylisierter
+    HTML-Inhalt sichtbar wird, bevor das zugehörige CSS vollständig geladen
+    und angewendet wurde.
 
 framework:
   long:
@@ -353,6 +391,13 @@ gre:
     plural: Generic Routing Encapsulations
   description: Ein Tunneling-Protokoll, das beliebige Netzwerkprotokolle in IP-Pakete verpackt, um sie über ein öffentliches Netzwerk zu transportieren.
 
+gui:
+  short:
+    singular: GUI
+  long:
+    singular: Graphical User Interface
+  description: Bezeichnet eine Benutzeroberfläche, die dem Anwender die Interaktion mit der Software durch visuelle Elemente wie Fenster, Menüs und Symbole ermöglicht, anstatt textbasierte Befehle zu erfordern.
+
 hermetic:
   long:
     singular: hermetisch
@@ -373,7 +418,7 @@ hsrp:
   long:
     singular: Hot Standby Router Protocol
     plural: Hot Standby Router Protocols
-  description: Ein Redundanzprotokoll von Cisco, das durch ein Active/Standby-Modell die Ausfallsicherheit des Standard-Gateways gewährleistet.
+  description: Ein proprietäres Redundanzprotokoll von Cisco, das durch ein Active/Standby-Modell die Ausfallsicherheit des Standard-Gateways gewährleistet.
 
 html:
   short:
@@ -398,14 +443,13 @@ http:
     singular: Hypertext Transfer Protocol
   description: Ein zustandsloses Protokoll zur Übertragung von Daten auf der Anwendungsschicht über ein Rechnernetz, das hauptsächlich zum Laden von Webseiten verwendet wird.
 
-ieee:
+icmp:
   short:
-    singular: IEEE
-    plural: IEEE
+    singular: ICMP
   long:
-    singular: Institute of Electrical and Electronics Engineers
-    plural: Institute of Electrical and Electronics Engineers
-  description: Internationale Organisation für Elektrotechnik, Elektronik und Informationstechnik, die unter anderem zahlreiche Netzwerkstandards entwickelt und veröffentlicht.
+    singular: Internet Control Message Protocol
+  description: >-
+    Ein Netzwerkprotokoll, das zum Austausch von Informations- und Fehlermeldungen in IP-Netzwerken dient. Es wird primär für Diagnosezwecke verwendet, etwa um die Erreichbarkeit von Hosts zu prüfen.
 
 igp:
   short:
@@ -414,7 +458,7 @@ igp:
   long:
     singular: Interior Gateway Protocol
     plural: Interior Gateway Protocols
-  description: Ein Routing-Protokoll, das zum Austausch von Routing-Informationen zwischen Routern innerhalb eines einzelnen Autonomen Systems verwendet wird.
+  description: Ein Routing-Protokoll, das zum Austausch von Routing-Informationen zwischen Gateways (Routern) innerhalb eines einzelnen Autonomen Systems (AS) verwendet wird.
 
 ike:
   short:
@@ -436,12 +480,19 @@ instanzattribute:
   long:
     singular: Instanzattribute
   description: >-
-    Variablen, die an eine spezifische Instanz einer Klasse gebunden sind.
+    Variablen, die an eine spezifische Instanz einer Klasse gebunden sind und deren individuellen Zustand speichern.
 
 interface:
   long:
     singular: Netzwerkinterface
   description: Eine physische oder logische Schnittstelle eines Netzwerkgeräts zur Datenübertragung.
+
+ios:
+  short:
+    singular: IOS
+  long:
+    singular: Internetwork Operating System
+  description: Das Betriebssystem von Cisco für Router und Switches, welches die Konfiguration und den Betrieb von Netzwerkfunktionen steuert.
 
 ip:
   short:
@@ -456,6 +507,20 @@ ipsec:
   long:
     singular: Internet Protocol Security
   description: Eine Protokoll-Suite zur Sicherung der Internetkommunikation durch Authentifizierung and Verschlüsselung jedes IP-Pakets.
+
+ipv4:
+  short:
+    singular: IPv4
+  long:
+    singular: Internet Protocol Version 4
+  description: Die vierte Version des Internet Protocols, die 32-Bit-Adressen verwendet und die historische Basis des Internets darstellt.
+
+ipv6:
+  short:
+    singular: IPv6
+  long:
+    singular: Internet Protocol Version 6
+  description: Der Nachfolger von IPv4, der 128-Bit-Adressen nutzt, um einen deutlich größeren Adressraum im Netzwerk zur Verfügung zu stellen.
 
 isakmp:
   short:
@@ -480,15 +545,6 @@ isp:
     plural: Internet Service Provider
   description: Ein Dienstleister, der Kunden die Anbindung an das Internet sowie weitere technische Dienstleistungen bereitstellt.
 
-js:
-  short:
-    singular: JS
-  long:
-    singular: JavaScript
-  description: >-
-    Eine weit verbreitete Skriptsprache, die primär für die Entwicklung
-    interaktiver Webinhalte im Browser eingesetzt wird.
-
 json:
   short:
     singular: JSON
@@ -502,12 +558,32 @@ just:
     singular: "`just`"
   description: Ein Task-Runner, der Projektaufgaben in einem Justfile definiert und als moderne Alternative zu `make` dient.
 
+kpi:
+  short:
+    singular: KPI
+    plural: KPIs
+  long:
+    singular: Key Performance Indicator
+    plural: Key Performance Indicators
+  description: >-
+    Eine messbare Kennzahl, die den Fortschritt oder Erfolg eines Systems,
+    Prozesses oder Projekts in Bezug auf ein definiertes Ziel bewertet.
+
 lacp:
   short:
     singular: LACP
   long:
     singular: Link Aggregation Control Protocol
   description: Ein IEEE-802.3ad-Standard zur dynamischen Bündelung mehrerer physischer Netzwerkverbindungen zu einem logischen Link, um Bandbreite und Redundanz zu erhöhen.
+
+lan:
+  short:
+    singular: LAN
+    plural: LANs
+  long:
+    singular: Local Area Network
+    plural: Local Area Networks
+  description: Ein lokales Netzwerk, das Geräte innerhalb eines räumlich begrenzten Bereichs wie einem Gebäude oder Campus miteinander verbindet.
 
 lldp:
   short:
@@ -541,7 +617,7 @@ med:
   long:
     singular: Multi-Exit Discriminator
     plural: Multi-Exit Discriminators
-  description: Ein BGP-Pfadattribut, das verwendet wird, um den eingehenden Datenverkehr von einem benachbarten Autonomen System zu steuern.
+  description: Ein optionales BGP-Pfadattribut, das verwendet wird, um den eingehenden Datenverkehr von einem benachbarten Autonomen System zu steuern.
 
 mpls:
   short:
@@ -619,11 +695,6 @@ nix-shell:
     singular: Nix Shell
   description: Eine temporäre, isolierte Entwicklungsumgebung, in der alle definierten Abhängigkeiten verfügbar sind, ohne das Host-System zu verändern.
 
-nix-store:
-  long:
-    singular: Nix-Store
-  description: Das unveränderliche, inhaltsadressierte Verzeichnis unter `/nix/store/`, in dem Nix alle Build-Ergebnisse und Abhängigkeiten als eindeutige, isolierte Pfade ablegt.
-
 nix:
   long:
     singular: Nix
@@ -678,6 +749,24 @@ parser:
     singular: Parser
   description: Eine Softwarekomponente, die unstrukturierten Text, wie Geräteausgaben, in strukturierte Datenformate umwandelt.
 
+pat:
+  short:
+    singular: PAT
+    plural: PATs
+  long:
+    singular: Port Address Translation
+    plural: Port Address Translations
+  description: Eine Erweiterung von NAT, die es ermöglicht, mehrere Geräte im lokalen Netzwerk über eine einzige öffentliche IP-Adresse abzubilden, indem unterschiedliche Source-Ports verwendet werden.
+
+pdf:
+  short:
+    singular: PDF
+    plural: PDFs
+  long:
+    singular: Portable Document Format
+    plural: Portable Document Formats
+  description: Ein plattformunabhängiges Dateiformat für elektronische Dokumente, welches das Layout originalgetreu bewahrt.
+
 pid:
   short:
     singular: PID
@@ -722,6 +811,13 @@ python_dictionary:
     singular: Python-Dictionary
   description: Eine Datenstruktur in Python zur Speicherung von Schlüssel-Wert-Paaren.
 
+qos:
+  short:
+    singular: QoS
+  long:
+    singular: Quality of Service
+  description: Mechanismen zur priorisierten Behandlung von Netzwerkverkehr, um bestimmten Anwendungen wie VoIP eine garantierte Bandbreite und geringe Latenz zuzusichern.
+
 radius:
   short:
     singular: RADIUS
@@ -754,7 +850,7 @@ rip:
   long:
     singular: Routing Information Protocol
     plural: Routing Information Protocols
-  description: Ein Distanzvektor-Routing-Protokoll, das den Hop-Count zur Bestimmung des besten Pfades verwendet.
+  description: Ein klassisches Distanzvektor-Routing-Protokoll, das den Hop-Count zur Bestimmung des besten Pfades verwendet.
 
 router_id:
   long:
@@ -820,6 +916,15 @@ supplicant:
     plural: Supplicants
   description: Ein Client-System oder eine Softwarekomponente auf einem Endgerät, die im Rahmen von 802.1X Authentifizierungsinformationen an einen Authenticator sendet.
 
+svi:
+  short:
+    singular: SVI
+    plural: SVIs
+  long:
+    singular: Switch Virtual Interface
+    plural: Switch Virtual Interfaces
+  description: Eine virtuelle Layer-3-Schnittstelle auf einem Multilayer-Switch, welche Inter-VLAN-Routing sowie den Management-Zugriff auf das Gerät ermöglicht.
+
 tcp:
   short:
     singular: TCP
@@ -852,15 +957,6 @@ twelvefactor:
   long:
     singular: The Twelve-Factor App
   description: Eine Methodik zur Erstellung skalierbarer und wartbarer Software-as-a-Service-Anwendungen.
-
-ucs:
-  short:
-    singular: UCS
-    plural: UCS
-  long:
-    singular: Cisco Unified Computing System
-    plural: Cisco Unified Computing Systems
-  description: Von Cisco entwickeltes Rechenzentrums-System, das Server, Netzwerkkomponenten und Managementfunktionen in einer Plattform zusammenführt.
 
 udld:
   short:
@@ -904,6 +1000,13 @@ vlan:
     plural: Virtual Local Area Networks
   description: Ein logisches Teilnetz innerhalb eines physischen Netzwerks, das Geräte unabhängig von ihrem Standort isoliert.
 
+voip:
+  short:
+    singular: VoIP
+  long:
+    singular: Voice over IP
+  description: Eine Technologie zur Übertragung von Sprach- und Videokommunikation über IP-basierte Netzwerke, welche spezielle QoS-Anforderungen an die Switching-Infrastruktur stellt.
+
 vpn:
   short:
     singular: VPN
@@ -940,7 +1043,7 @@ wan:
   long:
     singular: Wide Area Network
     plural: Wide Area Networks
-  description: Ein Netzwerk, das sich über einen sehr großen geografischen Bereich erstreckt und verschiedene lokale Netze miteinander verbindet.
+  description: Ein Rechnernetz, das sich über einen sehr großen geografischen Bereich erstreckt und verschiedene lokale Netze (LANs) miteinander verbindet.
 
 whitenoise:
   long:
