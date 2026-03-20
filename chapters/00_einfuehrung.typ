@@ -10,9 +10,11 @@ Im laufenden Betrieb verändert sich dieser Zustand jedoch schrittweise. Softwar
 
 Dadurch entstehen häufig Unsicherheiten. Beispielsweise ist nicht immer klar, ob sicherheitsrelevante Funktionen wie #htl3r.full[dhcp] Snooping weiterhin auf allen Access-Switches aktiviert sind oder ob bestimmte Parameter im Spanning-Tree-Protokoll noch korrekt gesetzt sind. Besonders in größeren Netzwerken mit vielen Geräten kann die manuelle Überprüfung solcher Konfigurationen schnell sehr aufwendig werden.
 
-In der Praxis erfolgt diese Kontrolle meist über eine direkte Verbindung zu den jeweiligen Geräten, etwa per #htl3r.full[ssh]. Administratoren führen anschließend verschiedene Diagnosebefehle aus und vergleichen deren Ausgabe mit der vorhandenen Dokumentation. Dieser Prozess ist zwar grundsätzlich zuverlässig, jedoch zeitintensiv und anfällig für menschliche Fehler.
+In der Praxis erfolgt diese Kontrolle meist über eine standardmäßige Verbindung zu den jeweiligen Geräten, etwa per #htl3r.full[ssh]. Administratoren führen anschließend verschiedene Diagnosebefehle aus und vergleichen deren Ausgabe mit der vorhandenen Dokumentation. Dieser Prozess ist zwar grundsätzlich zuverlässig, jedoch zeitintensiv und anfällig für menschliche Fehler.
 
 Um diese Problematik zu adressieren, wurde im Rahmen dieser Diplomarbeit die Anwendung #htl3r.long[diagnet] entwickelt. Ziel des Projekts ist es, die Überprüfung von Netzwerkzuständen zu automatisieren und dadurch schneller sowie konsistenter durchführen zu können. Durch definierte Testfälle können Konfigurationen automatisch überprüft und mögliche Abweichungen vom geplanten Design frühzeitig erkannt werden.
+
+#pagebreak()
 
 == Das Konzept für die Automatisierung
 
@@ -24,6 +26,8 @@ Die Ergebnisse dieser Prüfungen werden anschließend automatisch ausgewertet un
 
 Ein weiterer Vorteil dieses Ansatzes liegt in der Standardisierung. Da alle Tests nach demselben Schema aufgebaut sind, lassen sich Prüfungen wiederholen und auf verschiedene Geräte anwenden. Dies reduziert den manuellen Aufwand erheblich und erhöht gleichzeitig die Konsistenz der Ergebnisse.
 
+#pagebreak()
+
 == Die Schwerpunkte von DiagNet
 
 Die Entwicklung von #htl3r.long[diagnet] konzentriert sich auf mehrere zentrale Aspekte, die für den praktischen Einsatz in Netzwerkumgebungen relevant sind.
@@ -32,13 +36,13 @@ Ein wichtiger Schwerpunkt ist die Automatisierung von Netzwerktests. Durch autom
 
 Ein weiterer Fokus liegt auf der Übersichtlichkeit der Ergebnisse. Die Resultate der Testläufe werden in einer webbasierten Oberfläche dargestellt, sodass Administratoren den Zustand des Netzwerks auf einen Blick erkennen können. Grafische Darstellungen und übersichtliche Tabellen erleichtern dabei die Analyse der Ergebnisse.
 
-#pagebreak()
-
 Darüber hinaus spielt auch die Modularität der Anwendung eine wichtige Rolle. Neue Testfälle können flexibel hinzugefügt werden, ohne dass die gesamte Anwendung angepasst werden muss. Dadurch lässt sich das System an unterschiedliche Netzwerkumgebungen und Anforderungen anpassen.
 
 Ein weiterer wichtiger Punkt ist die Nachvollziehbarkeit von Änderungen. Durch die Speicherung von Testergebnissen können verschiedene Testläufe miteinander verglichen werden. Auf diese Weise wird sichtbar, ob sich der Zustand des Netzwerks im Laufe der Zeit verändert hat.
 
-== Entstehung und Kooperation
+#pagebreak()
+
+== Projektrealisierung und Kooperation
 
 Das Projekt #htl3r.long[diagnet] entstand im Rahmen der Diplomarbeit an der Höheren Technischen Bundeslehranstalt Wien 3 Rennweg im Ausbildungsschwerpunkt Informationstechnologie mit Fokus auf Netzwerktechnik. Die Arbeit wurde von mehreren Schülern gemeinsam umgesetzt und im Schuljahr 2025/26 durchgeführt. Ziel des Projekts war es, eine praktische Lösung für ein reales Problem im Bereich der Netzwerkadministration zu entwickeln.
 
