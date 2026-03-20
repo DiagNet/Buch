@@ -179,17 +179,6 @@ just-command-runner:
     date: 2026-02-07
   date: 2025-01-15
 
-netmiko-docs:
-  type: web
-  title: "Netmiko: Multi-vendor library to simplify Paramiko SSH connections to network devices"
-  author:
-    - name: Eiesland
-      given-name: Kirk
-  url:
-    value: https://netmiko.readthedocs.io/en/latest/
-    date: 2026-03-08
-  date: 2024-01-01
-
 nix-docker-tools:
   type: web
   title: "NixOS Manual: pkgs.dockerTools"
