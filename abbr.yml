@@ -689,6 +689,12 @@ pid:
     im Userspace und übernimmt besondere Aufgaben bei der
     Signalweiterleitung und Prozessverwaltung.
 
+policy_map:
+  long:
+    singular: Policy Map
+    plural: Policy Maps
+  description: Eine Struktur innerhalb der Cisco Zone-Based Firewall, mit der festgelegt wird, wie Datenverkehr gehandhabt wird.
+
 port_forwarding:
   long:
     singular: Port Forwarding
@@ -970,4 +976,10 @@ zbf:
   long:
     singular: Zone-Based Firewall
   description: Eine zustandsorientierte Firewall-Technologie von Cisco, bei der der Datenverkehr zwischen definierten Sicherheitszonen kontrolliert wird.
+
+zone_pair:
+  long:
+    singular: Zone Pair
+    plural: Zone Pairs
+  description: Eine Struktur innerhalb der Cisco Zone-Based Firewall, mit der Sicherheitszonen verknüpft werden.
 # keep-sorted end

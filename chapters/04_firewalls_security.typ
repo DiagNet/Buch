@@ -48,7 +48,9 @@ Die Zone `INSIDE` repräsentiert das interne Netzwerk des Standorts, während di
 
 Der #htl3r.short[ipsec]-#htl3r.long[vpn_tunnel] zum virtuellen Standort wird über den Router ZBFW-1 aufgebaut. Damit der Aufbau und Betrieb des #htl3r.long[vpn_tunnel]s durch die Firewall nicht blockiert wird, muss entsprechender #htl3r.short[vpn]-Verkehr explizit erlaubt werden. Dazu werden innerhalb der #htl3r.short[zbf] entsprechende Klassen definiert, welche die für #htl3r.short[ipsec] notwendigen Protokolle erkennen und zulassen.
 
-Der folgende Konfigurationsauszug zeigt die Definition der #htl3r.short[acl] sowie der zugehörigen #htl3r.long[class_map] zur Erkennung des VPN-Verkehrs:
+Der folgende Konfigurationsauszug zeigt, wie eingehender VPN-Verkehr erkannt und zugelassen wird:
+
+#pagebreak()
 
 #htl3r.code(
   caption: [Auszug aus der Firewall Konfiguration],
@@ -56,24 +58,35 @@ Der folgende Konfigurationsauszug zeigt die Definition der #htl3r.short[acl] sow
 )[
   ```cisco
   ip access-list extended VPN-ESP
-    permit esp any any
+    permit esp 10.61.91.3 10.60.90.1
 
   class-map type inspect match-any VPN-CLASS
    match protocol isakmp
    match protocol ipsec
    match access-group name VPN-ESP
    exit
+
+  policy-map type inspect OUTSIDE-SELF
+    class type inspect VPN-CLASS
+      pass
+    class class-default
+      drop log
+      exit
+    exit
+
+  zone-pair sec OUTSIDE-SELF source OUTSIDE dest self
+    service-policy type inspect OUTSIDE-SELF
   ```
 ]
 
 Erklärung:
 - #htl3r.short[acl] `VPN-ESP`: Erfasst das Protokoll #htl3r.full[esp], welches für die Verschlüsselung der Nutzdaten zuständig ist.
 - #htl3r.long[class_map] `VPN-CLASS`: Behandelt verschiedenen Traffic. Durch `match-any` wird Verkehr als #htl3r.short[vpn] klassifiziert, wenn er entweder dem Verbindungsaufbau (#htl3r.full[isakmp]), der VPN-Aushandlung (#htl3r.short[ipsec]) oder der definierten ACL entspricht.
+- #htl3r.long[policy_map] OUTSIDE-SELF: Legt fest, wie der als VPN klassifizierte Traffic behandelt wird. Erlaubter VPN-Traffic wird mit pass durchgelassen, alles andere verworfen und geloggt.
+- #htl3r.long[zone_pair] OUTSIDE-SELF: Verknüpft die Zone OUTSIDE mit der Router-eigenen Zone self und weist die definierte #htl3r.long[policy_map] zu, sodass eingehender VPN-Traffic entsprechend gehandhabt wird.
 
 Die Firewall-Engine erkennt #htl3r.short[isakmp] und #htl3r.short[ipsec] meist problemlos als Protokoll-Signaturen, da es sich um Standard-#htl3r.full[udp]-Verbindungen handelt. #htl3r.short[isakmp] bzw. IKE verwendet #htl3r.short[udp] Port 500 für den Aufbau des Tunnels sowie für den Schlüsselaustausch.
 #htl3r.short[esp] hingegen ist kein TCP- oder #htl3r.short[udp]-Protokoll, sondern ein eigenständiges IP-Protokoll mit der Nummer 50, was manchmal zu Problemen führt:
-
-#pagebreak()
 
 In der Praxis kommt häufig #htl3r.short[nat] zwischen den VPN-Endpunkten zum Einsatz. Klassisches #htl3r.short[esp] ist dafür nur eingeschränkt geeignet, da NAT-Geräte üblicherweise Verbindungen anhand von TCP- oder UDP-Portinformationen zuordnen. Da #htl3r.short[esp] keine solchen Felder besitzt, können manche Implementierungen den Datenstrom nicht korrekt behandeln.
 Zur Umgehung dieses Problems wird häufig #htl3r.full[nat_traversal] eingesetzt. Erkennt IKE während dem Verbindungsaufbau ein #htl3r.short[nat]-Gerät im Übertragungsweg, werden die #htl3r.short[esp]-Pakete in #htl3r.short[udp] gekapselt und anschließend über #htl3r.short[udp] Port 4500 transportiert. Für die Firewall erscheint der verschlüsselte Datenstrom in diesem Fall daher als gewöhnlicher UDP-Verkehr.
@@ -88,8 +101,6 @@ Um eine sichere Kommunikation zwischen den beiden Standorten zu ermöglichen, wi
 #htl3r.short[ikev2] stellt einen modernen Mechanismus zum Aufbau und zur Verwaltung von #htl3r.short[ipsec]-Tunneln dar. Im Vergleich zu IKEv1 bietet es eine effizientere Aushandlung der Sicherheitsparameter, eine verbesserte Stabilität sowie eine geringere Anzahl an Nachrichten während des Tunnelaufbaus. Dadurch eignet sich #htl3r.short[ikev2] besonders für stabile und langfristige Standortverbindungen.
 
 Der Aufbau eines solchen #htl3r.short[ipsec]-Tunnels erfolgt grundsätzlich in zwei Phasen:
-
-#pagebreak()
 
 *Phase 1 – IKE Security Association:*
 
@@ -109,6 +120,8 @@ AES-256 sorgt für eine starke symmetrische Verschlüsselung des Datenverkehrs, 
 In der zweiten Phase wird die eigentliche #htl3r.short[ipsec] Security Association (IPsec SA) erstellt. Hier werden die Parameter für den verschlüsselten Datenkanal definiert. Dazu gehören insbesondere die zu schützenden Netzwerke sowie die verwendeten Verschlüsselungsalgorithmen.
 
 Im Rahmen des Projekts werden zwei interne Netzwerke des Cisco-Standorts über den Tunnel erreichbar gemacht. Dadurch kann die #htl3r.long[diagnet]-Instanz im virtuellen Standort auf Geräte im entfernten Netzwerk zugreifen und entsprechende Tests durchführen.
+
+#pagebreak()
 
 Die folgenden Subnetze werden über den Tunnel miteinander verbunden:
 
