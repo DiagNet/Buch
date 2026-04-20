@@ -63,7 +63,7 @@ Als Hardwareplattform kommt ein Server des Typs Cisco #htl3r.full[ucs] C220 M4 z
 
 #pagebreak()
 
-In der Testumgebung wird die #htl3r.short[ise] für zwei zentrale Aufgaben eingesetzt. Einerseits übernimmt sie die Authentifizierung von Administratoren, die sich über das #htl3r.full[radius]-Protokoll auf Netzwerkgeräten anmelden. Andererseits wird sie für die Authentifizierung von Endgeräten an Access-Switchports mittels #htl3r.full[ieee] #htl3r.full[dot1x] verwendet. Die Netzwerkgeräte fungieren dabei als #htl3r.short[radius]-Clients und leiten Authentifizierungsanfragen an die #htl3r.short[ise] weiter.
+In der Testumgebung wird die #htl3r.short[ise] für zwei zentrale Aufgaben eingesetzt:\ Einerseits übernimmt sie die Authentifizierung von Administratoren, die sich über das #htl3r.full[radius]-Protokoll auf Netzwerkgeräten anmelden. Andererseits wird sie für die Authentifizierung von Endgeräten an Access-Switchports mittels #htl3r.long[dot1x] verwendet. Die Netzwerkgeräte fungieren dabei als #htl3r.short[radius]-Clients und leiten Authentifizierungsanfragen an die #htl3r.short[ise] weiter.
 
 
 Die Administration erfolgt über eine webbasierte Oberfläche, über die Richtlinien definiert, Netzwerkgeräte registriert sowie Authentifizierungsereignisse überwacht werden können.
