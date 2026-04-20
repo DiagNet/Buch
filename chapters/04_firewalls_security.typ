@@ -92,7 +92,7 @@ In der Praxis kommt häufig #htl3r.short[nat] zwischen den VPN-Endpunkten zum Ei
 Zur Umgehung dieses Problems wird häufig #htl3r.full[nat_traversal] eingesetzt. Erkennt IKE während dem Verbindungsaufbau ein #htl3r.short[nat]-Gerät im Übertragungsweg, werden die #htl3r.short[esp]-Pakete in #htl3r.short[udp] gekapselt und anschließend über #htl3r.short[udp] Port 4500 transportiert. Für die Firewall erscheint der verschlüsselte Datenstrom in diesem Fall daher als gewöhnlicher UDP-Verkehr.
 
 In Umgebungen ohne #htl3r.short[nat] oder wenn #htl3r.short[nat_traversal] nicht aktiv ist, wird jedoch weiterhin natives #htl3r.short[esp] verwendet. Genau hier liegt das Problem, dass einige ältere Implementierungen der ZBF-Inspektion dieses Format nicht zuverlässig über ihre integrierten Protokoll-Signaturen erkennen.
-Aus diesem Grund wird zusätzlich eine explizite ACL definiert, die #htl3r.short[esp] direkt anhand der IP-Protokollnummer 50 matcht. Die #htl3r.short[acl] `VPN-ESP` stellt somit sicher, dass auch solcher Datenverkehr korrekt der VPN-Klasse zugeordnet wird und von der Firewall entsprechend verarbeitet werden kann.
+Aus diesem Grund wird zusätzlich eine explizite ACL definiert, die #htl3r.short[esp] direkt anhand der IP-Protokollnummer 50 matcht. Die #htl3r.short[acl] `VPN-ESP` stellt somit sicher, dass auch solcher Datenverkehr korrekt der #htl3r.long[policy_map]VPN-Klasse zugeordnet wird und von der Firewall entsprechend verarbeitet werden kann.
 
 === IKEv2 Site-to-Site VPN
 
@@ -152,7 +152,7 @@ Der folgende Auszug zeigt die Definition der IKE Phase 1:
   end
   ```]
 
-Die Phase-2-Definition legt fest, welche internen Netzwerke über den Tunnel erreichbar sind:
+Die Phase-2-Definition legt die über den Tunnel erreichbaren Netze fest:
 
 #htl3r.code(
   caption: [Auszug aus der VPN Konfiguration: `phase2-interface`],
