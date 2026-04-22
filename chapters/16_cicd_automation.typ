@@ -147,3 +147,9 @@ Parallel zum Applikations-Code wird auch das Diplomarbeitsbuch selbst automatisi
 ]
 
 #box(`nix run .#build`) ruft die in der `flake.nix`-Datei definierte Typix-Derivation auf, die Typst installiert und als PDF kompiliert. Diese wird als Artefakt hochgeladen und bei einem Tag-Release direkt an das GitHub Release angehängt.
+
+=== Fazit
+
+Die zwei Workflow-Gruppen schließen einen Kreis: Qualitätssicherung blockiert fehlerhafte Merges, und der Container-Workflow veröffentlicht geprüfte Builds. Der gemeinsame `nix.yml`-Basis-Workflow ist dabei das entscheidende Bindeglied, das sicherstellt, dass alle Jobs unter identischen Bedingungen laufen, ohne dass jeder Workflow seine eigene Nix- und Cachix-Konfiguration verwalten muss.
+
+Dass Nix als Fundament geeignet ist, zeigt sich erst in der Pipeline richtig: Eine `flake.nix`-Datei, die lokal funktioniert, funktioniert ohne Anpassungen auch auf dem Runner. Was lokal in die Umgebungsdefinition investiert wurde, kommt in der Pipeline direkt zugute.
