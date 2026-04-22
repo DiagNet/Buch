@@ -116,7 +116,7 @@ Genau dieser Befehl versetzt den Hub in die Lage, den Außenstellen einen Pfad m
   ```
 ]
 ==== Site-to-Site VPN
-Die zwei Standorte `IPSEC` sind über eine klassische Site-to-Site #htl3r.full[vpn]-Verbindung gekoppelt.
+Die zwei IPSEC-Standorte sind über eine klassische Site-to-Site #htl3r.full[vpn]-Verbindung gekoppelt.
 Der verschlüsselte Tunnel überspannt das gesamte #htl3r.short[wan].
 Die Endpunkte handeln dabei eigenständig die #htl3r.full[ike]-Phase 1 zur Authentifizierung und die #htl3r.short[ike]-Phase 2 zur Verschlüsselung des Nutzdatenverkehrs aus.
 
