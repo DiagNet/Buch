@@ -19,7 +19,7 @@ Die rekursive Selbstreferenz von `TestParameter` über `parent_test_parameter_id
   caption: [Datenbankschema: Testausführung und Gruppierung],
 ) <erd_ausfuehrung>
 
-=== Entity-Relationship-Modell und konzeptionelle Grundlagen
+=== Entity-Relationship-Modell und konzeptionelle #box[Grundlagen]
 
 Bevor die konkrete Implementierung der Django-Modelle in Angriff genommen wurde, war eine sorgfältige Analyse der fachlichen Anforderungen notwendig. Ziel der Datenmodellierung war es, die realen Entitäten des Netzwerktestbetriebs (Geräte, Testfälle, deren Parameter sowie die historischen Ergebnisse) in ein konsistentes, normalisiertes relationales Schema zu überführen. Als Designgrundlage dient die #htl3r.full[3nf], um Redundanzen zu minimieren und die referenzielle Integrität der Daten zu wahren.
 
@@ -323,7 +323,7 @@ Für diesen Fall implementiert #htl3r.long[diagnet] den Management-Befehl `rotat
 
 #pagebreak()
 
-=== Web-Sicherheit: Djangos eingebaute Schutzmechanismen <web_security>
+=== Web-Sicherheit: Djangos eingebaute #box[Schutzmechanismen] <web_security>
 
 Neben der Absicherung gespeicherter Daten muss eine Webanwendung auch gegen aktive Angriffe auf die Benutzerinteraktion gewappnet sein. Django adressiert die gängigsten Angriffsvektoren durch Mechanismen, die standardmäßig aktiv sind und in `settings.py` über die `MIDDLEWARE`-Liste eingebunden werden @django-security. Für #htl3r.long[diagnet] relevant sind vor allem drei davon.
 

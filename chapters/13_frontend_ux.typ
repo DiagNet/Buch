@@ -154,7 +154,7 @@ Diese Warnung ist permanent sichtbar und kann nicht weggeklickt werden, um den e
 
 #figure(
   image("../assets/screenshot_custom_templates_warning.png", width: 100%),
-  caption: [Verwaltungsseite für Custom Templates mit permanenter Sicherheitswarnung],
+  caption: [Verwaltungsseite für Custom Templates mit permanenter #box[Sicherheitswarnung]],
 ) <screenshot_custom_templates>
 
 #pagebreak()
