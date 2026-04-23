@@ -1,0 +1,15 @@
+graph LR
+    Browser(["Browser"])
+
+    subgraph Backend["Backend"]
+        Django["Django"]
+        pyATS["pyATS / Genie"]
+    end
+
+    DB[SQLite]
+    Geraet["Netzwerkgerät"]
+
+    Browser <-->|"HTTP"| Django
+    Django -->|"SQL"| DB
+    Django --> pyATS
+    pyATS -->|"SSH/Telnet"| Geraet

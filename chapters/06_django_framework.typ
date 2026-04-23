@@ -3,11 +3,18 @@
 #htl3r.author("Karun Sandhu")
 = Applikationsarchitektur des #box[Backends] <backend_architektur>
 
+#figure(
+  image("../assets/applicationarchtitecture.png", width: 100%),
+  caption: [Technologie-Übersicht der DiagNet-Backendarchitektur],
+)
+
 #htl3r.long[diagnet] verwaltet Netzwerkgeräte, Testfälle, Testergebnisse und Benutzerrechte. Diese Daten stehen nicht isoliert nebeneinander: Ein Testfall gehört zu einem Gerät, ein Ergebnis zu einem Testfall, eine Berechtigung zu einem Benutzer. Je mehr solcher Relationen eine Plattform abbilden muss, desto mehr bestimmt die Wahl des #htl3r.longpl[framework], wie viel davon selbst implementiert werden muss und wie viel von Haus aus mitgeliefert wird. Diese Entscheidung war der Ausgangspunkt für die Architektur des #htl3r.longpl[backend].
 
 == Das Django Framework <django_framework>
 
 Für die Entwicklung der zentralen Verwaltungsplattform von #htl3r.long[diagnet] fiel die Wahl auf das in Python geschriebene Web-#htl3r.long[framework] Django. Django folgt dem Prinzip "Batteries included" @django-docs: Authentifizierung, Session-Management und Schutzmechanismen gegen gängige Web-Vulnerabilitäten sind standardmäßig integriert, ohne dass externe Bibliotheken eingebunden werden müssen. Wie diese Mechanismen konkret zum Einsatz kommen, wird in @data_security behandelt.
+
+#pagebreak()
 
 Da #htl3r.long[diagnet] komplexe Relationen zwischen Netzwerkgeräten, Testfällen und historischen Testergebnissen abbilden muss, war Djangos integriertes #htl3r.full[orm] ein entscheidender Faktor. Statt rohe #htl3r.full[sql]-Zugriffe von Hand zu implementieren, lassen sich Datenbankoperationen direkt über Python-Objekte ausdrücken. Das resultierende Datenbankschema und die konkreten Modellentscheidungen sind in @data_modeling dokumentiert.
 
@@ -20,6 +27,8 @@ Folgende vier Kriterien wurden für die Bewertung definiert:
 - *Tool-Integration:* Einbindung der nativen Python-Netzwerk-Bibliotheken.
 - *Rendering:* Eignung für serverseitiges #htl3r.short[html]-Rendering.
 - *#htl3r.short[api]-Fokus:* Ausrichtung auf reine Schnittstellen-Entwicklung.
+
+#pagebreak()
 
 ==== Gegenüberstellung der Kriterien
 
@@ -49,8 +58,6 @@ Aus diesem Vergleich ergibt sich folgende Gewichtung (Anzahl der Nennungen):
 - Rendering: 1
 - #htl3r.short[api]-Fokus: 0
 
-#pagebreak()
-
 ==== Punktevergabe und Auswertung
 
 Im zweiten Schritt wurden die #htl3r.longpl[framework] in den einzelnen Kategorien mit Punkten von 1 (sehr schlecht) bis 5 (sehr gut) bewertet. Das Kriterium "#htl3r.full[api]-Fokus" floss mit der Gewichtung 0 nicht in die finale Punktzahl ein, wurde der Vollständigkeit halber jedoch evaluiert.
@@ -75,6 +82,8 @@ Im zweiten Schritt wurden die #htl3r.longpl[framework] in den einzelnen Kategori
   caption: [Nutzwertanalyse und finale Auswertung der Frameworks],
 ) <nutzwertanalyse>
 
+#pagebreak()
+
 ==== Entscheidung für Django
 
 Django erreicht mit 30 Punkten den höchsten Wert. Den Ausschlag gibt der Funktionsumfang: Flask und FastAPI sind Micro-#htl3r.longpl[framework], die für eine vollständige Webanwendung mit Datenbank, Authentifizierung und serverseitigem Rendering auf externe Bibliotheken angewiesen sind. Django liefert diese Komponenten von Haus aus mit, was den Implementierungsaufwand für die Web-Infrastruktur deutlich reduzierte und den Fokus auf die Netzwerklogik ermöglichte.
@@ -86,6 +95,8 @@ Das #htl3r.long[backend] von #htl3r.long[diagnet] ist in vier Django-Apps untert
 Durch die Abstraktion über das #htl3r.short[orm] kann die zugrunde liegende
 Datenbank bei Bedarf von SQLite gegen PostgreSQL ausgetauscht werden, ohne dass
 Datenmodelle oder Programmlogik angepasst werden müssen.
+
+#pagebreak()
 
 === Model-View-Template (MVT) Architektur
 
