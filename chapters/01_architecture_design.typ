@@ -12,18 +12,18 @@ Diese Trennung wurde bewusst gewählt, da eine reine Simulation für viele Testf
 
 == Physischer Standort (Labor)
 
-Im physischen Labor befindet sich die Hardware von Cisco, welche von der Firma CANCOM Austria AG bereitgestellt wurde. Die Abbildung @fig-physische-topologie zeigt das Zusammenspiel der einzelnen Komponenten an diesem Standort.
+Im physischen Labor befindet sich die Hardware von Cisco, welche von der Firma CANCOM Austria AG bereitgestellt wurde. Die @fig-physische-topologie zeigt das Zusammenspiel der einzelnen Komponenten an diesem Standort.
 
 #figure(
-  image("../assets/topo_echtgeraete.png", width: 96%),
+  image("../assets/topo_echtgeraete.png", width: 100%),
   caption: [
     Physische Topologie: Das Cisco-Labor mit den Zone-Based Firewalls (ZBFW-1, ZBFW-2), dem Distribution-Switch (DSW), den Access-Switches (ASW-1, ASW-2) und der Cisco ISE.
   ],
 ) <fig-physische-topologie>
 
-Der Zugang zum Labor erfolgt über zwei Cisco ISR4331 Router (ZBFW-1 und ZBFW-2), welche als #htl3r.full[zbf] konfiguriert wurden. Ein zentraler Bestandteil des Labors ist ein Cisco UCS-Server, der als administrativer Zugangspunkt für die Verwaltung der Netzwerkgeräte dient.
+Der Zugang zum Labor erfolgt über zwei Cisco ISR4331 Router (ZBFW-1 und ZBFW-2), welche als #htl3r.full[zbf] konfiguriert wurden (siehe @fig-physische-topologie). Ein zentraler Bestandteil des Labors ist ein Cisco UCS-Server, der als administrativer Zugangspunkt für die Verwaltung der Netzwerkgeräte dient (siehe @fig-physische-topologie).
 
-Hinter den Firewalls arbeitet ein Catalyst-Switch als Distribution-Switch (DSW), welcher das Routing zwischen den verschiedenen #htl3r.full[vlan] Segmenten übernimmt. An diesem Switch sind die zwei Access-Switches (ASW-1 und ASW-2) angeschlossen, an denen die Layer-2-Sicherheitsfunktionen wie Port-Security und DHCP Snooping implementiert wurden. Zur zentralen Authentifizierung der Zugriffe wird eine Cisco Identity Services Engine (#htl3r.short[ise]) eingesetzt.
+Hinter den Firewalls arbeitet ein Catalyst-Switch als Distribution-Switch (DSW), welcher das Routing zwischen den verschiedenen #htl3r.full[vlan] Segmenten übernimmt. An diesem Switch sind die zwei Access-Switches (ASW-1 und ASW-2) angeschlossen, an denen die Layer-2-Sicherheitsfunktionen wie Port-Security und DHCP Snooping implementiert wurden. Zur zentralen Authentifizierung der Zugriffe wird eine Cisco Identity Services Engine (#htl3r.short[ise]) eingesetzt (siehe @fig-physische-topologie).
 
 == Virtueller Standort (GNS3)
 

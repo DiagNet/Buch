@@ -101,10 +101,10 @@ Durch das Snooping baut der Switch zudem eine Tabelle auf, in der die Zuweisunge
 
 Das Protokoll #htl3r.full[arp] hat von Haus aus keine Sicherheitsfunktionen, was Angriffe wie das ARP-Spoofing ermöglicht. Hierbei werden gefälschte Nachrichten verschickt, um Daten abzufangen. Zur Abwehr wird #htl3r.short[dai] eingesetzt, welche jedes eingehende Paket gegen die Tabelle aus dem DHCP Snooping prüft.
 
-Passt die Kombination aus #htl3r.short[ip] und MAC nicht zu den gespeicherten Daten, wird das Paket gelöscht. Wie beim Snooping werden auch hier nur die Uplink-Ports als vertrauenswürdig eingestuft.
+Passt die Kombination aus #htl3r.short[ip] und MAC nicht zu den gespeicherten Daten, wird das Paket gelöscht. WSie beim Snooping werden auch hier nur die Uplink-Ports als vertrauenswürdig eingestuft.
 
 #htl3r.code(
-  caption: [Aktivierung von Dynamic ARP Inspection je VLAN mit vertrauenswürdigem Port],
+  caption: [Aktivierung von Dynamic ARP Inspection für die VLANs 10,20 und 99 mit vertrauenswürdigem Port],
   description: `switch-config`,
 )[
   ```

@@ -4,7 +4,7 @@
 
 = Einführung in DiagNet
 
-Beim Betrieb größerer Netzwerkinfrastrukturen tritt häufig ein bekanntes Problem auf. Zu Beginn wird ein Netzwerk sorgfältig geplant, konfiguriert und dokumentiert. In diesem Moment entspricht die tatsächliche Konfiguration genau dem vorgesehenen Design und alle Komponenten funktionieren wie erwartet.
+Beim Betrieb größerer Netzwerkinfrastrukturen tritt häufig ein bekanntes Problem auf: Zu Beginn wird ein Netzwerk sorgfältig geplant, konfiguriert und dokumentiert. In diesem Moment entspricht die tatsächliche Konfiguration genau dem vorgesehenen Design und alle Komponenten funktionieren wie erwartet.
 
 Im laufenden Betrieb verändert sich dieser Zustand jedoch schrittweise. Software-Updates werden installiert, kurzfristige Anpassungen an der Konfiguration vorgenommen oder neue Geräte in das Netzwerk integriert. Solche Änderungen sind im Alltag von IT-Infrastrukturen unvermeidbar. Mit der Zeit kann jedoch der Überblick darüber verloren gehen, ob alle Einstellungen noch dem ursprünglichen Konzept entsprechen.
 
@@ -16,7 +16,7 @@ Um diese Problematik zu adressieren, wurde im Rahmen dieser Diplomarbeit die Anw
 
 #pagebreak()
 
-== Das Konzept für die Automatisierung
+== Das Konzept der Automatisierung
 
 Die zentrale Idee hinter #htl3r.long[diagnet] besteht darin, typische Überprüfungen von Netzwerkkonfigurationen in Form automatisierter Tests abzubilden. Statt jede Konfiguration manuell zu kontrollieren, werden diese Prüfungen durch ein System durchgeführt, das selbstständig mit den Netzwerkgeräten kommuniziert.
 
