@@ -543,6 +543,12 @@ med:
     plural: Multi-Exit Discriminators
   description: Ein BGP-Pfadattribut, das verwendet wird, um den eingehenden Datenverkehr von einem benachbarten Autonomen System zu steuern.
 
+modal:
+  long:
+    singular: Modal
+    plural: Modale
+  description: Dialogfenster, das den Seiteninhalt überlagert. Modale Dialoge blockieren die Interaktion mit dem restlichen Inhalt der Seite, bis der Dialog geschlossen wird.
+
 mpls:
   short:
     singular: MPLS

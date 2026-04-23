@@ -12,7 +12,7 @@ Die Wahl der Frontend-Technologien folgt direkt aus der Architekturentscheidung 
 
 === Bootstrap
 
-Für das visuelle Erscheinungsbild und die Responsivität der Oberfläche kommt #htl3r.long[bootstrap] 5.3 zum Einsatz. #htl3r.long[bootstrap] ist ein komponentenbasiertes #htl3r.full[css]-Framework, das ein umfangreiches Grid-System sowie vorgefertigte UI-Komponenten wie Navigationsleisten, Karten, Modale, Tabellen und Badges mitliefert @bootstrap-docs.
+Für das visuelle Erscheinungsbild und die Responsivität der Oberfläche kommt #htl3r.long[bootstrap] 5.3 zum Einsatz. #htl3r.long[bootstrap] ist ein komponentenbasiertes #htl3r.full[css]-Framework, das ein umfangreiches Grid-System sowie vorgefertigte UI-Komponenten wie Navigationsleisten, Karten, #htl3r.longpl[modal], Tabellen und Badges mitliefert @bootstrap-docs.
 
 #pagebreak()
 
@@ -20,7 +20,7 @@ Außerdem unterstützt #htl3r.long[bootstrap] einen Dark Mode über das `data-bs
 
 === HTMX
 
-Die interaktivsten Teile der Oberfläche, also Gerätelisten, Testausführung, Modal-Formulare und Statusaktualisierungen, erfordern asynchrone Kommunikation mit dem Server, ohne dabei die gesamte Seite neu zu laden. Hierfür wird #htl3r.long[htmx] 2.0 eingesetzt. #htl3r.long[htmx] erlaubt es, #htl3r.short[http]-Requests direkt aus #htl3r.short[html]-Attributen heraus zu steuern und die Antwort des Servers gezielt in bestimmte DOM-Bereiche einzufügen @htmx-docs.
+Die interaktivsten Teile der Oberfläche, also Gerätelisten, Testausführung, #htl3r.long[modal]-Formulare und Statusaktualisierungen, erfordern asynchrone Kommunikation mit dem Server, ohne dabei die gesamte Seite neu zu laden. Hierfür wird #htl3r.long[htmx] 2.0 eingesetzt. #htl3r.long[htmx] erlaubt es, #htl3r.short[http]-Requests direkt aus #htl3r.short[html]-Attributen heraus zu steuern und die Antwort des Servers gezielt in bestimmte DOM-Bereiche einzufügen @htmx-docs.
 
 #htl3r.code(
   caption: [HTMX-Attribute für die lazy-geladene Gerätetabelle],
@@ -61,7 +61,7 @@ Zusätzlich steht eine "Check All Devices"-Schaltfläche zur Verfügung, die ein
 
 === Hinzufügen und Bearbeiten via Modal
 
-Das Anlegen und Bearbeiten von Geräten erfolgt in einem #htl3r.long[bootstrap]-Modal, das bei Klick auf "Add Device" bzw. "Edit" dynamisch mit dem jeweiligen Formular befüllt wird. Beim Öffnen des Modals wird das Formular per #htl3r.long[htmx] frisch vom Server geladen, was sicherstellt, dass bei einem erneuten Öffnen keine Überreste aus dem vorherigen Aufruf im #htl3r.full[dom] verbleiben. Nach erfolgreicher Speicherung sendet der Server den HTTP-Status `204 No Content` zurück, was clientseitig das Modal schließt und die Gerätetabelle über das `devicesRefresh`-Event aktualisiert.
+Das Anlegen und Bearbeiten von Geräten erfolgt in einem #htl3r.long[bootstrap]-#htl3r.long[modal], das bei Klick auf "Add Device" bzw. "Edit" dynamisch mit dem jeweiligen Formular befüllt wird. Beim Öffnen des #htl3r.long[modal]s wird das Formular per #htl3r.long[htmx] frisch vom Server geladen, was sicherstellt, dass bei einem erneuten Öffnen keine Überreste aus dem vorherigen Aufruf im #htl3r.full[dom] verbleiben. Nach erfolgreicher Speicherung sendet der Server den HTTP-Status `204 No Content` zurück, was clientseitig das #htl3r.long[modal] schließt und die Gerätetabelle über das `devicesRefresh`-Event aktualisiert.
 
 Das Löschen eines Geräts wird direkt aus der Tabelle heraus mit einem `DELETE`-Request per #htl3r.long[htmx] ausgelöst, wobei ein nativer Browser-Bestätigungsdialog (`hx-confirm`) dem Anwender eine letzte Sicherheitsabfrage stellt.
 
@@ -78,7 +78,7 @@ Die Testverwaltung gliedert sich in die Testfall-Liste mit Detailansicht und Aus
 
 === Testfall-Liste und Testdetails
 
-Unter `/tests/` werden alle angelegten Testfälle tabellarisch aufgeführt, jeweils mit Label, zugehörigem Testmodul und dem Ergebnis des letzten Testlaufs. Ein Klick auf einen Testfall öffnet die Detailansicht als Modal, das per HTMX lazy geladen wird. Das Modal gliedert sich in zwei Bereiche: Der obere Teil zeigt einen PASS/FAIL/NEW-Badge mit dem Zeitstempel des letzten Laufs, die konfigurierten Eingabeparameter als zweispaltige Tabelle sowie die zugewiesenen Geräte mit ihrer jeweiligen Rolle. Der untere Bereich enthält eine paginierte Ausführungshistorie, in der jede Zeile die Versuchsnummer (`attempt_id`), Zeitstempel und Pass/Fail-Status ausweist. Ein Klick auf eine Zeile klappt ein Accordion auf, das die einzelnen Testmodule des jeweiligen Laufs mit Modulname, Ergebnis, Meldung und Laufzeit auflistet. Dabei kann jeweils nur ein Accordion gleichzeitig offen sein.
+Unter `/tests/` werden alle angelegten Testfälle tabellarisch aufgeführt, jeweils mit Label, zugehörigem Testmodul und dem Ergebnis des letzten Testlaufs. Ein Klick auf einen Testfall öffnet die Detailansicht als #htl3r.long[modal], das per HTMX lazy geladen wird. Das #htl3r.long[modal] gliedert sich in zwei Bereiche: Der obere Teil zeigt einen PASS/FAIL/NEW-Badge mit dem Zeitstempel des letzten Laufs, die konfigurierten Eingabeparameter als zweispaltige Tabelle sowie die zugewiesenen Geräte mit ihrer jeweiligen Rolle. Der untere Bereich enthält eine paginierte Ausführungshistorie, in der jede Zeile die Versuchsnummer (`attempt_id`), Zeitstempel und Pass/Fail-Status ausweist. Ein Klick auf eine Zeile klappt ein Accordion auf, das die einzelnen Testmodule des jeweiligen Laufs mit Modulname, Ergebnis, Meldung und Laufzeit auflistet. Dabei kann jeweils nur ein Accordion gleichzeitig offen sein.
 
 Die Ausführung eines Testfalls erfolgt per "Run"-Button direkt aus der Liste, der einen `POST`-Request an `/tests/<pk>/run/` sendet und das aktualisierte Ergebnis als Fragment zurückbekommt.
 
@@ -88,7 +88,7 @@ Die Gruppierung von Testfällen in Testgruppen ist eine zentrale Funktion von #h
 
 #pagebreak()
 
-Das Anlegen und Bearbeiten von Testgruppen folgt demselben Modal-Muster wie die Geräteverwaltung. Bei einer Bearbeitung wird nach dem Speichern nicht das gesamte Accordion neu gerendert, sondern nur das betroffene Accordion-Item per `HX-Retarget`- und `HX-Reswap`-Header gezielt ausgetauscht und dabei offen gelassen. Eine Neuerstellung der Gruppe hingegen erfordert ein vollständiges Refresh des Dashboard-Inhalts via `refreshDashboard`-Event, da das neue Item an die richtige Position im Accordion eingefügt werden muss.
+Das Anlegen und Bearbeiten von Testgruppen folgt demselben #htl3r.long[modal]-Muster wie die Geräteverwaltung. Bei einer Bearbeitung wird nach dem Speichern nicht das gesamte Accordion neu gerendert, sondern nur das betroffene Accordion-Item per `HX-Retarget`- und `HX-Reswap`-Header gezielt ausgetauscht und dabei offen gelassen. Eine Neuerstellung der Gruppe hingegen erfordert ein vollständiges Refresh des Dashboard-Inhalts via `refreshDashboard`-Event, da das neue Item an die richtige Position im Accordion eingefügt werden muss.
 
 #figure(
   image("../assets/screenshot_testgroup_accordion.png", width: 100%),
@@ -99,7 +99,7 @@ Das Anlegen und Bearbeiten von Testgruppen folgt demselben Modal-Muster wie die 
 
 == Benutzerverwaltung <frontend_benutzerverwaltung>
 
-Die Benutzerverwaltung ist ausschließlich für Benutzer mit der Berechtigung `auth.view_user` zugänglich und gliedert sich in eine User-Liste sowie eine Gruppen-Liste. Beide Ansichten folgen dem in der Anwendung etablierten Modal-Pattern: Details, Bearbeitungsformulare und Bestätigungsdialoge werden per #htl3r.long[htmx] in Modals geladen, ohne die Seite neu aufzubauen.
+Die Benutzerverwaltung ist ausschließlich für Benutzer mit der Berechtigung `auth.view_user` zugänglich und gliedert sich in eine User-Liste sowie eine Gruppen-Liste. Beide Ansichten folgen dem in der Anwendung etablierten #htl3r.long[modal]-Pattern: Details, Bearbeitungsformulare und Bestätigungsdialoge werden per #htl3r.long[htmx] in #htl3r.long[modal]s geladen, ohne die Seite neu aufzubauen.
 
 === Rollenmodell
 
@@ -132,7 +132,7 @@ Die Standardrollen werden per `post_migrate`-Signal angelegt, sodass sie nach je
 
 === User anlegen und bearbeiten
 
-Das Anlegen und Bearbeiten von Benutzern folgt dem etablierten Modal-Pattern der Anwendung. Über separate Modals können Benutzerdaten, Gruppen-Zuordnungen und Passwörter bearbeitet werden. Eine Besonderheit: Das Löschen des eigenen Accounts wird serverseitig explizit verhindert, um ein versehentliches Aussperren aller Administratoren zu verhindern.
+Das Anlegen und Bearbeiten von Benutzern folgt dem etablierten #htl3r.long[modal]-Pattern der Anwendung. Über separate #htl3r.long[modal]s können Benutzerdaten, Gruppen-Zuordnungen und Passwörter bearbeitet werden. Eine Besonderheit: Das Löschen des eigenen Accounts wird serverseitig explizit verhindert, um ein versehentliches Aussperren aller Administratoren zu verhindern.
 
 === Permission-basiertes Template-Rendering
 
