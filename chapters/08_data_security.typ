@@ -323,7 +323,7 @@ Für diesen Fall implementiert #htl3r.long[diagnet] den Management-Befehl `rotat
 
 #pagebreak()
 
-=== Web-Sicherheit: Djangos eingebaute #box[Schutzmechanismen] <web_security>
+=== Web-Sicherheit: Djangos Schutzmechanismen <web_security>
 
 Neben der Absicherung gespeicherter Daten muss eine Webanwendung auch gegen aktive Angriffe auf die Benutzerinteraktion gewappnet sein. Django adressiert die gängigsten Angriffsvektoren durch Mechanismen, die standardmäßig aktiv sind und in `settings.py` über die `MIDDLEWARE`-Liste eingebunden werden @django-security. Für #htl3r.long[diagnet] relevant sind vor allem drei davon.
 
