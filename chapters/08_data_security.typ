@@ -6,7 +6,7 @@
 Eine Webanwendung ist letztlich nur so zuverlässig wie das Datenbankschema, auf dem sie aufbaut. Für #htl3r.long[diagnet] bedeutete das, zwei unterschiedliche Anforderungen unter einen Hut zu bringen: Einerseits mussten die Datenstrukturen flexibel genug sein, um sehr unterschiedliche Netzwerktests mit ihren jeweiligen Parametern abzubilden. Andererseits durfte diese Flexibilität nicht auf Kosten der Datenintegrität gehen, da fehlerhafte Konfigurationen in einem Netzwerktestsystem direkt zu falschen Testergebnissen führen können. Da das Schema in seiner Gesamtheit zu komplex für eine einzelne Abbildung wäre, zeigen @erd_struktur und @erd_ausfuehrung jeweils eine vereinfachte Sicht, die auf die für das Verständnis wesentlichen Felder und Relationen reduziert wurde.
 
 #figure(
-  image("../assets/erd_struktur.png", width: 100%),
+  image("../assets/erd_struktur.png", width: 75%),
   caption: [Datenbankschema: Geräteverwaltung und Teststruktur],
 ) <erd_struktur>
 
